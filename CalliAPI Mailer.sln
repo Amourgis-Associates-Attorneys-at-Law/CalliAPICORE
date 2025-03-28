@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35919.96 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalliAPI Mailer", "CalliAPI Mailer.csproj", "{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {29563069-AEE0-45FB-8605-D4611011FEA6}
+	EndGlobalSection
+EndGlobal

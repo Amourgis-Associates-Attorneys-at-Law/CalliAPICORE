@@ -1,0 +1,19 @@
+C:\Users\JakeH\source\repos\CalliAPI Mailer\bin\Debug\net8.0-windows\CalliAPI Mailer.exe
+C:\Users\JakeH\source\repos\CalliAPI Mailer\bin\Debug\net8.0-windows\CalliAPI Mailer.deps.json
+C:\Users\JakeH\source\repos\CalliAPI Mailer\bin\Debug\net8.0-windows\CalliAPI Mailer.runtimeconfig.json
+C:\Users\JakeH\source\repos\CalliAPI Mailer\bin\Debug\net8.0-windows\CalliAPI Mailer.dll
+C:\Users\JakeH\source\repos\CalliAPI Mailer\bin\Debug\net8.0-windows\CalliAPI Mailer.pdb
+C:\Users\JakeH\source\repos\CalliAPI Mailer\bin\Debug\net8.0-windows\MaterialSkin.dll
+C:\Users\JakeH\source\repos\CalliAPI Mailer\obj\Debug\net8.0-windows\CalliAPI Mailer.csproj.AssemblyReference.cache
+C:\Users\JakeH\source\repos\CalliAPI Mailer\obj\Debug\net8.0-windows\CalliAPI_Mailer.Form1.resources
+C:\Users\JakeH\source\repos\CalliAPI Mailer\obj\Debug\net8.0-windows\CalliAPI Mailer.csproj.GenerateResource.cache
+C:\Users\JakeH\source\repos\CalliAPI Mailer\obj\Debug\net8.0-windows\CalliAPI Mailer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\JakeH\source\repos\CalliAPI Mailer\obj\Debug\net8.0-windows\CalliAPI Mailer.AssemblyInfoInputs.cache
+C:\Users\JakeH\source\repos\CalliAPI Mailer\obj\Debug\net8.0-windows\CalliAPI Mailer.AssemblyInfo.cs
+C:\Users\JakeH\source\repos\CalliAPI Mailer\obj\Debug\net8.0-windows\CalliAPI Mailer.csproj.CoreCompileInputs.cache
+C:\Users\JakeH\source\repos\CalliAPI Mailer\obj\Debug\net8.0-windows\CalliAPI.0AF6B1D4.Up2Date
+C:\Users\JakeH\source\repos\CalliAPI Mailer\obj\Debug\net8.0-windows\CalliAPI Mailer.dll
+C:\Users\JakeH\source\repos\CalliAPI Mailer\obj\Debug\net8.0-windows\refint\CalliAPI Mailer.dll
+C:\Users\JakeH\source\repos\CalliAPI Mailer\obj\Debug\net8.0-windows\CalliAPI Mailer.pdb
+C:\Users\JakeH\source\repos\CalliAPI Mailer\obj\Debug\net8.0-windows\CalliAPI Mailer.genruntimeconfig.cache
+C:\Users\JakeH\source\repos\CalliAPI Mailer\obj\Debug\net8.0-windows\ref\CalliAPI Mailer.dll
