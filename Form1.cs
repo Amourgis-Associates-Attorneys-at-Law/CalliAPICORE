@@ -14,11 +14,16 @@
 
 using MaterialSkin;
 using MaterialSkin.Controls;
+using Microsoft.Data.SqlClient;
 
 namespace CalliAPI_Mailer
 {
     public partial class Form1 : MaterialForm
     {
+        
+        private static readonly string connectionString = "";
+        private static readonly string querySelectAll = "SELECT * FROM Documents";
+
         public Form1()
         {
             InitializeComponent();
@@ -89,6 +94,16 @@ namespace CalliAPI_Mailer
             // Implement your print logic here
             MessageBox.Show($"Printing document with ID: {documentId} and URL: {documentUrl}");
             //throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Called whenever any checkbox state is changed, UpdateGrid will update the grid with the new state of the checkboxes.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void UpdateGrid(object sender, EventArgs e)
+        {
+
         }
     }
 }

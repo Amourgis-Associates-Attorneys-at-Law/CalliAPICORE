@@ -31,6 +31,7 @@
             dataGridView1 = new DataGridView();
             chkShowPrinted = new CheckBox();
             chkShowIgnored = new CheckBox();
+            chkShowCancelled = new CheckBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -49,30 +50,44 @@
             // chkShowPrinted
             // 
             chkShowPrinted.AutoSize = true;
-            chkShowPrinted.Location = new Point(325, 111);
+            chkShowPrinted.Location = new Point(12, 111);
             chkShowPrinted.Name = "chkShowPrinted";
             chkShowPrinted.Size = new Size(139, 19);
             chkShowPrinted.TabIndex = 1;
             chkShowPrinted.Text = "Show Already Printed";
             chkShowPrinted.UseVisualStyleBackColor = true;
+            chkShowPrinted.CheckedChanged += UpdateGrid;
             // 
             // chkShowIgnored
             // 
             chkShowIgnored.AutoSize = true;
             chkShowIgnored.Checked = true;
             chkShowIgnored.CheckState = CheckState.Checked;
-            chkShowIgnored.Location = new Point(487, 111);
+            chkShowIgnored.Location = new Point(12, 71);
             chkShowIgnored.Name = "chkShowIgnored";
             chkShowIgnored.Size = new Size(99, 19);
             chkShowIgnored.TabIndex = 2;
             chkShowIgnored.Text = "Show Ignored";
             chkShowIgnored.UseVisualStyleBackColor = true;
+            chkShowIgnored.CheckedChanged += UpdateGrid;
+            // 
+            // chkShowCancelled
+            // 
+            chkShowCancelled.AutoSize = true;
+            chkShowCancelled.Location = new Point(12, 91);
+            chkShowCancelled.Name = "chkShowCancelled";
+            chkShowCancelled.Size = new Size(110, 19);
+            chkShowCancelled.TabIndex = 3;
+            chkShowCancelled.Text = "Show Cancelled";
+            chkShowCancelled.UseVisualStyleBackColor = true;
+            chkShowCancelled.CheckedChanged += UpdateGrid;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1834, 918);
+            Controls.Add(chkShowCancelled);
             Controls.Add(chkShowIgnored);
             Controls.Add(chkShowPrinted);
             Controls.Add(dataGridView1);
@@ -89,5 +104,6 @@
         private DataGridView dataGridView1;
         private CheckBox chkShowPrinted;
         private CheckBox chkShowIgnored;
+        private CheckBox chkShowCancelled;
     }
 }
