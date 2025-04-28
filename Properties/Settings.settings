@@ -1,0 +1,21 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="CalliAPI" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="SqlConnectionString" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Data Source=vm-prod-sql01;Initial Catalog=CalliAPI;Integrated Security=True</Value>
+    </Setting>
+    <Setting Name="ClientId" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Ryuee5CHqL3Uk0unmEdtx3SY9qiGJtrMg6Ta91yy</Value>
+    </Setting>
+    <Setting Name="ClientSecret" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">i3ZbrypIkrXOWnQqlt6olQmvvOtVKKcw6Twb0fRK</Value>
+    </Setting>
+    <Setting Name="RedirectUri" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">https://www.amourgis.com/</Value>
+    </Setting>
+    <Setting Name="ApiUrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">https://app.clio.com/api/v4/</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

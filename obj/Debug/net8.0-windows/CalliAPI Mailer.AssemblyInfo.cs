@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CalliAPI Mailer")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c0c3cff0958b7a87ae42ca7d3a3b873687aa3186")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+442c65f9266620c42b749a4d0d9cc222ea0b04d2")]
 [assembly: System.Reflection.AssemblyProductAttribute("CalliAPI Mailer")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CalliAPI Mailer")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
