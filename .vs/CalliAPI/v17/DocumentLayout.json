@@ -122,8 +122,7 @@
               "ViewState": "AgIAABYAAAAAAAAAAAAgwCAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-21T13:41:18.294Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -146,7 +145,7 @@
               "RelativeDocumentMoniker": "DataAccess\\ClioApiClient.cs",
               "ToolTip": "C:\\Users\\JakeH\\source\\repos\\CalliAPI\\DataAccess\\ClioApiClient.cs",
               "RelativeToolTip": "DataAccess\\ClioApiClient.cs",
-              "ViewState": "AgIAANcAAAAAAAAAAAAAwO0AAAB6AAAAAAAAAA==",
+              "ViewState": "AgIAAEMAAAAAAAAAAAAwwJ8AAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-21T13:46:58.97Z",
               "IsPinned": true,
@@ -170,8 +169,7 @@
               "RelativeToolTip": "Models\\Matter.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-22T20:18:27.183Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-22T20:18:27.183Z"
             },
             {
               "$type": "Document",
@@ -196,8 +194,7 @@
               "RelativeToolTip": "Interfaces\\IClioService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-21T19:44:52.723Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-21T19:44:52.723Z"
             },
             {
               "$type": "Document",
