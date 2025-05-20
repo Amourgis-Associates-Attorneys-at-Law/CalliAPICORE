@@ -12,7 +12,7 @@ namespace CalliAPI.BusinessLogic
 {
     internal class ClioService : IClioService
     {
-        private static readonly AMO_Logger _logger = new AMO_Logger(typeof(ClioService).FullName);
+        private static readonly AMO_Logger _logger = new AMO_Logger("CalliAPI");
 
         private readonly IClioApiClient _clioApiClient;
 

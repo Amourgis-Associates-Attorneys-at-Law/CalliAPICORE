@@ -13,7 +13,7 @@ namespace CalliAPI
 {
     internal static class Program
     {
-        private static readonly AMO_Logger _logger = new AMO_Logger(typeof(Program).FullName);
+        private static readonly AMO_Logger _logger = new AMO_Logger("CalliAPI");
 
         /// <summary>
         ///  The main entry point for the application.

@@ -13,7 +13,7 @@ namespace CalliAPI.BusinessLogic
 {
     internal class AuthService : IAuthService
     {
-        private static readonly AMO_Logger _logger = new AMO_Logger(typeof(AuthService).FullName);
+        private static readonly AMO_Logger _logger = new AMO_Logger("CalliAPI");
 
         private readonly IClioApiClient _clioApiClient;
         public string AccessToken { get; private set; }

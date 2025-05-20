@@ -18,7 +18,7 @@ namespace CalliAPI.DataAccess
 {
     public class ClioApiClient : IClioApiClient
     {
-        private static readonly AMO_Logger _logger = new AMO_Logger(typeof(ClioApiClient).FullName);
+        private static readonly AMO_Logger _logger = new AMO_Logger("CalliAPI");
 
         private readonly HttpClient _httpClient;
         private string accessToken = string.Empty;
