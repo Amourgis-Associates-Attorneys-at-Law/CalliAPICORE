@@ -4,14 +4,15 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using CalliAPI.Interfaces;
 using CalliAPI.Models;
+using AmourgisCOREServices;
 
 namespace CalliAPI.BusinessLogic
 {
     internal class ClioService : IClioService
     {
+        private static readonly AMO_Logger _logger = new AMO_Logger(typeof(ClioService).FullName);
 
         private readonly IClioApiClient _clioApiClient;
 

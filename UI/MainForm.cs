@@ -15,7 +15,7 @@ using System.Threading.Tasks; // for async
 using System.Windows.Forms;
 using CalliAPI.Interfaces;
 using CalliAPI.BusinessLogic;
-using CalliAPI_Mailer.UI;
+using CalliAPI.UI;
 
 namespace CalliAPI
 {

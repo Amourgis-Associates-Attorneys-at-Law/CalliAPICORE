@@ -1,4 +1,4 @@
-﻿namespace CalliAPI_Mailer.UI
+﻿namespace CalliAPI.UI
 {
     partial class ReportForm
     {

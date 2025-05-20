@@ -5,6 +5,7 @@
  * Creates the services and clients that CalliAPI needs to function and passes them to the MainForm.
  */
 
+using AmourgisCOREServices;
 using CalliAPI.BusinessLogic;
 using CalliAPI.DataAccess;
 
@@ -12,6 +13,8 @@ namespace CalliAPI
 {
     internal static class Program
     {
+        private static readonly AMO_Logger _logger = new AMO_Logger(typeof(Program).FullName);
+
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>

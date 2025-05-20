@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace CalliAPI_Mailer.UI
+namespace CalliAPI.UI
 {
     public partial class ReportForm : Form
     {

@@ -9,12 +9,16 @@ using System.Threading.Tasks;
 using CalliAPI.Properties;
 using System.Text.RegularExpressions;
 using CalliAPI.Properties;
-using CalliAPI_Mailer.Models;
+using CalliAPI.Models;
+using Task = System.Threading.Tasks.Task;
+using System.Diagnostics.Metrics;
+using AmourgisCOREServices;
 
 namespace CalliAPI.DataAccess
 {
-    internal class ClioApiClient : IClioApiClient
+    public class ClioApiClient : IClioApiClient
     {
+        private static readonly AMO_Logger _logger = new AMO_Logger(typeof(ClioApiClient).FullName);
 
         private readonly HttpClient _httpClient;
         private string accessToken = string.Empty;
@@ -49,6 +53,7 @@ namespace CalliAPI.DataAccess
         public async Task<string> GetAccessTokenAsync(string authorizationCode)
         {
             string tokenEndpoint = "https://app.clio.com/oauth/token";
+            // Package up the request data and send it to the token endpoint so we can grab the access_token string
             var requestData = new Dictionary<string, string>
             {
             { "grant_type", "authorization_code" },
@@ -65,56 +70,75 @@ namespace CalliAPI.DataAccess
         }
 
 
-        private Matter ParseMatter(JsonElement element)
+
+        public Matter ParseMatter(JsonElement element)
         {
             try
             {
-                // Log the element for debugging
-                Console.WriteLine($"Element: {element}");
-
-
-                // Declare variables for properties
-                JsonElement practiceAreaElement, practiceAreaNameElement;
-                JsonElement statusElement;
-                JsonElement hasTasksElement;
-                JsonElement clientElement, clientIdElement, clientNameElement;
-                JsonElement matterStageElement, matterStageNameElement;
-
-
-                // Check and log each property
-                Console.WriteLine($"id: {element.GetProperty("id")}");
-                Console.WriteLine($"practice_area: {element.TryGetProperty("practice_area", out practiceAreaElement)}");
-                if (practiceAreaElement.ValueKind != JsonValueKind.Null)
+                var matter = new Matter
                 {
-                    Console.WriteLine($"practice_area_name: {practiceAreaElement.TryGetProperty("name", out practiceAreaNameElement)}");
-                }
-                Console.WriteLine($"status: {element.TryGetProperty("status", out statusElement)}");
-                Console.WriteLine($"has_tasks: {element.TryGetProperty("has_tasks", out hasTasksElement)}");
-                Console.WriteLine($"client: {element.TryGetProperty("client", out clientElement)}");
-                if (clientElement.ValueKind != JsonValueKind.Null)
+                    id = element.GetProperty("id").GetInt64()
+                };
+
+                // Practice Area
+                if (element.TryGetProperty("practice_area", out var practiceAreaElement) &&
+         practiceAreaElement.TryGetProperty("name", out var practiceAreaNameElement))
                 {
-                    Console.WriteLine($"client_id: {clientElement.TryGetProperty("id", out clientIdElement)}");
-                    Console.WriteLine($"client_name: {clientElement.TryGetProperty("name", out clientNameElement)}");
-                }
-                Console.WriteLine($"matter_stage: {element.TryGetProperty("matter_stage", out matterStageElement)}");
-                if (matterStageElement.ValueKind != JsonValueKind.Null)
-                {
-                    Console.WriteLine($"matter_stage_name: {matterStageElement.TryGetProperty("name", out matterStageNameElement)}");
+                    matter.practice_area_name = practiceAreaNameElement.GetString();
                 }
 
-                return new Matter
+                // Status
+                if (element.TryGetProperty("status", out var statusElement))
                 {
-                    id = element.GetProperty("id").GetInt64(),
-                    practice_area_name = practiceAreaElement.ValueKind != JsonValueKind.Null && practiceAreaElement.TryGetProperty("name", out practiceAreaNameElement) ? practiceAreaNameElement.GetString() : null,
-                    status = statusElement.GetString(),
-                    has_tasks = hasTasksElement.GetBoolean(),
-                    client = clientElement.ValueKind != JsonValueKind.Null && clientElement.TryGetProperty("id", out clientIdElement) && clientElement.TryGetProperty("name", out clientNameElement) ? new Client
+                    matter.status = statusElement.GetString();
+                }
+
+                // Has Tasks
+                if (element.TryGetProperty("has_tasks", out var hasTasksElement))
+                {
+                    matter.has_tasks = hasTasksElement.GetBoolean();
+                }
+
+                // Client
+                if (element.TryGetProperty("client", out var clientElement) &&
+         clientElement.TryGetProperty("id", out var clientIdElement) &&
+         clientElement.TryGetProperty("name", out var clientNameElement))
+                {
+                    matter.client = new Client
                     {
                         id = clientIdElement.GetInt64(),
                         name = clientNameElement.GetString()
-                    } : null,
-                    matter_stage_name = matterStageElement.ValueKind != JsonValueKind.Null && matterStageElement.TryGetProperty("name", out matterStageNameElement) ? matterStageNameElement.GetString() : null
-                };
+                    };
+                }
+
+                // Matter Stage
+                if (element.TryGetProperty("matter_stage", out var matterStageElement) &&
+         matterStageElement.TryGetProperty("name", out var matterStageNameElement))
+                {
+                    matter.matter_stage_name = matterStageNameElement.GetString();
+                }
+
+                // Custom Fields
+                if (element.TryGetProperty("custom_field_values", out var customFieldsElement))
+                {
+                    foreach (var fieldValue in customFieldsElement.EnumerateArray())
+                    {
+                        if (fieldValue.TryGetProperty("custom_field", out var customFieldElement) &&
+                        customFieldElement.TryGetProperty("id", out var idElement) &&
+                        fieldValue.TryGetProperty("value", out var valueElement))
+                        {
+                            long fieldId = idElement.GetInt64();
+                            string value = valueElement.GetString();
+
+                            if (CustomFieldMap.TryGetField(fieldId, out var customField))
+                            {
+                                matter.CustomFields[customField] = value;
+                            }
+                        }
+                    }
+                }
+
+                return matter;
             }
             catch (Exception ex)
             {
@@ -122,6 +146,7 @@ namespace CalliAPI.DataAccess
                 throw;
             }
         }
+
 
 
         #region reporting functions

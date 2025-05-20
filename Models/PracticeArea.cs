@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CalliAPI_Mailer.Models
+namespace CalliAPI.Models
 {
-    internal class PracticeArea
+    public class PracticeArea
     {
         public long id { get; set; }
         public string name { get; set; }

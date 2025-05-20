@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CalliAPI.Models
 {
-    internal class Matter
+    public class Matter
     {
         public long id { get; set; }
         public int number { get; set; }
@@ -21,5 +21,7 @@ namespace CalliAPI.Models
         
         public string practice_area_name { get; set; }
         public Client client { get; set; }
+
+        public Dictionary<CustomField, string> CustomFields { get; set; } = new Dictionary<CustomField, string>();
     }
 }
