@@ -3,25 +3,20 @@
   <assemblyIdentity name="CalliAPI.application" version="1.0.0.0" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <description asmv2:publisher="CalliAPI" asmv2:product="CalliAPI" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <deployment install="true" mapFileExtensions="true">
-    <subscription>
-      <update>
-        <beforeApplicationStartup />
-      </update>
-    </subscription>
-    <deploymentProvider codebase="file://amo-dev/c/CalliAPI/CalliAPI.application" />
+    <deploymentProvider codebase="file:///C:/Users/JakeH.AMOURGISREILLY/Amourgis%20and%20Associates/Process%20and%20Software%20Development%20-%20Documents/Programs/_release/CalliAPI/CalliAPI.application" />
   </deployment>
   <compatibleFrameworks xmlns="urn:schemas-microsoft-com:clickonce.v2">
     <framework targetVersion="4.5" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="Application Files\CalliAPI_1_0_0_0\CalliAPI.dll.manifest" size="42167">
+    <dependentAssembly dependencyType="install" codebase="Application Files\CalliAPI_1_0_0_0\CalliAPI.dll.manifest" size="42168">
       <assemblyIdentity name="CalliAPI.exe" version="1.0.0.0" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>zg64yLJ+4uJq9qvtrfGJb6WkVF4mC5HVc+I6y9dbqRg=</dsig:DigestValue>
+        <dsig:DigestValue>3eX6co5htxEFcxkYEQBCw05yx923rlJmsfqzPilao5g=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

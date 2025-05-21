@@ -19,6 +19,7 @@ using System.Net;
 using System.Drawing.Printing;
 using System.Threading;
 using System.Runtime.CompilerServices;
+using ClioTask = CalliAPI.Models.Task;
 
 namespace CalliAPI.DataAccess
 {
@@ -166,6 +167,12 @@ namespace CalliAPI.DataAccess
                     matter.practice_area_name = practiceAreaNameElement.GetString();
                 }
 
+                // Display Number
+                if (TryGetObject(element, "display_number", out var displayNumberElement) && displayNumberElement.ValueKind == JsonValueKind.String)
+                {
+                    matter.display_number = displayNumberElement.GetString();
+                }
+
                 // Status
                 if (element.TryGetProperty("status", out var statusElement) && statusElement.ValueKind == JsonValueKind.String)
                 {
@@ -229,6 +236,35 @@ namespace CalliAPI.DataAccess
         }
 
 
+        #region Tasks
+
+        public async Task<List<ClioTask>> GetTasksForMatterAsync(long matterId)
+        {
+            string url = $"{Properties.Settings.Default.ApiUrl}tasks?matter_id={matterId}&fields=id,subject,status";
+            var response = await _retryPolicy.ExecuteAsync(() => _httpClient.GetAsync(url));
+            var responseContent = await response.Content.ReadAsStringAsync();
+            using var jsonDocument = JsonDocument.Parse(responseContent);
+
+            try
+            {
+                if (jsonDocument.RootElement.TryGetProperty("data", out JsonElement dataElement))
+                {
+                    return dataElement.EnumerateArray().Select(t => new ClioTask
+                    {
+                        id = t.GetProperty("id").GetInt64(),
+                        status = t.GetProperty("status").GetString()
+                    }).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.Error($"Error parsing tasks: {ex.Message}");
+                throw;
+            }
+            return new List<ClioTask>();
+        }
+
+        #endregion
 
 
         #region reporting functions
@@ -698,6 +734,9 @@ namespace CalliAPI.DataAccess
 
             return allMatters;
         }
+
+
+
 
         /// <summary>
         /// Fetches all matters that are not currently being worked on.

@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            btnOpenMailerForm = new Button();
             menuStrip1 = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
             exitToolStripMenuItem = new ToolStripMenuItem();
@@ -37,6 +36,7 @@
             unworkedMattersToolStripMenuItem = new ToolStripMenuItem();
             allMattersToolStripMenuItem = new ToolStripMenuItem();
             all713MattersToolStripMenuItem = new ToolStripMenuItem();
+            allUnworked7And13MattersToolStripMenuItem = new ToolStripMenuItem();
             fastFetchToolStripMenuItem1 = new ToolStripMenuItem();
             createdSinceToolStripMenuItem = new ToolStripMenuItem();
             programToolStripMenuItem = new ToolStripMenuItem();
@@ -50,28 +50,17 @@
             progressBarPagesRetrieved = new ProgressBar();
             lblReportPageRetrieved = new Label();
             lblReportName = new Label();
-            label1 = new Label();
+            textBox1 = new TextBox();
             menuStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
             SuspendLayout();
-            // 
-            // btnOpenMailerForm
-            // 
-            btnOpenMailerForm.Enabled = false;
-            btnOpenMailerForm.Location = new Point(1062, 566);
-            btnOpenMailerForm.Name = "btnOpenMailerForm";
-            btnOpenMailerForm.Size = new Size(226, 66);
-            btnOpenMailerForm.TabIndex = 0;
-            btnOpenMailerForm.Text = "Open Mailer";
-            btnOpenMailerForm.UseVisualStyleBackColor = true;
-            btnOpenMailerForm.Click += btnOpenMailerForm_Click;
             // 
             // menuStrip1
             // 
             menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, reportsToolStripMenuItem, fastFetchToolStripMenuItem1, programToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1343, 24);
+            menuStrip1.Size = new Size(1043, 24);
             menuStrip1.TabIndex = 1;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -91,7 +80,7 @@
             // 
             // reportsToolStripMenuItem
             // 
-            reportsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { unworkedMattersToolStripMenuItem, allMattersToolStripMenuItem, all713MattersToolStripMenuItem });
+            reportsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { unworkedMattersToolStripMenuItem, allMattersToolStripMenuItem, all713MattersToolStripMenuItem, allUnworked7And13MattersToolStripMenuItem });
             reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
             reportsToolStripMenuItem.Size = new Size(59, 20);
             reportsToolStripMenuItem.Text = "Reports";
@@ -100,23 +89,30 @@
             // 
             unworkedMattersToolStripMenuItem.Enabled = false;
             unworkedMattersToolStripMenuItem.Name = "unworkedMattersToolStripMenuItem";
-            unworkedMattersToolStripMenuItem.Size = new Size(190, 22);
+            unworkedMattersToolStripMenuItem.Size = new Size(235, 22);
             unworkedMattersToolStripMenuItem.Text = "Unworked Matters";
             unworkedMattersToolStripMenuItem.Click += unworkedMattersToolStripMenuItem_Click;
             // 
             // allMattersToolStripMenuItem
             // 
             allMattersToolStripMenuItem.Name = "allMattersToolStripMenuItem";
-            allMattersToolStripMenuItem.Size = new Size(190, 22);
+            allMattersToolStripMenuItem.Size = new Size(235, 22);
             allMattersToolStripMenuItem.Text = "All Matters";
             allMattersToolStripMenuItem.Click += allMattersToolStripMenuItem_Click;
             // 
             // all713MattersToolStripMenuItem
             // 
             all713MattersToolStripMenuItem.Name = "all713MattersToolStripMenuItem";
-            all713MattersToolStripMenuItem.Size = new Size(190, 22);
+            all713MattersToolStripMenuItem.Size = new Size(235, 22);
             all713MattersToolStripMenuItem.Text = "All Open 7 & 13 Matters";
             all713MattersToolStripMenuItem.Click += all713MattersToolStripMenuItem_Click;
+            // 
+            // allUnworked7And13MattersToolStripMenuItem
+            // 
+            allUnworked7And13MattersToolStripMenuItem.Name = "allUnworked7And13MattersToolStripMenuItem";
+            allUnworked7And13MattersToolStripMenuItem.Size = new Size(235, 22);
+            allUnworked7And13MattersToolStripMenuItem.Text = "All Unworked 7 and 13 Matters";
+            allUnworked7And13MattersToolStripMenuItem.Click += allUnworked7And13MattersToolStripMenuItem_Click;
             // 
             // fastFetchToolStripMenuItem1
             // 
@@ -157,9 +153,9 @@
             // statusStrip1
             // 
             statusStrip1.Items.AddRange(new ToolStripItem[] { lblApiStatus, lblClioAPIStatus, toolStripSplitButton1 });
-            statusStrip1.Location = new Point(0, 640);
+            statusStrip1.Location = new Point(0, 438);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(1343, 22);
+            statusStrip1.Size = new Size(1043, 22);
             statusStrip1.TabIndex = 2;
             statusStrip1.Text = "statusStrip1";
             // 
@@ -220,26 +216,29 @@
             lblReportName.Text = "Report Name";
             lblReportName.TextAlign = ContentAlignment.BottomLeft;
             // 
-            // label1
+            // textBox1
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(12, 97);
-            label1.Name = "label1";
-            label1.Size = new Size(1012, 15);
-            label1.TabIndex = 6;
-            label1.Text = "The FastFetch reports can capture up to 10,000 records, and are ideal for large datasets under 10,000 records. For small datasets or datasets over 10,000 records, use the Reports features instead.";
+            textBox1.BorderStyle = BorderStyle.None;
+            textBox1.Font = new Font("Segoe UI", 9F, FontStyle.Italic);
+            textBox1.ForeColor = SystemColors.ControlDark;
+            textBox1.Location = new Point(12, 100);
+            textBox1.Multiline = true;
+            textBox1.Name = "textBox1";
+            textBox1.ReadOnly = true;
+            textBox1.Size = new Size(829, 122);
+            textBox1.TabIndex = 7;
+            textBox1.Text = "The FastFetch reports can capture up to 10,000 records, and are ideal for large datasets under 10,000 records. For small datasets or datasets over 10,000 records, use the Reports features instead.";
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1343, 662);
-            Controls.Add(label1);
+            ClientSize = new Size(1043, 460);
+            Controls.Add(textBox1);
             Controls.Add(lblReportName);
             Controls.Add(lblReportPageRetrieved);
             Controls.Add(progressBarPagesRetrieved);
             Controls.Add(statusStrip1);
-            Controls.Add(btnOpenMailerForm);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
             Name = "MainForm";
@@ -253,8 +252,6 @@
         }
 
         #endregion
-
-        private Button btnOpenMailerForm;
         private MenuStrip menuStrip1;
         private ToolStripMenuItem fileToolStripMenuItem;
         private ToolStripMenuItem exitToolStripMenuItem;
@@ -272,9 +269,10 @@
         private ProgressBar progressBarPagesRetrieved;
         private Label lblReportPageRetrieved;
         private Label lblReportName;
-        private Label label1;
         private ToolStripMenuItem fastFetchToolStripMenuItem1;
         private ToolStripMenuItem createdSinceToolStripMenuItem;
         private ToolStripMenuItem all713MattersToolStripMenuItem;
+        private TextBox textBox1;
+        private ToolStripMenuItem allUnworked7And13MattersToolStripMenuItem;
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CalliAPI.Models
 {
-    internal class Task
+    public class Task
     {
         public long id { get; set; }
         public string name { get; set; }

@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CalliAPI.DataAccess;
 
 namespace CalliAPI.Models
 {
@@ -53,12 +54,22 @@ namespace CalliAPI.Models
         }
 
 
-
         public static async IAsyncEnumerable<Matter> FilterByPracticeAreaSuffixAsync(this IAsyncEnumerable<Matter> matters, params string[] suffixes)
         {
             await foreach (var matter in matters)
             {
                 if (matter.practice_area_name != null && suffixes.Any(suffix => matter.practice_area_name.EndsWith(suffix)))
+                {
+                    yield return matter;
+                }
+            }
+        }
+
+        public static async IAsyncEnumerable<Matter> FilterByStageNameAsync(this IAsyncEnumerable<Matter> matters, params string[] stageNames)
+        {
+            await foreach (var matter in matters)
+            {
+                if (matter.matter_stage_name != null && stageNames.Any(stageName => matter.matter_stage_name.Trim().ToLower().Equals(stageName.Trim().ToLower())))
                 {
                     yield return matter;
                 }
@@ -83,16 +94,33 @@ namespace CalliAPI.Models
             {
                 var row = new Dictionary<string, object>();
 
+                // Add Matter properties
                 foreach (var prop in typeof(Matter).GetProperties())
                 {
                     var value = prop.GetValue(matter);
-                    if (value != null)
+                    if (value != null & prop.Name != "client") // Skip client info for now
                     {
                         string columnName = prop.Name;
                         columns.Add(columnName);
                         row[columnName] = value;
                     }
                 }
+
+                // Add Client properties (flattened)
+                if (matter.client != null)
+                {
+                    foreach (var clientProp in typeof(Client).GetProperties())
+                    {
+                        var clientValue = clientProp.GetValue(matter.client);
+                        if (clientValue != null)
+                        {
+                            string columnName = "client_" + clientProp.Name;
+                            columns.Add(columnName);
+                            row[columnName] = clientValue;
+                        }
+                    }
+                }
+
 
                 // Include custom fields
                 if (matter.CustomFields != null)

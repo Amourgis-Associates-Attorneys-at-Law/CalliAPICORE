@@ -232,6 +232,7 @@ namespace CalliAPI
 
         private async void createdSinceToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            lblReportName.Text = "Report: All Matters since <date>";
             await FastFetchAllMatters();
         }
 
@@ -242,9 +243,14 @@ namespace CalliAPI
 
         private async void all713MattersToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            lblReportName.Text = "Report: All Open 7 & 13 Matters";
             await _clioService.GetAllOpen713Matters();
         }
 
-       
+        private async void allUnworked7And13MattersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            lblReportName.Text = "Report: All Unworked 7 & 13 Matters";
+            await _clioService.GetUnworked713Matters();
+        }
     }
 }

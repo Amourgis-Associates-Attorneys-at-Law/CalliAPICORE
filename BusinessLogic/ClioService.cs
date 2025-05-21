@@ -52,6 +52,8 @@ namespace CalliAPI.BusinessLogic
         }
 
 
+
+
         #region reports
         public async Task GetAllMatters()
         {
@@ -78,6 +80,53 @@ namespace CalliAPI.BusinessLogic
             // Convert the matter stream to a DataTable and show it
             await ReportLauncher.ShowAsync(matters);
         }
+
+        public async Task GetUnworked713Matters()
+        {
+            string[] validStages =
+            [
+                "prefile",
+                "pif - prefile",
+                "case prep",
+                "pif - case prep",
+                "signing and filing"
+            ];
+
+
+            // Initialize the matter stream and filter it
+            IAsyncEnumerable<Matter> matters = _clioApiClient.GetAllOpenMattersAsync().
+                FilterByPracticeAreaSuffixAsync(new string[] { "7", "13" }).
+                FilterByStageNameAsync(validStages);
+
+            IAsyncEnumerable<Matter> filteredMatters = FilterMattersWithNoOpenTasksAsync(matters);
+
+            // Convert the matter stream to a DataTable and show it
+            await ReportLauncher.ShowAsync(filteredMatters);
+        }
+
+
+        public async Task<bool> MatterHasNoOpenTasksAsync(Matter matter)
+        {
+            if (!matter.has_tasks)
+                return true;
+
+            var tasks = await _clioApiClient.GetTasksForMatterAsync(matter.id);
+            return tasks.All(t => t.status.Equals("complete", StringComparison.OrdinalIgnoreCase));
+        }
+
+
+        public async IAsyncEnumerable<Matter> FilterMattersWithNoOpenTasksAsync(IAsyncEnumerable<Matter> matters)
+        {
+            await foreach (var matter in matters)
+            {
+                if (await MatterHasNoOpenTasksAsync(matter))
+                {
+                    _logger.Info($"No tasks found for matter {matter.id.ToString()}.");
+                    yield return matter;
+                }
+            }
+        }
+
 
         #endregion
 
