@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-	  <Version>0.1.0</Version>
+	  <Version>0.2.0</Version>
     <TargetFramework>net8.0-windows</TargetFramework>
     <RootNamespace>CalliAPI</RootNamespace>
     <Nullable>enable</Nullable>
@@ -12,9 +12,12 @@
 
   <ItemGroup>
     <PackageReference Include="AmourgisCOREServices" Version="2.1.0" />
+    <PackageReference Include="ClosedXML" Version="0.105.0" />
     <PackageReference Include="FluentAssertions" Version="8.2.0" />
     <PackageReference Include="MaterialSkin" Version="0.2.1" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.2" />
+    <PackageReference Include="Polly" Version="8.5.2" />
+    <PackageReference Include="System.Linq.Async" Version="6.0.1" />
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
     <PackageReference Include="xunit" Version="2.9.3" />
   </ItemGroup>
@@ -46,10 +49,6 @@
       <CustomToolNamespace>CalliAPI.Properties</CustomToolNamespace>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Utilities\" />
   </ItemGroup>
 
 </Project>

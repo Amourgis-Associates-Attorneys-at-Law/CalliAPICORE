@@ -16,20 +16,57 @@ using System.Windows.Forms;
 using CalliAPI.Interfaces;
 using CalliAPI.BusinessLogic;
 using CalliAPI.UI;
+using Task = System.Threading.Tasks.Task;
+using AmourgisCOREServices;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace CalliAPI
 {
     public partial class MainForm : Form
     {
         private readonly IAuthService _authService; // for authorizing OAuth
-        private readonly IClioService _clioService; // for calling the API
+        private readonly ClioService _clioService; // for calling the API
+        private static readonly AMO_Logger _logger = new AMO_Logger("CalliAPI");
+        private static readonly int MaxLookbackDays = 300;
 
-        internal MainForm(IClioService clioService, IAuthService authService)
+        internal MainForm(ClioService clioService, IAuthService authService)
         {
             _authService = authService;
             _clioService = clioService;
             InitializeComponent();
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                StartOAuthProcess();
+                Thread.Sleep(2000);
+                UpdateClioAPIStatus();
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
+
+            clioService.ProgressUpdated += (current, total) =>
+            {
+                this.progressBarPagesRetrieved.Invoke(() =>
+                {
+                    progressBarPagesRetrieved.Maximum = total;
+                    progressBarPagesRetrieved.Value = Math.Min(current, total);
+                    lblReportPageRetrieved.Text = $"Page {current} of {total} obtained from Clio.";
+                });
+            };
         }
+
+
+        #region logic
+
+        private static bool IsValidLookbackDate(DateTime selectedDate)
+        {
+            var earliestAllowed = DateTime.UtcNow.Date.AddDays(-MaxLookbackDays);
+            return selectedDate >= earliestAllowed;
+        }
+
+        #endregion
 
         /// <summary>
         /// This method is called when the "Open Mailer Form" button is clicked. Opens a new MailerForm.
@@ -63,21 +100,16 @@ namespace CalliAPI
 
         private async void UpdateClioAPIStatus()
         {
-            string status = await _clioService.VerifyAPI();
-            lblClioAPIStatus.Text = status;
-        }
-
-        private async void unworkedMattersToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            // Get the data we need
-            DataTable mattersTable = await _clioService.GetMattersNotCurrentlyBeingWorkedAsDataTable();
-
-            // Show it in a new Report Form
-            ReportForm reportForm = new ReportForm();
-            reportForm.SetData(mattersTable);
-            reportForm.Show();
-
-
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                string status = await _clioService.VerifyAPI();
+                lblClioAPIStatus.Text = status;
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
         }
 
         private void lblClioAPIStatus_Click(object sender, EventArgs e)
@@ -92,12 +124,18 @@ namespace CalliAPI
 
         private async void allMattersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DataTable mattersTable = await _clioService.GetAllMattersAsDataTable();
+            _logger.Info("Report Start: All Matters");
+            lblReportName.Text = "Report: All Matters";
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                await _clioService.GetAllMatters(); // or whatever method you're calling
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
 
-            // Show it in a new Report Form
-            ReportForm reportForm = new ReportForm();
-            reportForm.SetData(mattersTable);
-            reportForm.Show();
         }
 
         /// <summary>
@@ -106,6 +144,7 @@ namespace CalliAPI
         /// </summary>
         private async void StartOAuthProcess()
         {
+            _logger.Info("Starting OAuth process...");
             // Open a browser and make the front-end OAuth call in the URL
             var authorizationUrl = _authService.GetAuthorizationUrl();
             var psi = new System.Diagnostics.ProcessStartInfo
@@ -141,6 +180,64 @@ namespace CalliAPI
             await _authService.GetAccessTokenAsync(authorizationCode);
             MessageBox.Show(_authService.AccessToken, "Access Token");
 
+        }
+
+        private async void allMattersToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            await FastFetchAllMatters();
+
+        }
+
+        /// <summary>
+        /// Grab a date from the last MaxLookbackDays days and then call a report to get all matters created_since that date
+        /// </summary>
+        /// <returns></returns>
+        private async Task FastFetchAllMatters()
+        {
+            DateTime selectedDate;
+
+            while (true)
+            {
+                using (var datePicker = new DatePickerDialog(MaxLookbackDays)) // Custom form or use DateTimePicker in a dialog
+                {
+                    if (datePicker.ShowDialog() != DialogResult.OK)
+                        return; // User cancelled
+
+                    selectedDate = datePicker.SelectedDate;
+
+                    if (IsValidLookbackDate(selectedDate))
+                        break;
+
+                    MessageBox.Show($"Please select a date within the last {MaxLookbackDays} days.",
+                    "Invalid Date", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                lblReportName.Text = $"Report: All Matters since {selectedDate.ToShortDateString()}";
+                _logger.Info($"Report Start: All Matters since {selectedDate.ToShortDateString()}");
+                await _clioService.FastFetchAllMatters(selectedDate);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
+        }
+
+        private async void createdSinceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            await FastFetchAllMatters();
+        }
+
+        private void unworkedMattersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("This feature is not yet implemented.", "Feature Not Implemented", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

@@ -1,4 +1,12 @@
-﻿using System;
+﻿// Project: CalliAPI
+// Namespace: CalliAPI.BusinessLogic
+// FileName: ClioService.cs
+// Jacob Hayes
+// 2025 05 21
+
+// FastFetch refers to the process of quickly retrieving all matters from Clio through parallization of offset requests.
+
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -7,19 +15,30 @@ using System.Threading.Tasks;
 using CalliAPI.Interfaces;
 using CalliAPI.Models;
 using AmourgisCOREServices;
+using CalliAPI.Utilities;
+using CalliAPI.DataAccess;
+using Task = System.Threading.Tasks.Task;
 
 namespace CalliAPI.BusinessLogic
 {
-    internal class ClioService : IClioService
+    internal class ClioService
     {
         private static readonly AMO_Logger _logger = new AMO_Logger("CalliAPI");
 
-        private readonly IClioApiClient _clioApiClient;
+        private readonly ClioApiClient _clioApiClient;
 
-        public ClioService(IClioApiClient clioApiClient)
+        public ClioService(ClioApiClient clioApiClient)
         {
             _clioApiClient = clioApiClient;
         }
+
+        #region event delegates
+        public event Action<int, int> ProgressUpdated
+        {
+            add => _clioApiClient.ProgressUpdated += value;
+            remove => _clioApiClient.ProgressUpdated -= value;
+        }
+        #endregion
 
         public async Task<string> VerifyAPI()
         {
@@ -31,35 +50,30 @@ namespace CalliAPI.BusinessLogic
             return await _clioApiClient.GetMattersNotCurrentlyBeingWorked();
         }
 
-
-        public async Task<DataTable> GetMattersNotCurrentlyBeingWorkedAsDataTable()
+        public async Task GetAllMatters()
         {
-            var matters = await _clioApiClient.GetMattersNotCurrentlyBeingWorked();
-            return ConvertToDataTable(matters);
+            // Initialize the matter stream
+            IAsyncEnumerable<Matter> matters = _clioApiClient.GetAllMattersAsync();
+            // Filter the matter stream (since this is ALL matters, we don't need to bother with filtering)
+            // matters = matters.FilterByWhatever();
+            // Convert the matter stream to a DataTable and show it
+            await ReportLauncher.ShowAsync(matters);
         }
 
-        public async Task<DataTable> GetAllMattersAsDataTable()
+        public async Task GetAllOpenMatters()
         {
-            var matters = await _clioApiClient.GetAllActive713MattersAsync();
-            return ConvertToDataTable(matters);
+            // Initialize the matter stream and filter it
+            IAsyncEnumerable<Matter> matters = _clioApiClient.GetAllMattersAsync().FilterByStatusAsync("open");
+            // Convert the matter stream to a DataTable and show it
+            await ReportLauncher.ShowAsync(matters);
         }
 
-
-        private DataTable ConvertToDataTable(List<Matter> matters)
+        public async Task FastFetchAllMatters(DateTime dateSince)
         {
-            DataTable table = new DataTable();
-            table.Columns.Add("Id", typeof(long));
-            table.Columns.Add("Practice Area", typeof(string));
-            table.Columns.Add("Stage", typeof(string));
+            IAsyncEnumerable<Matter> matters = _clioApiClient.FastFetchMattersSinceAsync(dateSince);
 
-            foreach (var matter in matters)
-            {
-                table.Rows.Add(matter.id, matter.practice_area_name, matter.matter_stage_name);
-            }
-
-            return table;
+            await ReportLauncher.ShowAsync(matters);
         }
-
 
 
     }

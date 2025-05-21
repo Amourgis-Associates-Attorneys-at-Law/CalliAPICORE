@@ -13,6 +13,12 @@ using CalliAPI.Models;
 using Task = System.Threading.Tasks.Task;
 using System.Diagnostics.Metrics;
 using AmourgisCOREServices;
+using Polly;
+using System.Net.Sockets;
+using System.Net;
+using System.Drawing.Printing;
+using System.Threading;
+using System.Runtime.CompilerServices;
 
 namespace CalliAPI.DataAccess
 {
@@ -32,6 +38,55 @@ namespace CalliAPI.DataAccess
         {
             _httpClient = httpClient;
         }
+
+
+        #region retry policies
+        /// <summary>
+        /// This policy will retry the request with exponential backoff.
+        /// </summary>
+        private readonly AsyncPolicy<HttpResponseMessage> _retryPolicy = Policy
+            .Handle<HttpRequestException>() // Handle HTTP request exceptions
+            .Or<SocketException>() // Handle socket exceptions
+    .OrResult<HttpResponseMessage>(r => (int)r.StatusCode == 429) //HTTP 429: Too Many Requests
+    .WaitAndRetryAsync(
+        retryCount: 5,
+        sleepDurationProvider: attempt => TimeSpan.FromSeconds(Math.Pow(2, attempt)),
+        onRetry: (outcome, delay, attempt, context) =>
+        {
+            if (outcome.Exception != null)
+            {
+                _logger.Warn($"Exception on attempt {attempt}: {outcome.Exception.Message}. Retrying in {delay.TotalSeconds} seconds...");
+            }
+            else
+            {
+                _logger.Warn($"Rate limited. Retrying in {delay.TotalSeconds} seconds...");
+            }
+        });
+
+
+        /// <summary>
+        /// This policy will return a fallback response if all retries fail.
+        /// Example: var response = await _fallbackPolicy.WrapAsync(_retryPolicy).ExecuteAsync(() => _httpClient.GetAsync(nextPageUrl));
+        /// </summary>
+        private readonly AsyncPolicy<HttpResponseMessage> _fallbackPolicy = Policy<HttpResponseMessage>
+         .Handle<HttpRequestException>()
+         .OrResult(r => !r.IsSuccessStatusCode)
+         .FallbackAsync(
+         fallbackAction: (cancellationToken) =>
+         {
+             _logger.Error("All retries failed. Returning fallback response.");
+             return Task.FromResult(new HttpResponseMessage(HttpStatusCode.ServiceUnavailable));
+         });
+        #endregion
+
+        #region delegates
+
+        public event Action<int, int> ProgressUpdated;
+
+        #endregion
+
+
+
 
 
 
@@ -62,12 +117,35 @@ namespace CalliAPI.DataAccess
             { "client_id", Properties.Settings.Default.ClientId },
             { "client_secret", Properties.Settings.Default.ClientSecret }
             };
+            _logger.Info($"Requesting access token as {requestData.ToString()}");
             var response = await _httpClient.PostAsync(tokenEndpoint, new FormUrlEncodedContent(requestData));
             var responseContent = await response.Content.ReadAsStringAsync();
             var jsonDocument = JsonDocument.Parse(responseContent);
+            _logger.Info(jsonDocument.ToString());
             accessToken = jsonDocument.RootElement.GetProperty("access_token").GetString();
             return accessToken;
         }
+
+
+
+        /// <summary>
+        /// This method attempts to get a property from a JsonElement. It checks if the property exists and if its value is an object.
+        /// </summary>
+        /// <param name="element">The JsonElement</param>
+        /// <param name="propertyName">The property to attempt to recover from the JsonElement</param>
+        /// <param name="result">The output of the attempt to access the JsonValueKind.Object from the JsonElement</param>
+        /// <returns>True if TryGetProperty() && ValueKind == JsonValueKind.Object, else false</returns>
+        private bool TryGetObject(JsonElement element, string propertyName, out JsonElement result)
+        {
+            result = default;
+            if (element.TryGetProperty(propertyName, out var temp) && temp.ValueKind == JsonValueKind.Object)
+            {
+                result = temp;
+                return true;
+            }
+            return false;
+        }
+
 
 
 
@@ -80,27 +158,28 @@ namespace CalliAPI.DataAccess
                     id = element.GetProperty("id").GetInt64()
                 };
 
+
                 // Practice Area
-                if (element.TryGetProperty("practice_area", out var practiceAreaElement) &&
+                if (TryGetObject(element, "practice_area", out var practiceAreaElement) &&
          practiceAreaElement.TryGetProperty("name", out var practiceAreaNameElement))
                 {
                     matter.practice_area_name = practiceAreaNameElement.GetString();
                 }
 
                 // Status
-                if (element.TryGetProperty("status", out var statusElement))
+                if (element.TryGetProperty("status", out var statusElement) && statusElement.ValueKind == JsonValueKind.String)
                 {
                     matter.status = statusElement.GetString();
                 }
 
                 // Has Tasks
-                if (element.TryGetProperty("has_tasks", out var hasTasksElement))
+                if (element.TryGetProperty("has_tasks", out var hasTasksElement) && hasTasksElement.ValueKind == JsonValueKind.True || hasTasksElement.ValueKind == JsonValueKind.False)
                 {
                     matter.has_tasks = hasTasksElement.GetBoolean();
                 }
 
                 // Client
-                if (element.TryGetProperty("client", out var clientElement) &&
+                if (TryGetObject(element, "client", out var clientElement) &&
          clientElement.TryGetProperty("id", out var clientIdElement) &&
          clientElement.TryGetProperty("name", out var clientNameElement))
                 {
@@ -112,20 +191,22 @@ namespace CalliAPI.DataAccess
                 }
 
                 // Matter Stage
-                if (element.TryGetProperty("matter_stage", out var matterStageElement) &&
+                if (TryGetObject(element, "matter_stage", out var matterStageElement) &&
          matterStageElement.TryGetProperty("name", out var matterStageNameElement))
                 {
                     matter.matter_stage_name = matterStageNameElement.GetString();
                 }
 
                 // Custom Fields
-                if (element.TryGetProperty("custom_field_values", out var customFieldsElement))
+                if (element.TryGetProperty("custom_field_values", out var customFieldsElement) &&
+         customFieldsElement.ValueKind == JsonValueKind.Array)
                 {
                     foreach (var fieldValue in customFieldsElement.EnumerateArray())
                     {
-                        if (fieldValue.TryGetProperty("custom_field", out var customFieldElement) &&
+                        if (TryGetObject(fieldValue, "custom_field", out var customFieldElement) &&
                         customFieldElement.TryGetProperty("id", out var idElement) &&
-                        fieldValue.TryGetProperty("value", out var valueElement))
+                        fieldValue.TryGetProperty("value", out var valueElement) &&
+                        valueElement.ValueKind == JsonValueKind.String)
                         {
                             long fieldId = idElement.GetInt64();
                             string value = valueElement.GetString();
@@ -142,14 +223,202 @@ namespace CalliAPI.DataAccess
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error parsing element: {ex.Message}");
+                _logger.Error($"Error parsing matter: {ex.Message}");
                 throw;
             }
         }
 
 
 
+
         #region reporting functions
+
+        /// <summary>
+        /// Get a list of all the matters as Matter objects. Use this with MatterFilters.cs to filter the list of matters.
+        /// </summary>
+        /// <returns></returns>
+        public async IAsyncEnumerable<Matter> GetAllMattersAsync()
+        {
+            _logger.Info("API CALL START -- GET ALL MATTERS ASYNC --");
+
+            string nextPageUrl = $"{Properties.Settings.Default.ApiUrl}matters?" +
+                                 "fields=id,practice_area{name},status,has_tasks,client{id,name},matter_stage{name},custom_field_values{id,value,custom_field}";
+
+            int pageCount = 0;
+            int maxPages = 9999;
+            int totalRecords;
+            int totalPages = 0;
+
+            while (!string.IsNullOrEmpty(nextPageUrl) && pageCount < maxPages) // While there exists another page of results...
+            {
+                pageCount++;
+                _logger.Info($"Fetching page {pageCount}: {nextPageUrl}");
+
+
+                // Get the next page (retrying with Polly)
+                var response = await _retryPolicy.ExecuteAsync(() => _httpClient.GetAsync(nextPageUrl));
+                if (!response.IsSuccessStatusCode)
+                {
+                    _logger.Error($"Failed to fetch matters: {response.StatusCode} - {await response.Content.ReadAsStringAsync()}");
+                    yield break;
+                }
+
+                var content = await response.Content.ReadAsStringAsync();
+
+                JsonDocument json;
+
+                try // Parse the JSON response
+                {
+                    json = JsonDocument.Parse(content);
+                }
+                catch (JsonException ex)
+                {
+                    _logger.Error($"Failed to parse JSON: {ex.Message}");
+                    yield break;
+                }
+
+                // Only extract totalRecords on the first page
+                if (pageCount == 1 &&
+                    json.RootElement.TryGetProperty("meta", out var metaElement) &&
+                    metaElement.TryGetProperty("records", out var recordsElement) &&
+                    recordsElement.TryGetInt32(out totalRecords))
+                {
+                    totalPages = (int)Math.Ceiling(totalRecords / 200.0);
+                    _logger.Info($"Total records: {totalRecords}, estimated pages: {totalPages}");
+                }
+
+                // Update progress bar here (if you pass a callback or use an event)
+                ProgressUpdated?.Invoke(pageCount, totalPages);
+
+
+
+                // If there's a data element, parse it
+
+                // Using the using block to ensure it's disposed of later...
+                using (json)
+                {
+                    if (json.RootElement.TryGetProperty("data", out var dataElement))
+                    {
+                        foreach (var element in dataElement.EnumerateArray())
+                        {
+                            yield return ParseMatter(element);
+                        }
+                    }
+
+                    nextPageUrl = json.RootElement
+                        .GetProperty("meta")
+                        .GetProperty("paging")
+                        .TryGetProperty("next", out var nextElement)
+                        ? nextElement.GetString()
+                        : null;
+
+                    
+                }
+            }
+
+            _logger.Info("API CALL END -- GET ALL MATTERS ASYNC --");
+        }
+
+
+        /// <summary>
+        /// Fetches up to 10,000 Matter records created since the given date using offset-based pagination,
+        /// parallelized for performance. Results are streamed back as an IAsyncEnumerable.
+        /// </summary>
+        public async IAsyncEnumerable<Matter> FastFetchMattersSinceAsync(
+         DateTime sinceDate,
+         [EnumeratorCancellation] CancellationToken cancellationToken = default)
+        {
+            // Constants for pagination and throttling
+            const int PageSize = 200;                   // Clio API max page size
+            const int MaxRecords = 10000;               // Safety cap to avoid over-fetching
+            const int MaxParallelRequests = 10;         // Limit concurrent requests to avoid rate limiting
+
+            int totalPages = MaxRecords / PageSize;     // Total pages to fetch (e.g., 50 for 10,000 records)
+            int completedPages = 0;                     // Tracks how many pages have completed
+            int totalRecordsFetched = 0;                // Tracks total records fetched across all pages
+
+            // Build base URL and query parameters
+            string baseUrl = $"{Properties.Settings.Default.ApiUrl}matters";
+            string fields = "id,practice_area{name},status,has_tasks,client{id,name},matter_stage{name},custom_field_values{id,value,custom_field}";
+            string isoDate = sinceDate.ToUniversalTime().ToString("o"); // ISO 8601 format
+
+            var throttler = new SemaphoreSlim(MaxParallelRequests); // Controls how many requests run at once
+
+            // Create a list of tasks, one for each page (offset)
+            var tasks = Enumerable.Range(0, totalPages).Select(async i =>
+            {
+                int offset = i * PageSize;
+                string url = $"{baseUrl}?fields={Uri.EscapeDataString(fields)}&created_since={Uri.EscapeDataString(isoDate)}&limit={PageSize}&offset={offset}";
+
+                await throttler.WaitAsync(cancellationToken); // Wait for a slot to run
+                try
+                {
+                    // Use Polly to retry transient failures
+                    var response = await _retryPolicy.ExecuteAsync(() =>
+         _httpClient.GetAsync(url, cancellationToken));
+
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        _logger.Warn($"[ParallelFetch] Failed at offset {offset}: {response.StatusCode}");
+                        return Enumerable.Empty<Matter>();
+                    }
+
+                    var content = await response.Content.ReadAsStringAsync(cancellationToken);
+                    var json = JsonDocument.Parse(content);
+
+                    var matters = new List<Matter>();
+                    if (json.RootElement.TryGetProperty("data", out var dataElement))
+                    {
+                        foreach (var element in dataElement.EnumerateArray())
+                        {
+                            matters.Add(ParseMatter(element)); // Convert JSON to Matter object
+                        }
+                    }
+
+                    // Safely increment the total record count
+                    Interlocked.Add(ref totalRecordsFetched, matters.Count);
+                    return matters;
+                }
+                catch (Exception ex)
+                {
+                    _logger.Error($"[ParallelFetch] Exception at offset {offset}: {ex.Message}");
+                    return Enumerable.Empty<Matter>();
+                }
+                finally
+                {
+                    // Update progress and release the throttler slot
+                    int newPageCount = Interlocked.Increment(ref completedPages);
+                    ProgressUpdated?.Invoke(newPageCount, totalPages);
+                    throttler.Release();
+                }
+            }).ToList();
+
+            // As each task completes, yield its results
+            foreach (var task in tasks)
+            {
+                var matters = await task;
+                foreach (var matter in matters)
+                {
+                    yield return matter;
+                }
+            }
+
+            // Warn if we hit the record cap
+            if (totalRecordsFetched >= MaxRecords)
+            {
+                _logger.Warn($"[ParallelFetch] Record cap of {MaxRecords} reached. Results may be incomplete.");
+                MessageBox.Show(
+                $"Only the first {MaxRecords} records were fetched. The results may be incomplete.\n\n" +
+                $"Try narrowing your date range or applying filters.",
+                "Record Limit Reached",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning);
+            }
+        }
+
+
+
+
 
         /// <summary>
         /// Get a list of all the Practice Areas as PracticeArea objects
