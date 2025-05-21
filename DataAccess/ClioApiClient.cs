@@ -242,7 +242,7 @@ namespace CalliAPI.DataAccess
             _logger.Info("API CALL START -- GET ALL MATTERS ASYNC --");
 
             string nextPageUrl = $"{Properties.Settings.Default.ApiUrl}matters?" +
-                                 "fields=id,practice_area{name},status,has_tasks,client{id,name},matter_stage{name},custom_field_values{id,value,custom_field}";
+                                 "fields=id,practice_area{name},status,has_tasks,client{id,name},matter_stage{name},custom_field_values{id,value,custom_field}&order=id(asc)";
 
             int pageCount = 0;
             int maxPages = 9999;
@@ -319,6 +319,93 @@ namespace CalliAPI.DataAccess
             _logger.Info("API CALL END -- GET ALL MATTERS ASYNC --");
         }
 
+        /// <summary>
+        /// Get a list of all the open matters as Matter objects. Use this with MatterFilters.cs to filter the list of matters.
+        /// </summary>
+        /// <returns></returns>
+        public async IAsyncEnumerable<Matter> GetAllOpenMattersAsync()
+        {
+            _logger.Info("API CALL START -- GET ALL OPEN MATTERS ASYNC --");
+
+            string nextPageUrl = $"{Properties.Settings.Default.ApiUrl}matters?" +
+                                 "fields=id,practice_area{name},status,has_tasks,client{id,name},matter_stage{name},custom_field_values{id,value,custom_field}&status=open&order=id(asc)";
+
+            int pageCount = 0;
+            int maxPages = 9999;
+            int totalRecords;
+            int totalPages = 0;
+
+            while (!string.IsNullOrEmpty(nextPageUrl) && pageCount < maxPages) // While there exists another page of results...
+            {
+                pageCount++;
+                _logger.Info($"Fetching page {pageCount}: {nextPageUrl}");
+
+
+                // Get the next page (retrying with Polly)
+                var response = await _retryPolicy.ExecuteAsync(() => _httpClient.GetAsync(nextPageUrl));
+                if (!response.IsSuccessStatusCode)
+                {
+                    _logger.Error($"Failed to fetch matters: {response.StatusCode} - {await response.Content.ReadAsStringAsync()}");
+                    yield break;
+                }
+
+                var content = await response.Content.ReadAsStringAsync();
+
+                JsonDocument json;
+
+                try // Parse the JSON response
+                {
+                    json = JsonDocument.Parse(content);
+                }
+                catch (JsonException ex)
+                {
+                    _logger.Error($"Failed to parse JSON: {ex.Message}");
+                    yield break;
+                }
+
+                // Only extract totalRecords on the first page
+                if (pageCount == 1 &&
+                    json.RootElement.TryGetProperty("meta", out var metaElement) &&
+                    metaElement.TryGetProperty("records", out var recordsElement) &&
+                    recordsElement.TryGetInt32(out totalRecords))
+                {
+                    totalPages = (int)Math.Ceiling(totalRecords / 200.0);
+                    _logger.Info($"Total records: {totalRecords}, estimated pages: {totalPages}");
+                }
+
+                // Update progress bar here (if you pass a callback or use an event)
+                ProgressUpdated?.Invoke(pageCount, totalPages);
+
+
+
+                // If there's a data element, parse it
+
+                // Using the using block to ensure it's disposed of later...
+                using (json)
+                {
+                    if (json.RootElement.TryGetProperty("data", out var dataElement))
+                    {
+                        foreach (var element in dataElement.EnumerateArray())
+                        {
+                            yield return ParseMatter(element);
+                        }
+                    }
+
+                    nextPageUrl = json.RootElement
+                        .GetProperty("meta")
+                        .GetProperty("paging")
+                        .TryGetProperty("next", out var nextElement)
+                        ? nextElement.GetString()
+                        : null;
+
+
+                }
+            }
+
+            _logger.Info("API CALL END -- GET ALL OPEN MATTERS ASYNC --");
+        }
+
+
 
         /// <summary>
         /// Fetches up to 10,000 Matter records created since the given date using offset-based pagination,
@@ -340,6 +427,98 @@ namespace CalliAPI.DataAccess
             // Build base URL and query parameters
             string baseUrl = $"{Properties.Settings.Default.ApiUrl}matters";
             string fields = "id,practice_area{name},status,has_tasks,client{id,name},matter_stage{name},custom_field_values{id,value,custom_field}";
+            string isoDate = sinceDate.ToUniversalTime().ToString("o"); // ISO 8601 format
+
+            var throttler = new SemaphoreSlim(MaxParallelRequests); // Controls how many requests run at once
+
+            // Create a list of tasks, one for each page (offset)
+            var tasks = Enumerable.Range(0, totalPages).Select(async i =>
+            {
+                int offset = i * PageSize;
+                string url = $"{baseUrl}?fields={Uri.EscapeDataString(fields)}&created_since={Uri.EscapeDataString(isoDate)}&limit={PageSize}&offset={offset}";
+
+                await throttler.WaitAsync(cancellationToken); // Wait for a slot to run
+                try
+                {
+                    // Use Polly to retry transient failures
+                    var response = await _retryPolicy.ExecuteAsync(() =>
+         _httpClient.GetAsync(url, cancellationToken));
+
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        _logger.Warn($"[ParallelFetch] Failed at offset {offset}: {response.StatusCode}");
+                        return Enumerable.Empty<Matter>();
+                    }
+
+                    var content = await response.Content.ReadAsStringAsync(cancellationToken);
+                    var json = JsonDocument.Parse(content);
+
+                    var matters = new List<Matter>();
+                    if (json.RootElement.TryGetProperty("data", out var dataElement))
+                    {
+                        foreach (var element in dataElement.EnumerateArray())
+                        {
+                            matters.Add(ParseMatter(element)); // Convert JSON to Matter object
+                        }
+                    }
+
+                    // Safely increment the total record count
+                    Interlocked.Add(ref totalRecordsFetched, matters.Count);
+                    return matters;
+                }
+                catch (Exception ex)
+                {
+                    _logger.Error($"[ParallelFetch] Exception at offset {offset}: {ex.Message}");
+                    return Enumerable.Empty<Matter>();
+                }
+                finally
+                {
+                    // Update progress and release the throttler slot
+                    int newPageCount = Interlocked.Increment(ref completedPages);
+                    ProgressUpdated?.Invoke(newPageCount, totalPages);
+                    throttler.Release();
+                }
+            }).ToList();
+
+            // As each task completes, yield its results
+            foreach (var task in tasks)
+            {
+                var matters = await task;
+                foreach (var matter in matters)
+                {
+                    yield return matter;
+                }
+            }
+
+            // Warn if we hit the record cap
+            if (totalRecordsFetched >= MaxRecords)
+            {
+                _logger.Warn($"[ParallelFetch] Record cap of {MaxRecords} reached. Results may be incomplete.");
+                MessageBox.Show(
+                $"Only the first {MaxRecords} records were fetched. The results may be incomplete.\n\n" +
+                $"Try narrowing your date range or applying filters.",
+                "Record Limit Reached",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning);
+            }
+        }
+
+        public async IAsyncEnumerable<Matter> FastFetchOpenMattersSinceAsync(
+ DateTime sinceDate,
+ [EnumeratorCancellation] CancellationToken cancellationToken = default)
+        {
+            // Constants for pagination and throttling
+            const int PageSize = 200;                   // Clio API max page size
+            const int MaxRecords = 10000;               // Safety cap to avoid over-fetching
+            const int MaxParallelRequests = 10;         // Limit concurrent requests to avoid rate limiting
+
+            int totalPages = MaxRecords / PageSize;     // Total pages to fetch (e.g., 50 for 10,000 records)
+            int completedPages = 0;                     // Tracks how many pages have completed
+            int totalRecordsFetched = 0;                // Tracks total records fetched across all pages
+
+            // Build base URL and query parameters
+            string baseUrl = $"{Properties.Settings.Default.ApiUrl}matters";
+            string fields = "id,practice_area{name},status,has_tasks,client{id,name},matter_stage{name},custom_field_values{id,value,custom_field}&status=open";
             string isoDate = sinceDate.ToUniversalTime().ToString("o"); // ISO 8601 format
 
             var throttler = new SemaphoreSlim(MaxParallelRequests); // Controls how many requests run at once

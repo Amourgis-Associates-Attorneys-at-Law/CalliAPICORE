@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-	  <Version>0.3.2</Version>
+	  <Version>1.0.0</Version>
     <TargetFramework>net8.0-windows</TargetFramework>
     <RootNamespace>CalliAPI</RootNamespace>
     <Nullable>enable</Nullable>

@@ -45,11 +45,14 @@ namespace CalliAPI.BusinessLogic
             return await _clioApiClient.VerifyAPI();
         }
 
+
         public async Task<List<Matter>> GetMattersNotCurrentlyBeingWorked()
         {
             return await _clioApiClient.GetMattersNotCurrentlyBeingWorked();
         }
 
+
+        #region reports
         public async Task GetAllMatters()
         {
             // Initialize the matter stream
@@ -63,18 +66,29 @@ namespace CalliAPI.BusinessLogic
         public async Task GetAllOpenMatters()
         {
             // Initialize the matter stream and filter it
-            IAsyncEnumerable<Matter> matters = _clioApiClient.GetAllMattersAsync().FilterByStatusAsync("open");
+            IAsyncEnumerable<Matter> matters = _clioApiClient.GetAllOpenMattersAsync();
             // Convert the matter stream to a DataTable and show it
             await ReportLauncher.ShowAsync(matters);
         }
 
+        public async Task GetAllOpen713Matters()
+        {             
+            // Initialize the matter stream and filter it
+            IAsyncEnumerable<Matter> matters = _clioApiClient.GetAllOpenMattersAsync().FilterByPracticeAreaSuffixAsync(new string[] { "7", "13" });
+            // Convert the matter stream to a DataTable and show it
+            await ReportLauncher.ShowAsync(matters);
+        }
+
+        #endregion
+
+        #region FastFetch reports
         public async Task FastFetchAllMatters(DateTime dateSince)
         {
             IAsyncEnumerable<Matter> matters = _clioApiClient.FastFetchMattersSinceAsync(dateSince);
 
             await ReportLauncher.ShowAsync(matters);
         }
-
+        #endregion
 
     }
 }

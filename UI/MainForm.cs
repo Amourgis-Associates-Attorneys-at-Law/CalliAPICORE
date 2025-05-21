@@ -239,5 +239,12 @@ namespace CalliAPI
         {
             MessageBox.Show("This feature is not yet implemented.", "Feature Not Implemented", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
+        private async void all713MattersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            await _clioService.GetAllOpen713Matters();
+        }
+
+       
     }
 }

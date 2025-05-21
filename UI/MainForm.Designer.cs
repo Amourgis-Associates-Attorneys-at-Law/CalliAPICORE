@@ -36,7 +36,7 @@
             reportsToolStripMenuItem = new ToolStripMenuItem();
             unworkedMattersToolStripMenuItem = new ToolStripMenuItem();
             allMattersToolStripMenuItem = new ToolStripMenuItem();
-            toolStripSeparator1 = new ToolStripSeparator();
+            all713MattersToolStripMenuItem = new ToolStripMenuItem();
             fastFetchToolStripMenuItem1 = new ToolStripMenuItem();
             createdSinceToolStripMenuItem = new ToolStripMenuItem();
             programToolStripMenuItem = new ToolStripMenuItem();
@@ -91,7 +91,7 @@
             // 
             // reportsToolStripMenuItem
             // 
-            reportsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { unworkedMattersToolStripMenuItem, allMattersToolStripMenuItem, toolStripSeparator1 });
+            reportsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { unworkedMattersToolStripMenuItem, allMattersToolStripMenuItem, all713MattersToolStripMenuItem });
             reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
             reportsToolStripMenuItem.Size = new Size(59, 20);
             reportsToolStripMenuItem.Text = "Reports";
@@ -100,21 +100,23 @@
             // 
             unworkedMattersToolStripMenuItem.Enabled = false;
             unworkedMattersToolStripMenuItem.Name = "unworkedMattersToolStripMenuItem";
-            unworkedMattersToolStripMenuItem.Size = new Size(171, 22);
+            unworkedMattersToolStripMenuItem.Size = new Size(190, 22);
             unworkedMattersToolStripMenuItem.Text = "Unworked Matters";
             unworkedMattersToolStripMenuItem.Click += unworkedMattersToolStripMenuItem_Click;
             // 
             // allMattersToolStripMenuItem
             // 
             allMattersToolStripMenuItem.Name = "allMattersToolStripMenuItem";
-            allMattersToolStripMenuItem.Size = new Size(171, 22);
+            allMattersToolStripMenuItem.Size = new Size(190, 22);
             allMattersToolStripMenuItem.Text = "All Matters";
             allMattersToolStripMenuItem.Click += allMattersToolStripMenuItem_Click;
             // 
-            // toolStripSeparator1
+            // all713MattersToolStripMenuItem
             // 
-            toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(168, 6);
+            all713MattersToolStripMenuItem.Name = "all713MattersToolStripMenuItem";
+            all713MattersToolStripMenuItem.Size = new Size(190, 22);
+            all713MattersToolStripMenuItem.Text = "All Open 7 & 13 Matters";
+            all713MattersToolStripMenuItem.Click += all713MattersToolStripMenuItem_Click;
             // 
             // fastFetchToolStripMenuItem1
             // 
@@ -141,14 +143,14 @@
             // 
             mailerProgramToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { openToolStripMenuItem });
             mailerProgramToolStripMenuItem.Name = "mailerProgramToolStripMenuItem";
-            mailerProgramToolStripMenuItem.Size = new Size(180, 22);
+            mailerProgramToolStripMenuItem.Size = new Size(156, 22);
             mailerProgramToolStripMenuItem.Text = "Mailer Program";
             // 
             // openToolStripMenuItem
             // 
             openToolStripMenuItem.Enabled = false;
             openToolStripMenuItem.Name = "openToolStripMenuItem";
-            openToolStripMenuItem.Size = new Size(180, 22);
+            openToolStripMenuItem.Size = new Size(103, 22);
             openToolStripMenuItem.Text = "Open";
             openToolStripMenuItem.Click += openToolStripMenuItem_Click;
             // 
@@ -270,9 +272,9 @@
         private ProgressBar progressBarPagesRetrieved;
         private Label lblReportPageRetrieved;
         private Label lblReportName;
-        private ToolStripSeparator toolStripSeparator1;
         private Label label1;
         private ToolStripMenuItem fastFetchToolStripMenuItem1;
         private ToolStripMenuItem createdSinceToolStripMenuItem;
+        private ToolStripMenuItem all713MattersToolStripMenuItem;
     }
 }

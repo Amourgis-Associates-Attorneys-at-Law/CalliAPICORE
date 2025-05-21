@@ -16,6 +16,8 @@ namespace CalliAPI.UI
         public ReportForm()
         {
             InitializeComponent();
+            dataGridView1.AutoGenerateColumns = true;
+            dataGridView1.ColumnHeadersVisible = true; // Ensure headers are visible
         }
 
         public void SetData(DataTable dataTable)
