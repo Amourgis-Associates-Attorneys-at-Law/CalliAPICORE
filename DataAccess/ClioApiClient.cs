@@ -278,7 +278,7 @@ namespace CalliAPI.DataAccess
             _logger.Info("API CALL START -- GET ALL MATTERS ASYNC --");
 
             string nextPageUrl = $"{Properties.Settings.Default.ApiUrl}matters?" +
-                                 "fields=id,practice_area{name},status,has_tasks,client{id,name},matter_stage{name},custom_field_values{id,value,custom_field}&order=id(asc)";
+                                 "fields=id,practice_area{name},display_number,status,has_tasks,client{id,name},matter_stage{name},custom_field_values{id,value,custom_field}&order=id(asc)";
 
             int pageCount = 0;
             int maxPages = 9999;
@@ -364,7 +364,7 @@ namespace CalliAPI.DataAccess
             _logger.Info("API CALL START -- GET ALL OPEN MATTERS ASYNC --");
 
             string nextPageUrl = $"{Properties.Settings.Default.ApiUrl}matters?" +
-                                 "fields=id,practice_area{name},status,has_tasks,client{id,name},matter_stage{name},custom_field_values{id,value,custom_field}&status=open&order=id(asc)";
+                                 "fields=id,practice_area{name},display_number,status,has_tasks,client{id,name},matter_stage{name},custom_field_values{id,value,custom_field}&status=open&order=id(asc)";
 
             int pageCount = 0;
             int maxPages = 9999;

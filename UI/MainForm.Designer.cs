@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            TreeNode treeNode1 = new TreeNode("Unworked Matters");
-            TreeNode treeNode2 = new TreeNode("Open Matters", new TreeNode[] { treeNode1 });
-            TreeNode treeNode3 = new TreeNode("All Matters");
-            TreeNode treeNode4 = new TreeNode("Reports", new TreeNode[] { treeNode2, treeNode3 });
-            TreeNode treeNode5 = new TreeNode("FastFetch");
+            TreeNode treeNode6 = new TreeNode("Unworked Matters");
+            TreeNode treeNode7 = new TreeNode("Open Matters", new TreeNode[] { treeNode6 });
+            TreeNode treeNode8 = new TreeNode("All Matters");
+            TreeNode treeNode9 = new TreeNode("Reports", new TreeNode[] { treeNode7, treeNode8 });
+            TreeNode treeNode10 = new TreeNode("FastFetch");
             menuStrip1 = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
             exitToolStripMenuItem = new ToolStripMenuItem();
@@ -60,6 +60,7 @@
             panelContent = new Panel();
             panel1 = new Panel();
             tableLayoutPanel1 = new TableLayoutPanel();
+            lblVersion = new Label();
             menuStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
@@ -261,23 +262,23 @@
             treeViewReports.Dock = DockStyle.Fill;
             treeViewReports.Location = new Point(0, 0);
             treeViewReports.Name = "treeViewReports";
-            treeNode1.Name = "Unworked Matters";
-            treeNode1.Tag = "ReportsOpenMattersUnworkedMatters";
-            treeNode1.Text = "Unworked Matters";
-            treeNode2.Name = "Open Matters";
-            treeNode2.Tag = "ReportsOpenMatters";
-            treeNode2.Text = "Open Matters";
-            treeNode3.Name = "All Matters";
-            treeNode3.Tag = "ReportsAllMatters";
-            treeNode3.Text = "All Matters";
-            treeNode4.Name = "Reports";
-            treeNode4.Tag = "Reports";
-            treeNode4.Text = "Reports";
-            treeNode5.Name = "FastFetch";
-            treeNode5.NodeFont = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            treeNode5.Tag = "FastFetch";
-            treeNode5.Text = "FastFetch";
-            treeViewReports.Nodes.AddRange(new TreeNode[] { treeNode4, treeNode5 });
+            treeNode6.Name = "Unworked Matters";
+            treeNode6.Tag = "ReportsOpenMattersUnworkedMatters";
+            treeNode6.Text = "Unworked Matters";
+            treeNode7.Name = "Open Matters";
+            treeNode7.Tag = "ReportsOpenMatters";
+            treeNode7.Text = "Open Matters";
+            treeNode8.Name = "All Matters";
+            treeNode8.Tag = "ReportsAllMatters";
+            treeNode8.Text = "All Matters";
+            treeNode9.Name = "Reports";
+            treeNode9.Tag = "Reports";
+            treeNode9.Text = "Reports";
+            treeNode10.Name = "FastFetch";
+            treeNode10.NodeFont = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            treeNode10.Tag = "FastFetch";
+            treeNode10.Text = "FastFetch";
+            treeViewReports.Nodes.AddRange(new TreeNode[] { treeNode9, treeNode10 });
             treeViewReports.Size = new Size(390, 359);
             treeViewReports.TabIndex = 0;
             treeViewReports.AfterSelect += treeViewReports_AfterSelect;
@@ -293,6 +294,7 @@
             // 
             // panel1
             // 
+            panel1.Controls.Add(lblVersion);
             panel1.Controls.Add(progressBarPagesRetrieved);
             panel1.Controls.Add(lblReportPageRetrieved);
             panel1.Controls.Add(textBox1);
@@ -317,6 +319,17 @@
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableLayoutPanel1.Size = new Size(1184, 515);
             tableLayoutPanel1.TabIndex = 8;
+            // 
+            // lblVersion
+            // 
+            lblVersion.AutoSize = true;
+            lblVersion.Font = new Font("Sylfaen", 8.25F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            lblVersion.ForeColor = SystemColors.AppWorkspace;
+            lblVersion.Location = new Point(377, 10);
+            lblVersion.Name = "lblVersion";
+            lblVersion.Size = new Size(70, 14);
+            lblVersion.TabIndex = 8;
+            lblVersion.Text = "Version 0.0.0";
             // 
             // MainForm
             // 
@@ -371,5 +384,6 @@
         private Panel panel1;
         private ToolStripStatusLabel toolStripBtnConnectToClio;
         private TableLayoutPanel tableLayoutPanel1;
+        private Label lblVersion;
     }
 }

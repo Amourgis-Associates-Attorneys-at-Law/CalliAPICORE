@@ -20,6 +20,7 @@ using Task = System.Threading.Tasks.Task;
 using AmourgisCOREServices;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using CalliAPI.UI.Views;
+using CalliAPI.Utilities;
 
 namespace CalliAPI
 {
@@ -46,6 +47,12 @@ namespace CalliAPI
             //{
             //    Cursor.Current = Cursors.Default;
             //}
+
+
+            this.Text = VersionHelper.GetDisplayVersion();
+            lblVersion.Text = VersionHelper.GetFormattedVersion();
+
+
 
             clioService.ProgressUpdated += (current, total) =>
             {
