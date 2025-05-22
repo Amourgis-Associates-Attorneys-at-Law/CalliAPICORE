@@ -7,7 +7,7 @@
 
 		<OutputType>WinExe</OutputType>
 
-		<Version>1.7.4</Version>
+		<Version>1.7.5</Version>
 
 		<TargetFramework>net8.0-windows</TargetFramework>
 		<RootNamespace>CalliAPI</RootNamespace>
@@ -99,7 +99,7 @@
 
 <!-- define variables for OutputIndexHtml and TemplateLines -->
 		<PropertyGroup>
-			    <OutputIndexHtml>$(PublishUrl)\index.html</OutputIndexHtml>
+			    <OutputIndexHtml>$(PublishUrl)index.html</OutputIndexHtml>
 		</PropertyGroup>
 
 
