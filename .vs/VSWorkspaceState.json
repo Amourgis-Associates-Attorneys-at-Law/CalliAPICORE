@@ -2,9 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\DataAccess",
+    "\\Docs",
     "\\Models",
     "\\UI"
   ],
-  "SelectedNode": "\\UI\\MainForm.cs",
+  "SelectedNode": "\\Docs",
   "PreviewInSolutionExplorer": false
 }

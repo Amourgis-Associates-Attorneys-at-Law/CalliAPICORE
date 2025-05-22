@@ -1,8 +1,16 @@
 Hello!
 
+# Notes to self
+Publish using 
+msbuild CalliAPI.csproj /t:Publish /p:PublishProfile=PSDProgramsRelease /p:Configuration=Release /p:NoWarn=true /v:normal > publish.log
+
 CalliAPI
 
 # CalliAPI Patch Log
+
+## 1.8.0 - Prepping framework for a new way to install and landing pages!
+Now CalliAPI has a more permanent home inside the SharePoint with a custom-made index page for installing from!
+(Don't ask about 1.5 and 1.6 and 1.7, it was all suffering with MSBuild, but now I know more I suppose!)
 
 ## 1.4.0 - Glow up in preparation for version 2!
 A new UI, a new icon, and a new way of installing gives CalliAPI a lot more staying power! Couple that with the new Publish.html page and we have a way more user-friendly experience!

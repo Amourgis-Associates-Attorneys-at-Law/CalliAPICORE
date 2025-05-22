@@ -1,70 +1,137 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-	  
-    <OutputType>WinExe</OutputType>
-	<Version>1.4.0</Version>
-    <TargetFramework>net8.0-windows</TargetFramework>
-    <RootNamespace>CalliAPI</RootNamespace>
-    <Nullable>enable</Nullable>
-    <UseWindowsForms>true</UseWindowsForms>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <ApplicationIcon>UI\Icons\ico_Calliope.ico</ApplicationIcon>
-	  
-  </PropertyGroup>
-
-  <ItemGroup>
-    <Content Include="UI\Icons\ico_Calliope.ico" />
-  </ItemGroup>
-
-  <ItemGroup>
-
-	<PackageReference Include="AmourgisCOREServices" Version="2.1.0" />
-    <PackageReference Include="ClosedXML" Version="0.105.0" />
-    <PackageReference Include="FluentAssertions" Version="8.2.0" />
-    <PackageReference Include="MaterialSkin" Version="0.2.1" />
-    <PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.2" />
-    <PackageReference Include="Polly" Version="8.5.2" />
-    <PackageReference Include="System.Linq.Async" Version="6.0.1" />
-    <PackageReference Include="System.Net.Http" Version="4.3.4" />
-    <PackageReference Include="xunit" Version="2.9.3" />
-	  
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Properties\Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Properties\Settings.Designer.cs">
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Update="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="Properties\Settings.settings">
-      <Generator>PublicSettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>CalliAPI.Properties</CustomToolNamespace>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
+	<!--#region Configuration -->
 
 
+	<PropertyGroup>
 
-	<Target Name="AfterPublish">
-		  <Copy SourceFiles="UI\InstallPage\CustomPublish.html" DestinationFiles="bin\$(Configuration)\$(TargetFramework)\app.publish\Publish.html" OverwriteReadOnlyFiles="true" />
+		<OutputType>WinExe</OutputType>
+
+		<Version>1.7.1</Version>
+
+		<TargetFramework>net8.0-windows</TargetFramework>
+		<RootNamespace>CalliAPI</RootNamespace>
+		<Nullable>enable</Nullable>
+		<UseWindowsForms>true</UseWindowsForms>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<ApplicationIcon>UI\Icons\ico_Calliope.ico</ApplicationIcon>
+
+
+	</PropertyGroup>
+
+
+	<ItemGroup>
+		<Content Include="UI\Icons\ico_Calliope.ico" />
+	</ItemGroup>
+
+	<ItemGroup>
+
+		<PackageReference Include="AmourgisCOREServices" Version="2.1.0" />
+		<PackageReference Include="ClosedXML" Version="0.105.0" />
+		<PackageReference Include="FluentAssertions" Version="8.2.0" />
+		<PackageReference Include="MaterialSkin" Version="0.2.1" />
+		<PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.2" />
+		<PackageReference Include="Polly" Version="8.5.2" />
+		<PackageReference Include="System.Linq.Async" Version="6.0.1" />
+		<PackageReference Include="System.Net.Http" Version="4.3.4" />
+		<PackageReference Include="xunit" Version="2.9.3" />
+
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Update="Properties\Resources.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Resources.resx</DependentUpon>
+		</Compile>
+		<Compile Update="Properties\Settings.Designer.cs">
+			<DesignTimeSharedInput>True</DesignTimeSharedInput>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Settings.settings</DependentUpon>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Update="Properties\Resources.resx">
+			<Generator>ResXFileCodeGenerator</Generator>
+			<LastGenOutput>Resources.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="Properties\Settings.settings">
+			<Generator>PublicSettingsSingleFileGenerator</Generator>
+			<LastGenOutput>Settings.Designer.cs</LastGenOutput>
+			<CustomToolNamespace>CalliAPI.Properties</CustomToolNamespace>
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Docs\" />
+	</ItemGroup>
+
+
+	<!--#endregion -->
+
+	<!--#region MSBuild Targets -->
+
+	<!-- #region BEFORE PUBLISH -->
+
+	<Target Name="CustomBeforePublish" BeforeTargets="_CopyManifestFiles">
+		  <!-- Log the version to verify -->
+		 
+		<Message Text="CustomBeforePublish $(Version) is running..." Importance="high" />
+		  <WriteLinesToFile File="$(PublishDir)\beforepublish.txt" Lines="Before publish ran!" Overwrite="true" />
+
 	</Target>
+
+	<!--#endregion -->
+
+	<!-- #region AFTER PUBLISH -->
+	<PropertyGroup>
+		<TemplateExists Condition="Exists('UI\InstallPage\index.template.html')">true</TemplateExists>
+	</PropertyGroup>
+
+	<!-- This target replaces {{VERSION}} in index.template.html and writes index.html to the publish folder -->
+	<Target Name="CustomAfterPublish" AfterTargets="Publish">
+		  <!-- Replace {{VERSION}} with actual version -->
+
+<!-- define variables for OutputIndexHtml and TemplateLines -->
+		<PropertyGroup>
+			    <OutputIndexHtml>$(PublishUrl)\index.aspx</OutputIndexHtml>
+		</PropertyGroup>
+
+
+		<ReadLinesFromFile Condition="'$(TemplateExists)' == 'true'" File="UI\InstallPage\index.template.html">
+			    <Output TaskParameter="Lines" ItemName="TemplateLines" />
+		</ReadLinesFromFile>
+
+
+
+		  <ItemGroup>
+			    <ProcessedLines Condition="'$(TemplateExists)' == 'true'" Include="@(TemplateLines)">
+				      <Text>$([System.String]::Copy('%(TemplateLines.Identity)').Replace('{{VERSION}}', '$(Version)'))</Text>
+			</ProcessedLines>
+		</ItemGroup>
+
+
+
+		  <WriteLinesToFile Condition="'$(TemplateExists)' == 'true'" File="$(OutputIndexHtml)" Lines="@(ProcessedLines->'%(Text)')" Overwrite="true" />
+
+		  <Message Condition="'$(TemplateExists)' == 'true'" Text="index.html created with version $(Version) at $(OutputIndexHtml)" Importance="high" />
+
+
+		<Message Condition="'$(TemplateExists)' != 'true'" Text="index.template.html not found — skipping index.aspx generation." Importance="high" />
+
+
+		<Message Text="Published!" Importance="high" />
+	</Target>
+
+
+	<!--#endregion -->
+
+	<!--#endregion-->
 
 
 </Project>
