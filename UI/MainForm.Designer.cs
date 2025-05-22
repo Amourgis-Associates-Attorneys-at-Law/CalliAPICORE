@@ -29,6 +29,11 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            TreeNode treeNode1 = new TreeNode("Unworked Matters");
+            TreeNode treeNode2 = new TreeNode("Open Matters", new TreeNode[] { treeNode1 });
+            TreeNode treeNode3 = new TreeNode("All Matters");
+            TreeNode treeNode4 = new TreeNode("Reports", new TreeNode[] { treeNode2, treeNode3 });
+            TreeNode treeNode5 = new TreeNode("FastFetch");
             menuStrip1 = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
             exitToolStripMenuItem = new ToolStripMenuItem();
@@ -45,14 +50,24 @@
             statusStrip1 = new StatusStrip();
             lblApiStatus = new ToolStripStatusLabel();
             lblClioAPIStatus = new ToolStripStatusLabel();
-            toolStripSplitButton1 = new ToolStripSplitButton();
-            connectToClioToolStripMenuItem = new ToolStripMenuItem();
+            toolStripBtnConnectToClio = new ToolStripStatusLabel();
             progressBarPagesRetrieved = new ProgressBar();
             lblReportPageRetrieved = new Label();
             lblReportName = new Label();
             textBox1 = new TextBox();
+            splitContainer1 = new SplitContainer();
+            treeViewReports = new TreeView();
+            panelContent = new Panel();
+            panel1 = new Panel();
+            tableLayoutPanel1 = new TableLayoutPanel();
             menuStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
+            splitContainer1.Panel1.SuspendLayout();
+            splitContainer1.Panel2.SuspendLayout();
+            splitContainer1.SuspendLayout();
+            panel1.SuspendLayout();
+            tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
@@ -60,7 +75,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, reportsToolStripMenuItem, fastFetchToolStripMenuItem1, programToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1043, 24);
+            menuStrip1.Size = new Size(1184, 24);
             menuStrip1.TabIndex = 1;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -152,10 +167,10 @@
             // 
             // statusStrip1
             // 
-            statusStrip1.Items.AddRange(new ToolStripItem[] { lblApiStatus, lblClioAPIStatus, toolStripSplitButton1 });
-            statusStrip1.Location = new Point(0, 438);
+            statusStrip1.Items.AddRange(new ToolStripItem[] { lblApiStatus, lblClioAPIStatus, toolStripBtnConnectToClio });
+            statusStrip1.Location = new Point(0, 539);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(1043, 22);
+            statusStrip1.Size = new Size(1184, 22);
             statusStrip1.TabIndex = 2;
             statusStrip1.Text = "statusStrip1";
             // 
@@ -172,26 +187,21 @@
             lblClioAPIStatus.Text = "Not Initialized";
             lblClioAPIStatus.Click += lblClioAPIStatus_Click;
             // 
-            // toolStripSplitButton1
+            // toolStripBtnConnectToClio
             // 
-            toolStripSplitButton1.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            toolStripSplitButton1.DropDownItems.AddRange(new ToolStripItem[] { connectToClioToolStripMenuItem });
-            toolStripSplitButton1.Image = (Image)resources.GetObject("toolStripSplitButton1.Image");
-            toolStripSplitButton1.ImageTransparentColor = Color.Magenta;
-            toolStripSplitButton1.Name = "toolStripSplitButton1";
-            toolStripSplitButton1.Size = new Size(32, 20);
-            toolStripSplitButton1.Text = "toolStripSplitButton1";
-            // 
-            // connectToClioToolStripMenuItem
-            // 
-            connectToClioToolStripMenuItem.Name = "connectToClioToolStripMenuItem";
-            connectToClioToolStripMenuItem.Size = new Size(157, 22);
-            connectToClioToolStripMenuItem.Text = "Connect to Clio";
-            connectToClioToolStripMenuItem.Click += connectToClioToolStripMenuItem_Click;
+            toolStripBtnConnectToClio.BackColor = SystemColors.ButtonShadow;
+            toolStripBtnConnectToClio.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            toolStripBtnConnectToClio.ForeColor = SystemColors.HotTrack;
+            toolStripBtnConnectToClio.Image = (Image)resources.GetObject("toolStripBtnConnectToClio.Image");
+            toolStripBtnConnectToClio.ImageTransparentColor = Color.Magenta;
+            toolStripBtnConnectToClio.Name = "toolStripBtnConnectToClio";
+            toolStripBtnConnectToClio.Size = new Size(107, 17);
+            toolStripBtnConnectToClio.Text = "Connect to Clio";
+            toolStripBtnConnectToClio.Click += toolStripBtnConnectToClio_Click;
             // 
             // progressBarPagesRetrieved
             // 
-            progressBarPagesRetrieved.Location = new Point(12, 71);
+            progressBarPagesRetrieved.Location = new Point(13, 28);
             progressBarPagesRetrieved.Name = "progressBarPagesRetrieved";
             progressBarPagesRetrieved.Size = new Size(829, 23);
             progressBarPagesRetrieved.TabIndex = 3;
@@ -199,7 +209,7 @@
             // lblReportPageRetrieved
             // 
             lblReportPageRetrieved.AutoSize = true;
-            lblReportPageRetrieved.Location = new Point(742, 53);
+            lblReportPageRetrieved.Location = new Point(743, 10);
             lblReportPageRetrieved.Name = "lblReportPageRetrieved";
             lblReportPageRetrieved.Size = new Size(99, 15);
             lblReportPageRetrieved.TabIndex = 4;
@@ -209,7 +219,7 @@
             // lblReportName
             // 
             lblReportName.AutoSize = true;
-            lblReportName.Location = new Point(12, 53);
+            lblReportName.Location = new Point(13, 10);
             lblReportName.Name = "lblReportName";
             lblReportName.Size = new Size(77, 15);
             lblReportName.TabIndex = 5;
@@ -221,23 +231,99 @@
             textBox1.BorderStyle = BorderStyle.None;
             textBox1.Font = new Font("Segoe UI", 9F, FontStyle.Italic);
             textBox1.ForeColor = SystemColors.ControlDark;
-            textBox1.Location = new Point(12, 100);
+            textBox1.Location = new Point(13, 57);
             textBox1.Multiline = true;
             textBox1.Name = "textBox1";
             textBox1.ReadOnly = true;
-            textBox1.Size = new Size(829, 122);
+            textBox1.Size = new Size(829, 34);
             textBox1.TabIndex = 7;
             textBox1.Text = "The FastFetch reports can capture up to 10,000 records, and are ideal for large datasets under 10,000 records. For small datasets or datasets over 10,000 records, use the Reports features instead.";
+            // 
+            // splitContainer1
+            // 
+            splitContainer1.Dock = DockStyle.Fill;
+            splitContainer1.Location = new Point(3, 153);
+            splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            splitContainer1.Panel1.Controls.Add(treeViewReports);
+            // 
+            // splitContainer1.Panel2
+            // 
+            splitContainer1.Panel2.Controls.Add(panelContent);
+            splitContainer1.Size = new Size(1178, 359);
+            splitContainer1.SplitterDistance = 390;
+            splitContainer1.TabIndex = 8;
+            // 
+            // treeViewReports
+            // 
+            treeViewReports.Dock = DockStyle.Fill;
+            treeViewReports.Location = new Point(0, 0);
+            treeViewReports.Name = "treeViewReports";
+            treeNode1.Name = "Unworked Matters";
+            treeNode1.Tag = "ReportsOpenMattersUnworkedMatters";
+            treeNode1.Text = "Unworked Matters";
+            treeNode2.Name = "Open Matters";
+            treeNode2.Tag = "ReportsOpenMatters";
+            treeNode2.Text = "Open Matters";
+            treeNode3.Name = "All Matters";
+            treeNode3.Tag = "ReportsAllMatters";
+            treeNode3.Text = "All Matters";
+            treeNode4.Name = "Reports";
+            treeNode4.Tag = "Reports";
+            treeNode4.Text = "Reports";
+            treeNode5.Name = "FastFetch";
+            treeNode5.NodeFont = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            treeNode5.Tag = "FastFetch";
+            treeNode5.Text = "FastFetch";
+            treeViewReports.Nodes.AddRange(new TreeNode[] { treeNode4, treeNode5 });
+            treeViewReports.Size = new Size(390, 359);
+            treeViewReports.TabIndex = 0;
+            treeViewReports.AfterSelect += treeViewReports_AfterSelect;
+            // 
+            // panelContent
+            // 
+            panelContent.AutoScroll = true;
+            panelContent.Dock = DockStyle.Fill;
+            panelContent.Location = new Point(0, 0);
+            panelContent.Name = "panelContent";
+            panelContent.Size = new Size(784, 359);
+            panelContent.TabIndex = 0;
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(progressBarPagesRetrieved);
+            panel1.Controls.Add(lblReportPageRetrieved);
+            panel1.Controls.Add(textBox1);
+            panel1.Controls.Add(lblReportName);
+            panel1.Dock = DockStyle.Fill;
+            panel1.Location = new Point(3, 3);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1178, 144);
+            panel1.TabIndex = 9;
+            // 
+            // tableLayoutPanel1
+            // 
+            tableLayoutPanel1.ColumnCount = 1;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel1.Controls.Add(panel1, 0, 0);
+            tableLayoutPanel1.Controls.Add(splitContainer1, 0, 1);
+            tableLayoutPanel1.Dock = DockStyle.Fill;
+            tableLayoutPanel1.Location = new Point(0, 24);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 2;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 150F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel1.Size = new Size(1184, 515);
+            tableLayoutPanel1.TabIndex = 8;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1043, 460);
-            Controls.Add(textBox1);
-            Controls.Add(lblReportName);
-            Controls.Add(lblReportPageRetrieved);
-            Controls.Add(progressBarPagesRetrieved);
+            ClientSize = new Size(1184, 561);
+            Controls.Add(tableLayoutPanel1);
             Controls.Add(statusStrip1);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
@@ -247,6 +333,13 @@
             menuStrip1.PerformLayout();
             statusStrip1.ResumeLayout(false);
             statusStrip1.PerformLayout();
+            splitContainer1.Panel1.ResumeLayout(false);
+            splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
+            splitContainer1.ResumeLayout(false);
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            tableLayoutPanel1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -263,8 +356,6 @@
         private ToolStripStatusLabel lblApiStatus;
         private ToolStripStatusLabel lblClioAPIStatus;
         private ToolStripMenuItem unworkedMattersToolStripMenuItem;
-        private ToolStripSplitButton toolStripSplitButton1;
-        private ToolStripMenuItem connectToClioToolStripMenuItem;
         private ToolStripMenuItem allMattersToolStripMenuItem;
         private ProgressBar progressBarPagesRetrieved;
         private Label lblReportPageRetrieved;
@@ -274,5 +365,11 @@
         private ToolStripMenuItem all713MattersToolStripMenuItem;
         private TextBox textBox1;
         private ToolStripMenuItem allUnworked7And13MattersToolStripMenuItem;
+        private SplitContainer splitContainer1;
+        private TreeView treeViewReports;
+        private Panel panelContent;
+        private Panel panel1;
+        private ToolStripStatusLabel toolStripBtnConnectToClio;
+        private TableLayoutPanel tableLayoutPanel1;
     }
 }

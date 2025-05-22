@@ -16,5 +16,11 @@
     <Compile Update="UI\ReportForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UI\Views\ReportsOpenMattersUnworkedMatters.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UI\Views\ReportsView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

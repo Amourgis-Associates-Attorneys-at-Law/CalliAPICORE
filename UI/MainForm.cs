@@ -19,6 +19,7 @@ using CalliAPI.UI;
 using Task = System.Threading.Tasks.Task;
 using AmourgisCOREServices;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using CalliAPI.UI.Views;
 
 namespace CalliAPI
 {
@@ -34,17 +35,17 @@ namespace CalliAPI
             _authService = authService;
             _clioService = clioService;
             InitializeComponent();
-            try
-            {
-                Cursor.Current = Cursors.WaitCursor;
-                StartOAuthProcess();
-                Thread.Sleep(2000);
-                UpdateClioAPIStatus();
-            }
-            finally
-            {
-                Cursor.Current = Cursors.Default;
-            }
+            //try
+            //{
+            //    Cursor.Current = Cursors.WaitCursor;
+            //    StartOAuthProcess();
+            //    Thread.Sleep(2000);
+            //    UpdateClioAPIStatus();
+            //}
+            //finally
+            //{
+            //    Cursor.Current = Cursors.Default;
+            //}
 
             clioService.ProgressUpdated += (current, total) =>
             {
@@ -251,6 +252,46 @@ namespace CalliAPI
         {
             lblReportName.Text = "Report: All Unworked 7 & 13 Matters";
             await _clioService.GetUnworked713Matters();
+        }
+
+        private void treeViewReports_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            // Grab the selected node and check if it has a tag
+            if (e.Node.Tag is string viewName)
+            {
+
+                // Prepare the appropriate View (in UI/Views) as well as the clioService if needed
+                UserControl view = viewName switch
+                {
+                    "Reports" => new ReportsView(),
+                    "ReportsOpenMattersUnworkedMatters" => new ReportsOpenMattersUnworkedMatters(_clioService),
+                    //"Open713MattersView" => new Open713MattersView(_clioService),
+                    _ => null
+                };
+
+                if (view != null)
+                {
+                    panelContent.Controls.Clear(); // Remove previous view
+                    panelContent.Controls.Add(view); // Add new view
+                    view.Dock = DockStyle.Fill; // Make it fill the panel
+                }
+            }
+
+        }
+
+        private void toolStripBtnConnectToClio_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                StartOAuthProcess();
+                Thread.Sleep(2000);
+                UpdateClioAPIStatus();
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
         }
     }
 }

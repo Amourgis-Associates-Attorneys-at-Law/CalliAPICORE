@@ -21,9 +21,20 @@ using Task = System.Threading.Tasks.Task;
 
 namespace CalliAPI.BusinessLogic
 {
-    internal class ClioService
+    public class ClioService
     {
         private static readonly AMO_Logger _logger = new AMO_Logger("CalliAPI");
+
+        public static string[] prefileStages =
+            [
+                "prefile",
+                "pif - prefile",
+                "case prep",
+                "pif - case prep",
+                "signing and filing",
+                "prefiling",
+                "pif - prefiling"
+            ];
 
         private readonly ClioApiClient _clioApiClient;
 
@@ -51,6 +62,11 @@ namespace CalliAPI.BusinessLogic
             return await _clioApiClient.GetMattersNotCurrentlyBeingWorked();
         }
 
+
+        public static string GetPrefileStageDescription()
+        {
+            return $"Prefile stages include: {string.Join(", ", prefileStages)}.";
+        }
 
 
 
@@ -83,20 +99,13 @@ namespace CalliAPI.BusinessLogic
 
         public async Task GetUnworked713Matters()
         {
-            string[] validStages =
-            [
-                "prefile",
-                "pif - prefile",
-                "case prep",
-                "pif - case prep",
-                "signing and filing"
-            ];
+            
 
 
             // Initialize the matter stream and filter it
             IAsyncEnumerable<Matter> matters = _clioApiClient.GetAllOpenMattersAsync().
                 FilterByPracticeAreaSuffixAsync(new string[] { "7", "13" }).
-                FilterByStageNameAsync(validStages);
+                FilterByStageNameAsync(prefileStages);
 
             IAsyncEnumerable<Matter> filteredMatters = FilterMattersWithNoOpenTasksAsync(matters);
 
