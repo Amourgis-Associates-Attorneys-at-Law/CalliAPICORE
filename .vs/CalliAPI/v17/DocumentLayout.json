@@ -33,19 +33,6 @@
           "SelectedChildIndex": 7,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "index.aspx",
-              "DocumentMoniker": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\Docs\\index.aspx",
-              "RelativeDocumentMoniker": "Docs\\index.aspx",
-              "ToolTip": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\Docs\\index.aspx",
-              "RelativeToolTip": "Docs\\index.aspx",
-              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2025-05-22T20:37:18.756Z",
-              "EditorCaption": ""
-            },
-            {
               "$type": "Bookmark",
               "Name": "ST:0:0:{ebe3f1d5-feac-4131-bf03-0e85ffb89a89}"
             },
@@ -63,6 +50,18 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "index.aspx",
+              "DocumentMoniker": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\Docs\\index.aspx",
+              "RelativeDocumentMoniker": "Docs\\index.aspx",
+              "ToolTip": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\Docs\\index.aspx",
+              "RelativeToolTip": "Docs\\index.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2025-05-22T20:37:18.756Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 2,
               "Title": "index.template.html",
               "DocumentMoniker": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\UI\\InstallPage\\index.template.html",
@@ -71,8 +70,7 @@
               "RelativeToolTip": "UI\\InstallPage\\index.template.html",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAFIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2025-05-22T20:05:31.563Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-22T20:05:31.563Z"
             },
             {
               "$type": "Document",
@@ -84,8 +82,7 @@
               "RelativeToolTip": "Properties\\PublishProfiles\\PSDProgramsRelease.pubxml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
-              "WhenOpened": "2025-05-22T19:33:23.156Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-22T19:33:23.156Z"
             },
             {
               "$type": "Document",
@@ -93,8 +90,8 @@
               "Title": "CalliAPI.csproj",
               "DocumentMoniker": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\CalliAPI.csproj",
               "RelativeDocumentMoniker": "CalliAPI.csproj",
-              "ToolTip": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\CalliAPI.csproj",
-              "RelativeToolTip": "CalliAPI.csproj",
+              "ToolTip": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\CalliAPI.csproj*",
+              "RelativeToolTip": "CalliAPI.csproj*",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
               "WhenOpened": "2025-05-22T19:23:05.656Z",

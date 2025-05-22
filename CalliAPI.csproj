@@ -7,7 +7,7 @@
 
 		<OutputType>WinExe</OutputType>
 
-		<Version>1.7.2</Version>
+		<Version>1.7.4</Version>
 
 		<TargetFramework>net8.0-windows</TargetFramework>
 		<RootNamespace>CalliAPI</RootNamespace>
@@ -68,7 +68,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Docs\" />
+	  <Folder Include="docs\" />
 	</ItemGroup>
 
 
