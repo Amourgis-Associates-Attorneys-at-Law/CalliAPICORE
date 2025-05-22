@@ -3,20 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|c:\\users\\jakeh.amourgisreilly\\documents\\github\\calliapicore\\properties\\publishprofiles\\psdprogramsrelease.pubxml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|solutionrelative:properties\\publishprofiles\\psdprogramsrelease.pubxml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+      "AbsoluteMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|c:\\users\\jakeh.amourgisreilly\\documents\\github\\calliapicore\\calliapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|solutionrelative:calliapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|c:\\users\\jakeh.amourgisreilly\\documents\\github\\calliapicore\\readme.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
-      "RelativeMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|solutionrelative:readme.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+      "AbsoluteMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|c:\\users\\jakeh.amourgisreilly\\documents\\github\\calliapicore\\properties\\publishprofiles\\psdprogramsrelease.pubxml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|solutionrelative:properties\\publishprofiles\\psdprogramsrelease.pubxml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|c:\\users\\jakeh.amourgisreilly\\documents\\github\\calliapicore\\ui\\installpage\\index.template.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|solutionrelative:ui\\installpage\\index.template.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|c:\\users\\jakeh.amourgisreilly\\documents\\github\\calliapicore\\calliapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|solutionrelative:calliapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|c:\\users\\jakeh.amourgisreilly\\documents\\github\\calliapicore\\docs\\index.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|solutionrelative:docs\\index.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|c:\\users\\jakeh.amourgisreilly\\documents\\github\\calliapicore\\readme.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|solutionrelative:readme.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,8 +30,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 7,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "index.aspx",
+              "DocumentMoniker": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\Docs\\index.aspx",
+              "RelativeDocumentMoniker": "Docs\\index.aspx",
+              "ToolTip": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\Docs\\index.aspx",
+              "RelativeToolTip": "Docs\\index.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2025-05-22T20:37:18.756Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{ebe3f1d5-feac-4131-bf03-0e85ffb89a89}"
@@ -52,40 +69,40 @@
               "RelativeDocumentMoniker": "UI\\InstallPage\\index.template.html",
               "ToolTip": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\UI\\InstallPage\\index.template.html",
               "RelativeToolTip": "UI\\InstallPage\\index.template.html",
-              "ViewState": "AgIAACkAAAAAAAAAAAAAwFIAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
               "WhenOpened": "2025-05-22T20:05:31.563Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "PSDProgramsRelease.pubxml",
               "DocumentMoniker": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\Properties\\PublishProfiles\\PSDProgramsRelease.pubxml",
               "RelativeDocumentMoniker": "Properties\\PublishProfiles\\PSDProgramsRelease.pubxml",
               "ToolTip": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\Properties\\PublishProfiles\\PSDProgramsRelease.pubxml",
               "RelativeToolTip": "Properties\\PublishProfiles\\PSDProgramsRelease.pubxml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAACaAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
               "WhenOpened": "2025-05-22T19:33:23.156Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "CalliAPI.csproj",
               "DocumentMoniker": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\CalliAPI.csproj",
               "RelativeDocumentMoniker": "CalliAPI.csproj",
               "ToolTip": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\CalliAPI.csproj",
               "RelativeToolTip": "CalliAPI.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAIgAAAAKAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
               "WhenOpened": "2025-05-22T19:23:05.656Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "ReadMe.MD",
               "DocumentMoniker": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\ReadMe.MD",
               "RelativeDocumentMoniker": "ReadMe.MD",
@@ -93,8 +110,7 @@
               "RelativeToolTip": "ReadMe.MD",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
-              "WhenOpened": "2025-05-22T19:23:18.667Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-22T19:23:18.667Z"
             }
           ]
         }
