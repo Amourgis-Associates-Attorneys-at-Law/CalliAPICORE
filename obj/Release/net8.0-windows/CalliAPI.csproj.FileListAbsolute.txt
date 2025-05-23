@@ -114,3 +114,7 @@ C:\Users\JakeH.AMOURGISREILLY\Documents\GitHub\CalliAPICORE\obj\Release\net8.0-w
 C:\Users\JakeH.AMOURGISREILLY\Documents\GitHub\CalliAPICORE\obj\Release\net8.0-windows\refint\CalliAPI.dll
 C:\Users\JakeH.AMOURGISREILLY\Documents\GitHub\CalliAPICORE\obj\Release\net8.0-windows\CalliAPI.pdb
 C:\Users\JakeH.AMOURGISREILLY\Documents\GitHub\CalliAPICORE\obj\Release\net8.0-windows\ref\CalliAPI.dll
+C:\Users\JakeH.AMOURGISREILLY\Documents\GitHub\CalliAPICORE\bin\Release\net8.0-windows\CalliAPI.dll.manifest
+C:\Users\JakeH.AMOURGISREILLY\Documents\GitHub\CalliAPICORE\bin\Release\net8.0-windows\CalliAPI.application
+C:\Users\JakeH.AMOURGISREILLY\Documents\GitHub\CalliAPICORE\obj\Release\net8.0-windows\CalliAPI.dll.manifest
+C:\Users\JakeH.AMOURGISREILLY\Documents\GitHub\CalliAPICORE\obj\Release\net8.0-windows\CalliAPI.application

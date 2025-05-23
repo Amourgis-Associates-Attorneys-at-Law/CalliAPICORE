@@ -16,13 +16,21 @@ namespace CalliAPI.UI
         public ReportForm()
         {
             InitializeComponent();
-            dataGridView1.AutoGenerateColumns = true;
-            dataGridView1.ColumnHeadersVisible = true; // Ensure headers are visible
         }
 
         public void SetData(DataTable dataTable)
         {
+            // Check if the DataTable is null or empty
+            if (dataTable == null || dataTable.Columns.Count == 0)
+            {
+                MessageBox.Show("No data available to display.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+
             dataGridView1.DataSource = dataTable;
+            dataGridView1.AutoGenerateColumns = true;
+            dataGridView1.ColumnHeadersVisible = true; // Ensure headers are visible
         }
 
         private void saveToExcel_Click(object sender, EventArgs e)

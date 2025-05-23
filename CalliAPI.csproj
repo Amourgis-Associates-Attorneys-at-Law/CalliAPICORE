@@ -7,7 +7,7 @@
 
 		<OutputType>WinExe</OutputType>
 
-		<Version>1.7.9</Version>
+		<Version>1.7.10</Version>
 
 		<TargetFramework>net8.0-windows</TargetFramework>
 		<RootNamespace>CalliAPI</RootNamespace>
