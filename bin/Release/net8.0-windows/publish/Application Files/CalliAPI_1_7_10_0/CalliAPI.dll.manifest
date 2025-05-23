@@ -99,13 +99,13 @@
       <dsig:DigestValue>T+twSrzyJrzCHLKurGlV6wO93IeXRj/+wGfc5BUc4co=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="CalliAPI.dll" size="360448">
+  <file name="CalliAPI.dll" size="359936">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>kAnQV9Oab+H0teOnh0sTdhV8tdaisft2mSVeA8XlCH4=</dsig:DigestValue>
+      <dsig:DigestValue>hMi+xAcU983St2/uI6Sbr6ahIAcLxxuUyefNSm1teA8=</dsig:DigestValue>
     </hash>
   </file>
   <file name="CalliAPI.dll.config" size="2410">
@@ -117,13 +117,13 @@
       <dsig:DigestValue>t6gg3USYAa+yI2xgqyww52lfP+WYqCchK2CQDYQxwpw=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="CalliAPI.exe" size="386048">
+  <file name="CalliAPI.exe" size="385536">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>zQeqbys/OuO2itM5mKFpt33SuyrSPbT+wy6jsZRZWFw=</dsig:DigestValue>
+      <dsig:DigestValue>Ku91U4q55VfpgWu1qN24/79eMfCvdDa1HxibEhYXwnM=</dsig:DigestValue>
     </hash>
   </file>
   <file name="CalliAPI.runtimeconfig.json" size="607">
