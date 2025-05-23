@@ -2,7 +2,7 @@ Hello!
 
 # Notes to self
 Publish using 
-msbuild CalliAPI.csproj /t:Publish /p:PublishProfile=PSDProgramsRelease /p:Configuration=Release /p:NoWarn=true /v:normal > publish.log
+msbuild CalliAPI.csproj /t:Publish /p:PublishProfile=GitHubPages /p:Configuration=Release /p:NoWarn=true /v:normal > publish.log
 
 CalliAPI
 

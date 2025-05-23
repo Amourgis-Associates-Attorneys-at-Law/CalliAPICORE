@@ -1,41 +1,32 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<!--#region Configuration -->
-
-
 	<PropertyGroup>
-
 		<OutputType>WinExe</OutputType>
-
-		<Version>1.8.0</Version>
-
+		<AssemblyName>CalliAPI</AssemblyName>
+		<Version>1.9.1</Version>
 		<TargetFramework>net8.0-windows</TargetFramework>
 		<RootNamespace>CalliAPI</RootNamespace>
 		<Nullable>enable</Nullable>
 		<UseWindowsForms>true</UseWindowsForms>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<ApplicationIcon>UI\Icons\ico_Calliope.ico</ApplicationIcon>
-
-
+		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
 	</PropertyGroup>
-
 
 	<ItemGroup>
 		<Content Include="UI\Icons\ico_Calliope.ico" />
 	</ItemGroup>
 
 	<ItemGroup>
-
 		<PackageReference Include="AmourgisCOREServices" Version="2.1.0" />
 		<PackageReference Include="ClosedXML" Version="0.105.0" />
 		<PackageReference Include="FluentAssertions" Version="8.2.0" />
 		<PackageReference Include="MaterialSkin" Version="0.2.1" />
-		<PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.2" />
+		<PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.0-preview1.25120.4" />
 		<PackageReference Include="Polly" Version="8.5.2" />
 		<PackageReference Include="System.Linq.Async" Version="6.0.1" />
 		<PackageReference Include="System.Net.Http" Version="4.3.4" />
 		<PackageReference Include="xunit" Version="2.9.3" />
-
 	</ItemGroup>
 
 	<ItemGroup>
@@ -67,39 +58,15 @@
 		</None>
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="docs\" />
-	</ItemGroup>
+	<!-- Custom MSBuild hooks -->
+<Target Name="CustomBeforePublish" BeforeTargets="_CopyManifestFiles">
+	<Message Text="CustomBeforePublish $(Version) is running..." Importance="high" />
+	<WriteLinesToFile File="$(PublishDir)\beforepublish.txt" Lines="Before publish ran!" Overwrite="true" />
+</Target>
 
-
-	<!--#endregion -->
-
-	<!--#region MSBuild Targets -->
-
-	<!-- #region BEFORE PUBLISH -->
-
-	<Target Name="CustomBeforePublish" BeforeTargets="_CopyManifestFiles">
-		  <!-- Log the version to verify -->
-		 
-		<Message Text="CustomBeforePublish $(Version) is running..." Importance="high" />
-		  <WriteLinesToFile File="$(PublishDir)\beforepublish.txt" Lines="Before publish ran!" Overwrite="true" />
-
-	</Target>
-
-	<!--#endregion -->
-
-
-	<Target Name="CustomAfterPublish" AfterTargets="Publish">
-		  <!-- Run the PowerShell script to transform the HTML template -->
-		  <Exec Command="powershell -ExecutionPolicy Bypass -File &quot;$(MSBuildProjectDirectory)\Scripts\Transform-Template.ps1&quot; -Version &quot;$(Version)&quot; -TemplatePath &quot;$(MSBuildProjectDirectory)\UI\InstallPage\index.template.html&quot; -OutputPath &quot;$(MSBuildProjectDirectory)\docs\index.html&quot;" />
-
-
-	  <!-- Final publish message -->
-			<Message Text="Published!" Importance="high" />
-	</Target>
-
-
-	<!--#endregion-->
-
+<Target Name="CustomAfterPublish" AfterTargets="Publish">
+	<Exec Command="powershell -ExecutionPolicy Bypass -File &quot;$(MSBuildProjectDirectory)\Scripts\Transform-Template.ps1&quot; -Version &quot;$(Version)&quot; -TemplatePath &quot;$(MSBuildProjectDirectory)\UI\InstallPage\index.template.html&quot; -OutputPath &quot;$(MSBuildProjectDirectory)\docs\index.html&quot;" />
+	<Message Text="Published!" Importance="high" />
+</Target>
 
 </Project>

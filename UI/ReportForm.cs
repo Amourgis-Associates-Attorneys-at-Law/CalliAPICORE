@@ -31,6 +31,9 @@ namespace CalliAPI.UI
             dataGridView1.DataSource = dataTable;
             dataGridView1.AutoGenerateColumns = true;
             dataGridView1.ColumnHeadersVisible = true; // Ensure headers are visible
+
+            // Breakpoint
+            Thread.Sleep(10);
         }
 
         private void saveToExcel_Click(object sender, EventArgs e)
@@ -89,5 +92,6 @@ namespace CalliAPI.UI
             table.DefaultView.RowFilter = string.Join(" OR ", filterConditions);
 
         }
+
     }
 }
