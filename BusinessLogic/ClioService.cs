@@ -23,7 +23,7 @@ namespace CalliAPI.BusinessLogic
 {
     public class ClioService
     {
-        private static readonly AMO_Logger _logger = new AMO_Logger("CalliAPI");
+        private readonly AMO_Logger _logger;
 
         public static string[] prefileStages =
             [
@@ -38,9 +38,10 @@ namespace CalliAPI.BusinessLogic
 
         private readonly ClioApiClient _clioApiClient;
 
-        public ClioService(ClioApiClient clioApiClient)
+        public ClioService(ClioApiClient clioApiClient, AMO_Logger logger)
         {
             _clioApiClient = clioApiClient;
+            this._logger = logger;
         }
 
         #region event delegates
@@ -69,17 +70,9 @@ namespace CalliAPI.BusinessLogic
         }
 
 
+        #region Classic Reports
+        #region reports - open Matters
 
-        #region reports
-        public async Task GetAllMatters()
-        {
-            // Initialize the matter stream
-            IAsyncEnumerable<Matter> matters = _clioApiClient.GetAllMattersAsync();
-            // Filter the matter stream (since this is ALL matters, we don't need to bother with filtering)
-            // matters = matters.FilterByWhatever();
-            // Convert the matter stream to a DataTable and show it
-            await ReportLauncher.ShowAsync(matters);
-        }
 
         public async Task GetAllOpenMatters()
         {
@@ -90,7 +83,7 @@ namespace CalliAPI.BusinessLogic
         }
 
         public async Task GetAllOpen713Matters()
-        {             
+        {
             // Initialize the matter stream and filter it
             IAsyncEnumerable<Matter> matters = _clioApiClient.GetAllOpenMattersAsync().FilterByPracticeAreaSuffixAsync(new string[] { "7", "13" });
             // Convert the matter stream to a DataTable and show it
@@ -99,8 +92,6 @@ namespace CalliAPI.BusinessLogic
 
         public async Task GetUnworked713Matters()
         {
-            
-
 
             // Initialize the matter stream and filter it
             IAsyncEnumerable<Matter> matters = _clioApiClient.GetAllOpenMattersAsync().
@@ -113,6 +104,25 @@ namespace CalliAPI.BusinessLogic
             await ReportLauncher.ShowAsync(filteredMatters);
         }
 
+
+        #endregion
+
+        #region reports - all Matters
+        public async Task GetAllMatters()
+        {
+            // Initialize the matter stream
+            IAsyncEnumerable<Matter> matters = _clioApiClient.GetAllMattersAsync();
+            // Filter the matter stream (since this is ALL matters, we don't need to bother with filtering)
+            // matters = matters.FilterByWhatever();
+            // Convert the matter stream to a DataTable and show it
+            await ReportLauncher.ShowAsync(matters);
+        }
+
+
+
+        #endregion
+
+        #region helper methods
 
         public async Task<bool> MatterHasNoOpenTasksAsync(Matter matter)
         {
@@ -138,7 +148,7 @@ namespace CalliAPI.BusinessLogic
 
 
         #endregion
-
+        #endregion
         #region FastFetch reports
         public async Task FastFetchAllMatters(DateTime dateSince)
         {

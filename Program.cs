@@ -56,7 +56,7 @@ namespace CalliAPI
             HttpClient httpClient = new HttpClient();
             ClioApiClient clioApiClient = new ClioApiClient(httpClient);
             AuthService authService = new AuthService(clioApiClient);
-            ClioService clioService = new ClioService(clioApiClient);
+            ClioService clioService = new ClioService(clioApiClient, logger: _logger);
             _logger.Info("Services created");
 
             // Create the MainForm and pass the services to it
