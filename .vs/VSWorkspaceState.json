@@ -2,9 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\DataAccess",
+    "\\docs",
     "\\Models",
     "\\UI"
   ],
-  "SelectedNode": "\\CalliAPI.sln",
+  "SelectedNode": "\\CalliAPI.csproj",
   "PreviewInSolutionExplorer": false
 }
