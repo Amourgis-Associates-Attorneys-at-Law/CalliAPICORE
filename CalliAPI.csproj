@@ -68,7 +68,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="docs\" />
+	  <Folder Include="docs_temp\" />
 	</ItemGroup>
 
 
@@ -91,7 +91,7 @@
 
 	<Target Name="CustomAfterPublish" AfterTargets="Publish">
 		  <!-- Run the PowerShell script to transform the HTML template -->
-		  <Exec Command='powershell -ExecutionPolicy Bypass -File "$(MSBuildProjectDirectory)\Scripts\Transform-Template.ps1" -Version "$(Version)" -TemplatePath "$(MSBuildProjectDirectory)\UI\InstallPage\index.template.html" -OutputPath "$(MSBuildProjectDirectory)\docs\index.html"' />
+		  <Exec Command="powershell -ExecutionPolicy Bypass -File &quot;$(MSBuildProjectDirectory)\Scripts\Transform-Template.ps1&quot; -Version &quot;$(Version)&quot; -TemplatePath &quot;$(MSBuildProjectDirectory)\UI\InstallPage\index.template.html&quot; -OutputPath &quot;$(MSBuildProjectDirectory)\docs\index.html&quot;" />
 
 
 	  <!-- Final publish message -->

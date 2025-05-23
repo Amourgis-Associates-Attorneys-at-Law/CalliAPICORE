@@ -1,10 +1,7 @@
 {
   "ExpandedNodes": [
     "",
-    "\\DataAccess",
-    "\\docs",
-    "\\Models",
-    "\\UI"
+    "\\DataAccess"
   ],
   "SelectedNode": "\\CalliAPI.sln",
   "PreviewInSolutionExplorer": false

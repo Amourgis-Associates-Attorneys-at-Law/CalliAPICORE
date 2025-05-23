@@ -19,7 +19,7 @@
       "RelativeMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|solutionrelative:calliapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|c:\\users\\jakeh.amourgisreilly\\documents\\github\\calliapicore\\ui\\reportform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\ui\\reportform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|solutionrelative:ui\\reportform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
@@ -75,8 +75,7 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAGgAAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
               "WhenOpened": "2025-05-22T19:23:05.656Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Bookmark",
@@ -129,8 +128,7 @@
               "ToolTip": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\UI\\ReportForm.cs [Design]",
               "RelativeToolTip": "UI\\ReportForm.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-23T14:53:43.499Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2025-05-23T14:53:43.499Z"
             },
             {
               "$type": "Document",
@@ -142,7 +140,8 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AgIAABYAAAAAAAAAAAAUwC4AAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-23T14:22:06.146Z"
+              "WhenOpened": "2025-05-23T14:22:06.146Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -153,7 +152,8 @@
               "ToolTip": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\Properties\\Settings.settings",
               "RelativeToolTip": "Properties\\Settings.settings",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002767|",
-              "WhenOpened": "2025-05-23T14:03:20.208Z"
+              "WhenOpened": "2025-05-23T14:03:20.208Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -165,7 +165,8 @@
               "RelativeToolTip": "Models\\CustomFieldMap.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAA1AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-23T13:25:57.779Z"
+              "WhenOpened": "2025-05-23T13:25:57.779Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -177,7 +178,8 @@
               "RelativeToolTip": "Models\\Matter.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-23T13:25:50.636Z"
+              "WhenOpened": "2025-05-23T13:25:50.636Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
