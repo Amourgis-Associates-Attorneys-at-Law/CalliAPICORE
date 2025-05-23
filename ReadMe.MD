@@ -41,8 +41,13 @@ FastFetch parallelizes the queries we send to Clio in order to grab up to 10,000
 
 # Wishlist
 
+## Functionality
 - Add error handling if the xlsx file being saved in ReportForm is already locked
 - Add filters to TaskFilters
+
+## UI
 - Add a percentage to the progress bar (yeah it's a tiny thing but nice anyway)
 - Make ONE Logger for the whole solution, and then pass it around to whatever needs it (dependency injection?)
-- Publish the program to SharePoint as an easy to use executable?
+
+## Documentation & External Resources
+- Add a zip to the docs folder so that users can fallback on the zip
