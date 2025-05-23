@@ -7,7 +7,7 @@
 
 		<OutputType>WinExe</OutputType>
 
-		<Version>1.7.7</Version>
+		<Version>1.7.9</Version>
 
 		<TargetFramework>net8.0-windows</TargetFramework>
 		<RootNamespace>CalliAPI</RootNamespace>
@@ -91,15 +91,10 @@
 
 	<Target Name="CustomAfterPublish" AfterTargets="Publish">
 		  <!-- Run the PowerShell script to transform the HTML template -->
-		  <Exec Condition="'$(TemplateExists)' == 'true'"
-			Command="powershell -ExecutionPolicy Bypass -File Utilities\Transform-Template.ps1" />
+		  <Exec Command='powershell -ExecutionPolicy Bypass -File "$(MSBuildProjectDirectory)\Scripts\Transform-Template.ps1" -Version "$(Version)" -TemplatePath "$(MSBuildProjectDirectory)\UI\InstallPage\index.template.html" -OutputPath "$(MSBuildProjectDirectory)\docs\index.html"' />
 
-		  <!-- Log if the template is missing -->
-		  <Message Condition="'$(TemplateExists)' != 'true'"
-			Text="index.template.html not found — skipping index.html generation."
-			Importance="high" />
 
-		  <!-- Final publish message -->
+	  <!-- Final publish message -->
 			<Message Text="Published!" Importance="high" />
 	</Target>
 

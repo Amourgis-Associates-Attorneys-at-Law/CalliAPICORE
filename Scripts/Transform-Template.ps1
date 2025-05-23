@@ -1,17 +1,13 @@
 ﻿# Transform-Template.ps1
 
+param (
+    [string]$Version = "DEV",
+    [string]$TemplatePath = "..\UI\InstallPage\index.template.html",
+    [string]$OutputPath = "..\docs\index.html"
+)
+
 # Get the script's directory
 $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Definition
-
-# Define paths relative to the script location
-$templatePath = Join-Path $scriptDir "..\UI\InstallPage\index.template.html"
-$outputPath = Join-Path $scriptDir "..\docs\index.html"
-
-# Optional: Get version from environment or pass it as an argument
-$version = $env:VERSION
-if (-not $version) {
-    $version = "DEV"
-}
 
 # Read, replace, and write
 (Get-Content $templatePath -Raw) -replace '{{VERSION}}', $version | Set-Content $outputPath
