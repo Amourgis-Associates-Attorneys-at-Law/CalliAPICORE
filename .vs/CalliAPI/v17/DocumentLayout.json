@@ -7,16 +7,16 @@
       "RelativeMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|solutionrelative:calliapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|c:\\users\\jakeh.amourgisreilly\\documents\\github\\calliapicore\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|c:\\users\\jakeh.amourgisreilly\\documents\\github\\calliapicore\\docs\\index.template.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|solutionrelative:docs\\index.template.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|c:\\users\\jakeh.amourgisreilly\\documents\\github\\calliapicore\\properties\\publishprofiles\\githubpages.pubxml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
       "RelativeMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|solutionrelative:properties\\publishprofiles\\githubpages.pubxml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|c:\\users\\jakeh.amourgisreilly\\documents\\github\\calliapicore\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|c:\\users\\jakeh.amourgisreilly\\documents\\github\\calliapicore\\scripts\\transform-template.ps1||{3B902123-F8A7-4915-9F01-361F908088D0}",
@@ -145,13 +145,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "GitHubPages.pubxml",
               "DocumentMoniker": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\Properties\\PublishProfiles\\GitHubPages.pubxml",
               "RelativeDocumentMoniker": "Properties\\PublishProfiles\\GitHubPages.pubxml",
               "ToolTip": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\Properties\\PublishProfiles\\GitHubPages.pubxml",
               "RelativeToolTip": "Properties\\PublishProfiles\\GitHubPages.pubxml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAiAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
               "WhenOpened": "2025-05-23T16:20:15.434Z",
               "IsPinned": true,
@@ -159,7 +159,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -189,13 +189,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "index.template.html",
               "DocumentMoniker": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\docs\\index.template.html",
               "RelativeDocumentMoniker": "docs\\index.template.html",
               "ToolTip": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\docs\\index.template.html",
               "RelativeToolTip": "docs\\index.template.html",
-              "ViewState": "AgIAAIoAAAAAAAAAAAAAAJkAAAASAAAAAAAAAA==",
+              "ViewState": "AgIAALQAAAAAAAAAAAAAAJkAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
               "WhenOpened": "2025-05-27T15:43:15.126Z",
               "EditorCaption": ""
