@@ -3,60 +3,80 @@
   "WorkspaceRootPath": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|c:\\users\\jakeh.amourgisreilly\\documents\\github\\calliapicore\\readme.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
-      "RelativeMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|solutionrelative:readme.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|c:\\users\\jakeh.amourgisreilly\\documents\\github\\calliapicore\\calliapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|solutionrelative:calliapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|c:\\users\\jakeh.amourgisreilly\\documents\\github\\calliapicore\\ui\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|solutionrelative:ui\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|c:\\users\\jakeh.amourgisreilly\\documents\\github\\calliapicore\\utilities\\versionhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|solutionrelative:utilities\\versionhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\ui\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|solutionrelative:ui\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|c:\\users\\jakeh.amourgisreilly\\documents\\github\\calliapicore\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|c:\\users\\jakeh.amourgisreilly\\documents\\github\\calliapicore\\ui\\controls\\progressbarwithtext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|solutionrelative:ui\\controls\\progressbarwithtext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|c:\\users\\jakeh.amourgisreilly\\documents\\github\\calliapicore\\utilities\\reportlauncher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|solutionrelative:utilities\\reportlauncher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|c:\\users\\jakeh.amourgisreilly\\documents\\github\\calliapicore\\properties\\publishprofiles\\githubpages.pubxml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|solutionrelative:properties\\publishprofiles\\githubpages.pubxml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|c:\\users\\jakeh.amourgisreilly\\documents\\github\\calliapicore\\versions.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|solutionrelative:versions.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|c:\\users\\jakeh.amourgisreilly\\documents\\github\\calliapicore\\publish.ps1||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|solutionrelative:publish.ps1||{3B902123-F8A7-4915-9F01-361F908088D0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|c:\\users\\jakeh.amourgisreilly\\documents\\github\\calliapicore\\docs\\index.template.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|solutionrelative:docs\\index.template.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|c:\\users\\jakeh.amourgisreilly\\documents\\github\\calliapicore\\calliapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|solutionrelative:calliapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
       "AbsoluteMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|c:\\users\\jakeh.amourgisreilly\\documents\\github\\calliapicore\\businesslogic\\clioservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|solutionrelative:businesslogic\\clioservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|c:\\users\\jakeh.amourgisreilly\\documents\\github\\calliapicore\\businesslogic\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|solutionrelative:businesslogic\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|c:\\users\\jakeh.amourgisreilly\\documents\\github\\calliapicore\\dataaccess\\clioapiclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|solutionrelative:dataaccess\\clioapiclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|c:\\users\\jakeh.amourgisreilly\\documents\\github\\calliapicore\\ui\\mainform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|solutionrelative:ui\\mainform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|c:\\users\\jakeh.amourgisreilly\\documents\\github\\calliapicore\\publish.ps1||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|solutionrelative:publish.ps1||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|c:\\users\\jakeh.amourgisreilly\\documents\\github\\calliapicore\\readme.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|solutionrelative:readme.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|c:\\users\\jakeh.amourgisreilly\\documents\\github\\calliapicore\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|c:\\users\\jakeh.amourgisreilly\\documents\\github\\calliapicore\\ui\\reportform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|solutionrelative:ui\\reportform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|c:\\users\\jakeh.amourgisreilly\\documents\\github\\calliapicore\\utilities\\reportlauncher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|solutionrelative:utilities\\reportlauncher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|c:\\users\\jakeh.amourgisreilly\\documents\\github\\calliapicore\\models\\matter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|solutionrelative:models\\matter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|c:\\users\\jakeh.amourgisreilly\\documents\\github\\calliapicore\\models\\customfieldmap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|solutionrelative:models\\customfieldmap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|c:\\users\\jakeh.amourgisreilly\\documents\\github\\calliapicore\\versions.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|solutionrelative:versions.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|c:\\users\\jakeh.amourgisreilly\\documents\\github\\calliapicore\\utilities\\versionhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|solutionrelative:utilities\\versionhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|c:\\users\\jakeh.amourgisreilly\\documents\\github\\calliapicore\\properties\\publishprofiles\\githubpages.pubxml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|solutionrelative:properties\\publishprofiles\\githubpages.pubxml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|c:\\users\\jakeh.amourgisreilly\\documents\\github\\calliapicore\\docs\\index.template.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|solutionrelative:docs\\index.template.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|c:\\users\\jakeh.amourgisreilly\\documents\\github\\calliapicore\\businesslogic\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|solutionrelative:businesslogic\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|c:\\users\\jakeh.amourgisreilly\\documents\\github\\calliapicore\\interfaces\\iclioapiclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -91,14 +111,6 @@
       "RelativeMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|solutionrelative:utilities\\keywordtooltipmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|c:\\users\\jakeh.amourgisreilly\\documents\\github\\calliapicore\\models\\matter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|solutionrelative:models\\matter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|c:\\users\\jakeh.amourgisreilly\\documents\\github\\calliapicore\\models\\customfieldmap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|solutionrelative:models\\customfieldmap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|c:\\users\\jakeh.amourgisreilly\\documents\\github\\calliapicore\\ui\\views\\reportsopenmattersunworkedmatters.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|solutionrelative:ui\\views\\reportsopenmattersunworkedmatters.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -115,10 +127,6 @@
       "RelativeMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|solutionrelative:ui\\reportform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|c:\\users\\jakeh.amourgisreilly\\documents\\github\\calliapicore\\ui\\reportform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|solutionrelative:ui\\reportform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|c:\\users\\jakeh.amourgisreilly\\documents\\github\\calliapicore\\ui\\reportform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{79B0F0EE-C7C6-4C01-9B5E-8BA57E01E4FF}|CalliAPI.csproj|solutionrelative:ui\\reportform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -130,11 +138,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 12,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "CalliAPI.csproj",
               "DocumentMoniker": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\CalliAPI.csproj",
               "RelativeDocumentMoniker": "CalliAPI.csproj",
@@ -148,21 +156,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 8,
               "Title": "ReadMe.MD",
               "DocumentMoniker": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\ReadMe.MD",
               "RelativeDocumentMoniker": "ReadMe.MD",
               "ToolTip": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\ReadMe.MD",
               "RelativeToolTip": "ReadMe.MD",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAABRAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAACYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
               "WhenOpened": "2025-05-22T19:23:18.667Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 16,
               "Title": "GitHubPages.pubxml",
               "DocumentMoniker": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\Properties\\PublishProfiles\\GitHubPages.pubxml",
               "RelativeDocumentMoniker": "Properties\\PublishProfiles\\GitHubPages.pubxml",
@@ -171,12 +178,11 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
               "WhenOpened": "2025-05-23T16:20:15.434Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 9,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -185,26 +191,24 @@
               "ViewState": "AgIAAB4AAAAAAAAAAAASwCoAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-23T14:22:06.146Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 14,
               "Title": "versions.txt",
               "DocumentMoniker": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\versions.txt",
               "RelativeDocumentMoniker": "versions.txt",
               "ToolTip": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\versions.txt",
               "RelativeToolTip": "versions.txt",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
               "WhenOpened": "2025-05-27T17:52:13.396Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 7,
               "Title": "publish.ps1",
               "DocumentMoniker": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\publish.ps1",
               "RelativeDocumentMoniker": "publish.ps1",
@@ -213,8 +217,7 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
               "WhenOpened": "2025-05-23T18:12:07.608Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Bookmark",
@@ -235,18 +238,120 @@
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "MainForm.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\UI\\MainForm.cs",
-              "RelativeDocumentMoniker": "UI\\MainForm.cs",
-              "ToolTip": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\UI\\MainForm.cs [Design]",
-              "RelativeToolTip": "UI\\MainForm.cs [Design]",
+              "Title": "ClioService.cs",
+              "DocumentMoniker": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\BusinessLogic\\ClioService.cs",
+              "RelativeDocumentMoniker": "BusinessLogic\\ClioService.cs",
+              "ToolTip": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\BusinessLogic\\ClioService.cs",
+              "RelativeToolTip": "BusinessLogic\\ClioService.cs",
+              "ViewState": "AgIAAEAAAAAAAAAAAAAmwCMAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-23T19:06:52.39Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2025-05-23T12:52:33.14Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
+              "Title": "MainForm.cs",
+              "DocumentMoniker": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\UI\\MainForm.cs",
+              "RelativeDocumentMoniker": "UI\\MainForm.cs",
+              "ToolTip": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\UI\\MainForm.cs",
+              "RelativeToolTip": "UI\\MainForm.cs",
+              "ViewState": "AgIAAEIBAAAAAAAAAAAUwFQBAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-27T20:05:39.891Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ProgressBarWithText.cs",
+              "DocumentMoniker": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\UI\\Controls\\ProgressBarWithText.cs",
+              "RelativeDocumentMoniker": "UI\\Controls\\ProgressBarWithText.cs",
+              "ToolTip": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\UI\\Controls\\ProgressBarWithText.cs",
+              "RelativeToolTip": "UI\\Controls\\ProgressBarWithText.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAowCIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-27T20:04:56.877Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ClioApiClient.cs",
+              "DocumentMoniker": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\DataAccess\\ClioApiClient.cs",
+              "RelativeDocumentMoniker": "DataAccess\\ClioApiClient.cs",
+              "ToolTip": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\DataAccess\\ClioApiClient.cs",
+              "RelativeToolTip": "DataAccess\\ClioApiClient.cs",
+              "ViewState": "AgIAANwAAAAAAAAAAAAMwPQAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-23T19:41:32.94Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "MainForm.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\UI\\MainForm.Designer.cs",
+              "RelativeDocumentMoniker": "UI\\MainForm.Designer.cs",
+              "ToolTip": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\UI\\MainForm.Designer.cs",
+              "RelativeToolTip": "UI\\MainForm.Designer.cs",
+              "ViewState": "AgIAACUAAAAAAAAAAAAAAC4AAABQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-27T20:05:44.156Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ReportForm.cs",
+              "DocumentMoniker": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\UI\\ReportForm.cs",
+              "RelativeDocumentMoniker": "UI\\ReportForm.cs",
+              "ToolTip": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\UI\\ReportForm.cs",
+              "RelativeToolTip": "UI\\ReportForm.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAMwCMAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-23T14:53:49.877Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ReportLauncher.cs",
+              "DocumentMoniker": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\Utilities\\ReportLauncher.cs",
+              "RelativeDocumentMoniker": "Utilities\\ReportLauncher.cs",
+              "ToolTip": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\Utilities\\ReportLauncher.cs",
+              "RelativeToolTip": "Utilities\\ReportLauncher.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAACYAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-23T14:59:55.259Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Matter.cs",
+              "DocumentMoniker": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\Models\\Matter.cs",
+              "RelativeDocumentMoniker": "Models\\Matter.cs",
+              "ToolTip": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\Models\\Matter.cs",
+              "RelativeToolTip": "Models\\Matter.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAqwA8AAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-23T13:25:50.636Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "CustomFieldMap.cs",
+              "DocumentMoniker": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\Models\\CustomFieldMap.cs",
+              "RelativeDocumentMoniker": "Models\\CustomFieldMap.cs",
+              "ToolTip": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\Models\\CustomFieldMap.cs",
+              "RelativeToolTip": "Models\\CustomFieldMap.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwBQAAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-23T13:25:57.779Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
               "Title": "VersionHelper.cs",
               "DocumentMoniker": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\Utilities\\VersionHelper.cs",
               "RelativeDocumentMoniker": "Utilities\\VersionHelper.cs",
@@ -254,38 +359,11 @@
               "RelativeToolTip": "Utilities\\VersionHelper.cs",
               "ViewState": "AgIAACcAAAAAAAAAAAAowDMAAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-27T13:02:14.586Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-27T13:02:14.586Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "MainForm.cs",
-              "DocumentMoniker": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\UI\\MainForm.cs",
-              "RelativeDocumentMoniker": "UI\\MainForm.cs",
-              "ToolTip": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\UI\\MainForm.cs",
-              "RelativeToolTip": "UI\\MainForm.cs",
-              "ViewState": "AgIAABYAAAAAAAAAAAAiwCYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-23T19:06:55.456Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ReportLauncher.cs",
-              "DocumentMoniker": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\Utilities\\ReportLauncher.cs",
-              "RelativeDocumentMoniker": "Utilities\\ReportLauncher.cs",
-              "ToolTip": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\Utilities\\ReportLauncher.cs",
-              "RelativeToolTip": "Utilities\\ReportLauncher.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAABAAAAA1AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-23T14:59:55.259Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 17,
               "Title": "index.template.html",
               "DocumentMoniker": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\docs\\index.template.html",
               "RelativeDocumentMoniker": "docs\\index.template.html",
@@ -293,25 +371,11 @@
               "RelativeToolTip": "docs\\index.template.html",
               "ViewState": "AgIAAK4AAAAAAAAAAAAAAM4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2025-05-27T15:43:15.126Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-27T15:43:15.126Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "ClioService.cs",
-              "DocumentMoniker": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\BusinessLogic\\ClioService.cs",
-              "RelativeDocumentMoniker": "BusinessLogic\\ClioService.cs",
-              "ToolTip": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\BusinessLogic\\ClioService.cs",
-              "RelativeToolTip": "BusinessLogic\\ClioService.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAgwCMAAAAaAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-23T12:52:33.14Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 18,
               "Title": "AuthService.cs",
               "DocumentMoniker": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\BusinessLogic\\AuthService.cs",
               "RelativeDocumentMoniker": "BusinessLogic\\AuthService.cs",
@@ -319,25 +383,11 @@
               "RelativeToolTip": "BusinessLogic\\AuthService.cs",
               "ViewState": "AgIAAA8AAAAAAAAAAAAAABkAAABKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-23T19:06:44.185Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-23T19:06:44.185Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "ClioApiClient.cs",
-              "DocumentMoniker": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\DataAccess\\ClioApiClient.cs",
-              "RelativeDocumentMoniker": "DataAccess\\ClioApiClient.cs",
-              "ToolTip": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\DataAccess\\ClioApiClient.cs",
-              "RelativeToolTip": "DataAccess\\ClioApiClient.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAASwBkAAAAvAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-23T19:41:32.94Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 19,
               "Title": "IClioApiClient.cs",
               "DocumentMoniker": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\Interfaces\\IClioApiClient.cs",
               "RelativeDocumentMoniker": "Interfaces\\IClioApiClient.cs",
@@ -345,12 +395,11 @@
               "RelativeToolTip": "Interfaces\\IClioApiClient.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwA0AAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-27T18:04:32.918Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-27T18:04:32.918Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 20,
               "Title": "IAuthService.cs",
               "DocumentMoniker": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\Interfaces\\IAuthService.cs",
               "RelativeDocumentMoniker": "Interfaces\\IAuthService.cs",
@@ -358,36 +407,33 @@
               "RelativeToolTip": "Interfaces\\IAuthService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-27T18:52:43.489Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-27T18:52:43.489Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 21,
               "Title": "Settings.settings",
               "DocumentMoniker": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\Properties\\Settings.settings",
               "RelativeDocumentMoniker": "Properties\\Settings.settings",
               "ToolTip": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\Properties\\Settings.settings",
               "RelativeToolTip": "Properties\\Settings.settings",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002767|",
-              "WhenOpened": "2025-05-23T14:03:20.208Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-23T14:03:20.208Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 22,
               "Title": "CalliAPI",
               "DocumentMoniker": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\CalliAPI.csproj",
               "RelativeDocumentMoniker": "CalliAPI.csproj",
               "ToolTip": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\CalliAPI.csproj",
               "RelativeToolTip": "CalliAPI.csproj",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-05-27T17:30:08.612Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-27T17:30:08.612Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 23,
               "Title": "Transform-Template.ps1",
               "DocumentMoniker": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\Scripts\\Transform-Template.ps1",
               "RelativeDocumentMoniker": "Scripts\\Transform-Template.ps1",
@@ -399,7 +445,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 24,
               "Title": "CalliAPI.nuspec",
               "DocumentMoniker": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\CalliAPI.nuspec",
               "RelativeDocumentMoniker": "CalliAPI.nuspec",
@@ -411,7 +457,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 25,
               "Title": "TooltipDefinitions.cs",
               "DocumentMoniker": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\Utilities\\TooltipDefinitions.cs",
               "RelativeDocumentMoniker": "Utilities\\TooltipDefinitions.cs",
@@ -423,7 +469,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 26,
               "Title": "KeywordTooltipManager.cs",
               "DocumentMoniker": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\Utilities\\KeywordTooltipManager.cs",
               "RelativeDocumentMoniker": "Utilities\\KeywordTooltipManager.cs",
@@ -435,7 +481,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 27,
               "Title": "ReportsOpenMattersUnworkedMatters.cs",
               "DocumentMoniker": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\UI\\Views\\ReportsOpenMattersUnworkedMatters.cs",
               "RelativeDocumentMoniker": "UI\\Views\\ReportsOpenMattersUnworkedMatters.cs",
@@ -448,19 +494,18 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 28,
               "Title": "ReportsOpenMattersUnworkedMatters.cs [Design]",
               "DocumentMoniker": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\UI\\Views\\ReportsOpenMattersUnworkedMatters.cs",
               "RelativeDocumentMoniker": "UI\\Views\\ReportsOpenMattersUnworkedMatters.cs",
               "ToolTip": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\UI\\Views\\ReportsOpenMattersUnworkedMatters.cs [Design]",
               "RelativeToolTip": "UI\\Views\\ReportsOpenMattersUnworkedMatters.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-23T19:08:59.818Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2025-05-23T19:08:59.818Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 29,
               "Title": "FolderProfile.pubxml",
               "DocumentMoniker": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\Properties\\PublishProfiles\\FolderProfile.pubxml",
               "RelativeDocumentMoniker": "Properties\\PublishProfiles\\FolderProfile.pubxml",
@@ -472,7 +517,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 31,
               "Title": "ReportForm.Designer.cs",
               "DocumentMoniker": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\UI\\ReportForm.Designer.cs",
               "RelativeDocumentMoniker": "UI\\ReportForm.Designer.cs",
@@ -480,57 +525,51 @@
               "RelativeToolTip": "UI\\ReportForm.Designer.cs",
               "ViewState": "AgIAABsAAAAAAAAAAAASwDUAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-23T15:34:54.375Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-23T15:34:54.375Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
-              "Title": "ReportForm.cs",
-              "DocumentMoniker": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\UI\\ReportForm.cs",
-              "RelativeDocumentMoniker": "UI\\ReportForm.cs",
-              "ToolTip": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\UI\\ReportForm.cs",
-              "RelativeToolTip": "UI\\ReportForm.cs",
-              "ViewState": "AgIAAEkAAAAAAAAAAAArwF4AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-23T14:53:49.877Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 30,
               "Title": "ReportForm.cs [Design]",
               "DocumentMoniker": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\UI\\ReportForm.cs",
               "RelativeDocumentMoniker": "UI\\ReportForm.cs",
               "ToolTip": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\UI\\ReportForm.cs [Design]",
               "RelativeToolTip": "UI\\ReportForm.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-23T14:53:43.499Z",
+              "WhenOpened": "2025-05-23T14:53:43.499Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "FloatingWindowState": {
+        "Id": "75e5636d-60da-475c-8cfe-dc87b4f338bb",
+        "Display": 3,
+        "X": 342,
+        "Y": 227,
+        "Width": 1337,
+        "Height": 610,
+        "WindowState": 2
+      },
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainForm.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\UI\\MainForm.cs",
+              "RelativeDocumentMoniker": "UI\\MainForm.cs",
+              "ToolTip": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\UI\\MainForm.cs [Design]",
+              "RelativeToolTip": "UI\\MainForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-23T19:06:52.39Z",
               "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 23,
-              "Title": "CustomFieldMap.cs",
-              "DocumentMoniker": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\Models\\CustomFieldMap.cs",
-              "RelativeDocumentMoniker": "Models\\CustomFieldMap.cs",
-              "ToolTip": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\Models\\CustomFieldMap.cs",
-              "RelativeToolTip": "Models\\CustomFieldMap.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAA1AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-23T13:25:57.779Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
-              "Title": "Matter.cs",
-              "DocumentMoniker": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\Models\\Matter.cs",
-              "RelativeDocumentMoniker": "Models\\Matter.cs",
-              "ToolTip": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\Models\\Matter.cs",
-              "RelativeToolTip": "Models\\Matter.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAIBJwA8AAAAvAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-23T13:25:50.636Z"
             }
           ]
         }

@@ -9,16 +9,18 @@ namespace CalliAPI.Models
 
     public enum CustomField
     {
-        PaymentPlanInfo,
-        ExpectedPIFDate
+        EmergencyCaseType,
+        ExpectedPIFDate,
+        PaymentPlanInfo
     }
 
     internal class CustomFieldMap
     {
         private static readonly Dictionary<CustomField, long> _fieldIds = new Dictionary<CustomField, long>()
         {
-            { CustomField.PaymentPlanInfo, 13582683 },
-            { CustomField.ExpectedPIFDate, 13582698 }
+            { CustomField.EmergencyCaseType, 13584798 },
+            { CustomField.ExpectedPIFDate, 13582698 },
+            { CustomField.PaymentPlanInfo, 13582683 }
         };
 
         public static long GetId(CustomField field) => _fieldIds[field];

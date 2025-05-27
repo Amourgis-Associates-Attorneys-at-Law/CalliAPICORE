@@ -216,20 +216,38 @@ namespace CalliAPI.DataAccess
 
                 // Custom Fields
                 if (element.TryGetProperty("custom_field_values", out var customFieldsElement) &&
-         customFieldsElement.ValueKind == JsonValueKind.Array)
+    customFieldsElement.ValueKind == JsonValueKind.Array)
                 {
+                    // Each Custom Field
                     foreach (var fieldValue in customFieldsElement.EnumerateArray())
                     {
                         if (TryGetObject(fieldValue, "custom_field", out var customFieldElement) &&
-                        customFieldElement.TryGetProperty("id", out var idElement) &&
-                        fieldValue.TryGetProperty("value", out var valueElement) &&
-                        valueElement.ValueKind == JsonValueKind.String)
+                            customFieldElement.TryGetProperty("id", out var idElement))
                         {
                             long fieldId = idElement.GetInt64();
-                            string value = valueElement.GetString();
+                            string value = null;
+
+                            // Try to get string value
+                            if (fieldValue.TryGetProperty("value", out var valueElement))
+                            {
+                                if (valueElement.ValueKind == JsonValueKind.String)
+                                {
+                                    value = valueElement.GetString();
+                                }
+
+                                if (valueElement.ValueKind == JsonValueKind.Number && valueElement.TryGetInt64(out long intValue))
+                                {
+                                    value = intValue.ToString(); // Picklist ID  
+                                }
+                                else
+                                {
+                                    _logger.Warn($"Unexpected value type for 'value': {valueElement}");
+                                }
+                            }
 
                             if (CustomFieldMap.TryGetField(fieldId, out var customField))
                             {
+                                if (value == null) value = "null";
                                 matter.CustomFields[customField] = value;
                             }
                         }

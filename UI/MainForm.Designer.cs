@@ -1,4 +1,6 @@
-﻿namespace CalliAPI
+﻿using CalliAPI.UI.Controls;
+
+namespace CalliAPI
 {
     partial class MainForm
     {
@@ -36,6 +38,7 @@
             TreeNode treeNode5 = new TreeNode("FastFetch");
             menuStrip1 = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
+            checkForUpdatesToolStripMenuItem = new ToolStripMenuItem();
             exitToolStripMenuItem = new ToolStripMenuItem();
             reportsToolStripMenuItem = new ToolStripMenuItem();
             unworkedMattersToolStripMenuItem = new ToolStripMenuItem();
@@ -51,7 +54,7 @@
             lblApiStatus = new ToolStripStatusLabel();
             lblClioAPIStatus = new ToolStripStatusLabel();
             toolStripBtnConnectToClio = new ToolStripStatusLabel();
-            progressBarPagesRetrieved = new ProgressBar();
+            progressBarPagesRetrieved = new ProgressBarWithText();
             lblReportPageRetrieved = new Label();
             lblReportName = new Label();
             textBox1 = new TextBox();
@@ -61,7 +64,8 @@
             panel1 = new Panel();
             lblVersion = new Label();
             tableLayoutPanel1 = new TableLayoutPanel();
-            checkForUpdatesToolStripMenuItem = new ToolStripMenuItem();
+            debugToolStripMenuItem = new ToolStripMenuItem();
+            toolStripMenuItem2 = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
@@ -87,6 +91,13 @@
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             fileToolStripMenuItem.Size = new Size(37, 20);
             fileToolStripMenuItem.Text = "File";
+            // 
+            // checkForUpdatesToolStripMenuItem
+            // 
+            checkForUpdatesToolStripMenuItem.Name = "checkForUpdatesToolStripMenuItem";
+            checkForUpdatesToolStripMenuItem.Size = new Size(180, 22);
+            checkForUpdatesToolStripMenuItem.Text = "Check for Updates";
+            checkForUpdatesToolStripMenuItem.Click += checkForUpdatesToolStripMenuItem_Click;
             // 
             // exitToolStripMenuItem
             // 
@@ -147,7 +158,7 @@
             // 
             // programToolStripMenuItem
             // 
-            programToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { mailerProgramToolStripMenuItem });
+            programToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { mailerProgramToolStripMenuItem, debugToolStripMenuItem });
             programToolStripMenuItem.Name = "programToolStripMenuItem";
             programToolStripMenuItem.Size = new Size(65, 20);
             programToolStripMenuItem.Text = "Program";
@@ -156,7 +167,7 @@
             // 
             mailerProgramToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { openToolStripMenuItem });
             mailerProgramToolStripMenuItem.Name = "mailerProgramToolStripMenuItem";
-            mailerProgramToolStripMenuItem.Size = new Size(156, 22);
+            mailerProgramToolStripMenuItem.Size = new Size(180, 22);
             mailerProgramToolStripMenuItem.Text = "Mailer Program";
             // 
             // openToolStripMenuItem
@@ -203,6 +214,7 @@
             // 
             // progressBarPagesRetrieved
             // 
+            progressBarPagesRetrieved.ForeColor = Color.FromArgb(162, 188, 214);
             progressBarPagesRetrieved.Location = new Point(13, 28);
             progressBarPagesRetrieved.Name = "progressBarPagesRetrieved";
             progressBarPagesRetrieved.Size = new Size(829, 23);
@@ -210,13 +222,14 @@
             // 
             // lblReportPageRetrieved
             // 
+            lblReportPageRetrieved.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             lblReportPageRetrieved.AutoSize = true;
             lblReportPageRetrieved.Location = new Point(743, 10);
             lblReportPageRetrieved.Name = "lblReportPageRetrieved";
             lblReportPageRetrieved.Size = new Size(99, 15);
             lblReportPageRetrieved.TabIndex = 4;
             lblReportPageRetrieved.Text = "Report Progress...";
-            lblReportPageRetrieved.TextAlign = ContentAlignment.BottomRight;
+            lblReportPageRetrieved.TextAlign = ContentAlignment.MiddleRight;
             // 
             // lblReportName
             // 
@@ -332,12 +345,19 @@
             tableLayoutPanel1.Size = new Size(1184, 515);
             tableLayoutPanel1.TabIndex = 8;
             // 
-            // checkForUpdatesToolStripMenuItem
+            // debugToolStripMenuItem
             // 
-            checkForUpdatesToolStripMenuItem.Name = "checkForUpdatesToolStripMenuItem";
-            checkForUpdatesToolStripMenuItem.Size = new Size(180, 22);
-            checkForUpdatesToolStripMenuItem.Text = "Check for Updates";
-            checkForUpdatesToolStripMenuItem.Click += checkForUpdatesToolStripMenuItem_Click;
+            debugToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { toolStripMenuItem2 });
+            debugToolStripMenuItem.Name = "debugToolStripMenuItem";
+            debugToolStripMenuItem.Size = new Size(180, 22);
+            debugToolStripMenuItem.Text = "Debug";
+            // 
+            // toolStripMenuItem2
+            // 
+            toolStripMenuItem2.Name = "toolStripMenuItem2";
+            toolStripMenuItem2.Size = new Size(180, 22);
+            toolStripMenuItem2.Text = "100%";
+            toolStripMenuItem2.Click += Debug100Percent;
             // 
             // MainForm
             // 
@@ -378,7 +398,6 @@
         private ToolStripStatusLabel lblClioAPIStatus;
         private ToolStripMenuItem unworkedMattersToolStripMenuItem;
         private ToolStripMenuItem allMattersToolStripMenuItem;
-        private ProgressBar progressBarPagesRetrieved;
         private Label lblReportPageRetrieved;
         private Label lblReportName;
         private ToolStripMenuItem fastFetchToolStripMenuItem1;
@@ -394,5 +413,8 @@
         private TableLayoutPanel tableLayoutPanel1;
         private Label lblVersion;
         private ToolStripMenuItem checkForUpdatesToolStripMenuItem;
+        private ProgressBarWithText progressBarPagesRetrieved;
+        private ToolStripMenuItem debugToolStripMenuItem;
+        private ToolStripMenuItem toolStripMenuItem2;
     }
 }

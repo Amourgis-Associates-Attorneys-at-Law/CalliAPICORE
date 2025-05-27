@@ -21,6 +21,7 @@ using AmourgisCOREServices;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using CalliAPI.UI.Views;
 using CalliAPI.Utilities;
+using CalliAPI.UI.Controls;
 
 namespace CalliAPI
 {
@@ -28,16 +29,14 @@ namespace CalliAPI
     {
         private readonly ClioService _clioService; // for calling the API
         private readonly AMO_Logger _logger;
-        private static readonly int MaxLookbackDays = 300;
+        private static readonly int MaxLookbackDays = 300; // for picking FastFetch start date
+        private DateTime _lastUpdate = DateTime.MinValue; // for updating the progress bar only if a certain amount of time has passed
+
+        private int _lastPercent = -1; // for updating the progress bar only if it's actually changed
+
 
         internal MainForm(ClioService clioService, AMO_Logger logger)
         {
-            // We can only check for updates in a live build
-#if !DEBUG
-            VersionHelper.UpdateCalliAPI().Wait(); // Wait for the update check to complete
-#endif
-
-
             _clioService = clioService;
             _logger = logger;
             InitializeComponent();
@@ -51,12 +50,34 @@ namespace CalliAPI
             {
                 this.progressBarPagesRetrieved.Invoke(() =>
                 {
-                    progressBarPagesRetrieved.Maximum = total;
-                    progressBarPagesRetrieved.Value = Math.Min(current, total);
-                    lblReportPageRetrieved.Text = $"Page {current} of {total} obtained from Clio.";
+                    if (total == 0) return; // Avoid division by zero
+
+                    var now = DateTime.Now;
+                    if ((now - _lastUpdate).TotalMilliseconds < 500) return; // Only update every 0.5s
+                    _lastUpdate = now;
+
+
+                    int percent = (int)((current / (double)total) * 100);
+
+                    if (percent == _lastPercent) return; // Only update if the percent has changed
+                    _lastPercent = percent;
+                    progressBarPagesRetrieved.Value = percent;
+                    UpdateReportLabel($"Page {current} of {total} obtained from Clio.");
                 });
             };
         }
+
+
+        private void UpdateReportLabel(string text)
+        {
+            lblReportPageRetrieved.Text = text;
+            lblReportPageRetrieved.AutoSize = true;
+
+            // Reposition the label so its right edge aligns with the progress bar's right edge
+            lblReportPageRetrieved.Left = progressBarPagesRetrieved.Right - lblReportPageRetrieved.Width;
+            lblReportPageRetrieved.Top = progressBarPagesRetrieved.Top + 2; // Adjust as needed
+        }
+
 
 
         #region logic
@@ -293,7 +314,7 @@ namespace CalliAPI
             {
                 Cursor.Current = Cursors.WaitCursor;
                 StartOAuthProcess();
-                Thread.Sleep(2000);
+                Thread.Sleep(1000);
                 UpdateClioAPIStatus();
             }
             finally
@@ -305,6 +326,21 @@ namespace CalliAPI
         private async void checkForUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             await VersionHelper.UpdateCalliAPI();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Debug100Percent(object sender, EventArgs e)
+        {
+            progressBarPagesRetrieved.Value = 0;
+            for (int x = 0; x < 100; x++)
+            {
+                Thread.Sleep(100);
+                progressBarPagesRetrieved.Value += 1;
+            }
         }
     }
 }
