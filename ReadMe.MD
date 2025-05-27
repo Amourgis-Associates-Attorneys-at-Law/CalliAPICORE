@@ -15,6 +15,9 @@
 
 # CalliAPI Patch Log
 
+## 2.1.0 - Updated download page and implemented auto-update functionality!
+Plus, added raw image storage so we can easily update the logo and other images in the future! This is a big step forward in making CalliAPI more user-friendly and easier to maintain. The auto-update functionality will ensure that users always have the latest version without needing to manually download updates.
+
 ## 2.0.0 - Finally, automatic hosting on GitHub pages is live!
 CalliAPI is now hosted on GitHub Pages, with a custom index page for easy installation! This is a huge step forward in making CalliAPI accessible to everyone at Amourgis & Associates, and it should make future updates much easier to manage!
 [x] Wishlist item: Add a zip to the docs folder so that users can fallback on the zip completed!
