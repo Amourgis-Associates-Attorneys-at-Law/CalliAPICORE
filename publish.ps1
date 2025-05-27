@@ -30,7 +30,7 @@ $versionShort = "$($versionParts[0]).$($versionParts[1]).$($versionParts[2])"
 # Define paths and variables
 $publishDir = "publish"
 $outputDir = "Releases"
-$templateHtml = "UI\InstallPage\index.template.html"
+$templateHtml = "docs\index.template.html"
 $outputHtml = "docs\index.html"
 $repoUrl = 'https://github.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE'
 $stableStr = if ($stable) { "" } else { "--pre" }
