@@ -6,39 +6,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Install CalliAPI</title>
     <style>
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background: linear-gradient(to bottom right, #f4f7fa, #A2BCD6);
-            color: #333;
-            margin: 0;
-            padding: 2rem;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
-        }
 
 
-        .fallback {
-            margin-top: 2rem;
-            font-size: 0.95rem;
-        }
+.accent {
+    color: #F4A261;
+    font-weight: bold;
+}
 
-        .gallery {
-            margin-top: 2rem;
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to bottom right, #f4f7fa, #A2BCD6);
+    color: #333;
+    margin: 0;
+    padding: 2rem;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
 
-        .gallery-step {
-            background-color: #fff;
-            padding: 1rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
+.fallback {
+    background-color: #f9fbfd;
+    padding: 1rem;
+    border-radius: 6px;
+}
+
+.gallery {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+    .gallery-step {
+        background-color: #ffffff;
+        padding: 1rem;
+        /*border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;*/
+        border-left: 4px solid #20558B;
+    }
+
+        .gallery-step:hover {
+            background-color: #f0f8ff;
+            transition: background-color 0.3s ease;
         }
 
         .gallery-step img {
@@ -50,50 +63,78 @@
         }
 
 
-        h1 {
-            color: #2c3e50;
-        }
+h1 {
+    color: #000444;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
 
-        html {
-            scroll-behavior: smooth;
-        }
+html {
+    scroll-behavior: smooth;
+}
 
+.install-button {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background-color: #0078d4;
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    border-radius: 6px;
+    margin-top: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+
+    @media (max-width: 600px) {
         .install-button {
-            display: inline-block;
-            padding: 1rem 2rem;
-            background-color: #0078d4;
-            color: white;
-            text-decoration: none;
-            font-size: 1.2rem;
-            border-radius: 6px;
-            margin-top: 1rem;
-            transition: background-color 0.3s ease;
-        }
-
-        .logo {
-            height: 60px;
-            object-fit: contain;
-        }
-
-        .site-footer {
-            margin-top: 4rem;
-            font-size: 0.85rem;
-            color: #999;
             text-align: center;
+            width: 100%;
         }
-
-        .site-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 2rem;
-        }
+    }
 
 
-        .version {
+            .install-button:hover {
+                transform: scale(1.05);
+                background-color: #F4A261;
+            }
+
+
+            .logo {
+                height: 60px;
+                object-fit: contain;
+            }
+
+            p {
+                line-height: 1.6;
+                margin-top: 0.5rem;
+                color: #000222;
+            }
+
+            .site-footer {
+                margin-top: 4rem;
+                font-size: 0.85rem;
+                color: #999;
+                text-align: center;
+            }
+
+            .site-header {
+                /*display: flex;
+    align-items: center;
+    margin-bottom: 2rem;*/
+
+                background-color: #f4f7fa;
+                padding: 1rem;
+                border-radius: 8px;
+                box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+            }
+
+
+            .version {
                 margin-top: 1rem;
                 font-style: italic;
                 color: #666
-        }
+            }
 
             .version-badge {
                 display: inline-block;
@@ -115,11 +156,11 @@
 
 
     <h1>Install CalliAPI</h1>
-    <p>Click the button below to install the latest version of CalliAPI.</p>
+    <p>Click the <span class="accent">Install</span> button below to install the latest version of CalliAPI.</p>
 
-    <a class="install-button" href="https://github.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/releases/download/v2.0.3/CalliAPI-win-Setup.exe">Install CalliAPI</a>
+    <a class="install-button" href="https://github.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/releases/download/v2.0.4/CalliAPI-win-Setup.exe">Install CalliAPI</a>
     <br />
-    <div class="version"><span class="version-badge">v2.0.3</span></div>
+    <div class="version"><span class="version-badge">v2.0.4</span></div>
 
     <div class="gallery">
         <p>To install CalliAPI, follow the instructions below:</p>
@@ -156,7 +197,7 @@
     </div>
 
     <div class="fallback">
-        <p>If the install button doesn't work, you can <a href="https://github.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/releases/download/v2.0.3/CalliAPI-win-Portable.zip">download the full installer package (ZIP)</a> and run <strong>setup.exe</strong> manually.</p>
+        <p>If the install button doesn't work, you can <a href="https://github.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/releases/download/v2.0.4/CalliAPI-win-Portable.zip">download the full installer package (ZIP)</a> and run <strong>setup.exe</strong> manually.</p>
     </div>
 
     <footer class="site-footer">

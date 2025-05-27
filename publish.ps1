@@ -3,6 +3,22 @@
 	[switch]$stable = $true
 )
 
+# Check if a file exists and is unlocked
+function Test-FileUnlocked {
+    param ([string]$path)
+
+    if (-not (Test-Path $path)) {
+        return $false
+    }
+
+    try {
+        $stream = [System.IO.File]::Open($path, 'Open', 'ReadWrite', 'None')
+        $stream.Close()
+        return $true
+    } catch {
+        return $false
+    }
+}
 
 # Define project settings
 $project = "CalliAPI.csproj"
@@ -24,9 +40,13 @@ $publishStr = if ($publish) { "--publish" } else { "" }
 $VELOPACK_GITHUB_TOKEN = if ($env:VELOPACK_GITHUB_TOKEN) { $env:VELOPACK_GITHUB_TOKEN } else { Read-Host -Prompt "Enter your GitHub token: " }
 
 # Early escapes
-if (-not $templateHtml)
-{
-    Write-Host "Template HTML file not found: $templateHtml"
+if (-not (Test-FileUnlocked $templateHtml)) {
+    Write-Host "Template HTML file not found or is locked: $templateHtml"
+    exit 1
+}
+
+if (-not (Test-FileUnlocked $outputHtml)) {
+    Write-Host "Output HTML file is locked or inaccessible: $outputHtml"
     exit 1
 }
 
@@ -65,21 +85,29 @@ $changedFiles = git status --porcelain | ForEach-Object {
 
 $unlockedFiles = @()
 
-foreach ($file in $changedFiles) {
-    try {
-        $stream = [System.IO.File]::Open($file, 'Open', 'ReadWrite', 'None')
-        $stream.Close()
-        $unlockedFiles += $file
-    } catch {
+foreach ($file in $changedFiles) 
+{
+    if (Test-FileUnlocked $file) { $unlockedFiles += $file }
+    else
+    {
         Write-Host "Skipping locked file: $file"
     }
 }
 
 if ($unlockedFiles.Count -eq 0) {
     Write-Host "No unlocked files to commit."
-} else {
+} 
+else 
+{
     git add $unlockedFiles
     git commit -m "Update site for version $versionShort"
+    try 
+    {
     git push origin main
     Write-Host "Committed and pushed unlocked changes to GitHub."
+    } 
+    catch
+    {
+        Write-Host "Failed to push changes: $_"
+    }
 }
