@@ -26,15 +26,14 @@ namespace CalliAPI
 {
     public partial class MainForm : Form
     {
-        private readonly IAuthService _authService; // for authorizing OAuth
         private readonly ClioService _clioService; // for calling the API
-        private static readonly AMO_Logger _logger = new AMO_Logger("CalliAPI");
+        private readonly AMO_Logger _logger;
         private static readonly int MaxLookbackDays = 300;
 
-        internal MainForm(ClioService clioService, IAuthService authService)
+        internal MainForm(ClioService clioService, AMO_Logger logger)
         {
-            _authService = authService;
             _clioService = clioService;
+            _logger = logger;
             InitializeComponent();
             //try
             //{
@@ -154,7 +153,7 @@ namespace CalliAPI
         {
             _logger.Info("Starting OAuth process...");
             // Open a browser and make the front-end OAuth call in the URL
-            var authorizationUrl = _authService.GetAuthorizationUrl();
+            var authorizationUrl = _clioService.GetAuthorizationUrl();
             var psi = new System.Diagnostics.ProcessStartInfo
             {
                 FileName = authorizationUrl,
@@ -183,7 +182,7 @@ namespace CalliAPI
                         return;
                     }
 
-                    authorizationCode = _authService.ValidateAuthorizationCode(form.AuthorizationCode);
+                    authorizationCode = _clioService.ValidateAuthorizationCode(form.AuthorizationCode);
 
                     if (!string.IsNullOrEmpty(authorizationCode))
                         break;
@@ -193,8 +192,8 @@ namespace CalliAPI
             }
 
 
-            await _authService.GetAccessTokenAsync(authorizationCode);
-            MessageBox.Show(_authService.AccessToken, "Access Token");
+            await _clioService.GetAccessTokenAsync(authorizationCode);
+            MessageBox.Show("Access Token successfully obtained!");
 
         }
 

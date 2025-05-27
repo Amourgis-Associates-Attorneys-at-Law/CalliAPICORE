@@ -8,20 +8,47 @@ using CalliAPI.Properties;
 using CalliAPI;
 using AmourgisCOREServices;
 using CalliAPI.DataAccess;
+using System.Security.Cryptography;
 
 namespace CalliAPI.BusinessLogic
 {
-    internal class AuthService : IAuthService
+    public class AuthService : IAuthService
     {
-        private static readonly AMO_Logger _logger = new AMO_Logger("CalliAPI");
+        private readonly AMO_Logger _logger;
 
-        private readonly IClioApiClient _clioApiClient;
+        private readonly ClioApiClient _clioApiClient;
         public string AccessToken { get; private set; }
 
-        public AuthService(IClioApiClient clioApiAccess)
+        private string _codeVerifier;
+        private string _codeChallenge;
+
+
+        public AuthService(ClioApiClient clioApiAccess, AMO_Logger logger)
         {
             _clioApiClient = clioApiAccess;
+            _logger = logger;
         }
+
+
+        /// <summary>
+        /// Generates PKCE (Proof Key for Code Exchange) values. Useful if we can use PKCE for OAuth 2.0 authorization.
+        /// </summary>
+        private void GeneratePkceValues()
+        {
+            using var rng = RandomNumberGenerator.Create();
+            var bytes = new byte[32];
+            rng.GetBytes(bytes);
+            _codeVerifier = Convert.ToBase64String(bytes)
+                .TrimEnd('=').Replace('+', '-').Replace('/', '_');
+
+            using var sha256 = SHA256.Create();
+            var challengeBytes = sha256.ComputeHash(Encoding.ASCII.GetBytes(_codeVerifier));
+            _codeChallenge = Convert.ToBase64String(challengeBytes)
+                .TrimEnd('=').Replace('+', '-').Replace('/', '_');
+        }
+
+
+
 
         public string GetAuthorizationUrl()
         {
@@ -30,6 +57,8 @@ namespace CalliAPI.BusinessLogic
                 $"client_id={Properties.Settings.Default.ClientId}&" +
                 $"redirect_uri={Properties.Settings.Default.RedirectUri}";
         }
+
+
 
         public string ValidateAuthorizationCode(string userInput)
         {
@@ -53,6 +82,7 @@ namespace CalliAPI.BusinessLogic
         {
             AccessToken = await _clioApiClient.GetAccessTokenAsync(authorizationCode);
         }
+
 
     }
 }

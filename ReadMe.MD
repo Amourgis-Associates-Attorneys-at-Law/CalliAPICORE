@@ -15,7 +15,9 @@
 
 # CalliAPI Patch Log
 
-## 2.2.0 - Begin migrating to PKCE for App Security
+## 3.0.0 - Restructure AuthService + GitHub Secret Support
+AuthService is now done UNDERNEATH ClioService, and our Client secret is now stored safely in GitHub. The old Clio App client is now DELETED, so the new one is the only one that can be used to access CalliAPI. This means there's no risk that attackers will scrounge up the old Client secret, as it is deactivated.
+This change is HUGE, as it allows us to securely store our secrets in GitHub, and it also simplifies the authentication process by making it more modular and easier to maintain.
 
 
 ## 2.1.0 - Updated download page and implemented auto-update functionality!

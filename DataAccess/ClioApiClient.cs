@@ -25,62 +25,46 @@ namespace CalliAPI.DataAccess
 {
     public class ClioApiClient : IClioApiClient
     {
-        private static readonly AMO_Logger _logger = new AMO_Logger("CalliAPI");
+        
 
         private const string MatterFields = @"id,practice_area{name},description,display_number,status,has_tasks,client{id,name},matter_stage{name},custom_field_values{id,value,custom_field}";
 
         private readonly HttpClient _httpClient;
-        private string accessToken = string.Empty;
+        private readonly AMO_Logger _logger;
+        private string clientSecret = string.Empty;
+        private AsyncPolicy<HttpResponseMessage> _retryPolicy;
         //private List<string> practiceAreas = new List<string>
         //{
         //    "AK", "CA", "CB", "CL", "CN", "DY", "TD", "WA", "YO"
         //};
 
 
-        public ClioApiClient(HttpClient httpClient)
+        public ClioApiClient(HttpClient httpClient, AMO_Logger logger)
         {
             _httpClient = httpClient;
+            _logger = logger;
+            clientSecret = Environment.GetEnvironmentVariable("CLIO_CLIENT_SECRET");
+
+
+        _retryPolicy = Policy
+        .Handle<HttpRequestException>()
+        .OrResult<HttpResponseMessage>(r => (int)r.StatusCode == 429)
+        .WaitAndRetryAsync(
+            retryCount: 5,
+            sleepDurationProvider: attempt => TimeSpan.FromSeconds(Math.Pow(2, attempt)),
+            onRetry: (outcome, delay, attempt, context) =>
+            { 
+                if (outcome.Exception != null)
+                {
+                    _logger.Warn($"Exception on attempt {attempt}: {outcome.Exception.Message}. Retrying in {delay.TotalSeconds} seconds...");
+                }
+                else
+                {
+                    _logger.Warn($"Retrying due to HTTP {outcome.Result.StatusCode}. Delay: {delay.TotalSeconds} seconds...");
+                }
+            });
+
         }
-
-
-        #region retry policies
-        /// <summary>
-        /// This policy will retry the request with exponential backoff.
-        /// </summary>
-        private readonly AsyncPolicy<HttpResponseMessage> _retryPolicy = Policy
-            .Handle<HttpRequestException>() // Handle HTTP request exceptions
-            .Or<SocketException>() // Handle socket exceptions
-    .OrResult<HttpResponseMessage>(r => (int)r.StatusCode == 429) //HTTP 429: Too Many Requests
-    .WaitAndRetryAsync(
-        retryCount: 5,
-        sleepDurationProvider: attempt => TimeSpan.FromSeconds(Math.Pow(2, attempt)),
-        onRetry: (outcome, delay, attempt, context) =>
-        {
-            if (outcome.Exception != null)
-            {
-                _logger.Warn($"Exception on attempt {attempt}: {outcome.Exception.Message}. Retrying in {delay.TotalSeconds} seconds...");
-            }
-            else
-            {
-                _logger.Warn($"Rate limited. Retrying in {delay.TotalSeconds} seconds...");
-            }
-        });
-
-
-        /// <summary>
-        /// This policy will return a fallback response if all retries fail.
-        /// Example: var response = await _fallbackPolicy.WrapAsync(_retryPolicy).ExecuteAsync(() => _httpClient.GetAsync(nextPageUrl));
-        /// </summary>
-        private readonly AsyncPolicy<HttpResponseMessage> _fallbackPolicy = Policy<HttpResponseMessage>
-         .Handle<HttpRequestException>()
-         .OrResult(r => !r.IsSuccessStatusCode)
-         .FallbackAsync(
-         fallbackAction: (cancellationToken) =>
-         {
-             _logger.Error("All retries failed. Returning fallback response.");
-             return Task.FromResult(new HttpResponseMessage(HttpStatusCode.ServiceUnavailable));
-         });
-        #endregion
 
         #region delegates
 
@@ -93,7 +77,7 @@ namespace CalliAPI.DataAccess
 
 
 
-        public async Task<string> VerifyAPI()
+        public async Task<string> VerifyAPI(string accessToken)
         {
             _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
             string apiUrl = "https://app.clio.com/api/v4/users/who_am_i";
@@ -118,18 +102,36 @@ namespace CalliAPI.DataAccess
             { "code", authorizationCode },
             { "redirect_uri", "https://www.amourgis.com/" },
             { "client_id", Properties.Settings.Default.ClientId },
-            { "client_secret", Properties.Settings.Default.ClientSecret }
+            { "client_secret", clientSecret}
             };
-            _logger.Info($"Requesting access token as {requestData.ToString()}");
+
+
+            _logger.Info("Requesting access token with data: " +
+                            string.Join(", ", requestData.Select(kvp => $"{kvp.Key}={kvp.Value}")));
+
             var response = await _httpClient.PostAsync(tokenEndpoint, new FormUrlEncodedContent(requestData));
+
             var responseContent = await response.Content.ReadAsStringAsync();
-            var jsonDocument = JsonDocument.Parse(responseContent);
-            _logger.Info(jsonDocument.ToString());
-            accessToken = jsonDocument.RootElement.GetProperty("access_token").GetString();
-            return accessToken;
+
+            _logger.Info("Token response: " + responseContent);
+
+            try
+            {
+                var jsonDocument = JsonDocument.Parse(responseContent);
+                string accessToken = jsonDocument.RootElement.GetProperty("access_token").GetString();
+                return accessToken;
+            }
+            catch (KeyNotFoundException)
+            {
+                _logger.Error("Access token not found in response.");
+                throw;
+            }
+            catch (Exception ex)
+            {
+                _logger.Error($"Unexpected error parsing token response: {ex.Message}");
+                throw;
+            }
         }
-
-
 
         /// <summary>
         /// This method attempts to get a property from a JsonElement. It checks if the property exists and if its value is an object.
@@ -680,7 +682,7 @@ namespace CalliAPI.DataAccess
         }
 
 
-        public async Task<List<Matter>> GetActiveMattersByPracticeAreaAsync(long practiceAreaId)
+        public async Task<List<Matter>> GetActiveMattersByPracticeAreaAsync(long practiceAreaId, string accessToken)
         {
             // This line sets the authorization header for the HTTP client using the access token. This is necessary for authenticating API requests.
             _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
@@ -729,7 +731,7 @@ namespace CalliAPI.DataAccess
             return allMatters;
         }
 
-        public async Task<List<Matter>> GetAllActive713MattersAsync()
+        public async Task<List<Matter>> GetAllActive713MattersAsync(string accessToken)
         {
             var practiceAreas = await GetAllPracticeAreasAsync();
             var relevantPracticeAreaIds = GetRelevantPracticeAreaIds(practiceAreas);
@@ -738,7 +740,7 @@ namespace CalliAPI.DataAccess
 
             foreach (var practiceAreaId in relevantPracticeAreaIds)
             {
-                var matters = await GetActiveMattersByPracticeAreaAsync(practiceAreaId);
+                var matters = await GetActiveMattersByPracticeAreaAsync(practiceAreaId, accessToken);
                 allMatters.AddRange(matters);
             }
 
@@ -752,7 +754,7 @@ namespace CalliAPI.DataAccess
         /// Fetches all matters that are not currently being worked on.
         /// </summary>
         /// <returns></returns>
-        public async Task<List<Matter>> GetMattersNotCurrentlyBeingWorked()
+        public async Task<List<Matter>> GetMattersNotCurrentlyBeingWorked(string accessToken)
         {
             // Implement the logic to fetch matters not currently being worked on - JH 2025-04-21
             // Defined as matters who:
@@ -769,7 +771,7 @@ namespace CalliAPI.DataAccess
                 "signing and filing"
             };
 
-            var matters = await GetAllActive713MattersAsync(); // 1. get all matters with a practice area ending in 7 or 13
+            var matters = await GetAllActive713MattersAsync(accessToken); // 1. get all matters with a practice area ending in 7 or 13
 
             var filteredMatters = matters
                 .Where(m => (m.matter_stage_name != null)) // has a stage

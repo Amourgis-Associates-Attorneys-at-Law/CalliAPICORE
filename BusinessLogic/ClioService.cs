@@ -18,12 +18,18 @@ using AmourgisCOREServices;
 using CalliAPI.Utilities;
 using CalliAPI.DataAccess;
 using Task = System.Threading.Tasks.Task;
+using Microsoft.Identity.Client;
 
 namespace CalliAPI.BusinessLogic
 {
     public class ClioService
     {
+        
         private readonly AMO_Logger _logger;
+        private readonly ClioApiClient _clioApiClient;
+        private readonly AuthService _authService;
+
+
 
         public static string[] prefileStages =
             [
@@ -36,13 +42,30 @@ namespace CalliAPI.BusinessLogic
                 "pif - prefiling"
             ];
 
-        private readonly ClioApiClient _clioApiClient;
-
-        public ClioService(ClioApiClient clioApiClient, AMO_Logger logger)
+        public ClioService(ClioApiClient clioApiClient, AuthService authService, AMO_Logger logger)
         {
             _clioApiClient = clioApiClient;
-            this._logger = logger;
+            _authService = authService;
+            _logger = logger;
         }
+
+
+        #region Authentication Methods
+        public string GetAuthorizationUrl()
+        {
+            return _authService.GetAuthorizationUrl();
+        }
+
+        public async Task GetAccessTokenAsync(string authorizationCode)
+        {
+            await _authService.GetAccessTokenAsync(authorizationCode);
+        }
+
+        public string ValidateAuthorizationCode(string userInput)
+        {
+            return _authService.ValidateAuthorizationCode(userInput);
+        }
+        #endregion
 
         #region event delegates
         public event Action<int, int> ProgressUpdated
@@ -50,17 +73,18 @@ namespace CalliAPI.BusinessLogic
             add => _clioApiClient.ProgressUpdated += value;
             remove => _clioApiClient.ProgressUpdated -= value;
         }
+        public bool IsAuthenticated => !string.IsNullOrWhiteSpace(_authService.AccessToken);
         #endregion
 
         public async Task<string> VerifyAPI()
         {
-            return await _clioApiClient.VerifyAPI();
+            return await _clioApiClient.VerifyAPI(_authService.AccessToken);
         }
 
 
         public async Task<List<Matter>> GetMattersNotCurrentlyBeingWorked()
         {
-            return await _clioApiClient.GetMattersNotCurrentlyBeingWorked();
+            return await _clioApiClient.GetMattersNotCurrentlyBeingWorked(_authService.AccessToken);
         }
 
 

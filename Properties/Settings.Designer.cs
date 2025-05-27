@@ -34,19 +34,10 @@ namespace CalliAPI.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Ryuee5CHqL3Uk0unmEdtx3SY9qiGJtrMg6Ta91yy")]
+        [global::System.Configuration.DefaultSettingValueAttribute("lZZ1pO1AitUzeZeGAYFCvCXWVc2xLJQHiEqAj2Uc")]
         public string ClientId {
             get {
                 return ((string)(this["ClientId"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("i3ZbrypIkrXOWnQqlt6olQmvvOtVKKcw6Twb0fRK")]
-        public string ClientSecret {
-            get {
-                return ((string)(this["ClientSecret"]));
             }
         }
         

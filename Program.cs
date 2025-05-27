@@ -9,6 +9,7 @@ using AmourgisCOREServices;
 using CalliAPI.BusinessLogic;
 using CalliAPI.DataAccess;
 using DocumentFormat.OpenXml.Drawing.Charts;
+using Serilog.Core;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Velopack; // for auto-updates
@@ -65,13 +66,13 @@ namespace CalliAPI
 
             // Create the Services we need through Dependency Injection - 2025-04-21
             HttpClient httpClient = new HttpClient();
-            ClioApiClient clioApiClient = new ClioApiClient(httpClient);
-            AuthService authService = new AuthService(clioApiClient);
-            ClioService clioService = new ClioService(clioApiClient, logger: _logger);
+            ClioApiClient clioApiClient = new ClioApiClient(httpClient, logger: _logger);
+            AuthService authService = new AuthService(clioApiClient, logger: _logger);
+            ClioService clioService = new ClioService(clioApiClient, authService, logger: _logger);
             _logger.Info("Services created");
 
             // Create the MainForm and pass the services to it
-            Application.Run(new MainForm(clioService, authService));
+            Application.Run(new MainForm(clioService: clioService, logger: _logger));
         }
     }
 }
