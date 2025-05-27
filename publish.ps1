@@ -14,9 +14,7 @@ $versionShort = "$($versionParts[0]).$($versionParts[1]).$($versionParts[2])"
 # Define paths and variables
 $publishDir = "publish"
 $outputDir = "Releases"
-$installerScript = "installer.iss"
-$tempScript = "installer.temp.iss"
-$templateHtml = "UI\InstallPage\index.template.html"
+$templateHtml = "docs\index.template.html"
 $outputHtml = "docs\index.html"
 $repoUrl = 'https://github.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE'
 $stableStr = if ($stable) { "" } else { "--pre" }
@@ -25,7 +23,12 @@ $publishStr = if ($publish) { "--publish" } else { "" }
 # Read environment variables
 $VELOPACK_GITHUB_TOKEN = if ($env:VELOPACK_GITHUB_TOKEN) { $env:VELOPACK_GITHUB_TOKEN } else { Read-Host -Prompt "Enter your GitHub token: " }
 
-
+# Early escapes
+if (-not $templateHtml)
+{
+    Write-Host "Template HTML file not found: $templateHtml"
+    exit 1
+}
 
 # Begin script execution
 Write-Host "Running Velopack upload for version $versionShort and set to full release: ${$publish.ToString()}..."
