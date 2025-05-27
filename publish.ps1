@@ -30,7 +30,7 @@ $versionShort = "$($versionParts[0]).$($versionParts[1]).$($versionParts[2])"
 # Define paths and variables
 $publishDir = "publish"
 $outputDir = "Releases"
-$templateHtml = "docs\index.template.html"
+$templateHtml = "UI\InstallPage\index.template.html"
 $outputHtml = "docs\index.html"
 $repoUrl = 'https://github.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE'
 $stableStr = if ($stable) { "" } else { "--pre" }
@@ -65,6 +65,26 @@ if (-not (Test-Path $dir)) {
 (Get-Content $templateHtml) -replace '{{VERSION}}', $versionShort | Set-Content $outputHtml
 
 Write-Host "Generated index.html with version $versionShort"
+
+# Step 2.5: Inject version history links
+$versionsFile = "versions.txt"
+$versionLinks = ""
+
+if (Test-Path $versionsFile) {
+    $versions = Get-Content $versionsFile
+    foreach ($v in $versions) {
+        $versionLinks += "<li><a href='https://github.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/releases/download/v$v/CalliAPI-win-Setup.exe'>v$v</a></li>`n"
+    }
+
+    $html = Get-Content $outputHtml -Raw
+    $html = $html -replace '<!--VERSIONS-->', "<ul>`n$versionLinks</ul>"
+    Set-Content $outputHtml $html
+    Write-Host "Injected version history into index.html"
+} else {
+    Write-Host "versions.txt not found. Skipping version history injection."
+}
+
+
 
 # Step 3: Publish release to GitHub
 vpk upload github `

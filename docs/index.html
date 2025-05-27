@@ -6,203 +6,90 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Install CalliAPI</title>
     <style>
+            body {
+                  font-family: 'Segoe UI', sans-serif;
+                  background-color: #f9f9f9;
+                  color: #333;
+                  margin: 0;
+                  padding: 2rem;
+                  max-width: 900px;
+                  margin-left: auto;
+                  margin-right: auto;
 
-
-.accent {
-    color: #F4A261;
-    font-weight: bold;
-}
-
-body {
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(to bottom right, #f4f7fa, #A2BCD6);
-    color: #333;
-    margin: 0;
-    padding: 2rem;
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.fallback {
-    background-color: #f9fbfd;
-    padding: 1rem;
-    border-radius: 6px;
-}
-
-.gallery {
-    margin-top: 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-}
-
-    .gallery-step {
-        background-color: #ffffff;
-        padding: 1rem;
-        /*border-radius: 8px;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;*/
-        border-left: 4px solid #20558B;
-    }
-
-        .gallery-step:hover {
-            background-color: #f0f8ff;
-            transition: background-color 0.3s ease;
         }
 
-        .gallery-step img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 6px;
-            margin-bottom: 0.75rem;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            h1 {
+                  color: #2c3e50;
+
         }
 
+            .install-button {
+                  display: inline-block;
+                  padding: 1rem 2rem;
+                  background-color: #0078d4;
+                  color: white;
+                  text-decoration: none;
+                  font-size: 1.2rem;
+                  border-radius: 6px;
+                  margin-top: 1rem;
+                  transition: background-color 0.3s ease;
 
-h1 {
-    color: #000444;
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-.install-button {
-    display: inline-block;
-    padding: 1rem 2rem;
-    background-color: #0078d4;
-    color: white;
-    text-decoration: none;
-    font-size: 1.2rem;
-    border-radius: 6px;
-    margin-top: 1rem;
-    transition: background-color 0.3s ease;
-}
-
-
-    @media (max-width: 600px) {
-        .install-button {
-            text-align: center;
-            width: 100%;
         }
-    }
 
+           -color: #005a9e;
 
-            .install-button:hover {
-                transform: scale(1.05);
-                background-color: #F4A261;
+        }
+
+            .gallery {
+                  margin-top: 2rem;
+                  display: grid;
+                  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                  gap: 1rem;
+
+        }
+
+                .gallery img {
+                      width: 100%;
+                      border-radius: 8px;
+                      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
             }
 
+            .fallback {
+                  margin-top: 2rem;
+                  font-size: 0.95rem;
 
-            .logo {
-                height: 60px;
-                object-fit: contain;
-            }
-
-            p {
-                line-height: 1.6;
-                margin-top: 0.5rem;
-                color: #000222;
-            }
-
-            .site-footer {
-                margin-top: 4rem;
-                font-size: 0.85rem;
-                color: #999;
-                text-align: center;
-            }
-
-            .site-header {
-                /*display: flex;
-    align-items: center;
-    margin-bottom: 2rem;*/
-
-                background-color: #f4f7fa;
-                padding: 1rem;
-                border-radius: 8px;
-                box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
-            }
-
+        }
 
             .version {
-                margin-top: 1rem;
-                font-style: italic;
-                color: #666
-            }
+                  margin-top: 1rem;
+                  font-style: italic;
+                  color: #666;
 
-            .version-badge {
-                display: inline-block;
-                background-color: #e1ecf4;
-                color: #0366d6;
-                padding: 0.3rem 0.6rem;
-                border-radius: 4px;
-                font-size: 0.9rem;
-                margin-top: 0.5rem;
-            }
+        }
 
 
     </style>
 </head>
 <body>
-    <header class="site-header">
-        <img src="https://raw.githubusercontent.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/main/UI/Images/AmourgisHeader425-87.png" alt="Company Logo" class="logo">
-    </header>
-
-
     <h1>Install CalliAPI</h1>
-    <p>Click the <span class="accent">Install</span> button below to install the latest version of CalliAPI.</p>
+    <p>Click the button below to install the latest version of CalliAPI.</p>
 
-    <a class="install-button" href="https://github.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/releases/download/v2.1.0/CalliAPI-win-Setup.exe">Install CalliAPI</a>
-    <br />
-    <div class="version"><span class="version-badge">v2.1.0</span></div>
+    <a class="install-button" href="https://github.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/releases/download/v2.1.1/CalliAPI-win-Setup.exe">Install CalliAPI</a>
 
-    <div class="gallery">
-        <p>To install CalliAPI, follow the instructions below:</p>
-        <div class="gallery-step">
-            <img src="https://raw.githubusercontent.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/main/UI/Images/InstallStep0DownloadLocation.png" alt="Downloads icon">
-            <p>Once CalliAPI has downloaded, click the Downloads icon (usually an arrow at the top right of this page).</p>
-        </div>
-        <div class="gallery-step">
-            <img src="https://raw.githubusercontent.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/main/UI/Images/InstallStep1.png" alt="Download with error warning">
-            <p>Step 1. If you have an error icon, such as shown here, click the three dots and then <strong>Keep</strong>.</p>
-        </div>
-        <div class="gallery-step">
-            <img src="https://raw.githubusercontent.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/main/UI/Images/InstallStep2.png" alt="Make sure you trust dialog box">
-            <p>Step 2. You'll likely receive this notification, with the options to Cancel or Delete. Instead, click <strong>Show more</strong>.</p>
-        </div>
-        <div class="gallery-step">
-            <img src="https://raw.githubusercontent.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/main/UI/Images/InstallStep3.png" alt="Make sure you trust dialog box">
-            <p>Step 3. Click <strong>Keep anyway</strong> to tell Microsoft you want to keep CalliAPI.</p>
-        </div>
-        <div class="gallery-step">
-            <img src="https://raw.githubusercontent.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/main/UI/Images/InstallStep4.png" alt="Open the file">
-            <p>Step 4. Click <strong>Open file</strong> to open the Setup executable. If you don't see it, click the Downloads icon again and click the file.</p>
-        </div>
-        <div class="gallery-step">
-            <img src="https://raw.githubusercontent.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/main/UI/Images/InstallStep5Repair.png" alt="Repair tooltip">
-            <p>Step 5. If you have CalliAPI installed, you will see a Repair option. Click <strong>Repair</strong> to repair your installation.</p>
-        </div>
-        <div class="gallery-step">
-            <p><em>If you do not see this pop-up, continue with the installation as normal.</em></p>
-            <img src="https://raw.githubusercontent.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/main/UI/Images/InstallStep6Done.png" alt="Installation complete">
-        </div>
-        <p>Check the top left corner of the screen to verify you are on the proper version of CalliAPI. If so, you are complete and good to go.</p>
-        <p><em>If you run into any issues in this setup, reach out to us at support@amourgis.com. Please clearly detail the issues you're experiencing.</em></p>
+    <div class="version">
+        Version: 2.1.1
     </div>
 
+    <!--<div class="gallery">
+        <img src="../Icons/screenshot1.png" alt="Screenshot 1" />
+        <img src="../Icons/screenshot2.png" alt="Screenshot 2" />
+        <img src="../Icons/screenshot3.png" alt="Screenshot 3" />
+    </div>-->
 
     <div class="fallback">
-        <p>If the install button doesn't work, you can <a href="https://github.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/releases/download/v2.1.0/CalliAPI-win-Portable.zip">download the full installer package (ZIP)</a> and run <strong>setup.exe</strong> manually.</p>
+        <p>If the install button doesn't work, you can <a href="https://github.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/releases/download/v2.1.1/CalliAPI-win-Portable.zip">download the full installer package (ZIP)</a> and run <strong>setup.exe</strong> manually.</p>
     </div>
-
-    <footer class="site-footer">
-        <p>Crafted with care by Jake Hayes</p>
-    </footer>
 </body>
 </html>
+

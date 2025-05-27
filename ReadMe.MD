@@ -15,6 +15,9 @@
 
 # CalliAPI Patch Log
 
+## 2.2.0 - Begin migrating to PKCE for App Security
+
+
 ## 2.1.0 - Updated download page and implemented auto-update functionality!
 Plus, added raw image storage so we can easily update the logo and other images in the future! This is a big step forward in making CalliAPI more user-friendly and easier to maintain. The auto-update functionality will ensure that users always have the latest version without needing to manually download updates.
 
