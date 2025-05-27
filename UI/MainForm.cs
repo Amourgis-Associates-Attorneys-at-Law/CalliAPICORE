@@ -32,21 +32,15 @@ namespace CalliAPI
 
         internal MainForm(ClioService clioService, AMO_Logger logger)
         {
+            // We can only check for updates in a live build
+#if !DEBUG
+            VersionHelper.UpdateCalliAPI().Wait(); // Wait for the update check to complete
+#endif
+
+
             _clioService = clioService;
             _logger = logger;
             InitializeComponent();
-            //try
-            //{
-            //    Cursor.Current = Cursors.WaitCursor;
-            //    StartOAuthProcess();
-            //    Thread.Sleep(2000);
-            //    UpdateClioAPIStatus();
-            //}
-            //finally
-            //{
-            //    Cursor.Current = Cursors.Default;
-            //}
-
 
             this.Text = VersionHelper.GetDisplayVersion();
             lblVersion.Text = VersionHelper.GetFormattedVersion();
@@ -306,6 +300,11 @@ namespace CalliAPI
             {
                 Cursor.Current = Cursors.Default;
             }
+        }
+
+        private async void checkForUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            await VersionHelper.UpdateCalliAPI();
         }
     }
 }

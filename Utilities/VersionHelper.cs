@@ -47,11 +47,11 @@ namespace CalliAPI.Utilities
         /// Checks for updates and applies them if available.
         /// </summary>
         /// <returns></returns>
-        private static async Task UpdateCalliAPI()
+        public static async Task UpdateCalliAPI()
         {
 #if !DEBUG
             var mgr = new UpdateManager(
-                new GithubSource(null, "https://github.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE", false));
+                new GithubSource("https://github.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE", accessToken: null, prerelease: false));
 
             // check for new version
             var newVersion = await mgr.CheckForUpdatesAsync();

@@ -44,8 +44,6 @@ namespace CalliAPI
 
 
 
-
-
             // Open a console window for debugging purposes
             AllocConsole();
 
