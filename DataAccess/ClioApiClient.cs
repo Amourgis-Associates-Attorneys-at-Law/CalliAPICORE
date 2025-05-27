@@ -27,6 +27,8 @@ namespace CalliAPI.DataAccess
     {
         private static readonly AMO_Logger _logger = new AMO_Logger("CalliAPI");
 
+        private const string MatterFields = @"id,practice_area{name},description,display_number,status,has_tasks,client{id,name},matter_stage{name},custom_field_values{id,value,custom_field}";
+
         private readonly HttpClient _httpClient;
         private string accessToken = string.Empty;
         //private List<string> practiceAreas = new List<string>
@@ -167,8 +169,14 @@ namespace CalliAPI.DataAccess
                     matter.practice_area_name = practiceAreaNameElement.GetString();
                 }
 
+                // Description
+                if (element.TryGetProperty("description", out var descriptionElement) && descriptionElement.ValueKind == JsonValueKind.String)
+                {
+                    matter.description = descriptionElement.GetString();
+                }
+
                 // Display Number
-                if (TryGetObject(element, "display_number", out var displayNumberElement) && displayNumberElement.ValueKind == JsonValueKind.String)
+                if (element.TryGetProperty("display_number", out var displayNumberElement) && displayNumberElement.ValueKind == JsonValueKind.String)
                 {
                     matter.display_number = displayNumberElement.GetString();
                 }
@@ -278,7 +286,8 @@ namespace CalliAPI.DataAccess
             _logger.Info("API CALL START -- GET ALL MATTERS ASYNC --");
 
             string nextPageUrl = $"{Properties.Settings.Default.ApiUrl}matters?" +
-                                 "fields=id,practice_area{name},display_number,status,has_tasks,client{id,name},matter_stage{name},custom_field_values{id,value,custom_field}&order=id(asc)";
+                                 $"fields={MatterFields}" +
+                                 "&order=id(asc)";
 
             int pageCount = 0;
             int maxPages = 9999;
@@ -364,7 +373,8 @@ namespace CalliAPI.DataAccess
             _logger.Info("API CALL START -- GET ALL OPEN MATTERS ASYNC --");
 
             string nextPageUrl = $"{Properties.Settings.Default.ApiUrl}matters?" +
-                                 "fields=id,practice_area{name},display_number,status,has_tasks,client{id,name},matter_stage{name},custom_field_values{id,value,custom_field}&status=open&order=id(asc)";
+                                 $"fields={MatterFields}" +
+                                 "&status=open&order=id(asc)";
 
             int pageCount = 0;
             int maxPages = 9999;
@@ -462,7 +472,7 @@ namespace CalliAPI.DataAccess
 
             // Build base URL and query parameters
             string baseUrl = $"{Properties.Settings.Default.ApiUrl}matters";
-            string fields = "id,practice_area{name},status,has_tasks,client{id,name},matter_stage{name},custom_field_values{id,value,custom_field}";
+            string fields = MatterFields;
             string isoDate = sinceDate.ToUniversalTime().ToString("o"); // ISO 8601 format
 
             var throttler = new SemaphoreSlim(MaxParallelRequests); // Controls how many requests run at once
@@ -472,7 +482,7 @@ namespace CalliAPI.DataAccess
             {
                 int offset = i * PageSize;
                 string url = $"{baseUrl}?fields={Uri.EscapeDataString(fields)}&created_since={Uri.EscapeDataString(isoDate)}&limit={PageSize}&offset={offset}";
-
+                _logger.Info($"Requesting {url}");
                 await throttler.WaitAsync(cancellationToken); // Wait for a slot to run
                 try
                 {
@@ -554,7 +564,7 @@ namespace CalliAPI.DataAccess
 
             // Build base URL and query parameters
             string baseUrl = $"{Properties.Settings.Default.ApiUrl}matters";
-            string fields = "id,practice_area{name},status,has_tasks,client{id,name},matter_stage{name},custom_field_values{id,value,custom_field}&status=open";
+            string fields = $"{MatterFields}&status=open";
             string isoDate = sinceDate.ToUniversalTime().ToString("o"); // ISO 8601 format
 
             var throttler = new SemaphoreSlim(MaxParallelRequests); // Controls how many requests run at once

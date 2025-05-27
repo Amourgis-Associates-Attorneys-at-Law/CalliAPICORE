@@ -4,6 +4,8 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Velopack;
+using Velopack.Sources;
 
 namespace CalliAPI.Utilities
 {
@@ -39,6 +41,29 @@ namespace CalliAPI.Utilities
         public static string GetDisplayVersion()
         {
             return $"CalliAPI {GetFormattedVersion(includeBuild: true)}";
+        }
+
+        /// <summary>
+        /// Checks for updates and applies them if available.
+        /// </summary>
+        /// <returns></returns>
+        private static async Task UpdateCalliAPI()
+        {
+#if !DEBUG
+            var mgr = new UpdateManager(
+                new GithubSource(null, "https://github.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE", false));
+
+            // check for new version
+            var newVersion = await mgr.CheckForUpdatesAsync();
+            if (newVersion == null)
+                return; // no update available
+
+            // download new version
+            await mgr.DownloadUpdatesAsync(newVersion);
+
+            // install new version and restart app
+            mgr.ApplyUpdatesAndRestart(newVersion);
+#endif
         }
     }
 

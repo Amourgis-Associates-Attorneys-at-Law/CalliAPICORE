@@ -8,13 +8,16 @@
 using AmourgisCOREServices;
 using CalliAPI.BusinessLogic;
 using CalliAPI.DataAccess;
+using DocumentFormat.OpenXml.Drawing.Charts;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
+using Velopack; // for auto-updates
+using Velopack.Windows; // for auto-updates
 
 namespace CalliAPI
 {
-    internal static class Program
+    public static class Program
     {
-        private static readonly AMO_Logger _logger = new AMO_Logger("CalliAPI");
 
 
         /// <summary>
@@ -30,9 +33,17 @@ namespace CalliAPI
         ///  The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
+            VelopackApp.Build().Run(); // <--- must be first line of code in Main!
+            // ^ Checks for Updates with Velopack (formerly Squirrel.Clowd, formerly Squirrel.Windows)
+
+            AMO_Logger _logger = new AMO_Logger("CalliAPI");
             _logger.Info("CalliAPI started");
+
+
+
+
 
             // Open a console window for debugging purposes
             AllocConsole();

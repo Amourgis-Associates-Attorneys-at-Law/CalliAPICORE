@@ -168,22 +168,30 @@ namespace CalliAPI
 
 
             // Wait for the user to enter the authorization code correctly
+
             string authorizationCode = string.Empty;
+
             while (true)
             {
-                string userInput = Microsoft.VisualBasic.Interaction.InputBox(
-                "Please enter the authorization code from the URL:",
-                "Authorization Code",
-                ""
-                );
+                using (var form = new AuthorizationCodeForm())
+                {
+                    var result = form.ShowDialog();
 
-                authorizationCode = _authService.ValidateAuthorizationCode(userInput);
-                // will return null if it's not the proper code, so we can break out if that's the case
-                if (!string.IsNullOrEmpty(authorizationCode))
-                    break;
+                    if (result == DialogResult.Cancel)
+                    {
+                        MessageBox.Show("Authorization cancelled.", "Cancelled", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
 
-                MessageBox.Show("Invalid authorization code. Please try again.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    authorizationCode = _authService.ValidateAuthorizationCode(form.AuthorizationCode);
+
+                    if (!string.IsNullOrEmpty(authorizationCode))
+                        break;
+
+                    MessageBox.Show("Invalid authorization code. Please try again.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
+
 
             await _authService.GetAccessTokenAsync(authorizationCode);
             MessageBox.Show(_authService.AccessToken, "Access Token");

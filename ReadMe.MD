@@ -1,12 +1,26 @@
-Hello!
 
-# Notes to self
-Publish using 
-msbuild CalliAPI.csproj /t:Publish /p:PublishProfile=GitHubPages /p:Configuration=Release /p:NoWarn=true /v:normal > publish.log
+# Wishlist
 
-CalliAPI
+## Functionality
+- Add error handling if the xlsx file being saved in ReportForm is already locked
+- Add filters to TaskFilters
+
+## UI
+- Add a percentage to the progress bar (yeah it's a tiny thing but nice anyway)
+- Make ONE Logger for the whole solution, and then pass it around to whatever needs it (dependency injection?)
+
+## Documentation & External Resources
+
+
 
 # CalliAPI Patch Log
+
+## 2.0.0 - Finally, automatic hosting on GitHub pages is live!
+CalliAPI is now hosted on GitHub Pages, with a custom index page for easy installation! This is a huge step forward in making CalliAPI accessible to everyone at Amourgis & Associates, and it should make future updates much easier to manage!
+[x] Wishlist item: Add a zip to the docs folder so that users can fallback on the zip completed!
+
+## 1.9.5 - UI tweaks and Matter Descriptions!
+Now we can actually cancel the authorization dialog, instead of being stuck in limbo! Also, the Matter Descriptions are now included in the Matter searches, so we can retrieve them too!
 
 ## 1.8.0 - Prepping framework for a new way to install and landing pages!
 Now CalliAPI has a more permanent home inside GitHub Pages with a custom-made index page for installing from!
@@ -38,16 +52,3 @@ FastFetch parallelizes the queries we send to Clio in order to grab up to 10,000
 ### v0.1.0 - Added Serilog for logging!
 
 ### v0 - Add MatterFilters to allow for easy, natural-language filtering!
-
-# Wishlist
-
-## Functionality
-- Add error handling if the xlsx file being saved in ReportForm is already locked
-- Add filters to TaskFilters
-
-## UI
-- Add a percentage to the progress bar (yeah it's a tiny thing but nice anyway)
-- Make ONE Logger for the whole solution, and then pass it around to whatever needs it (dependency injection?)
-
-## Documentation & External Resources
-- Add a zip to the docs folder so that users can fallback on the zip

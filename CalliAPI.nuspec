@@ -1,0 +1,14 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>CalliAPI</id>
+    <version>1.9.5</version>
+    <authors>Amourgis & Associates</authors>
+    <owners>Amourgis & Associates</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>CalliAPI desktop integration tool</description>
+  </metadata>
+  <files>
+    <file src="publish\**" target="lib\net8.0-windows" />
+  </files>
+</package>
