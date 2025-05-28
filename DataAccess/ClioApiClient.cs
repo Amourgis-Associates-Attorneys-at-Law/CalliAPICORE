@@ -146,107 +146,20 @@ namespace CalliAPI.DataAccess
         }
 
 
+        private static string TryGetString(JsonElement element, string propertyName)
+        {
+            return element.TryGetProperty(propertyName, out var prop) && prop.ValueKind == JsonValueKind.String
+            ? prop.GetString()
+            : null;
+        }
+
 
 
         public Matter ParseMatter(JsonElement element)
         {
             try
             {
-                var matter = new Matter
-                {
-                    id = element.GetProperty("id").GetInt64()
-                };
-
-
-                // Practice Area
-                if (TryGetObject(element, "practice_area", out var practiceAreaElement) &&
-         practiceAreaElement.TryGetProperty("name", out var practiceAreaNameElement))
-                {
-                    matter.practice_area_name = practiceAreaNameElement.GetString();
-                }
-
-                // Description
-                if (element.TryGetProperty("description", out var descriptionElement) && descriptionElement.ValueKind == JsonValueKind.String)
-                {
-                    matter.description = descriptionElement.GetString();
-                }
-
-                // Display Number
-                if (element.TryGetProperty("display_number", out var displayNumberElement) && displayNumberElement.ValueKind == JsonValueKind.String)
-                {
-                    matter.display_number = displayNumberElement.GetString();
-                }
-
-                // Status
-                if (element.TryGetProperty("status", out var statusElement) && statusElement.ValueKind == JsonValueKind.String)
-                {
-                    matter.status = statusElement.GetString();
-                }
-
-                // Has Tasks
-                if (element.TryGetProperty("has_tasks", out var hasTasksElement) && hasTasksElement.ValueKind == JsonValueKind.True || hasTasksElement.ValueKind == JsonValueKind.False)
-                {
-                    matter.has_tasks = hasTasksElement.GetBoolean();
-                }
-
-                // Client
-                if (TryGetObject(element, "client", out var clientElement) &&
-         clientElement.TryGetProperty("id", out var clientIdElement) &&
-         clientElement.TryGetProperty("name", out var clientNameElement))
-                {
-                    matter.client = new Client
-                    {
-                        id = clientIdElement.GetInt64(),
-                        name = clientNameElement.GetString()
-                    };
-                }
-
-                // Matter Stage
-                if (TryGetObject(element, "matter_stage", out var matterStageElement) &&
-         matterStageElement.TryGetProperty("name", out var matterStageNameElement))
-                {
-                    matter.matter_stage_name = matterStageNameElement.GetString();
-                }
-
-                // Custom Fields
-                if (element.TryGetProperty("custom_field_values", out var customFieldsElement) &&
-    customFieldsElement.ValueKind == JsonValueKind.Array)
-                {
-                    // Each Custom Field
-                    foreach (var fieldValue in customFieldsElement.EnumerateArray())
-                    {
-                        if (TryGetObject(fieldValue, "custom_field", out var customFieldElement) &&
-                            customFieldElement.TryGetProperty("id", out var idElement))
-                        {
-                            long fieldId = idElement.GetInt64();
-                            string value = null;
-
-                            // Try to get string value
-                            if (fieldValue.TryGetProperty("value", out var valueElement))
-                            {
-                                if (valueElement.ValueKind == JsonValueKind.String)
-                                {
-                                    value = valueElement.GetString();
-                                }
-
-                                if (valueElement.ValueKind == JsonValueKind.Number && valueElement.TryGetInt64(out long intValue))
-                                {
-                                    value = intValue.ToString(); // Picklist ID  
-                                }
-                                else
-                                {
-                                    _logger.Warn($"Unexpected value type for 'value': {valueElement}");
-                                }
-                            }
-
-                            if (CustomFieldMap.TryGetField(fieldId, out var customField))
-                            {
-                                if (value == null) value = "null";
-                                matter.CustomFields[customField] = value;
-                            }
-                        }
-                    }
-                }
+                Matter matter = JsonSerializer.Deserialize<Matter>(element.GetRawText());
 
                 return matter;
             }
@@ -302,7 +215,8 @@ namespace CalliAPI.DataAccess
             if (string.IsNullOrEmpty(fields)) 
                 fields = MatterFields; // Default to the predefined fields if none are provided
             else
-                fields = "id," + fields; // Ensure 'id' is always included in the fields
+                if (!fields.StartsWith("id"))
+                    fields = "id," + fields; // Ensure 'id' is always included in the fields
 
             if (string.IsNullOrEmpty(status)) status = "open,pending,closed"; // Default to all matters if no status is provided
             if (!addedHttp.StartsWith("&")) addedHttp = "&" + addedHttp; // Ensure the additional parameters start with '&'

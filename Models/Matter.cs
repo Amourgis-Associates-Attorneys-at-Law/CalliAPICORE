@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace CalliAPI.Models
@@ -21,8 +22,13 @@ namespace CalliAPI.Models
         public string matter_stage_name { get; set; }
         
         public string practice_area_name { get; set; }
+
         public Client client { get; set; }
 
-        public Dictionary<CustomField, string> CustomFields { get; set; } = new Dictionary<CustomField, string>();
+        //public Dictionary<CustomField, string> CustomFields { get; set; } = new Dictionary<CustomField, string>();
+
+        [JsonPropertyName("custom_field_values")]
+        public List<CustomFieldValue> CustomFields { get; set; }
+
     }
 }

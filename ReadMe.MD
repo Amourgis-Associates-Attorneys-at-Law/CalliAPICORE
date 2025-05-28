@@ -23,6 +23,7 @@
 # CalliAPI Patch Log
 
 ### 3.1 - CUSTOM REPORT BUILDER!!!!
+CalliAPI has a custom report builder now! Adding deserialization into the Matter Parser for extra "nice".
 
 #### 3.0.4 - Clio App Fixes
 Added a field for the user to enter their Clio App secret key, allowing for more secure authentication. This change is crucial for ensuring that the CalliAPI can access Clio data without exposing sensitive information in the codebase.

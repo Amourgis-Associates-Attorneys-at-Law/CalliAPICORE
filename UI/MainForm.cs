@@ -41,10 +41,6 @@ namespace CalliAPI
         internal MainForm(ClioService clioService, AMO_Logger logger)
         {
 
-
-
-
-
             _clioService = clioService;
             _logger = logger;
             InitializeComponent();
@@ -63,8 +59,19 @@ namespace CalliAPI
 
         public void SetProgress(int current, int total)
         {
-            progressBarPagesRetrieved.Value = current;
-            progressBarPagesRetrieved.Maximum = total;
+            if (total <= 0)
+            {
+                progressBarPagesRetrieved.Value = 0;
+                UpdateReportLabel("No pages to retrieve.");
+                return;
+            }
+
+
+
+            int percent = Math.Min(100, (int)((current / (double)total) * 100));
+            progressBarPagesRetrieved.Value = percent;
+
+            progressBarPagesRetrieved.Maximum = 100;
             UpdateReportLabel($"Page {current} of {total} obtained from Clio.");
         }
 
@@ -74,8 +81,13 @@ namespace CalliAPI
             lblReportPageRetrieved.Text = text;
             lblReportPageRetrieved.AutoSize = true;
 
+
+
+            // Clamp the left side
+            int newLeft = progressBarPagesRetrieved.Right - lblReportPageRetrieved.Width;
+
             // Reposition the label so its right edge aligns with the progress bar's right edge
-            lblReportPageRetrieved.Left = progressBarPagesRetrieved.Right - lblReportPageRetrieved.Width;
+            lblReportPageRetrieved.Left = Math.Max(progressBarPagesRetrieved.Left, newLeft);
             lblReportPageRetrieved.Top = progressBarPagesRetrieved.Top + 2; // Adjust as needed
         }
 
@@ -308,13 +320,12 @@ namespace CalliAPI
             }
         }
 
-        private void Debug100Percent(object sender, EventArgs e)
+        private async void Debug100Percent(object sender, EventArgs e)
         {
-            progressBarPagesRetrieved.Value = 0;
-            for (int x = 0; x < 100; x++)
+            for (int x = 1; x < 100; x++)
             {
-                Thread.Sleep(100);
-                progressBarPagesRetrieved.Value += 1;
+                await Task.Delay(100); // non-blocking delay
+                SetProgress(x, 100);
             }
         }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using CalliAPI.DataAccess;
 
@@ -43,15 +44,49 @@ namespace CalliAPI.Models
     this IAsyncEnumerable<Matter> matters,
     CustomField field,
     Func<string, bool> predicate)
-        {
-            await foreach (var matter in matters)
+{
+            if (field == null)
             {
-                if (matter.CustomFields.TryGetValue(field, out var value) && predicate(value))
-                {
-                    yield return matter;
-                }
+                throw new ArgumentNullException(nameof(field), "Custom field cannot be null.");
             }
-        }
+            if (predicate == null)
+            {
+                throw new ArgumentNullException(nameof(predicate), "Predicate function cannot be null.");
+            }
+
+            // Get the field ID from the CustomFieldMap so we have a numeric id
+            long fieldId = CustomFieldMap.GetId(field);
+
+        await foreach (var matter in matters)
+    {
+                // Get the first custom field that matches the id and check if its value matches the predicate
+                var match = matter.CustomFields?
+            .FirstOrDefault(cf => cf.custom_field?.id == fieldId);
+
+        if (match != null && match.value.ValueKind != JsonValueKind.Null)
+        {
+            string value = match.value.ToString();
+            if (predicate(value))
+            {
+                yield return matter;
+            }
+}
+    }
+}
+
+    //    public static async IAsyncEnumerable<Matter> FilterByCustomFieldAsync(
+    //this IAsyncEnumerable<Matter> matters,
+    //CustomField field,
+    //Func<string, bool> predicate)
+    //    {
+    //        await foreach (var matter in matters)
+    //        {
+    //            if (matter.CustomFields.TryGetValue(field, out var value) && predicate(value))
+    //            {
+    //                yield return matter;
+    //            }
+    //        }
+    //    }
 
 
         public static async IAsyncEnumerable<Matter> FilterByPracticeAreaSuffixAsync(this IAsyncEnumerable<Matter> matters, params string[] suffixes)
@@ -114,7 +149,7 @@ namespace CalliAPI.Models
                         var clientValue = clientProp.GetValue(matter.client);
                         if (clientValue != null)
                         {
-                            string columnName = "client_" + clientProp.Name;
+                            string columnName = clientProp.Name;
                             columns.Add(columnName);
                             row[columnName] = clientValue;
                         }
@@ -125,14 +160,11 @@ namespace CalliAPI.Models
                 // Include custom fields
                 if (matter.CustomFields != null)
                 {
-                    foreach (var kvp in matter.CustomFields)
+                    foreach (var field in matter.CustomFields)
                     {
-                        if (!string.IsNullOrWhiteSpace(kvp.Value))
-                        {
-                            string columnName = kvp.Key.ToString();
-                            columns.Add(columnName);
-                            row[columnName] = kvp.Value;
-                        }
+                        string columnName = field.custom_field.id.ToString();
+                        columns.Add(columnName);
+                        row[columnName] = (field.value.ValueKind == JsonValueKind.Null) ? null : field.value.ToString();
                     }
                 }
 
