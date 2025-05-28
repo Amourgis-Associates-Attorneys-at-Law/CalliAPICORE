@@ -8,7 +8,9 @@
 using AmourgisCOREServices;
 using CalliAPI.BusinessLogic;
 using CalliAPI.DataAccess;
+using CalliAPI.UI;
 using DocumentFormat.OpenXml.Drawing.Charts;
+using Microsoft.Win32;
 using Serilog.Core;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
@@ -69,8 +71,41 @@ namespace CalliAPI
             ClioService clioService = new ClioService(clioApiClient, authService, logger: _logger);
             _logger.Info("Services created");
 
+            string clientSecret = LoadClientSecretFromRegistry();
+            if (string.IsNullOrWhiteSpace(clientSecret))
+            {
+                using (var secretForm = new SecretGatekeeper())
+                {
+                    if (secretForm.ShowDialog() == DialogResult.OK)
+                    {
+                        SaveClientSecretToRegistry(secretForm.ClientSecret);
+                        clientSecret = secretForm.ClientSecret;
+                    }
+                    else
+                    {
+                        MessageBox.Show("You must enter a CLIO_CLIENT_SECRET to continue.", "Missing Secret", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        Environment.Exit(1);
+                    }
+                }
+            }
+
             // Create the MainForm and pass the services to it
             Application.Run(new MainForm(clioService: clioService, logger: _logger));
         }
+
+
+        public static void SaveClientSecretToRegistry(string secret)
+        {
+            RegistryKey key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\CalliAPI");
+            key.SetValue("ClioClientSecret", secret);
+            key.Close();
+        }
+
+        public static string LoadClientSecretFromRegistry()
+        {
+            RegistryKey key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\CalliAPI");
+            return key?.GetValue("ClioClientSecret") as string;
+        }
+
     }
 }

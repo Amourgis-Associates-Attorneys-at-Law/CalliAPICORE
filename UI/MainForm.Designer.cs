@@ -50,6 +50,8 @@ namespace CalliAPI
             programToolStripMenuItem = new ToolStripMenuItem();
             mailerProgramToolStripMenuItem = new ToolStripMenuItem();
             openToolStripMenuItem = new ToolStripMenuItem();
+            debugToolStripMenuItem = new ToolStripMenuItem();
+            toolStripMenuItem2 = new ToolStripMenuItem();
             statusStrip1 = new StatusStrip();
             lblApiStatus = new ToolStripStatusLabel();
             lblClioAPIStatus = new ToolStripStatusLabel();
@@ -64,8 +66,7 @@ namespace CalliAPI
             panel1 = new Panel();
             lblVersion = new Label();
             tableLayoutPanel1 = new TableLayoutPanel();
-            debugToolStripMenuItem = new ToolStripMenuItem();
-            toolStripMenuItem2 = new ToolStripMenuItem();
+            resetRegistryKeyToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
@@ -87,7 +88,7 @@ namespace CalliAPI
             // 
             // fileToolStripMenuItem
             // 
-            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { checkForUpdatesToolStripMenuItem, exitToolStripMenuItem });
+            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { checkForUpdatesToolStripMenuItem, exitToolStripMenuItem, resetRegistryKeyToolStripMenuItem });
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             fileToolStripMenuItem.Size = new Size(37, 20);
             fileToolStripMenuItem.Text = "File";
@@ -167,7 +168,7 @@ namespace CalliAPI
             // 
             mailerProgramToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { openToolStripMenuItem });
             mailerProgramToolStripMenuItem.Name = "mailerProgramToolStripMenuItem";
-            mailerProgramToolStripMenuItem.Size = new Size(180, 22);
+            mailerProgramToolStripMenuItem.Size = new Size(156, 22);
             mailerProgramToolStripMenuItem.Text = "Mailer Program";
             // 
             // openToolStripMenuItem
@@ -177,6 +178,20 @@ namespace CalliAPI
             openToolStripMenuItem.Size = new Size(103, 22);
             openToolStripMenuItem.Text = "Open";
             openToolStripMenuItem.Click += openToolStripMenuItem_Click;
+            // 
+            // debugToolStripMenuItem
+            // 
+            debugToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { toolStripMenuItem2 });
+            debugToolStripMenuItem.Name = "debugToolStripMenuItem";
+            debugToolStripMenuItem.Size = new Size(156, 22);
+            debugToolStripMenuItem.Text = "Debug";
+            // 
+            // toolStripMenuItem2
+            // 
+            toolStripMenuItem2.Name = "toolStripMenuItem2";
+            toolStripMenuItem2.Size = new Size(102, 22);
+            toolStripMenuItem2.Text = "100%";
+            toolStripMenuItem2.Click += Debug100Percent;
             // 
             // statusStrip1
             // 
@@ -345,19 +360,12 @@ namespace CalliAPI
             tableLayoutPanel1.Size = new Size(1184, 515);
             tableLayoutPanel1.TabIndex = 8;
             // 
-            // debugToolStripMenuItem
+            // resetRegistryKeyToolStripMenuItem
             // 
-            debugToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { toolStripMenuItem2 });
-            debugToolStripMenuItem.Name = "debugToolStripMenuItem";
-            debugToolStripMenuItem.Size = new Size(180, 22);
-            debugToolStripMenuItem.Text = "Debug";
-            // 
-            // toolStripMenuItem2
-            // 
-            toolStripMenuItem2.Name = "toolStripMenuItem2";
-            toolStripMenuItem2.Size = new Size(180, 22);
-            toolStripMenuItem2.Text = "100%";
-            toolStripMenuItem2.Click += Debug100Percent;
+            resetRegistryKeyToolStripMenuItem.Name = "resetRegistryKeyToolStripMenuItem";
+            resetRegistryKeyToolStripMenuItem.Size = new Size(180, 22);
+            resetRegistryKeyToolStripMenuItem.Text = "Reset Registry Key";
+            resetRegistryKeyToolStripMenuItem.Click += resetRegistryKeyToolStripMenuItem_Click;
             // 
             // MainForm
             // 
@@ -416,5 +424,6 @@ namespace CalliAPI
         private ProgressBarWithText progressBarPagesRetrieved;
         private ToolStripMenuItem debugToolStripMenuItem;
         private ToolStripMenuItem toolStripMenuItem2;
+        private ToolStripMenuItem resetRegistryKeyToolStripMenuItem;
     }
 }

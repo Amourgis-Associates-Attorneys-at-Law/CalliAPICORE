@@ -22,6 +22,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using CalliAPI.UI.Views;
 using CalliAPI.Utilities;
 using CalliAPI.UI.Controls;
+using Microsoft.Win32;
 
 namespace CalliAPI
 {
@@ -31,12 +32,16 @@ namespace CalliAPI
         private readonly AMO_Logger _logger;
         private static readonly int MaxLookbackDays = 300; // for picking FastFetch start date
         private DateTime _lastUpdate = DateTime.MinValue; // for updating the progress bar only if a certain amount of time has passed
-
         private int _lastPercent = -1; // for updating the progress bar only if it's actually changed
 
 
         internal MainForm(ClioService clioService, AMO_Logger logger)
         {
+
+
+
+
+
             _clioService = clioService;
             _logger = logger;
             InitializeComponent();
@@ -342,5 +347,20 @@ namespace CalliAPI
                 progressBarPagesRetrieved.Value += 1;
             }
         }
-    }
+
+        private void resetRegistryKeyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure you want to clear the Clio Client Secret from the registry? This will require you to reauthorize the application.", "Confirm Clear Client Secret", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                if (MessageBox.Show("This will clear the Clio Client Secret from the registry. Are you sure?", "Confirm Clear Client Secret", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                    ClearClientSecretFromRegistry();
+        }
+
+
+        public static void ClearClientSecretFromRegistry()
+        {
+            RegistryKey key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\CalliAPI", writable: true);
+            key?.DeleteValue("ClioClientSecret", false);
+        }
+
+}
 }
