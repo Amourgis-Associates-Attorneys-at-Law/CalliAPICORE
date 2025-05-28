@@ -330,7 +330,21 @@ namespace CalliAPI
 
         private async void checkForUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            await VersionHelper.UpdateCalliAPI();
+            try
+            {
+                MessageBox.Show("Checking for updates... This may take a moment.");
+                Cursor.Current = Cursors.WaitCursor;
+                await VersionHelper.UpdateCalliAPI();
+                MessageBox.Show("Update check complete. If an update was found, it has been applied. Please restart the application to see the changes.", "Update Check Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while checking for updates: {ex.Message}", "Update Check Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
         }
 
         private void label1_Click(object sender, EventArgs e)

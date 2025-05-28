@@ -18,6 +18,8 @@
 
 # CalliAPI Patch Log
 
+### 3.0.4 - Clio App Fixes
+Added a field for the user to enter their Clio App secret key, allowing for more secure authentication. This change is crucial for ensuring that the CalliAPI can access Clio data without exposing sensitive information in the codebase.
 
 ### 3.0.3 - Custom Field Adds!
 Added 13584798 - Emergency Case Type! Doing this required a large rework to how we process Matters. Actual translation of picklist items will come soon!
