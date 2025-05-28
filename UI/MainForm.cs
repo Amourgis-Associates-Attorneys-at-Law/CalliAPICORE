@@ -25,6 +25,7 @@ using CalliAPI.UI.Controls;
 using Microsoft.Win32;
 using DocumentFormat.OpenXml.Bibliography;
 using System.Net;
+using System.Reflection;
 
 namespace CalliAPI
 {
@@ -57,7 +58,7 @@ namespace CalliAPI
 
         }
 
-        public void SetProgress(int current, int total)
+        public async Task SetProgress(int current, int total)
         {
             if (total <= 0)
             {
@@ -69,10 +70,32 @@ namespace CalliAPI
 
 
             int percent = Math.Min(100, (int)((current / (double)total) * 100));
-            progressBarPagesRetrieved.Value = percent;
-
             progressBarPagesRetrieved.Maximum = 100;
+            await AnimateProgressBarAsync(percent);
             UpdateReportLabel($"Page {current} of {total} obtained from Clio.");
+        }
+
+
+        /// <summary>
+        /// This method animates the progress bar to smoothly transition to the target value.
+        /// </summary>
+        /// <param name="targetValue"></param>
+        /// <returns></returns>
+        private async Task AnimateProgressBarAsync(int targetValue)
+        {
+            int start = progressBarPagesRetrieved.Value;
+            int duration = 500; // milliseconds
+            int steps = 30;
+
+            for (int i = 0; i <= steps; i++)
+            {
+                double t = i / (double)steps;
+                // Ease-out cubic: t = 1 - (1 - t)^3
+                double eased = 1 - Math.Pow(1 - t, 3);
+                int value = start + (int)((targetValue - start) * eased);
+                progressBarPagesRetrieved.Value = Math.Min(progressBarPagesRetrieved.Maximum, value);
+                await Task.Delay(duration / steps);
+            }
         }
 
 
@@ -347,6 +370,17 @@ namespace CalliAPI
         {
             CustomReportBuilderForm customReportBuilderForm = new CustomReportBuilderForm(_clioService);
             customReportBuilderForm.Show();
+        }
+
+        private void manifestResourceListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string result = "";
+            var names = Assembly.GetExecutingAssembly().GetManifestResourceNames();
+            foreach (var name in names)
+                result += ("\n" + name);
+
+            MessageBox.Show(result, "Manifest Resource Names", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
         }
     }
 }

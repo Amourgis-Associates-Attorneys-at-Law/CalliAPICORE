@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
 		<AssemblyName>CalliAPI</AssemblyName>
-		<Version>3.1.0</Version>
+		<Version>3.1.1</Version>
 		<TargetFramework>net8.0-windows</TargetFramework>
 		<RootNamespace>CalliAPI</RootNamespace>
 		<Nullable>enable</Nullable>
@@ -12,6 +12,47 @@
 		<ApplicationIcon>UI\Icons\ico_Calliope.ico</ApplicationIcon>
 		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
 	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Remove="UI\Fonts\Cinzel-Black.otf" />
+	  <None Remove="UI\Fonts\Cinzel-Bold.otf" />
+	  <None Remove="UI\Fonts\Cinzel-Regular.otf" />
+	  <None Remove="UI\Fonts\CinzelDecorative-Black.otf" />
+	  <None Remove="UI\Fonts\CinzelDecorative-Bold.otf" />
+	  <None Remove="UI\Fonts\CinzelDecorative-Regular.otf" />
+	  <None Remove="UI\Fonts\CormorantGaramond-Italic-VariableFont_wght.ttf" />
+	  <None Remove="UI\Fonts\CormorantGaramond-VariableFont_wght.ttf" />
+	  <None Remove="UI\Fonts\FiraSansExtraCondensed-Black.ttf" />
+	  <None Remove="UI\Fonts\FiraSansExtraCondensed-BlackItalic.ttf" />
+	  <None Remove="UI\Fonts\FiraSansExtraCondensed-Bold.ttf" />
+	  <None Remove="UI\Fonts\FiraSansExtraCondensed-BoldItalic.ttf" />
+	  <None Remove="UI\Fonts\FiraSansExtraCondensed-ExtraBold.ttf" />
+	  <None Remove="UI\Fonts\FiraSansExtraCondensed-ExtraBoldItalic.ttf" />
+	  <None Remove="UI\Fonts\FiraSansExtraCondensed-ExtraLight.ttf" />
+	  <None Remove="UI\Fonts\FiraSansExtraCondensed-ExtraLightItalic.ttf" />
+	  <None Remove="UI\Fonts\FiraSansExtraCondensed-Italic.ttf" />
+	  <None Remove="UI\Fonts\FiraSansExtraCondensed-Light.ttf" />
+	  <None Remove="UI\Fonts\FiraSansExtraCondensed-LightItalic.ttf" />
+	  <None Remove="UI\Fonts\FiraSansExtraCondensed-Medium.ttf" />
+	  <None Remove="UI\Fonts\FiraSansExtraCondensed-MediumItalic.ttf" />
+	  <None Remove="UI\Fonts\FiraSansExtraCondensed-Regular.ttf" />
+	  <None Remove="UI\Fonts\FiraSansExtraCondensed-SemiBold.ttf" />
+	  <None Remove="UI\Fonts\FiraSansExtraCondensed-SemiBoldItalic.ttf" />
+	  <None Remove="UI\Fonts\FiraSansExtraCondensed-Thin.ttf" />
+	  <None Remove="UI\Fonts\FiraSansExtraCondensed-ThinItalic.ttf" />
+	  <None Remove="UI\Fonts\Lato-Black.ttf" />
+	  <None Remove="UI\Fonts\Lato-BlackItalic.ttf" />
+	  <None Remove="UI\Fonts\Lato-Bold.ttf" />
+	  <None Remove="UI\Fonts\Lato-BoldItalic.ttf" />
+	  <None Remove="UI\Fonts\Lato-Italic.ttf" />
+	  <None Remove="UI\Fonts\Lato-Light.ttf" />
+	  <None Remove="UI\Fonts\Lato-LightItalic.ttf" />
+	  <None Remove="UI\Fonts\Lato-Regular.ttf" />
+	  <None Remove="UI\Fonts\Lato-Thin.ttf" />
+	  <None Remove="UI\Fonts\Lato-ThinItalic.ttf" />
+	  <None Remove="UI\Fonts\Montserrat-Italic-VariableFont_wght.ttf" />
+	  <None Remove="UI\Fonts\Montserrat-VariableFont_wght.ttf" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<Content Include="UI\Icons\ico_Calliope.ico" />
@@ -65,6 +106,47 @@
 
 	<ItemGroup>
 	  <Folder Include="UI\Images\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="UI\Fonts\Cinzel-Black.otf" />
+	  <EmbeddedResource Include="UI\Fonts\Cinzel-Bold.otf" />
+	  <EmbeddedResource Include="UI\Fonts\Cinzel-Regular.otf" />
+	  <EmbeddedResource Include="UI\Fonts\CinzelDecorative-Black.otf" />
+	  <EmbeddedResource Include="UI\Fonts\CinzelDecorative-Bold.otf" />
+	  <EmbeddedResource Include="UI\Fonts\CinzelDecorative-Regular.otf" />
+	  <EmbeddedResource Include="UI\Fonts\CormorantGaramond-Italic-VariableFont_wght.ttf" />
+	  <EmbeddedResource Include="UI\Fonts\CormorantGaramond-VariableFont_wght.ttf" />
+	  <EmbeddedResource Include="UI\Fonts\FiraSansExtraCondensed-Black.ttf" />
+	  <EmbeddedResource Include="UI\Fonts\FiraSansExtraCondensed-BlackItalic.ttf" />
+	  <EmbeddedResource Include="UI\Fonts\FiraSansExtraCondensed-Bold.ttf" />
+	  <EmbeddedResource Include="UI\Fonts\FiraSansExtraCondensed-BoldItalic.ttf" />
+	  <EmbeddedResource Include="UI\Fonts\FiraSansExtraCondensed-ExtraBold.ttf" />
+	  <EmbeddedResource Include="UI\Fonts\FiraSansExtraCondensed-ExtraBoldItalic.ttf" />
+	  <EmbeddedResource Include="UI\Fonts\FiraSansExtraCondensed-ExtraLight.ttf" />
+	  <EmbeddedResource Include="UI\Fonts\FiraSansExtraCondensed-ExtraLightItalic.ttf" />
+	  <EmbeddedResource Include="UI\Fonts\FiraSansExtraCondensed-Italic.ttf" />
+	  <EmbeddedResource Include="UI\Fonts\FiraSansExtraCondensed-Light.ttf" />
+	  <EmbeddedResource Include="UI\Fonts\FiraSansExtraCondensed-LightItalic.ttf" />
+	  <EmbeddedResource Include="UI\Fonts\FiraSansExtraCondensed-Medium.ttf" />
+	  <EmbeddedResource Include="UI\Fonts\FiraSansExtraCondensed-MediumItalic.ttf" />
+	  <EmbeddedResource Include="UI\Fonts\FiraSansExtraCondensed-Regular.ttf" />
+	  <EmbeddedResource Include="UI\Fonts\FiraSansExtraCondensed-SemiBold.ttf" />
+	  <EmbeddedResource Include="UI\Fonts\FiraSansExtraCondensed-SemiBoldItalic.ttf" />
+	  <EmbeddedResource Include="UI\Fonts\FiraSansExtraCondensed-Thin.ttf" />
+	  <EmbeddedResource Include="UI\Fonts\FiraSansExtraCondensed-ThinItalic.ttf" />
+	  <EmbeddedResource Include="UI\Fonts\Lato-Black.ttf" />
+	  <EmbeddedResource Include="UI\Fonts\Lato-BlackItalic.ttf" />
+	  <EmbeddedResource Include="UI\Fonts\Lato-Bold.ttf" />
+	  <EmbeddedResource Include="UI\Fonts\Lato-BoldItalic.ttf" />
+	  <EmbeddedResource Include="UI\Fonts\Lato-Italic.ttf" />
+	  <EmbeddedResource Include="UI\Fonts\Lato-Light.ttf" />
+	  <EmbeddedResource Include="UI\Fonts\Lato-LightItalic.ttf" />
+	  <EmbeddedResource Include="UI\Fonts\Lato-Regular.ttf" />
+	  <EmbeddedResource Include="UI\Fonts\Lato-Thin.ttf" />
+	  <EmbeddedResource Include="UI\Fonts\Lato-ThinItalic.ttf" />
+	  <EmbeddedResource Include="UI\Fonts\Montserrat-Italic-VariableFont_wght.ttf" />
+	  <EmbeddedResource Include="UI\Fonts\Montserrat-VariableFont_wght.ttf" />
 	</ItemGroup>
 
 	<!-- Custom MSBuild hooks -->

@@ -47,6 +47,8 @@ namespace CalliAPI
             openToolStripMenuItem = new ToolStripMenuItem();
             debugToolStripMenuItem = new ToolStripMenuItem();
             toolStripMenuItem2 = new ToolStripMenuItem();
+            manifestResourceListToolStripMenuItem = new ToolStripMenuItem();
+            customReportBuilderToolStripMenuItem = new ToolStripMenuItem();
             reportsToolStripMenuItem = new ToolStripMenuItem();
             allMattersToolStripMenuItem = new ToolStripMenuItem();
             all713MattersToolStripMenuItem = new ToolStripMenuItem();
@@ -65,7 +67,6 @@ namespace CalliAPI
             panel1 = new Panel();
             lblVersion = new Label();
             tableLayoutPanel1 = new TableLayoutPanel();
-            customReportBuilderToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
@@ -137,7 +138,7 @@ namespace CalliAPI
             // 
             // debugToolStripMenuItem
             // 
-            debugToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { toolStripMenuItem2 });
+            debugToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { toolStripMenuItem2, manifestResourceListToolStripMenuItem });
             debugToolStripMenuItem.Name = "debugToolStripMenuItem";
             debugToolStripMenuItem.Size = new Size(194, 22);
             debugToolStripMenuItem.Text = "Debug";
@@ -145,9 +146,23 @@ namespace CalliAPI
             // toolStripMenuItem2
             // 
             toolStripMenuItem2.Name = "toolStripMenuItem2";
-            toolStripMenuItem2.Size = new Size(102, 22);
+            toolStripMenuItem2.Size = new Size(192, 22);
             toolStripMenuItem2.Text = "100%";
             toolStripMenuItem2.Click += Debug100Percent;
+            // 
+            // manifestResourceListToolStripMenuItem
+            // 
+            manifestResourceListToolStripMenuItem.Name = "manifestResourceListToolStripMenuItem";
+            manifestResourceListToolStripMenuItem.Size = new Size(192, 22);
+            manifestResourceListToolStripMenuItem.Text = "Manifest Resource List";
+            manifestResourceListToolStripMenuItem.Click += manifestResourceListToolStripMenuItem_Click;
+            // 
+            // customReportBuilderToolStripMenuItem
+            // 
+            customReportBuilderToolStripMenuItem.Name = "customReportBuilderToolStripMenuItem";
+            customReportBuilderToolStripMenuItem.Size = new Size(194, 22);
+            customReportBuilderToolStripMenuItem.Text = "Custom Report Builder";
+            customReportBuilderToolStripMenuItem.Click += customReportBuilderToolStripMenuItem_Click;
             // 
             // reportsToolStripMenuItem
             // 
@@ -222,9 +237,10 @@ namespace CalliAPI
             // lblReportPageRetrieved
             // 
             lblReportPageRetrieved.AutoSize = true;
+            lblReportPageRetrieved.Font = new Font("Cinzel", 9F);
             lblReportPageRetrieved.Location = new Point(743, 9);
             lblReportPageRetrieved.Name = "lblReportPageRetrieved";
-            lblReportPageRetrieved.Size = new Size(99, 15);
+            lblReportPageRetrieved.Size = new Size(122, 14);
             lblReportPageRetrieved.TabIndex = 4;
             lblReportPageRetrieved.Text = "Report Progress...";
             lblReportPageRetrieved.TextAlign = ContentAlignment.MiddleRight;
@@ -232,9 +248,10 @@ namespace CalliAPI
             // lblReportName
             // 
             lblReportName.AutoSize = true;
+            lblReportName.Font = new Font("Cinzel", 9F);
             lblReportName.Location = new Point(13, 10);
             lblReportName.Name = "lblReportName";
-            lblReportName.Size = new Size(77, 15);
+            lblReportName.Size = new Size(92, 14);
             lblReportName.TabIndex = 5;
             lblReportName.Text = "Report Name";
             lblReportName.TextAlign = ContentAlignment.BottomLeft;
@@ -242,13 +259,13 @@ namespace CalliAPI
             // textBox1
             // 
             textBox1.BorderStyle = BorderStyle.None;
-            textBox1.Font = new Font("Segoe UI", 9F, FontStyle.Italic);
+            textBox1.Font = new Font("Cormorant Garamond SemiBold", 10F, FontStyle.Italic);
             textBox1.ForeColor = SystemColors.ControlDark;
             textBox1.Location = new Point(13, 57);
             textBox1.Multiline = true;
             textBox1.Name = "textBox1";
             textBox1.ReadOnly = true;
-            textBox1.Size = new Size(829, 34);
+            textBox1.Size = new Size(829, 45);
             textBox1.TabIndex = 7;
             textBox1.Text = "The FastFetch reports can capture up to 10,000 records, and are ideal for large datasets under 10,000 records. For small datasets or datasets over 10,000 records, use the Reports features instead.";
             // 
@@ -323,11 +340,11 @@ namespace CalliAPI
             // lblVersion
             // 
             lblVersion.AutoSize = true;
-            lblVersion.Font = new Font("Sylfaen", 8.25F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            lblVersion.Font = new Font("Cinzel", 8.25F, FontStyle.Italic, GraphicsUnit.Point, 0);
             lblVersion.ForeColor = SystemColors.AppWorkspace;
             lblVersion.Location = new Point(377, 10);
             lblVersion.Name = "lblVersion";
-            lblVersion.Size = new Size(70, 14);
+            lblVersion.Size = new Size(83, 13);
             lblVersion.TabIndex = 8;
             lblVersion.Text = "Version 0.0.0";
             // 
@@ -345,13 +362,6 @@ namespace CalliAPI
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableLayoutPanel1.Size = new Size(1184, 515);
             tableLayoutPanel1.TabIndex = 8;
-            // 
-            // customReportBuilderToolStripMenuItem
-            // 
-            customReportBuilderToolStripMenuItem.Name = "customReportBuilderToolStripMenuItem";
-            customReportBuilderToolStripMenuItem.Size = new Size(194, 22);
-            customReportBuilderToolStripMenuItem.Text = "Custom Report Builder";
-            customReportBuilderToolStripMenuItem.Click += customReportBuilderToolStripMenuItem_Click;
             // 
             // MainForm
             // 
@@ -409,5 +419,6 @@ namespace CalliAPI
         private ToolStripMenuItem toolStripMenuItem2;
         private ToolStripMenuItem resetRegistryKeyToolStripMenuItem;
         private ToolStripMenuItem customReportBuilderToolStripMenuItem;
+        private ToolStripMenuItem manifestResourceListToolStripMenuItem;
     }
 }

@@ -9,6 +9,6 @@ namespace CalliAPI.Interfaces
     public interface IReportContext
     {
         void SetReportName(string name);
-        void SetProgress(int current, int total);
+        Task SetProgress(int current, int total);
     }
 }

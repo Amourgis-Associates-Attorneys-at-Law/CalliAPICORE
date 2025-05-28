@@ -6,8 +6,6 @@
 - Add filters to TaskFilters
 
 ## UI
-- Add a percentage to the progress bar (yeah it's a tiny thing but nice anyway)
-- Make ONE Logger for the whole solution, and then pass it around to whatever needs it (dependency injection?)
 
 ## Documentation & External Resources
 
@@ -16,11 +14,11 @@
 
 - 3.0.3 - The automatic update functionality is still in its early stages and may not work perfectly on all systems. If you encounter issues, please report them on the GitHub repository.
 
-- 3.0.6 - The progress bar is doing something funky with the percentage
-
-- 3.0.6 - The created_since field doesn't seem to work yet, probably needs normalizing into an ISO timestamp
 
 # CalliAPI Patch Log
+
+#### 3.1.1 - Small bug fixes
+Fixed the progress bar issue where it was not displaying the percentage correctly. This should now show the correct progress during report generation! Additionally, the CreatedSince dateTime picker should function properly in the ReportBuilder!
 
 ### 3.1 - CUSTOM REPORT BUILDER!!!!
 CalliAPI has a custom report builder now! Adding deserialization into the Matter Parser for extra "nice".
