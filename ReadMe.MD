@@ -11,7 +11,10 @@
 
 ## Documentation & External Resources
 
+## Known Issues
+- 3.0.3 - The Emergency Case Type is not yet translated into the MatterType picklist, so it will not show up properly in the UI. This is a known issue that will be addressed in a future update.
 
+- 3.0.3 - The automatic update functionality is still in its early stages and may not work perfectly on all systems. If you encounter issues, please report them on the GitHub repository.
 
 # CalliAPI Patch Log
 
