@@ -20,6 +20,7 @@ using System.Drawing.Printing;
 using System.Threading;
 using System.Runtime.CompilerServices;
 using ClioTask = CalliAPI.Models.Task;
+using DocumentFormat.OpenXml.Drawing.Charts;
 
 namespace CalliAPI.DataAccess
 {
@@ -77,19 +78,12 @@ namespace CalliAPI.DataAccess
 
 
 
-        public async Task<string> VerifyAPI(string accessToken)
+        public async Task<HttpResponseMessage> VerifyAPI(string accessToken)
         {
             _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
             string apiUrl = "https://app.clio.com/api/v4/users/who_am_i";
             HttpResponseMessage response = await _httpClient.GetAsync(apiUrl);
-            if (response.IsSuccessStatusCode)
-            {
-                return "Clio API is working!";
-            }
-            else
-            {
-                return $"Clio API error: {response.StatusCode}";
-            }
+            return response;
         }
 
         public async Task<string> GetAccessTokenAsync(string authorizationCode)
@@ -301,13 +295,23 @@ namespace CalliAPI.DataAccess
         /// Get a list of all the matters as Matter objects. Use this with MatterFilters.cs to filter the list of matters.
         /// </summary>
         /// <returns></returns>
-        public async IAsyncEnumerable<Matter> GetAllMattersAsync()
+        public async IAsyncEnumerable<Matter> GetAllMattersAsync(string fields = "", string status = "", string addedHttp = "")
         {
             _logger.Info("API CALL START -- GET ALL MATTERS ASYNC --");
 
+            if (string.IsNullOrEmpty(fields)) 
+                fields = MatterFields; // Default to the predefined fields if none are provided
+            else
+                fields = "id," + fields; // Ensure 'id' is always included in the fields
+
+            if (string.IsNullOrEmpty(status)) status = "open,pending,closed"; // Default to all matters if no status is provided
+            if (!addedHttp.StartsWith("&")) addedHttp = "&" + addedHttp; // Ensure the additional parameters start with '&'
+
             string nextPageUrl = $"{Properties.Settings.Default.ApiUrl}matters?" +
-                                 $"fields={MatterFields}" +
-                                 "&order=id(asc)";
+                                $"fields={fields}" + // Use the provided fields or default to MatterFields
+                                $"&status={status}" + // Use the provided status or default to all
+                                $"{addedHttp}" + // Add any additional parameters provided
+                                "&order=id(asc)";
 
             int pageCount = 0;
             int maxPages = 9999;

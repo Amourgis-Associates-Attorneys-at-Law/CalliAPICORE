@@ -66,7 +66,7 @@ if (-not (Test-Path $dir)) {
 
 Write-Host "Generated index.html with version $versionShort"
 
-# Step 2.5: Inject version history links
+# Step 2.1: Inject version history links
 $versionsFile = "versions.txt"
 $versionLinks = ""
 
@@ -84,6 +84,17 @@ if (Test-Path $versionsFile) {
     Write-Host "versions.txt not found. Skipping version history injection."
 }
 
+# Step 2.2: Inject changelog
+$changelogFile = "ReadMe.MD"
+if (Test-Path $changelogFile) {
+    $changelogContent = Get-Content $changelogFile -Raw
+    $html = Get-Content $outputHtml -Raw
+    $html = $html -replace '<!--CHANGELOG-->', "<pre>$changelogContent</pre>"
+    Set-Content $outputHtml $html
+    Write-Host "Injected changelog into index.html"
+} else {
+    Write-Host "ReadMe.MD not found. Skipping changelog injection."
+}
 
 
 # Step 3: Publish release to GitHub

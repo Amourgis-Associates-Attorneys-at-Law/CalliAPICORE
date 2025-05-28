@@ -16,26 +16,32 @@
 
 - 3.0.3 - The automatic update functionality is still in its early stages and may not work perfectly on all systems. If you encounter issues, please report them on the GitHub repository.
 
+- 3.0.6 - The progress bar is doing something funky with the percentage
+
+- 3.0.6 - The created_since field doesn't seem to work yet, probably needs normalizing into an ISO timestamp
+
 # CalliAPI Patch Log
 
-### 3.0.4 - Clio App Fixes
+### 3.1 - CUSTOM REPORT BUILDER!!!!
+
+#### 3.0.4 - Clio App Fixes
 Added a field for the user to enter their Clio App secret key, allowing for more secure authentication. This change is crucial for ensuring that the CalliAPI can access Clio data without exposing sensitive information in the codebase.
 
-### 3.0.3 - Custom Field Adds!
+#### 3.0.3 - Custom Field Adds!
 Added 13584798 - Emergency Case Type! Doing this required a large rework to how we process Matters. Actual translation of picklist items will come soon!
 
-### 3.0.2 - Added Automatic updates
+#### 3.0.2 - Added Automatic updates
 From 3.0.2 onwards, CalliAPI should also allow for automatic updates on each run!
 
-## 3.0.0 - Restructure AuthService + GitHub Secret Support
+## 3.0 - Restructure AuthService + GitHub Secret Support
 AuthService is now done UNDERNEATH ClioService, and our Client secret is now stored safely in GitHub. The old Clio App client is now DELETED, so the new one is the only one that can be used to access CalliAPI. This means there's no risk that attackers will scrounge up the old Client secret, as it is deactivated.
 This change is HUGE, as it allows us to securely store our secrets in GitHub, and it also simplifies the authentication process by making it more modular and easier to maintain.
 
 
-### 2.1.0 - Updated download page and implemented auto-update functionality!
+### 2.1 - Updated download page and implemented auto-update functionality!
 Plus, added raw image storage so we can easily update the logo and other images in the future! This is a big step forward in making CalliAPI more user-friendly and easier to maintain. The auto-update functionality will ensure that users always have the latest version without needing to manually download updates.
 
-## 2.0.0 - Finally, automatic hosting on GitHub pages is live!
+## 2.0 - Finally, automatic hosting on GitHub pages is live!
 CalliAPI is now hosted on GitHub Pages, with a custom index page for easy installation! This is a huge step forward in making CalliAPI accessible to everyone at Amourgis & Associates, and it should make future updates much easier to manage!
 [x] Wishlist item: Add a zip to the docs folder so that users can fallback on the zip completed!
 

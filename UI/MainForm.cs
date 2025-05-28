@@ -23,10 +23,12 @@ using CalliAPI.UI.Views;
 using CalliAPI.Utilities;
 using CalliAPI.UI.Controls;
 using Microsoft.Win32;
+using DocumentFormat.OpenXml.Bibliography;
+using System.Net;
 
 namespace CalliAPI
 {
-    public partial class MainForm : Form
+    public partial class MainForm : Form, IReportContext
     {
         private readonly ClioService _clioService; // for calling the API
         private readonly AMO_Logger _logger;
@@ -34,6 +36,7 @@ namespace CalliAPI
         private DateTime _lastUpdate = DateTime.MinValue; // for updating the progress bar only if a certain amount of time has passed
         private int _lastPercent = -1; // for updating the progress bar only if it's actually changed
 
+        public void SetReportName(string name) { lblReportName.Text = name; }
 
         internal MainForm(ClioService clioService, AMO_Logger logger)
         {
@@ -53,23 +56,16 @@ namespace CalliAPI
 
             clioService.ProgressUpdated += (current, total) =>
             {
-                this.progressBarPagesRetrieved.Invoke(() =>
-                {
-                    if (total == 0) return; // Avoid division by zero
-
-                    var now = DateTime.Now;
-                    if ((now - _lastUpdate).TotalMilliseconds < 500) return; // Only update every 0.5s
-                    _lastUpdate = now;
-
-
-                    int percent = (int)((current / (double)total) * 100);
-
-                    if (percent == _lastPercent) return; // Only update if the percent has changed
-                    _lastPercent = percent;
-                    progressBarPagesRetrieved.Value = percent;
-                    UpdateReportLabel($"Page {current} of {total} obtained from Clio.");
-                });
+                SetProgress(current, total);
             };
+
+        }
+
+        public void SetProgress(int current, int total)
+        {
+            progressBarPagesRetrieved.Value = current;
+            progressBarPagesRetrieved.Maximum = total;
+            UpdateReportLabel($"Page {current} of {total} obtained from Clio.");
         }
 
 
@@ -82,18 +78,6 @@ namespace CalliAPI
             lblReportPageRetrieved.Left = progressBarPagesRetrieved.Right - lblReportPageRetrieved.Width;
             lblReportPageRetrieved.Top = progressBarPagesRetrieved.Top + 2; // Adjust as needed
         }
-
-
-
-        #region logic
-
-        private static bool IsValidLookbackDate(DateTime selectedDate)
-        {
-            var earliestAllowed = DateTime.UtcNow.Date.AddDays(-MaxLookbackDays);
-            return selectedDate >= earliestAllowed;
-        }
-
-        #endregion
 
         /// <summary>
         /// This method is called when the "Open Mailer Form" button is clicked. Opens a new MailerForm.
@@ -130,8 +114,10 @@ namespace CalliAPI
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                string status = await _clioService.VerifyAPI();
-                lblClioAPIStatus.Text = status;
+                HttpResponseMessage status = await _clioService.VerifyAPI();
+                lblClioAPIStatus.Text = status.IsSuccessStatusCode
+                    ? "Clio API Status: Connected"
+                    : $"Clio API Status: Error {status.StatusCode}";
             }
             finally
             {
@@ -144,10 +130,6 @@ namespace CalliAPI
             UpdateClioAPIStatus();
         }
 
-        private void connectToClioToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            StartOAuthProcess(); UpdateClioAPIStatus();
-        }
 
         private async void allMattersToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -156,7 +138,7 @@ namespace CalliAPI
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                await _clioService.GetAllMatters(); // or whatever method you're calling
+                await _clioService.GetAllMattersAsync(); // or whatever method you're calling
             }
             finally
             {
@@ -169,7 +151,7 @@ namespace CalliAPI
         /// This method is called when the "Connect to Clio" button is clicked. It starts the OAuth process to allow for authorized API calls to Clio. The user will be prompted to enter the authorization code after authorizing the app in the browser,
         /// and the resulting access token will be stored in the authService.
         /// </summary>
-        private async void StartOAuthProcess()
+        private async Task<bool> StartOAuthProcess()
         {
             _logger.Info("Starting OAuth process...");
             // Open a browser and make the front-end OAuth call in the URL
@@ -199,7 +181,7 @@ namespace CalliAPI
                     if (result == DialogResult.Cancel)
                     {
                         MessageBox.Show("Authorization cancelled.", "Cancelled", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        return;
+                        return false;
                     }
 
                     authorizationCode = _clioService.ValidateAuthorizationCode(form.AuthorizationCode);
@@ -214,66 +196,8 @@ namespace CalliAPI
 
             await _clioService.GetAccessTokenAsync(authorizationCode);
             MessageBox.Show("Access Token successfully obtained!");
+            return true;
 
-        }
-
-        private async void allMattersToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            await FastFetchAllMatters();
-
-        }
-
-        /// <summary>
-        /// Grab a date from the last MaxLookbackDays days and then call a report to get all matters created_since that date
-        /// </summary>
-        /// <returns></returns>
-        private async Task FastFetchAllMatters()
-        {
-            DateTime selectedDate;
-
-            while (true)
-            {
-                using (var datePicker = new DatePickerDialog(MaxLookbackDays)) // Custom form or use DateTimePicker in a dialog
-                {
-                    if (datePicker.ShowDialog() != DialogResult.OK)
-                        return; // User cancelled
-
-                    selectedDate = datePicker.SelectedDate;
-
-                    if (IsValidLookbackDate(selectedDate))
-                        break;
-
-                    MessageBox.Show($"Please select a date within the last {MaxLookbackDays} days.",
-                    "Invalid Date", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-            }
-
-            try
-            {
-                Cursor.Current = Cursors.WaitCursor;
-                lblReportName.Text = $"Report: All Matters since {selectedDate.ToShortDateString()}";
-                _logger.Info($"Report Start: All Matters since {selectedDate.ToShortDateString()}");
-                await _clioService.FastFetchAllMatters(selectedDate);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                Cursor.Current = Cursors.Default;
-            }
-        }
-
-        private async void createdSinceToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            lblReportName.Text = "Report: All Matters since <date>";
-            await FastFetchAllMatters();
-        }
-
-        private void unworkedMattersToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("This feature is not yet implemented.", "Feature Not Implemented", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private async void all713MattersToolStripMenuItem_Click(object sender, EventArgs e)
@@ -299,7 +223,7 @@ namespace CalliAPI
                 {
                     "Reports" => new ReportsView(),
                     "ReportsOpenMattersUnworkedMatters" => new ReportsOpenMattersUnworkedMatters(_clioService),
-                    //"Open713MattersView" => new Open713MattersView(_clioService),
+                    "FastFetchCreatedSince" => new FastFetchCreatedSinceView(_clioService, this),
                     _ => null
                 };
 
@@ -313,14 +237,51 @@ namespace CalliAPI
 
         }
 
-        private void toolStripBtnConnectToClio_Click(object sender, EventArgs e)
+        private async void toolStripBtnConnectToClio_Click(object sender, EventArgs e)
         {
             try
             {
+                int attempt = 0;
+                int maxAttempts = 5; // Set the maximum number of attempts
+                lblClioAPIStatus.Text = "Attempting to connect to Clio API...";
                 Cursor.Current = Cursors.WaitCursor;
-                StartOAuthProcess();
-                Thread.Sleep(1000);
-                UpdateClioAPIStatus();
+                // Start the OAuth process and get the access token
+                bool userAuthorized = await StartOAuthProcess();
+
+                if (userAuthorized)
+                {
+
+                    HttpResponseMessage httpResponse = await _clioService.VerifyAPI();
+
+                    while (!httpResponse.IsSuccessStatusCode)
+                    {
+                        attempt++;
+                        Thread.Sleep(3000);
+                        httpResponse = await _clioService.VerifyAPI();
+
+                        _logger.Info($"Attempt {attempt} of {maxAttempts} to connect to Clio API. Status: {httpResponse.StatusCode}. {await httpResponse.Content.ReadAsStringAsync()}");
+                        if (httpResponse.IsSuccessStatusCode)
+                        {
+                            lblClioAPIStatus.Text = "Clio API Status: Connected";
+                            MessageBox.Show("Successfully connected to Clio API!", "Connection Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            break;
+                        }
+                        lblClioAPIStatus.Text = $"Attempt {attempt} of {maxAttempts} to connect to Clio API failed: {httpResponse.StatusCode}.";
+                        if (attempt >= maxAttempts) throw new Exception(httpResponse.ReasonPhrase);
+                    }
+
+                    UpdateClioAPIStatus();
+                }
+                else
+                {
+                    lblClioAPIStatus.Text = "Authorization cancelled or failed.";
+                    MessageBox.Show("Authorization was cancelled or failed. Please try again.", "Authorization Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                lblClioAPIStatus.Text = "Error connecting to Clio API.";
+                MessageBox.Show($"An error occurred while connecting to the Clio API: {ex.Message}", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
@@ -347,11 +308,6 @@ namespace CalliAPI
             }
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void Debug100Percent(object sender, EventArgs e)
         {
             progressBarPagesRetrieved.Value = 0;
@@ -376,5 +332,10 @@ namespace CalliAPI
             key?.DeleteValue("ClioClientSecret", false);
         }
 
-}
+        private void customReportBuilderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CustomReportBuilderForm customReportBuilderForm = new CustomReportBuilderForm(_clioService);
+            customReportBuilderForm.Show();
+        }
+    }
 }

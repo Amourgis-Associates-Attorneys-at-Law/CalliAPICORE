@@ -35,23 +35,22 @@ namespace CalliAPI
             TreeNode treeNode2 = new TreeNode("Open Matters", new TreeNode[] { treeNode1 });
             TreeNode treeNode3 = new TreeNode("All Matters");
             TreeNode treeNode4 = new TreeNode("Reports", new TreeNode[] { treeNode2, treeNode3 });
-            TreeNode treeNode5 = new TreeNode("FastFetch");
+            TreeNode treeNode5 = new TreeNode("All Created Since");
+            TreeNode treeNode6 = new TreeNode("FastFetch", new TreeNode[] { treeNode5 });
             menuStrip1 = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
             checkForUpdatesToolStripMenuItem = new ToolStripMenuItem();
             exitToolStripMenuItem = new ToolStripMenuItem();
-            reportsToolStripMenuItem = new ToolStripMenuItem();
-            unworkedMattersToolStripMenuItem = new ToolStripMenuItem();
-            allMattersToolStripMenuItem = new ToolStripMenuItem();
-            all713MattersToolStripMenuItem = new ToolStripMenuItem();
-            allUnworked7And13MattersToolStripMenuItem = new ToolStripMenuItem();
-            fastFetchToolStripMenuItem1 = new ToolStripMenuItem();
-            createdSinceToolStripMenuItem = new ToolStripMenuItem();
+            resetRegistryKeyToolStripMenuItem = new ToolStripMenuItem();
             programToolStripMenuItem = new ToolStripMenuItem();
             mailerProgramToolStripMenuItem = new ToolStripMenuItem();
             openToolStripMenuItem = new ToolStripMenuItem();
             debugToolStripMenuItem = new ToolStripMenuItem();
             toolStripMenuItem2 = new ToolStripMenuItem();
+            reportsToolStripMenuItem = new ToolStripMenuItem();
+            allMattersToolStripMenuItem = new ToolStripMenuItem();
+            all713MattersToolStripMenuItem = new ToolStripMenuItem();
+            allUnworked7And13MattersToolStripMenuItem = new ToolStripMenuItem();
             statusStrip1 = new StatusStrip();
             lblApiStatus = new ToolStripStatusLabel();
             lblClioAPIStatus = new ToolStripStatusLabel();
@@ -66,7 +65,7 @@ namespace CalliAPI
             panel1 = new Panel();
             lblVersion = new Label();
             tableLayoutPanel1 = new TableLayoutPanel();
-            resetRegistryKeyToolStripMenuItem = new ToolStripMenuItem();
+            customReportBuilderToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
@@ -79,7 +78,7 @@ namespace CalliAPI
             // 
             // menuStrip1
             // 
-            menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, reportsToolStripMenuItem, fastFetchToolStripMenuItem1, programToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, programToolStripMenuItem, reportsToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(1184, 24);
@@ -96,31 +95,66 @@ namespace CalliAPI
             // checkForUpdatesToolStripMenuItem
             // 
             checkForUpdatesToolStripMenuItem.Name = "checkForUpdatesToolStripMenuItem";
-            checkForUpdatesToolStripMenuItem.Size = new Size(180, 22);
+            checkForUpdatesToolStripMenuItem.Size = new Size(171, 22);
             checkForUpdatesToolStripMenuItem.Text = "Check for Updates";
             checkForUpdatesToolStripMenuItem.Click += checkForUpdatesToolStripMenuItem_Click;
             // 
             // exitToolStripMenuItem
             // 
             exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            exitToolStripMenuItem.Size = new Size(180, 22);
+            exitToolStripMenuItem.Size = new Size(171, 22);
             exitToolStripMenuItem.Text = "Exit";
             exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
             // 
+            // resetRegistryKeyToolStripMenuItem
+            // 
+            resetRegistryKeyToolStripMenuItem.Name = "resetRegistryKeyToolStripMenuItem";
+            resetRegistryKeyToolStripMenuItem.Size = new Size(171, 22);
+            resetRegistryKeyToolStripMenuItem.Text = "Reset Registry Key";
+            resetRegistryKeyToolStripMenuItem.Click += resetRegistryKeyToolStripMenuItem_Click;
+            // 
+            // programToolStripMenuItem
+            // 
+            programToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { mailerProgramToolStripMenuItem, debugToolStripMenuItem, customReportBuilderToolStripMenuItem });
+            programToolStripMenuItem.Name = "programToolStripMenuItem";
+            programToolStripMenuItem.Size = new Size(65, 20);
+            programToolStripMenuItem.Text = "Program";
+            // 
+            // mailerProgramToolStripMenuItem
+            // 
+            mailerProgramToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { openToolStripMenuItem });
+            mailerProgramToolStripMenuItem.Name = "mailerProgramToolStripMenuItem";
+            mailerProgramToolStripMenuItem.Size = new Size(194, 22);
+            mailerProgramToolStripMenuItem.Text = "Mailer Program";
+            // 
+            // openToolStripMenuItem
+            // 
+            openToolStripMenuItem.Enabled = false;
+            openToolStripMenuItem.Name = "openToolStripMenuItem";
+            openToolStripMenuItem.Size = new Size(103, 22);
+            openToolStripMenuItem.Text = "Open";
+            openToolStripMenuItem.Click += openToolStripMenuItem_Click;
+            // 
+            // debugToolStripMenuItem
+            // 
+            debugToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { toolStripMenuItem2 });
+            debugToolStripMenuItem.Name = "debugToolStripMenuItem";
+            debugToolStripMenuItem.Size = new Size(194, 22);
+            debugToolStripMenuItem.Text = "Debug";
+            // 
+            // toolStripMenuItem2
+            // 
+            toolStripMenuItem2.Name = "toolStripMenuItem2";
+            toolStripMenuItem2.Size = new Size(102, 22);
+            toolStripMenuItem2.Text = "100%";
+            toolStripMenuItem2.Click += Debug100Percent;
+            // 
             // reportsToolStripMenuItem
             // 
-            reportsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { unworkedMattersToolStripMenuItem, allMattersToolStripMenuItem, all713MattersToolStripMenuItem, allUnworked7And13MattersToolStripMenuItem });
+            reportsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { allMattersToolStripMenuItem, all713MattersToolStripMenuItem, allUnworked7And13MattersToolStripMenuItem });
             reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
             reportsToolStripMenuItem.Size = new Size(59, 20);
             reportsToolStripMenuItem.Text = "Reports";
-            // 
-            // unworkedMattersToolStripMenuItem
-            // 
-            unworkedMattersToolStripMenuItem.Enabled = false;
-            unworkedMattersToolStripMenuItem.Name = "unworkedMattersToolStripMenuItem";
-            unworkedMattersToolStripMenuItem.Size = new Size(235, 22);
-            unworkedMattersToolStripMenuItem.Text = "Unworked Matters";
-            unworkedMattersToolStripMenuItem.Click += unworkedMattersToolStripMenuItem_Click;
             // 
             // allMattersToolStripMenuItem
             // 
@@ -142,56 +176,6 @@ namespace CalliAPI
             allUnworked7And13MattersToolStripMenuItem.Size = new Size(235, 22);
             allUnworked7And13MattersToolStripMenuItem.Text = "All Unworked 7 and 13 Matters";
             allUnworked7And13MattersToolStripMenuItem.Click += allUnworked7And13MattersToolStripMenuItem_Click;
-            // 
-            // fastFetchToolStripMenuItem1
-            // 
-            fastFetchToolStripMenuItem1.DropDownItems.AddRange(new ToolStripItem[] { createdSinceToolStripMenuItem });
-            fastFetchToolStripMenuItem1.Name = "fastFetchToolStripMenuItem1";
-            fastFetchToolStripMenuItem1.Size = new Size(69, 20);
-            fastFetchToolStripMenuItem1.Text = "FastFetch";
-            // 
-            // createdSinceToolStripMenuItem
-            // 
-            createdSinceToolStripMenuItem.Name = "createdSinceToolStripMenuItem";
-            createdSinceToolStripMenuItem.Size = new Size(146, 22);
-            createdSinceToolStripMenuItem.Text = "Created Since";
-            createdSinceToolStripMenuItem.Click += createdSinceToolStripMenuItem_Click;
-            // 
-            // programToolStripMenuItem
-            // 
-            programToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { mailerProgramToolStripMenuItem, debugToolStripMenuItem });
-            programToolStripMenuItem.Name = "programToolStripMenuItem";
-            programToolStripMenuItem.Size = new Size(65, 20);
-            programToolStripMenuItem.Text = "Program";
-            // 
-            // mailerProgramToolStripMenuItem
-            // 
-            mailerProgramToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { openToolStripMenuItem });
-            mailerProgramToolStripMenuItem.Name = "mailerProgramToolStripMenuItem";
-            mailerProgramToolStripMenuItem.Size = new Size(156, 22);
-            mailerProgramToolStripMenuItem.Text = "Mailer Program";
-            // 
-            // openToolStripMenuItem
-            // 
-            openToolStripMenuItem.Enabled = false;
-            openToolStripMenuItem.Name = "openToolStripMenuItem";
-            openToolStripMenuItem.Size = new Size(103, 22);
-            openToolStripMenuItem.Text = "Open";
-            openToolStripMenuItem.Click += openToolStripMenuItem_Click;
-            // 
-            // debugToolStripMenuItem
-            // 
-            debugToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { toolStripMenuItem2 });
-            debugToolStripMenuItem.Name = "debugToolStripMenuItem";
-            debugToolStripMenuItem.Size = new Size(156, 22);
-            debugToolStripMenuItem.Text = "Debug";
-            // 
-            // toolStripMenuItem2
-            // 
-            toolStripMenuItem2.Name = "toolStripMenuItem2";
-            toolStripMenuItem2.Size = new Size(102, 22);
-            toolStripMenuItem2.Text = "100%";
-            toolStripMenuItem2.Click += Debug100Percent;
             // 
             // statusStrip1
             // 
@@ -237,9 +221,8 @@ namespace CalliAPI
             // 
             // lblReportPageRetrieved
             // 
-            lblReportPageRetrieved.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             lblReportPageRetrieved.AutoSize = true;
-            lblReportPageRetrieved.Location = new Point(743, 10);
+            lblReportPageRetrieved.Location = new Point(743, 9);
             lblReportPageRetrieved.Name = "lblReportPageRetrieved";
             lblReportPageRetrieved.Size = new Size(99, 15);
             lblReportPageRetrieved.TabIndex = 4;
@@ -303,11 +286,14 @@ namespace CalliAPI
             treeNode4.Name = "Reports";
             treeNode4.Tag = "Reports";
             treeNode4.Text = "Reports";
-            treeNode5.Name = "FastFetch";
-            treeNode5.NodeFont = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            treeNode5.Tag = "FastFetch";
-            treeNode5.Text = "FastFetch";
-            treeViewReports.Nodes.AddRange(new TreeNode[] { treeNode4, treeNode5 });
+            treeNode5.Name = "CreatedSince";
+            treeNode5.Tag = "FastFetchCreatedSince";
+            treeNode5.Text = "All Created Since";
+            treeNode6.Name = "FastFetch";
+            treeNode6.NodeFont = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            treeNode6.Tag = "FastFetch";
+            treeNode6.Text = "FastFetch";
+            treeViewReports.Nodes.AddRange(new TreeNode[] { treeNode4, treeNode6 });
             treeViewReports.Size = new Size(390, 359);
             treeViewReports.TabIndex = 0;
             treeViewReports.AfterSelect += treeViewReports_AfterSelect;
@@ -360,12 +346,12 @@ namespace CalliAPI
             tableLayoutPanel1.Size = new Size(1184, 515);
             tableLayoutPanel1.TabIndex = 8;
             // 
-            // resetRegistryKeyToolStripMenuItem
+            // customReportBuilderToolStripMenuItem
             // 
-            resetRegistryKeyToolStripMenuItem.Name = "resetRegistryKeyToolStripMenuItem";
-            resetRegistryKeyToolStripMenuItem.Size = new Size(180, 22);
-            resetRegistryKeyToolStripMenuItem.Text = "Reset Registry Key";
-            resetRegistryKeyToolStripMenuItem.Click += resetRegistryKeyToolStripMenuItem_Click;
+            customReportBuilderToolStripMenuItem.Name = "customReportBuilderToolStripMenuItem";
+            customReportBuilderToolStripMenuItem.Size = new Size(194, 22);
+            customReportBuilderToolStripMenuItem.Text = "Custom Report Builder";
+            customReportBuilderToolStripMenuItem.Click += customReportBuilderToolStripMenuItem_Click;
             // 
             // MainForm
             // 
@@ -404,12 +390,9 @@ namespace CalliAPI
         private StatusStrip statusStrip1;
         private ToolStripStatusLabel lblApiStatus;
         private ToolStripStatusLabel lblClioAPIStatus;
-        private ToolStripMenuItem unworkedMattersToolStripMenuItem;
         private ToolStripMenuItem allMattersToolStripMenuItem;
         private Label lblReportPageRetrieved;
         private Label lblReportName;
-        private ToolStripMenuItem fastFetchToolStripMenuItem1;
-        private ToolStripMenuItem createdSinceToolStripMenuItem;
         private ToolStripMenuItem all713MattersToolStripMenuItem;
         private TextBox textBox1;
         private ToolStripMenuItem allUnworked7And13MattersToolStripMenuItem;
@@ -425,5 +408,6 @@ namespace CalliAPI
         private ToolStripMenuItem debugToolStripMenuItem;
         private ToolStripMenuItem toolStripMenuItem2;
         private ToolStripMenuItem resetRegistryKeyToolStripMenuItem;
+        private ToolStripMenuItem customReportBuilderToolStripMenuItem;
     }
 }

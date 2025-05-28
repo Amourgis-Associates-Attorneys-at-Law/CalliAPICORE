@@ -7,8 +7,14 @@
     <Compile Update="UI\AuthorizationCodeForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UI\Controls\MatterQueryControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="UI\Controls\ProgressBarWithText.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="UI\CustomReportBuilderForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\DatePickerForm.cs">
       <SubType>Form</SubType>
@@ -24,6 +30,9 @@
     </Compile>
     <Compile Update="UI\SecretGatekeeper.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Views\FastFetchCreatedSinceView.cs">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="UI\Views\ReportsOpenMattersUnworkedMatters.cs">
       <SubType>UserControl</SubType>

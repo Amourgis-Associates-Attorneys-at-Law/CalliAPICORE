@@ -19,6 +19,7 @@ using CalliAPI.Utilities;
 using CalliAPI.DataAccess;
 using Task = System.Threading.Tasks.Task;
 using Microsoft.Identity.Client;
+using System.Net;
 
 namespace CalliAPI.BusinessLogic
 {
@@ -76,7 +77,7 @@ namespace CalliAPI.BusinessLogic
         public bool IsAuthenticated => !string.IsNullOrWhiteSpace(_authService.AccessToken);
         #endregion
 
-        public async Task<string> VerifyAPI()
+        public async Task<HttpResponseMessage> VerifyAPI()
         {
             return await _clioApiClient.VerifyAPI(_authService.AccessToken);
         }
@@ -93,6 +94,9 @@ namespace CalliAPI.BusinessLogic
             return $"Prefile stages include: {string.Join(", ", prefileStages)}.";
         }
 
+
+        #region Custom Report Methods
+        #endregion
 
         #region Classic Reports
         #region reports - open Matters
@@ -132,10 +136,10 @@ namespace CalliAPI.BusinessLogic
         #endregion
 
         #region reports - all Matters
-        public async Task GetAllMatters()
+        public async Task GetAllMattersAsync(string fields="", string status="", string addedHtml="")
         {
             // Initialize the matter stream
-            IAsyncEnumerable<Matter> matters = _clioApiClient.GetAllMattersAsync();
+            IAsyncEnumerable<Matter> matters = _clioApiClient.GetAllMattersAsync(fields, status, addedHtml);
             // Filter the matter stream (since this is ALL matters, we don't need to bother with filtering)
             // matters = matters.FilterByWhatever();
             // Convert the matter stream to a DataTable and show it
