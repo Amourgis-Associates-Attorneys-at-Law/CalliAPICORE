@@ -17,7 +17,7 @@
 
 # CalliAPI Patch Log
 
-### 3.2 - Splash Screen!
+### 3.2.1 - Splash Screen!
 Also checks for updates on startup, so you can always be sure you're running the latest version of CalliAPI!
 
 #### 3.1.2 - Added custom fields to custom report builder!
