@@ -47,22 +47,26 @@ namespace CalliAPI.Utilities
         /// Checks for updates and applies them if available.
         /// </summary>
         /// <returns></returns>
-        public static async Task UpdateCalliAPI()
+        public static async Task PromptForUpdateAsync()
         {
 #if !DEBUG
-            var mgr = new UpdateManager(
-                new GithubSource("https://github.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE", accessToken: null, prerelease: false));
+            var mgr = new UpdateManager(new GithubSource("https://github.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE", accessToken: null, prerelease: false));
+            var updateInfo = await mgr.CheckForUpdatesAsync();
 
-            // check for new version
-            var newVersion = await mgr.CheckForUpdatesAsync();
-            if (newVersion == null)
-                return; // no update available
+            if (updateInfo != null)
+            {
+                var result = MessageBox.Show(
+                    $"A new version ({updateInfo.TargetFullRelease}) is available. Would you like to update now?",
+                    "Update Available",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Information);
 
-            // download new version
-            await mgr.DownloadUpdatesAsync(newVersion);
-
-            // install new version and restart app
-            mgr.ApplyUpdatesAndRestart(newVersion);
+                if (result == DialogResult.Yes)
+                {
+                    await mgr.DownloadUpdatesAsync(updateInfo);
+                    mgr.ApplyUpdatesAndRestart(updateInfo);
+                }
+            } 
 #endif
         }
     }

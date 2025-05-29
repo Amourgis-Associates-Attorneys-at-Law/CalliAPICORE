@@ -4,7 +4,7 @@
     <_LastSelectedProfileId>C:\Users\JakeH.AMOURGISREILLY\Documents\GitHub\CalliAPICORE\Properties\PublishProfiles\GitHubPages.pubxml</_LastSelectedProfileId>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Update="UI\AuthorizationCodeForm.cs">
+    <Compile Update="UI\Forms\AuthorizationCodeForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\Controls\MatterQueryControl.cs">
@@ -13,22 +13,25 @@
     <Compile Update="UI\Controls\ProgressBarWithText.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Update="UI\CustomReportBuilderForm.cs">
+    <Compile Update="UI\Forms\CustomReportBuilderForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="UI\DatePickerForm.cs">
+    <Compile Update="UI\Forms\DatePickerForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="UI\MailerForm.cs">
+    <Compile Update="UI\Forms\MailerForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="UI\MainForm.cs">
+    <Compile Update="UI\Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="UI\ReportForm.cs">
+    <Compile Update="UI\Forms\ReportForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="UI\MissingClioSecret.cs">
+    <Compile Update="UI\Forms\MissingClioSecret.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Forms\SplashForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\Views\FastFetchCreatedSinceView.cs">

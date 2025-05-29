@@ -8,10 +8,14 @@
 using AmourgisCOREServices;
 using CalliAPI.BusinessLogic;
 using CalliAPI.DataAccess;
+using CalliAPI.Interfaces;
 using CalliAPI.UI;
+using CalliAPI.UI.Forms;
+using CalliAPI.Utilities;
 using DocumentFormat.OpenXml.Drawing.Charts;
 using Microsoft.Win32;
 using Serilog.Core;
+using System.Net.Http;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Velopack; // for auto-updates
@@ -36,7 +40,7 @@ namespace CalliAPI
         ///  The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             VelopackApp.Build().Run(); // <--- must be first line of code in Main!
             // ^ Checks for Updates with Velopack (formerly Squirrel.Clowd, formerly Squirrel.Windows)
@@ -59,16 +63,38 @@ namespace CalliAPI
             Console.SetOut(standardOutput);
             Console.SetError(standardOutput);
 
-
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
+
+
+            SplashForm splash = null;
+            var splashThread = new Thread(() =>
+            {
+                splash = new SplashForm();
+                Application.Run(splash);
+            });
+            splashThread.SetApartmentState(ApartmentState.STA);
+            splashThread.Start();
+
+            // Do your async work here
+            _logger.Info("Checking for updates...");
+            await VersionHelper.PromptForUpdateAsync();
+            _logger.Info("Update check complete.");
+
+            await Task.Delay(4000);
+
+            // Close splash screen safely
+            splash?.Invoke(() => splash.Close());
+            splashThread.Join();
+
 
             // Create the Services we need through Dependency Injection - 2025-04-21
             HttpClient httpClient = new HttpClient();
             ClioApiClient clioApiClient = new ClioApiClient(httpClient, logger: _logger);
             AuthService authService = new AuthService(clioApiClient, logger: _logger);
             ClioService clioService = new ClioService(clioApiClient, authService, logger: _logger);
+
             _logger.Info("Services created");
 
             string clientSecret = LoadClientSecretFromRegistry();
@@ -89,7 +115,8 @@ namespace CalliAPI
                 }
             }
 
-            // Create the MainForm and pass the services to it
+            // Create the MainForm and pass the services to 
+            _logger.Info("About to launch MainForm...");
             Application.Run(new MainForm(clioService: clioService, logger: _logger));
         }
 

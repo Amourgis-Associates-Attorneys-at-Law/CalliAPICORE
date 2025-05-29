@@ -17,6 +17,9 @@
 
 # CalliAPI Patch Log
 
+### 3.2 - Splash Screen!
+Also checks for updates on startup, so you can always be sure you're running the latest version of CalliAPI!
+
 #### 3.1.2 - Added custom fields to custom report builder!
 Also, finally fixed that really anying flickering progress bar issue (I hope)! The custom report builder now supports custom fields, allowing for more flexibility in report generation. This is a significant improvement that will enhance the usability of the report builder and make it easier to generate reports tailored to specific needs!
 Finally, this patch also gives us the Page {X} of {Y} label back, which I missed dearly (due to a visual bug)!

@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
 		<AssemblyName>CalliAPI</AssemblyName>
-		<Version>3.1.2</Version>
+		<Version>3.2.0</Version>
 		<TargetFramework>net8.0-windows</TargetFramework>
 		<RootNamespace>CalliAPI</RootNamespace>
 		<Nullable>enable</Nullable>
@@ -52,6 +52,7 @@
 	  <None Remove="UI\Fonts\Lato-ThinItalic.ttf" />
 	  <None Remove="UI\Fonts\Montserrat-Italic-VariableFont_wght.ttf" />
 	  <None Remove="UI\Fonts\Montserrat-VariableFont_wght.ttf" />
+	  <None Remove="UI\Images\CalliopeMuseEpicPoetryhalf.jpeg" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -90,7 +91,7 @@
 
 	<ItemGroup>
 		<EmbeddedResource Update="Properties\Resources.resx">
-			<Generator>ResXFileCodeGenerator</Generator>
+			<Generator>PublicResXFileCodeGenerator</Generator>
 			<LastGenOutput>Resources.Designer.cs</LastGenOutput>
 		</EmbeddedResource>
 	</ItemGroup>
@@ -106,7 +107,6 @@
 
 	<ItemGroup>
 	  <Folder Include="Factories\" />
-	  <Folder Include="UI\Images\" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -148,6 +148,12 @@
 	  <EmbeddedResource Include="UI\Fonts\Lato-ThinItalic.ttf" />
 	  <EmbeddedResource Include="UI\Fonts\Montserrat-Italic-VariableFont_wght.ttf" />
 	  <EmbeddedResource Include="UI\Fonts\Montserrat-VariableFont_wght.ttf" />
+	  <EmbeddedResource Include="UI\Images\CalliopeMuseEpicPoetry.jpeg">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Images\CalliopeMuseEpicPoetryhalf.jpeg">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </EmbeddedResource>
 	</ItemGroup>
 
 	<!-- Custom MSBuild hooks -->
