@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
 		<AssemblyName>CalliAPI</AssemblyName>
-		<Version>3.1.1</Version>
+		<Version>3.1.2</Version>
 		<TargetFramework>net8.0-windows</TargetFramework>
 		<RootNamespace>CalliAPI</RootNamespace>
 		<Nullable>enable</Nullable>
@@ -105,6 +105,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Folder Include="Factories\" />
 	  <Folder Include="UI\Images\" />
 	</ItemGroup>
 

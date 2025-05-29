@@ -28,7 +28,7 @@
     <Compile Update="UI\ReportForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="UI\SecretGatekeeper.cs">
+    <Compile Update="UI\MissingClioSecret.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\Views\FastFetchCreatedSinceView.cs">

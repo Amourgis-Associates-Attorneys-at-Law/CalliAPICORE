@@ -10,12 +10,16 @@
 ## Documentation & External Resources
 
 ## Known Issues
-- 3.0.3 - The Emergency Case Type is not yet translated into the MatterType picklist, so it will not show up properly in the UI. This is a known issue that will be addressed in a future update.
-
+- 3.1.2 - Custom Fields are named by their ID, not their name, so they will not show up properly in the UI. This is a known issue that will be addressed in a future update.
 - 3.0.3 - The automatic update functionality is still in its early stages and may not work perfectly on all systems. If you encounter issues, please report them on the GitHub repository.
 
 
+
 # CalliAPI Patch Log
+
+#### 3.1.2 - Added custom fields to custom report builder!
+Also, finally fixed that really anying flickering progress bar issue (I hope)! The custom report builder now supports custom fields, allowing for more flexibility in report generation. This is a significant improvement that will enhance the usability of the report builder and make it easier to generate reports tailored to specific needs!
+Finally, this patch also gives us the Page {X} of {Y} label back, which I missed dearly (due to a visual bug)!
 
 #### 3.1.1 - Small bug fixes
 Fixed the progress bar issue where it was not displaying the percentage correctly. This should now show the correct progress during report generation! Additionally, the CreatedSince dateTime picker should function properly in the ReportBuilder!

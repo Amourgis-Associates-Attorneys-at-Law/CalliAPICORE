@@ -26,6 +26,7 @@ using Microsoft.Win32;
 using DocumentFormat.OpenXml.Bibliography;
 using System.Net;
 using System.Reflection;
+using DocumentFormat.OpenXml.Drawing;
 
 namespace CalliAPI
 {
@@ -71,6 +72,10 @@ namespace CalliAPI
 
             int percent = Math.Min(100, (int)((current / (double)total) * 100));
             progressBarPagesRetrieved.Maximum = 100;
+
+            if (percent <= _lastPercent) return; // Don't update the progress bar if there's nothing to update
+
+            _lastPercent = percent;
             await AnimateProgressBarAsync(percent);
             UpdateReportLabel($"Page {current} of {total} obtained from Clio.");
         }
@@ -87,11 +92,21 @@ namespace CalliAPI
             int duration = 500; // milliseconds
             int steps = 30;
 
+            // If the target value is very close to the current value, set it directly to avoid unnecessary animation
+            if (Math.Abs(targetValue - start) < 3)
+            {
+                progressBarPagesRetrieved.Value = targetValue;
+                return;
+            }
+
             for (int i = 0; i <= steps; i++)
             {
                 double t = i / (double)steps;
                 // Ease-out cubic: t = 1 - (1 - t)^3
                 double eased = 1 - Math.Pow(1 - t, 3);
+
+
+
                 int value = start + (int)((targetValue - start) * eased);
                 progressBarPagesRetrieved.Value = Math.Min(progressBarPagesRetrieved.Maximum, value);
                 await Task.Delay(duration / steps);
@@ -111,7 +126,7 @@ namespace CalliAPI
 
             // Reposition the label so its right edge aligns with the progress bar's right edge
             lblReportPageRetrieved.Left = Math.Max(progressBarPagesRetrieved.Left, newLeft);
-            lblReportPageRetrieved.Top = progressBarPagesRetrieved.Top + 2; // Adjust as needed
+            //lblReportPageRetrieved.Top = progressBarPagesRetrieved.Top + 2; // Adjust as needed
         }
 
         /// <summary>
@@ -345,7 +360,7 @@ namespace CalliAPI
 
         private async void Debug100Percent(object sender, EventArgs e)
         {
-            for (int x = 1; x < 100; x++)
+            for (int x = 1; x <= 100; x++)
             {
                 await Task.Delay(100); // non-blocking delay
                 SetProgress(x, 100);

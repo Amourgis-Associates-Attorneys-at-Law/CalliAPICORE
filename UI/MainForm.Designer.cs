@@ -236,9 +236,10 @@ namespace CalliAPI
             // 
             // lblReportPageRetrieved
             // 
+            lblReportPageRetrieved.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             lblReportPageRetrieved.AutoSize = true;
             lblReportPageRetrieved.Font = new Font("Cinzel", 9F);
-            lblReportPageRetrieved.Location = new Point(743, 9);
+            lblReportPageRetrieved.Location = new Point(720, 11);
             lblReportPageRetrieved.Name = "lblReportPageRetrieved";
             lblReportPageRetrieved.Size = new Size(122, 14);
             lblReportPageRetrieved.TabIndex = 4;

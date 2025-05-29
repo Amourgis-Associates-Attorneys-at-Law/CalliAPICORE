@@ -117,7 +117,7 @@ C:\Users\JakeH.AMOURGISREILLY\Documents\GitHub\CalliAPICORE\obj\Debug\net8.0-win
 C:\Users\JakeH.AMOURGISREILLY\Documents\GitHub\CalliAPICORE\obj\Debug\net8.0-windows\CalliAPI.pdb
 C:\Users\JakeH.AMOURGISREILLY\Documents\GitHub\CalliAPICORE\obj\Debug\net8.0-windows\CalliAPI.genruntimeconfig.cache
 C:\Users\JakeH.AMOURGISREILLY\Documents\GitHub\CalliAPICORE\obj\Debug\net8.0-windows\ref\CalliAPI.dll
-C:\Users\JakeH.AMOURGISREILLY\Documents\GitHub\CalliAPICORE\obj\Debug\net8.0-windows\CalliAPI.UI.SecretGatekeeper.resources
 C:\Users\JakeH.AMOURGISREILLY\Documents\GitHub\CalliAPICORE\obj\Debug\net8.0-windows\CalliAPI.UI.Controls.MatterQueryControl.resources
 C:\Users\JakeH.AMOURGISREILLY\Documents\GitHub\CalliAPICORE\obj\Debug\net8.0-windows\CalliAPI.UI.CustomReportBuilderForm.resources
 C:\Users\JakeH.AMOURGISREILLY\Documents\GitHub\CalliAPICORE\obj\Debug\net8.0-windows\CalliAPI.UI.Views.FastFetchCreatedSinceView.resources
+C:\Users\JakeH.AMOURGISREILLY\Documents\GitHub\CalliAPICORE\obj\Debug\net8.0-windows\CalliAPI.UI.MissingClioSecret.resources

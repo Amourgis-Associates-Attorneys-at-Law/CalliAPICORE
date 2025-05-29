@@ -74,7 +74,7 @@ namespace CalliAPI
             string clientSecret = LoadClientSecretFromRegistry();
             if (string.IsNullOrWhiteSpace(clientSecret))
             {
-                using (var secretForm = new SecretGatekeeper())
+                using (var secretForm = new MissingClioSecret())
                 {
                     if (secretForm.ShowDialog() == DialogResult.OK)
                     {
