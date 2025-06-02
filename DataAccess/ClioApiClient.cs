@@ -40,11 +40,11 @@ namespace CalliAPI.DataAccess
         //};
 
 
-        public ClioApiClient(HttpClient httpClient, AMO_Logger logger)
+        public ClioApiClient(HttpClient httpClient, AMO_Logger logger, string secret)
         {
             _httpClient = httpClient;
             _logger = logger;
-            clientSecret = Environment.GetEnvironmentVariable("CLIO_CLIENT_SECRET");
+            clientSecret = secret;
 
 
         _retryPolicy = Policy

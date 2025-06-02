@@ -17,6 +17,9 @@
 
 # CalliAPI Patch Log
 
+#### 4.0.1 - Bug Fixes
+Pointed the CLIO_CLIENT_SECRET to the proper place, so now the custom report builder should work properly with Clio queries!
+
 ## 4.0 - Custom Report Builder Enhancements and Bug Fixes; SQL Support!!!
 We can now see into our SQL server with the custom report builder! This is a huge step forward in making CalliAPI more versatile and powerful. The custom report builder now supports SQL queries, allowing users to generate reports based on SQL data directly within the application. This enhancement will significantly improve the usability of the report builder and make it easier to generate reports tailored to specific needs.
 

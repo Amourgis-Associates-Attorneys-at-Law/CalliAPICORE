@@ -158,15 +158,30 @@ namespace CalliAPI.Models
 
 
                 // Include custom fields
+                // Include custom fields
                 if (matter.CustomFields != null)
                 {
                     foreach (var field in matter.CustomFields)
                     {
                         string columnName = field.custom_field.id.ToString();
                         columns.Add(columnName);
-                        row[columnName] = (field.value.ValueKind == JsonValueKind.Null) ? null : field.value.ToString();
+
+                        // Prefer picklist label if available
+                        if (field.picklist_option?.option != null)
+                        {
+                            row[columnName] = field.picklist_option.option;
+                        }
+                        else if (field.value.ValueKind != JsonValueKind.Null)
+                        {
+                            row[columnName] = field.value.ToString();
+                        }
+                        else
+                        {
+                            row[columnName] = null;
+                        }
                     }
                 }
+
 
                 rows.Add(row);
             }

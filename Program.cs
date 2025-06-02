@@ -13,6 +13,7 @@ using CalliAPI.UI;
 using CalliAPI.UI.Forms;
 using CalliAPI.Utilities;
 using DocumentFormat.OpenXml.Drawing.Charts;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.Win32;
 using Serilog.Core;
 using System.Net.Http;
@@ -89,13 +90,6 @@ namespace CalliAPI
             splashThread.Join();
 
 
-            // Create the Services we need through Dependency Injection - 2025-04-21
-            HttpClient httpClient = new HttpClient();
-            ClioApiClient clioApiClient = new ClioApiClient(httpClient, logger: _logger);
-            AuthService authService = new AuthService(clioApiClient, logger: _logger);
-            ClioService clioService = new ClioService(clioApiClient, authService, logger: _logger);
-
-            _logger.Info("Services created");
 
             string clientSecret = LoadClientSecretFromRegistry();
             if (string.IsNullOrWhiteSpace(clientSecret))
@@ -114,6 +108,16 @@ namespace CalliAPI
                     }
                 }
             }
+
+            // Create the Services we need through Dependency Injection - 2025-04-21
+            HttpClient httpClient = new HttpClient();
+            ClioApiClient clioApiClient = new ClioApiClient(httpClient, logger: _logger, secret: clientSecret);
+            AuthService authService = new AuthService(clioApiClient, logger: _logger);
+            ClioService clioService = new ClioService(clioApiClient, authService, logger: _logger);
+
+            _logger.Info("Services created");
+
+
 
             // Create the MainForm and pass the services to 
             _logger.Info("About to launch MainForm...");
