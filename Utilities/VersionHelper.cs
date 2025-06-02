@@ -15,11 +15,11 @@ namespace CalliAPI.Utilities
     /// </summary>
     public static class VersionHelper
     {
-    
+
         /// <summary>
-        /// Gets the full version from the executing assembly (e.g., 1.2.3.0).
-        /// </summary>
-        public static Version GetVersion()
+                /// Gets the full version from the executing assembly (e.g., 1.2.3.0).
+                /// </summary>
+        public static Version GetVersion()
         {
             return Assembly.GetExecutingAssembly().GetName().Version;
         }
@@ -63,7 +63,7 @@ namespace CalliAPI.Utilities
                     ShowInTaskbar = false,
                     TopMost = true
                 })
-                { 
+                {
 
                     topmostForm.Show();
                     await Task.Delay(100); // Ensure the form is shown before focusing
@@ -83,9 +83,10 @@ namespace CalliAPI.Utilities
                         await mgr.DownloadUpdatesAsync(updateInfo);
                         mgr.ApplyUpdatesAndRestart(updateInfo);
                     }
-                } 
+                }
 #endif
+            }
         }
-    }
 
+    }
 }

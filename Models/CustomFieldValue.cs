@@ -16,6 +16,8 @@ namespace CalliAPI.Models
 
         // This can be a number, string, or null — keep as JsonElement for flexibility
         public JsonElement value { get; set; }
+        
+        public string field_name { get; set; }
 
         public CustomFieldMetadata custom_field { get; set; }
 

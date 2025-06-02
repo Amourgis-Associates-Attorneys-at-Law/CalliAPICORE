@@ -63,7 +63,7 @@ namespace CalliAPI.BusinessLogic
                 throw new InvalidOperationException("Cannot initialize ClioService before authentication.");
             }
 
-            await _clioApiClient.LoadCustomFieldNamesAsync();
+            //await _clioApiClient.LoadCustomFieldNamesAsync();
         }
 
         public async Task GetAccessTokenAsync(string authorizationCode)

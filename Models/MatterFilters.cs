@@ -164,7 +164,7 @@ namespace CalliAPI.Models
                 {
                     foreach (var field in matter.CustomFields)
                     {
-                        string columnName = clioApiClient.GetFieldName(field.custom_field.id);
+                        string columnName = field.field_name ?? $"Field_{field.custom_field.id}";
                         columns.Add(columnName);
 
                         // Prefer picklist label if available
@@ -181,6 +181,7 @@ namespace CalliAPI.Models
                             row[columnName] = null;
                         }
                     }
+
                 }
 
 

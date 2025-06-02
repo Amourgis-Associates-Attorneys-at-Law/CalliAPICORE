@@ -17,6 +17,9 @@
 
 # CalliAPI Patch Log
 
+### 4.1.0 - Custom Report Builder Enhancements and Bug Fixes
+We finally have friendly names for the Custom Fields in Clio!!! This means that when you use the custom report builder, the custom fields will now display their friendly names instead of their IDs, making it much easier to understand and use the report builder effectively. This enhancement significantly improves the usability of the custom report builder and makes it easier to generate reports tailored to specific needs.
+
 #### 4.0.1 - Bug Fixes
 Pointed the CLIO_CLIENT_SECRET to the proper place, so now the custom report builder should work properly with Clio queries!
 
