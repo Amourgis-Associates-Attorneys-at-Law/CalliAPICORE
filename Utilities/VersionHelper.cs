@@ -84,9 +84,10 @@ namespace CalliAPI.Utilities
                         mgr.ApplyUpdatesAndRestart(updateInfo);
                     }
                 }
-#endif
-            }
-        }
 
+
+            }
+#endif
+        }
     }
 }
