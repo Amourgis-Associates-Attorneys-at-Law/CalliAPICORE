@@ -55,18 +55,35 @@ namespace CalliAPI.Utilities
 
             if (updateInfo != null)
             {
-                var result = MessageBox.Show(
-                    $"A new version ({updateInfo.TargetFullRelease}) is available. Would you like to update now?",
-                    "Update Available",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Information);
-
-                if (result == DialogResult.Yes)
+                using (Form topmostForm = new Form
                 {
-                    await mgr.DownloadUpdatesAsync(updateInfo);
-                    mgr.ApplyUpdatesAndRestart(updateInfo);
-                }
-            } 
+                    Size = new Size(0, 0),
+                    StartPosition = FormStartPosition.Manual,
+                    Location = new Point(-2000, -2000), // Off-screen
+                    ShowInTaskbar = false,
+                    TopMost = true
+                })
+                { 
+
+                    topmostForm.Show();
+                    await Task.Delay(100); // Ensure the form is shown before focusing
+                    topmostForm.Focus();
+
+                    var result = MessageBox.Show(
+                        topmostForm,
+                        $"A new version ({updateInfo.TargetFullRelease.ToString()}) is available. Would you like to update now?",
+                        "Update Available",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Information);
+
+
+
+                    if (result == DialogResult.Yes)
+                    {
+                        await mgr.DownloadUpdatesAsync(updateInfo);
+                        mgr.ApplyUpdatesAndRestart(updateInfo);
+                    }
+                } 
 #endif
         }
     }

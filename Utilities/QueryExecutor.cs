@@ -4,32 +4,34 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CalliAPI.BusinessLogic;
+using CalliAPI.DataAccess;
 using CalliAPI.Interfaces;
 using CalliAPI.Models;
 
 namespace CalliAPI.Utilities
 {
 
-    public static class QueryExecutor
+    public class QueryExecutor
     {
         public static async System.Threading.Tasks.Task ExecuteAsync<T>(
         IQueryBuilder<T> builder,
-        ClioService clioService)
+        ClioService clioService,
+        ClioApiClient clioApiClient)
         {
             string fields = builder.SelectedFields;
             var filters = builder.SelectedFilters;
 
-            IAsyncEnumerable<T> results = GetResults<T>(clioService, fields);
+            IAsyncEnumerable<T> results = GetResults<T>(clioService, clioApiClient, fields);
 
             foreach (var filter in filters)
             {
                 results = filter(results);
             }
 
-            await ReportLauncher_ShowAsync(results);
+            await ReportLauncher_ShowAsync(results, clioApiClient);
         }
 
-        private static IAsyncEnumerable<T> GetResults<T>(ClioService clioService, string fields)
+        private static IAsyncEnumerable<T> GetResults<T>(ClioService clioService, ClioApiClient clioApiClient, string fields)
         {
             if (typeof(T) == typeof(Matter))
             {
@@ -43,7 +45,7 @@ namespace CalliAPI.Utilities
             throw new NotSupportedException($"Querying for type {typeof(T).Name} is not supported.");
         }
 
-        private static async System.Threading.Tasks.Task ReportLauncher_ShowAsync<T>(IAsyncEnumerable<T> results)
+        private static async System.Threading.Tasks.Task ReportLauncher_ShowAsync<T>(IAsyncEnumerable<T> results, ClioApiClient clioApiClient)
         {
             if (results == null)
             {
@@ -52,7 +54,7 @@ namespace CalliAPI.Utilities
 
             if (results is IAsyncEnumerable<Matter> matters)
             {
-                await ReportLauncher.ShowAsync((IAsyncEnumerable<Matter>)results);
+                await ReportLauncher.ShowAsync((IAsyncEnumerable<Matter>)results, clioApiClient);
             }
             
         }

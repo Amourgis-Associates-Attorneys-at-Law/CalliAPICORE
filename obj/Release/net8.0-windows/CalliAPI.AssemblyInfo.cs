@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CalliAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("4.0.1.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("4.0.1+9f2b973084cbeba26213715a2b74075985db14e2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("4.0.1+605e811767c050a0677a8201ad3a9d5ef90afa7a")]
 [assembly: System.Reflection.AssemblyProductAttribute("CalliAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CalliAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("4.0.1.0")]

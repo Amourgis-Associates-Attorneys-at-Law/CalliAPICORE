@@ -34,6 +34,7 @@ namespace CalliAPI.DataAccess
         private readonly AMO_Logger _logger;
         private string clientSecret = string.Empty;
         private AsyncPolicy<HttpResponseMessage> _retryPolicy;
+        private Dictionary<long, string> _fieldNameCache = new Dictionary<long, string>();
         //private List<string> practiceAreas = new List<string>
         //{
         //    "AK", "CA", "CB", "CL", "CN", "DY", "TD", "WA", "YO"
@@ -65,6 +66,31 @@ namespace CalliAPI.DataAccess
                 }
             });
 
+        }
+
+        public async Task LoadCustomFieldNamesAsync()
+        {
+            try
+            {
+                var response = await _httpClient.GetAsync("https://app.clio.com/api/v4/custom_fields?fields=id,name,parent_type,field_type");
+                response.EnsureSuccessStatusCode();
+
+                var json = await response.Content.ReadAsStringAsync();
+                var result = JsonSerializer.Deserialize<CustomFieldResponse>(json);
+
+                _fieldNameCache = result.data
+                    .Where(f => f.parent_type == "Matter")
+                    .ToDictionary(f => f.id, f => f.name);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error($"Failed to load custom field names: {ex.Message}");
+            }
+        }
+
+        public string GetFieldName(long id)
+        {
+            return _fieldNameCache.TryGetValue(id, out var name) ? name : id.ToString();
         }
 
         #region delegates
@@ -169,7 +195,6 @@ namespace CalliAPI.DataAccess
                 throw;
             }
         }
-
 
         #region Tasks
 

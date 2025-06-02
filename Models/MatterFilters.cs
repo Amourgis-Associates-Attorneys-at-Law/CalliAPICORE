@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using CalliAPI.BusinessLogic;
 using CalliAPI.DataAccess;
 
 namespace CalliAPI.Models
@@ -117,7 +118,7 @@ namespace CalliAPI.Models
         /// </summary>
         /// <param name="matters"></param>
         /// <returns></returns>
-        public static async Task<DataTable> ToSmartDataTableAsync(this IAsyncEnumerable<Matter> matters)
+        public static async Task<DataTable> ToSmartDataTableAsync(this IAsyncEnumerable<Matter> matters, ClioApiClient clioApiClient)
         {
             var table = new DataTable();
             var rows = new List<Dictionary<string, object>>();
@@ -163,7 +164,7 @@ namespace CalliAPI.Models
                 {
                     foreach (var field in matter.CustomFields)
                     {
-                        string columnName = field.custom_field.id.ToString();
+                        string columnName = clioApiClient.GetFieldName(field.custom_field.id);
                         columns.Add(columnName);
 
                         // Prefer picklist label if available

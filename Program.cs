@@ -83,6 +83,9 @@ namespace CalliAPI
             await VersionHelper.PromptForUpdateAsync();
             _logger.Info("Update check complete.");
 
+
+
+
             await Task.Delay(4000);
 
             // Close splash screen safely
@@ -116,12 +119,12 @@ namespace CalliAPI
             ClioService clioService = new ClioService(clioApiClient, authService, logger: _logger);
 
             _logger.Info("Services created");
-
+            _logger.Info("Loading custom fields from Clio...");
 
 
             // Create the MainForm and pass the services to 
             _logger.Info("About to launch MainForm...");
-            Application.Run(new MainForm(clioService: clioService, logger: _logger));
+            Application.Run(new MainForm(clioService: clioService, clioApiClient: clioApiClient, logger: _logger));
         }
 
 
