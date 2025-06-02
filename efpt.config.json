@@ -1,0 +1,89 @@
+﻿{
+   "CodeGenerationMode": 4,
+   "ContextClassName": "AmourgisDBContext",
+   "ContextNamespace": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": "DataAccess",
+   "OutputPath": "Models\/AmourgisDB",
+   "PreserveCasingWithRegex": true,
+   "ProjectRootNamespace": "CalliAPI",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 2,
+   "SelectedToBeGenerated": 0,
+   "T4TemplatePath": null,
+   "Tables": [
+      {
+         "Name": "[Bankruptcy].[CaseInformation]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Bankruptcy].[DebtorInformation]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Bankruptcy].[Jurisdictions]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Bankruptcy].[MessageInformation]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Bankruptcy].[Offices]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Clio].[Documents]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Clio].[Payments]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Clio].[Staging]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PCLAW]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[PersonalInjury].[CrashReports]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[YesterdayCases]",
+         "ObjectType": 3
+      }
+   ],
+   "UiHint": null,
+   "UncountableWords": null,
+   "UseAsyncStoredProcedureCalls": true,
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": true,
+   "UseDatabaseNamesForRoutines": true,
+   "UseDateOnlyTimeOnly": true,
+   "UseDbContextSplitting": false,
+   "UseDecimalDataAnnotationForSprocResult": true,
+   "UseFluentApiOnly": false,
+   "UseHandleBars": false,
+   "UseHierarchyId": false,
+   "UseInflector": false,
+   "UseInternalAccessModifiersForSprocsAndFunctions": false,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UsePrefixNavigationNaming": false,
+   "UseSchemaFolders": true,
+   "UseSchemaNamespaces": true,
+   "UseSpatial": false,
+   "UseT4": false,
+   "UseT4Split": false
+}

@@ -28,9 +28,9 @@ namespace CalliAPI.UI.Views
         private const int MaxLookbackDays = 365; // Maximum lookback period in days
         public string reportName;
 
-        private void btnLaunch_Click(object sender, EventArgs e)
+        private async void btnLaunch_Click(object sender, EventArgs e)
         {
-            FastFetchAllMatters();
+            await FastFetchAllMatters();
         }
 
         private async Task FastFetchAllMatters()

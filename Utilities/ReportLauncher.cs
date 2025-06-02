@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,6 +39,37 @@ namespace CalliAPI.Utilities
             form.SetData(table);
             form.Show();
         }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public static DataTable ToDataTable<T>(List<T> items)
+        {
+            var table = new DataTable(typeof(T).Name);
+            var props = typeof(T).GetProperties();
+
+            foreach (var prop in props)
+            {
+                table.Columns.Add(prop.Name, Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType);
+            }
+
+            foreach (var item in items)
+            {
+                var row = table.NewRow();
+                foreach (var prop in props)
+                {
+                    row[prop.Name] = prop.GetValue(item) ?? DBNull.Value;
+                }
+                table.Rows.Add(row);
+            }
+
+            return table;
+        }
+
 
     }
 

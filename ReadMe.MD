@@ -17,6 +17,9 @@
 
 # CalliAPI Patch Log
 
+## 4.0 - Custom Report Builder Enhancements and Bug Fixes; SQL Support!!!
+We can now see into our SQL server with the custom report builder! This is a huge step forward in making CalliAPI more versatile and powerful. The custom report builder now supports SQL queries, allowing users to generate reports based on SQL data directly within the application. This enhancement will significantly improve the usability of the report builder and make it easier to generate reports tailored to specific needs.
+
 ### 3.2.1 - Splash Screen!
 Also checks for updates on startup, so you can always be sure you're running the latest version of CalliAPI!
 

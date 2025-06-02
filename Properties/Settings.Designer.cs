@@ -12,7 +12,7 @@ namespace CalliAPI.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.13.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.14.0.0")]
     public sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -25,7 +25,8 @@ namespace CalliAPI.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=vm-prod-sql01;Initial Catalog=CalliAPI;Integrated Security=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=vm-prod-sql01;Initial Catalog=AmourgisDB;Integrated Security=True;Tru" +
+            "st Server Certificate=True;")]
         public string SqlConnectionString {
             get {
                 return ((string)(this["SqlConnectionString"]));

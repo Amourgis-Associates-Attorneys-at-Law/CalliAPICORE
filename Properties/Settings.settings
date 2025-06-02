@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="SqlConnectionString" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">Data Source=vm-prod-sql01;Initial Catalog=CalliAPI;Integrated Security=True</Value>
+      <Value Profile="(Default)">Data Source=vm-prod-sql01;Initial Catalog=AmourgisDB;Integrated Security=True;Trust Server Certificate=True;</Value>
     </Setting>
     <Setting Name="ClientId" Type="System.String" Scope="Application">
       <Value Profile="(Default)">lZZ1pO1AitUzeZeGAYFCvCXWVc2xLJQHiEqAj2Uc</Value>
