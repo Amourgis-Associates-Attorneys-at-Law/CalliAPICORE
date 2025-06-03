@@ -20,6 +20,7 @@ using CalliAPI.DataAccess;
 using Task = System.Threading.Tasks.Task;
 using Microsoft.Identity.Client;
 using System.Net;
+using System.Globalization;
 
 namespace CalliAPI.BusinessLogic
 {
@@ -129,17 +130,26 @@ namespace CalliAPI.BusinessLogic
 
         public async Task GetUnworked713Matters()
         {
-
+            _logger.Info("ClioService: GetUnworked713Matters called.");
             // Initialize the matter stream and filter it
-            IAsyncEnumerable<Matter> matters = _clioApiClient.GetAllOpenMattersAsync().
-                FilterByPracticeAreaSuffixAsync(new string[] { "7", "13" }).
-                FilterByStageNameAsync(prefileStages);
+
+
+            var matters = _clioApiClient.GetAllOpenMattersAsync()
+                .LogEachAsync(_logger, "All Matters")
+                .FilterByPracticeAreaSuffixAsync(new[] { "7", "13" })
+                .LogEachAsync(_logger, "After Suffix Filter")
+                .FilterByStageNameAsync(prefileStages)
+                .LogEachAsync(_logger, "After Stage Filter");
+
 
             IAsyncEnumerable<Matter> filteredMatters = FilterMattersWithNoOpenTasksAsync(matters);
 
             // Convert the matter stream to a DataTable and show it
             await ReportLauncher.ShowAsync(filteredMatters, _clioApiClient);
         }
+
+
+
 
 
         #endregion
@@ -195,5 +205,19 @@ namespace CalliAPI.BusinessLogic
         }
         #endregion
 
+        #region Calendar Methods
+        public async Task<List<ClioCalendar>> GetCalendarsAsync()
+        {
+            return await _clioApiClient.GetCalendarsAsync(_authService.AccessToken);
+        }
+
+        internal async IAsyncEnumerable<ClioCalendarEvent> GetCalendarEntriesAsync(List<long> selectedCalendars)
+        {
+            await foreach (var calendarEvent in _clioApiClient.GetCalendarEntriesAsync(selectedCalendars, _authService.AccessToken))
+            {
+                yield return calendarEvent;
+            }
+        }
+        #endregion
     }
 }

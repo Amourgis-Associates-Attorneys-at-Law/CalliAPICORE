@@ -19,16 +19,25 @@ namespace CalliAPI.Models
         public string created_at { get; set; }
         public string updated_at { get; set; }
         public bool has_tasks { get; set; }
-        public string matter_stage_name { get; set; }
-        
-        public string practice_area_name { get; set; }
 
         public Client client { get; set; }
+
+        public PracticeArea practice_area { get; set; }
+
+        public MatterStage matter_stage { get; set; }
 
         //public Dictionary<CustomField, string> CustomFields { get; set; } = new Dictionary<CustomField, string>();
 
         [JsonPropertyName("custom_field_values")]
         public List<CustomFieldValue> CustomFields { get; set; }
 
+
+    }
+
+    public class MatterStage
+    {
+        public long id { get; set; }
+        public string name { get; set; }
+        public string practice_area_id { get; set; }
     }
 }

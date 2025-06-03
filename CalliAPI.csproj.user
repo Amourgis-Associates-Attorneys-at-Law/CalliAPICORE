@@ -4,6 +4,9 @@
     <_LastSelectedProfileId>C:\Users\JakeH.AMOURGISREILLY\Documents\GitHub\CalliAPICORE\Properties\PublishProfiles\GitHubPages.pubxml</_LastSelectedProfileId>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Update="UI\Controls\CalendarQueryControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="UI\Forms\AuthorizationCodeForm.cs">
       <SubType>Form</SubType>
     </Compile>

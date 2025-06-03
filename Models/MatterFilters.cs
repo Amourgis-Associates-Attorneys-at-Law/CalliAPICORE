@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using AmourgisCOREServices;
 using CalliAPI.BusinessLogic;
 using CalliAPI.DataAccess;
 
@@ -12,7 +13,25 @@ namespace CalliAPI.Models
 {
     internal static class MatterFilters
     {
-
+        /// <summary>
+        /// Async logging function so we can log counts without disrupting streaming. Writes a LOT of text (one line per item in source plus one line to total)
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="logger"></param>
+        /// <param name="label"></param>
+        /// <returns></returns>
+        public static async IAsyncEnumerable<T> LogEachAsync<T>(this IAsyncEnumerable<T> source, AMO_Logger logger, string label)
+        {
+            int count = 0;
+            await foreach (var item in source)
+            {
+                count++;
+                logger.Info($"{label} - Item #{count}: {item}");
+                yield return item;
+            }
+            logger.Info($"{label} - Total items: {count}");
+        }
 
         /// <summary>
         /// 
@@ -94,7 +113,9 @@ namespace CalliAPI.Models
         {
             await foreach (var matter in matters)
             {
-                if (matter.practice_area_name != null && suffixes.Any(suffix => matter.practice_area_name.EndsWith(suffix)))
+                if (matter.practice_area != null 
+                    && matter.practice_area.name != null 
+                    && suffixes.Any(suffix => matter.practice_area.name.EndsWith(suffix)))
                 {
                     yield return matter;
                 }
@@ -105,7 +126,9 @@ namespace CalliAPI.Models
         {
             await foreach (var matter in matters)
             {
-                if (matter.matter_stage_name != null && stageNames.Any(stageName => matter.matter_stage_name.Trim().ToLower().Equals(stageName.Trim().ToLower())))
+                if (matter.matter_stage != null 
+                    && matter.matter_stage.name != null 
+                    && stageNames.Any(stageName => matter.matter_stage.name.Trim().ToLower().Equals(stageName.Trim().ToLower())))
                 {
                     yield return matter;
                 }
@@ -118,7 +141,9 @@ namespace CalliAPI.Models
         /// </summary>
         /// <param name="matters"></param>
         /// <returns></returns>
-        public static async Task<DataTable> ToSmartDataTableAsync(this IAsyncEnumerable<Matter> matters, ClioApiClient clioApiClient)
+        public static async Task<DataTable> ToSmartDataTableAsync(this IAsyncEnumerable<Matter> matters, 
+            ClioApiClient clioApiClient,
+            List<CustomField>? includedCustomFields = null)
         {
             var table = new DataTable();
             var rows = new List<Dictionary<string, object>>();
@@ -134,7 +159,7 @@ namespace CalliAPI.Models
                 foreach (var prop in typeof(Matter).GetProperties())
                 {
                     var value = prop.GetValue(matter);
-                    if (value != null & prop.Name != "client") // Skip client info for now
+                    if (value != null && prop.Name != "client" && prop.Name != "matter_stage") // Skip client info for now
                     {
                         string columnName = prop.Name;
                         columns.Add(columnName);
@@ -157,6 +182,35 @@ namespace CalliAPI.Models
                     }
                 }
 
+                // Add PracticeArea properties (flattened)
+                if (matter.practice_area != null)
+                {
+                    foreach (var practiceAreaProp in typeof(PracticeArea).GetProperties())
+                    {
+                        var practiceAreaValue = practiceAreaProp.GetValue(matter.practice_area);
+                        if (practiceAreaValue != null)
+                        {
+                            string columnName = practiceAreaProp.Name;
+                            columns.Add(columnName);
+                            row[columnName] = practiceAreaValue;
+                        }
+                    }
+                }
+
+                // Add MatterStage properties (flattened)
+                if (matter.matter_stage != null)
+                {
+                    foreach (var matterStageProp in typeof(MatterStage).GetProperties())
+                    {
+                        var matterStageValue = matterStageProp.GetValue(matter.matter_stage);
+                        if (matterStageValue != null)
+                        {
+                            string columnName = matterStageProp.Name;
+                            columns.Add(columnName);
+                            row[columnName] = matterStageValue;
+                        }
+                    }
+                }
 
                 // Include custom fields
                 // Include custom fields
@@ -164,6 +218,15 @@ namespace CalliAPI.Models
                 {
                     foreach (var field in matter.CustomFields)
                     {
+
+                        if (includedCustomFields != null &&
+                         (!CustomFieldMap.TryGetField(field.custom_field.id, out var enumField) ||
+                         !includedCustomFields.Contains(enumField)))
+                        {
+                            continue; // Skip fields not in the list
+                        }
+
+
                         string columnName = field.field_name ?? $"Field_{field.custom_field.id}";
                         columns.Add(columnName);
 
@@ -219,7 +282,7 @@ namespace CalliAPI.Models
 
             await foreach (var matter in matters)
             {
-                table.Rows.Add(matter.id, matter.practice_area_name, matter.matter_stage_name);
+                table.Rows.Add(matter.id, matter.practice_area.name, matter.matter_stage.name);
             }
 
             return table;

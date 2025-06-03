@@ -2,7 +2,6 @@
 # Wishlist
 
 ## Functionality
-- Add error handling if the xlsx file being saved in ReportForm is already locked
 - Add filters to TaskFilters
 
 ## UI
@@ -16,6 +15,10 @@
 
 
 # CalliAPI Patch Log
+
+### 4.2.1 - Bug Fixes and Improvements
+- Error handling for the ReportForm when the xlsx file is already locked has been added. This will prevent crashes and ensure that users can handle file access issues gracefully.
+- The 7 & 13 custom report was not working properly, so it has been fixed. This should resolve any issues users were experiencing with this specific report.
 
 ### 4.2 - Reporting Updates!
 Custom Fields now appear in alphabetical order on the ReportForm, to make it easier to filter. We also have individual filters for each column! This will greatly improve the usability of the report builder and make it easier to generate reports tailored to specific needs. 

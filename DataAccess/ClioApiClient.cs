@@ -68,30 +68,6 @@ namespace CalliAPI.DataAccess
 
         }
 
-        //public async Task LoadCustomFieldNamesAsync()
-        //{
-        //    try
-        //    {
-        //        var response = await _httpClient.GetAsync("https://app.clio.com/api/v4/custom_fields?fields=id,name,parent_type,field_type");
-        //        response.EnsureSuccessStatusCode();
-
-        //        var json = await response.Content.ReadAsStringAsync();
-        //        var result = JsonSerializer.Deserialize<CustomFieldResponse>(json);
-
-        //        _fieldNameCache = result.data
-        //            .Where(f => f.parent_type == "Matter")
-        //            .ToDictionary(f => f.id, f => f.name);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _logger.Error($"Failed to load custom field names: {ex.Message}");
-        //    }
-        //}
-
-        //public string GetFieldName(long id)
-        //{
-        //    return _fieldNameCache.TryGetValue(id, out var name) ? name : id.ToString();
-        //}
 
         #region delegates
 
@@ -180,7 +156,7 @@ namespace CalliAPI.DataAccess
         }
 
 
-
+        #region Parse Methods
         public Matter ParseMatter(JsonElement element)
         {
             try
@@ -195,6 +171,36 @@ namespace CalliAPI.DataAccess
                 throw;
             }
         }
+        private ClioCalendar ParseClioCalendar(JsonElement element)
+        {
+            try
+            {
+                ClioCalendar clioCalendar = JsonSerializer.Deserialize<ClioCalendar>(element.GetRawText());
+
+                return clioCalendar;
+            }
+            catch (Exception ex)
+            {
+                _logger.Error($"Error parsing clio calendar: {ex.Message}");
+                throw;
+            }
+        }
+
+        private ClioCalendarEvent ParseClioCalendarEvent(JsonElement element)
+        {
+            try
+            {
+                ClioCalendarEvent clioCalendarEvent = JsonSerializer.Deserialize<ClioCalendarEvent>(element.GetRawText());
+
+                return clioCalendarEvent;
+            }
+            catch (Exception ex)
+            {
+                _logger.Error($"Error parsing clio calendar event: {ex.Message}");
+                throw;
+            }
+        }
+        #endregion
 
         #region Tasks
 
@@ -228,7 +234,7 @@ namespace CalliAPI.DataAccess
 
 
         #region reporting functions
-
+        #region matters
         /// <summary>
         /// Get a list of all the matters as Matter objects. Use this with MatterFilters.cs to filter the list of matters.
         /// </summary>
@@ -326,7 +332,143 @@ namespace CalliAPI.DataAccess
 
             _logger.Info("API CALL END -- GET ALL MATTERS ASYNC --");
         }
+        #endregion
 
+        #region calendars
+        /// <summary>
+        /// Get all visible calendars and store them as ClioCalendar objects.
+        /// </summary>
+        /// <param name="accessToken"></param>
+        /// <returns>A List of ClioCalendar objects that the user is allowed to view.</returns>
+        internal async Task<List<ClioCalendar>> GetCalendarsAsync(string accessToken)
+        {
+            var calendars = new List<ClioCalendar>();
+
+            string taskUrl = Properties.Settings.Default.ApiUrl + "calendars?fields=visible,id,name,permission&visible=true";
+
+            var response = await _retryPolicy.ExecuteAsync(() => _httpClient.GetAsync(taskUrl));
+            if (!response.IsSuccessStatusCode)
+            {
+                _logger.Error($"Failed to fetch calendars: {response.StatusCode} - {await response.Content.ReadAsStringAsync()}");
+                return calendars;
+            }
+
+            var content = await response.Content.ReadAsStringAsync();
+
+            try
+            {
+                using var json = JsonDocument.Parse(content);
+                if (json.RootElement.TryGetProperty("data", out var dataElement))
+                {
+                    foreach (var element in dataElement.EnumerateArray())
+                    {
+                        calendars.Add(ParseClioCalendar(element));
+                    }
+                }
+            }
+            catch (JsonException ex)
+            {
+                _logger.Error($"Failed to parse JSON: {ex.Message}");
+            }
+
+            return calendars;
+        }
+
+        internal async IAsyncEnumerable<ClioCalendarEvent> GetCalendarEntriesAsync(List<long> selectedCalendars, string accessToken)
+        {
+
+            foreach (long calendarId in selectedCalendars)
+            {
+                // Build the URL for fetching calendar entries for the selected calendar
+                string taskUrl = Properties.Settings.Default.ApiUrl + "calendar_entries" +
+                    "?calendar_id=" + calendarId.ToString() +
+                    "&fields=id,summary,description,location,start_at,end_at,all_day,matter{id,description,display_number,status,created_at,updated_at}";
+
+                string nextPageUrl = taskUrl; // Initialize the next page URL
+
+                int pageCount = 0;
+                int maxPages = 9999;
+                int totalRecords;
+                int totalPages = 0;
+
+                while (!string.IsNullOrEmpty(nextPageUrl) && pageCount < maxPages) // While there exists another page of results...
+                {
+                    pageCount++;
+                    _logger.Info($"Fetching page {pageCount}: {nextPageUrl}");
+
+
+                    // Get the next page (retrying with Polly)
+                    var response = await _retryPolicy.ExecuteAsync(() => _httpClient.GetAsync(nextPageUrl));
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        _logger.Error($"Failed to fetch matters: {response.StatusCode} - {await response.Content.ReadAsStringAsync()}");
+                        yield break;
+                    }
+
+                    var content = await response.Content.ReadAsStringAsync();
+
+                    JsonDocument json;
+
+                    try // Parse the JSON response
+                    {
+                        json = JsonDocument.Parse(content);
+                    }
+                    catch (JsonException ex)
+                    {
+                        _logger.Error($"Failed to parse JSON: {ex.Message}");
+                        yield break;
+                    }
+
+                    // Only extract totalRecords on the first page
+                    if (pageCount == 1 &&
+                        json.RootElement.TryGetProperty("meta", out var metaElement) &&
+                        metaElement.TryGetProperty("records", out var recordsElement) &&
+                        recordsElement.TryGetInt32(out totalRecords))
+                    {
+                        totalPages = (int)Math.Ceiling(totalRecords / 200.0);
+                        _logger.Info($"Total records: {totalRecords}, estimated pages: {totalPages}");
+                    }
+
+                    // Update progress bar here (if you pass a callback or use an event)
+                    ProgressUpdated?.Invoke(pageCount, totalPages);
+
+
+
+                    // If there's a data element, parse it
+
+                    // Using the using block to ensure it's disposed of later...
+                    using (json)
+                    {
+                        if (json.RootElement.TryGetProperty("data", out var dataElement))
+                        {
+                            foreach (var element in dataElement.EnumerateArray())
+                            {
+                                yield return ParseClioCalendarEvent(element);
+                            }
+                        }
+
+                        nextPageUrl = json.RootElement
+                            .GetProperty("meta")
+                            .GetProperty("paging")
+                            .TryGetProperty("next", out var nextElement)
+                            ? nextElement.GetString()
+                            : null;
+
+
+                    }
+                }
+            }
+        }
+
+
+        #endregion
+
+
+        #endregion
+
+
+
+        #region archived methods
         /// <summary>
         /// Get a list of all the open matters as Matter objects. Use this with MatterFilters.cs to filter the list of matters.
         /// </summary>
@@ -735,8 +877,8 @@ namespace CalliAPI.DataAccess
             var matters = await GetAllActive713MattersAsync(accessToken); // 1. get all matters with a practice area ending in 7 or 13
 
             var filteredMatters = matters
-                .Where(m => (m.matter_stage_name != null)) // has a stage
-                .Where(m => (validStages.Contains(m.matter_stage_name.ToLower()))); // 2. has a stage in "Prefile" or "PIF - Prefile" or "Case prep" or "PIF - Case prep" or "Signing and Filing"
+                .Where(m => (m.matter_stage != null && m.matter_stage.name != null)) // has a stage
+                .Where(m => (validStages.Contains(m.matter_stage.name.ToLower()))); // 2. has a stage in "Prefile" or "PIF - Prefile" or "Case prep" or "PIF - Case prep" or "Signing and Filing"
 
 
             // Create a list to store matters with no outstanding tasks
@@ -776,6 +918,5 @@ namespace CalliAPI.DataAccess
 
         }
         #endregion
-
     }
 }

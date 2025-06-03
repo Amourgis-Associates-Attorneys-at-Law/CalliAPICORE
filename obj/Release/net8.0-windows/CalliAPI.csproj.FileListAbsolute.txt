@@ -195,3 +195,4 @@ C:\Users\JakeH.AMOURGISREILLY\Documents\GitHub\CalliAPICORE\bin\Release\net8.0-w
 C:\Users\JakeH.AMOURGISREILLY\Documents\GitHub\CalliAPICORE\bin\Release\net8.0-windows\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\JakeH.AMOURGISREILLY\Documents\GitHub\CalliAPICORE\bin\Release\net8.0-windows\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\JakeH.AMOURGISREILLY\Documents\GitHub\CalliAPICORE\bin\Release\net8.0-windows\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\JakeH.AMOURGISREILLY\Documents\GitHub\CalliAPICORE\obj\Release\net8.0-windows\CalliAPI.UI.Controls.CalendarQueryControl.resources
