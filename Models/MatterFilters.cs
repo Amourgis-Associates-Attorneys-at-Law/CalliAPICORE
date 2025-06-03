@@ -189,7 +189,7 @@ namespace CalliAPI.Models
             }
 
             // Add columns to the table
-            foreach (var column in columns)
+            foreach (var column in columns.OrderBy(c => c, StringComparer.OrdinalIgnoreCase))
             {
                 table.Columns.Add(column);
             }

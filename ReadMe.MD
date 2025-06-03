@@ -12,12 +12,15 @@
 ## Known Issues
 - 3.1.2 - Custom Fields are named by their ID, not their name, so they will not show up properly in the UI. This is a known issue that will be addressed in a future update.
 - 3.0.3 - The automatic update functionality is still in its early stages and may not work perfectly on all systems. If you encounter issues, please report them on the GitHub repository.
-
+- 4.1.1 - The row filters are invisible???
 
 
 # CalliAPI Patch Log
 
-### 4.1.0 - Custom Report Builder Enhancements and Bug Fixes
+### 4.2 - Reporting Updates!
+Custom Fields now appear in alphabetical order on the ReportForm, to make it easier to filter. We also have individual filters for each column! This will greatly improve the usability of the report builder and make it easier to generate reports tailored to specific needs. 
+
+### 4.1 - Custom Report Builder Enhancements and Bug Fixes
 We finally have friendly names for the Custom Fields in Clio!!! This means that when you use the custom report builder, the custom fields will now display their friendly names instead of their IDs, making it much easier to understand and use the report builder effectively. This enhancement significantly improves the usability of the custom report builder and makes it easier to generate reports tailored to specific needs.
 
 #### 4.0.1 - Bug Fixes
