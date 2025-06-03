@@ -16,6 +16,11 @@
 
 # CalliAPI Patch Log
 
+### 4.2.2 - Improvements
+- Removed extra logging in the Release version, to allow for better performance and cleaner logs. This should improve the overall user experience by reducing unnecessary log clutter and focusing on essential information.
+- The logs are still visible when run in Debug mode, allowing developers to troubleshoot and monitor the application effectively during development.
+- Fixed an auto-update bug that caused the application to crash when trying to update. This should resolve any issues users were experiencing with the auto-update feature, ensuring a smoother update process.
+
 ### 4.2.1 - Bug Fixes and Improvements
 - Error handling for the ReportForm when the xlsx file is already locked has been added. This will prevent crashes and ensure that users can handle file access issues gracefully.
 - The 7 & 13 custom report was not working properly, so it has been fixed. This should resolve any issues users were experiencing with this specific report.

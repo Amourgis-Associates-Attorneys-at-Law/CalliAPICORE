@@ -135,12 +135,18 @@ namespace CalliAPI.BusinessLogic
 
 
             var matters = _clioApiClient.GetAllOpenMattersAsync()
+#if DEBUG
                 .LogEachAsync(_logger, "All Matters")
+#endif
                 .FilterByPracticeAreaSuffixAsync(new[] { "7", "13" })
+#if DEBUG
                 .LogEachAsync(_logger, "After Suffix Filter")
+#endif
                 .FilterByStageNameAsync(prefileStages)
-                .LogEachAsync(_logger, "After Stage Filter");
-
+#if DEBUG
+                .LogEachAsync(_logger, "After Stage Filter")
+#endif
+                ;
 
             IAsyncEnumerable<Matter> filteredMatters = FilterMattersWithNoOpenTasksAsync(matters);
 
@@ -152,7 +158,7 @@ namespace CalliAPI.BusinessLogic
 
 
 
-        #endregion
+#endregion
 
         #region reports - all Matters
         public async Task GetAllMattersAsync(string fields="", string status="", string addedHtml="")
@@ -195,7 +201,7 @@ namespace CalliAPI.BusinessLogic
 
 
         #endregion
-        #endregion
+#endregion
         #region FastFetch reports
         public async Task FastFetchAllMatters(DateTime dateSince)
         {

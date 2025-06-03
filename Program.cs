@@ -80,7 +80,7 @@ namespace CalliAPI
 
             // Do your async work here
             _logger.Info("Checking for updates...");
-            await VersionHelper.PromptForUpdateAsync();
+            await VersionHelper.SplashPromptForUpdateAsync(splash);
             _logger.Info("Update check complete.");
 
 
