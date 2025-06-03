@@ -69,30 +69,18 @@ namespace CalliAPI
             ApplicationConfiguration.Initialize();
 
 
-            SplashForm splash = null;
-            var splashThread = new Thread(() =>
-            {
-                splash = new SplashForm();
-                Application.Run(splash);
-            });
-            splashThread.SetApartmentState(ApartmentState.STA);
-            splashThread.Start();
+            // Show splash on the main thread
+            SplashForm splash = new SplashForm();
+            splash.Show();
+            splash.Refresh(); // Ensure it's painted
 
-            // Do your async work here
             _logger.Info("Checking for updates...");
             await VersionHelper.SplashPromptForUpdateAsync(splash);
             _logger.Info("Update check complete.");
 
-
-
-
             await Task.Delay(4000);
 
-            // Close splash screen safely
-            splash?.Invoke(() => splash.Close());
-            splashThread.Join();
-
-
+            splash.Close();
 
             string clientSecret = LoadClientSecretFromRegistry();
             if (string.IsNullOrWhiteSpace(clientSecret))
