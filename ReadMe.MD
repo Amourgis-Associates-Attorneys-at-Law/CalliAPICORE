@@ -13,7 +13,7 @@
 
 # CalliAPI Patch Log
 
-### 4.2.3 - Bug Fixes and Improvements
+### 4.2.4 - Bug Fixes and Improvements
 Attempting to fix the auto-update bug that arose in 4.2.2
 
 ### 4.2.2 - Bug Fixes and Improvements
