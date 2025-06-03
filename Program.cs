@@ -70,64 +70,10 @@ namespace CalliAPI
 
 
             // Show splash on the main thread
-            SplashForm splash = new SplashForm();
-            splash.Show();
-            splash.Refresh(); // Ensure it's painted
-
-            _logger.Info("Checking for updates...");
-            await VersionHelper.SplashPromptForUpdateAsync(splash);
-            _logger.Info("Update check complete.");
-
-            await Task.Delay(4000);
-
-            splash.Close();
-
-            string clientSecret = LoadClientSecretFromRegistry();
-            if (string.IsNullOrWhiteSpace(clientSecret))
-            {
-                using (var secretForm = new MissingClioSecret())
-                {
-                    if (secretForm.ShowDialog() == DialogResult.OK)
-                    {
-                        SaveClientSecretToRegistry(secretForm.ClientSecret);
-                        clientSecret = secretForm.ClientSecret;
-                    }
-                    else
-                    {
-                        MessageBox.Show("You must enter a CLIO_CLIENT_SECRET to continue.", "Missing Secret", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        Environment.Exit(1);
-                    }
-                }
-            }
-
-            // Create the Services we need through Dependency Injection - 2025-04-21
-            HttpClient httpClient = new HttpClient();
-            ClioApiClient clioApiClient = new ClioApiClient(httpClient, logger: _logger, secret: clientSecret);
-            AuthService authService = new AuthService(clioApiClient, logger: _logger);
-            ClioService clioService = new ClioService(clioApiClient, authService, logger: _logger);
-
-            _logger.Info("Services created");
-            _logger.Info("Loading custom fields from Clio...");
-
-
-            // Create the MainForm and pass the services to 
-            _logger.Info("About to launch MainForm...");
-            Application.Run(new MainForm(clioService: clioService, clioApiClient: clioApiClient, logger: _logger));
+            Application.Run(new SplashForm(_logger));
         }
 
 
-        public static void SaveClientSecretToRegistry(string secret)
-        {
-            RegistryKey key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\CalliAPI");
-            key.SetValue("ClioClientSecret", secret);
-            key.Close();
-        }
-
-        public static string LoadClientSecretFromRegistry()
-        {
-            RegistryKey key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\CalliAPI");
-            return key?.GetValue("ClioClientSecret") as string;
-        }
 
     }
 }

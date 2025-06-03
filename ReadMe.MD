@@ -13,8 +13,8 @@
 
 # CalliAPI Patch Log
 
-### 4.2.4 - Bug Fixes and Improvements
-Attempting to fix the auto-update bug that arose in 4.2.2
+## 4.3 - Bug Fixes and Improvements
+Finally fixed the auto-update bug that arose in 4.2.2!
 
 ### 4.2.2 - Bug Fixes and Improvements
 - Removed extra logging in the Release version, to allow for better performance and cleaner logs. This should improve the overall user experience by reducing unnecessary log clutter and focusing on essential information.
