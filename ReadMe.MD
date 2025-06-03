@@ -9,17 +9,17 @@
 ## Documentation & External Resources
 
 ## Known Issues
-- 3.1.2 - Custom Fields are named by their ID, not their name, so they will not show up properly in the UI. This is a known issue that will be addressed in a future update.
 - 3.0.3 - The automatic update functionality is still in its early stages and may not work perfectly on all systems. If you encounter issues, please report them on the GitHub repository.
-- 4.1.1 - The row filters are invisible???
-
 
 # CalliAPI Patch Log
 
-### 4.2.2 - Improvements
+### 4.2.3 - Bug Fixes and Improvements
+Attempting to fix the auto-update bug that arose in 4.2.2
+
+### 4.2.2 - Bug Fixes and Improvements
 - Removed extra logging in the Release version, to allow for better performance and cleaner logs. This should improve the overall user experience by reducing unnecessary log clutter and focusing on essential information.
 - The logs are still visible when run in Debug mode, allowing developers to troubleshoot and monitor the application effectively during development.
-- Fixed an auto-update bug that caused the application to crash when trying to update. This should resolve any issues users were experiencing with the auto-update feature, ensuring a smoother update process.
+- Attempting to fix an auto-update bug that caused the application to crash when trying to update. This should resolve any issues users were experiencing with the auto-update feature, ensuring a smoother update process.
 
 ### 4.2.1 - Bug Fixes and Improvements
 - Error handling for the ReportForm when the xlsx file is already locked has been added. This will prevent crashes and ensure that users can handle file access issues gracefully.
