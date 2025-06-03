@@ -13,8 +13,12 @@
 
 # CalliAPI Patch Log
 
+### 4.3.1 - Bug Fixes and Improvements
+- Added parallelization to the Unworked 713 Search! Should help greatly increase the speed of the search.
+- Updated the retryAfter Policy to include longer delays to allow for more respect from the Clio API.
+
 ## 4.3 - Bug Fixes and Improvements
-Finally fixed the auto-update bug that arose in 4.2.2!
+Finally fixed the auto-update bug that arose in 4.2.2! This should resolve any issues users were experiencing with the auto-update feature, ensuring a smoother update process. Additionally, we have made some improvements to the overall performance and stability of the application.
 
 ### 4.2.2 - Bug Fixes and Improvements
 - Removed extra logging in the Release version, to allow for better performance and cleaner logs. This should improve the overall user experience by reducing unnecessary log clutter and focusing on essential information.

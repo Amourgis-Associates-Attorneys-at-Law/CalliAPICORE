@@ -134,21 +134,21 @@ namespace CalliAPI.BusinessLogic
             // Initialize the matter stream and filter it
 
 
-            var matters = _clioApiClient.GetAllOpenMattersAsync()
+                var matters = _clioApiClient.GetAllMattersAsync(status: "open,pending")
 #if DEBUG
-                .LogEachAsync(_logger, "All Matters")
+.LogEachAsync(_logger, "All Matters")
 #endif
-                .FilterByPracticeAreaSuffixAsync(new[] { "7", "13" })
+                    .FilterByPracticeAreaSuffixAsync(new[] { "7", "13" })
 #if DEBUG
-                .LogEachAsync(_logger, "After Suffix Filter")
+.LogEachAsync(_logger, "After Suffix Filter")
 #endif
-                .FilterByStageNameAsync(prefileStages)
+                    .FilterByStageNameAsync(prefileStages)
 #if DEBUG
-                .LogEachAsync(_logger, "After Stage Filter")
+.LogEachAsync(_logger, "After Stage Filter")
 #endif
-                ;
+                    ;
 
-            IAsyncEnumerable<Matter> filteredMatters = FilterMattersWithNoOpenTasksAsync(matters);
+            IAsyncEnumerable<Matter> filteredMatters = FilterMattersWithNoOpenTasksParallelAsync(matters);
 
             // Convert the matter stream to a DataTable and show it
             await ReportLauncher.ShowAsync(filteredMatters, _clioApiClient);
@@ -156,9 +156,56 @@ namespace CalliAPI.BusinessLogic
 
 
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matters"></param>
+        /// <returns></returns>
+        public async IAsyncEnumerable<Matter> FilterMattersWithNoOpenTasksParallelAsync(IAsyncEnumerable<Matter> matters)
+        {
+            var semaphore = new SemaphoreSlim(2); // limit to 2 concurrent requests (any more and we trigger retry exponential backoff)
+            var tasks = new List<Task<Matter?>>();
+
+            await foreach (var matter in matters)
+            {
+                await semaphore.WaitAsync();
+
+                tasks.Add(System.Threading.Tasks.Task.Run(async () =>
+                {
+                    try
+                    {
+                        if (!matter.has_tasks)
+                        {
+                            _logger.Info("No tasks found, including this matter.");
+                            return matter;
+                        }
+                        var tasks = await _clioApiClient.GetTasksForMatterAsync(matter.id);
+                        if (tasks.All(t => t.status.Equals("complete", StringComparison.OrdinalIgnoreCase)))
+                        {
+                            _logger.Info("All tasks complete, including this matter.");
+                            return matter;
+                        }
+
+                        _logger.Info("There exists an incomplete task, skipping this matter.");
+                        return null;
+                    }
+                    finally
+                    {
+                        semaphore.Release();
+                    }
+                }));
+            }
+
+            foreach (var task in tasks)
+            {
+                var result = await task;
+                if (result != null)
+                    yield return result;
+            }
+        }
 
 
-#endregion
+        #endregion
 
         #region reports - all Matters
         public async Task GetAllMattersAsync(string fields="", string status="", string addedHtml="")

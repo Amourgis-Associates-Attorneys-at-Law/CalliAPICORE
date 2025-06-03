@@ -1,0 +1,490 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CalliAPI</name>
+    </assembly>
+    <members>
+        <member name="M:CalliAPI.BusinessLogic.AuthService.GeneratePkceValues">
+            <summary>
+            Generates PKCE (Proof Key for Code Exchange) values. Useful if we can use PKCE for OAuth 2.0 authorization.
+            </summary>
+        </member>
+        <member name="M:CalliAPI.BusinessLogic.ClioService.FilterMattersWithNoOpenTasksParallelAsync(System.Collections.Generic.IAsyncEnumerable{CalliAPI.Models.Matter})">
+            <summary>
+            
+            </summary>
+            <param name="matters"></param>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:CalliAPI.DataAccess.ClioApiClient.TryGetObject(System.Text.Json.JsonElement,System.String,System.Text.Json.JsonElement@)" -->
+        <member name="M:CalliAPI.DataAccess.ClioApiClient.GetAllMattersAsync(System.String,System.String,System.String)">
+            <summary>
+            Get a list of all the matters as Matter objects. Use this with MatterFilters.cs to filter the list of matters.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CalliAPI.DataAccess.ClioApiClient.GetCalendarsAsync(System.String)">
+            <summary>
+            Get all visible calendars and store them as ClioCalendar objects.
+            </summary>
+            <param name="accessToken"></param>
+            <returns>A List of ClioCalendar objects that the user is allowed to view.</returns>
+        </member>
+        <member name="M:CalliAPI.DataAccess.ClioApiClient.GetAllOpenMattersAsync">
+            <summary>
+            Get a list of all the open matters as Matter objects. Use this with MatterFilters.cs to filter the list of matters.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CalliAPI.DataAccess.ClioApiClient.FastFetchMattersSinceAsync(System.DateTime,System.Threading.CancellationToken)">
+            <summary>
+            Fetches up to 10,000 Matter records created since the given date using offset-based pagination,
+            parallelized for performance. Results are streamed back as an IAsyncEnumerable.
+            </summary>
+        </member>
+        <member name="M:CalliAPI.DataAccess.ClioApiClient.GetAllPracticeAreasAsync">
+            <summary>
+            Get a list of all the Practice Areas as PracticeArea objects
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CalliAPI.DataAccess.ClioApiClient.GetMattersNotCurrentlyBeingWorked(System.String)">
+            <summary>
+            Fetches all matters that are not currently being worked on.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:CalliAPI.Interfaces.IQueryBuilder`1.SelectedFields">
+            <summary>
+            The list of fields selected by the user, formatted for the Clio API.
+            </summary>
+        </member>
+        <member name="P:CalliAPI.Interfaces.IQueryBuilder`1.SelectedFilters">
+            <summary>
+            A list of filters to apply to the result stream.
+            </summary>
+        </member>
+        <member name="P:CalliAPI.Interfaces.IQueryBuilder`1.QueryParameters">
+            <summary>
+            Optional query parameters to include in the API request.
+            </summary>
+        </member>
+        <member name="P:CalliAPI.Interfaces.IQueryBuilder`1.QueryDescription">
+            <summary>
+            Optional description of the query for logging or display.
+            </summary>
+        </member>
+        <member name="T:CalliAPI.Models.CustomFieldValue">
+            <summary>
+            Holds the value of a custom field for a matter in Clio.
+            </summary>
+        </member>
+        <member name="T:CalliAPI.Models.CustomFieldMetadata">
+            <summary>
+            Holds the metadata for a custom field in Clio.
+            </summary>
+        </member>
+        <member name="T:CalliAPI.Models.PicklistOption">
+            <summary>
+            Holds the metadata for a picklist option in Clio.
+            </summary>
+        </member>
+        <member name="T:CalliAPI.Models.CustomFieldDefinition">
+            <summary>
+            Holds the definition of a custom field in Clio.
+            </summary>
+        </member>
+        <member name="T:CalliAPI.Models.CustomFieldResponse">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CalliAPI.Models.MatterFilters.LogEachAsync``1(System.Collections.Generic.IAsyncEnumerable{``0},AmourgisCOREServices.AMO_Logger,System.String)">
+            <summary>
+            Async logging function so we can log counts without disrupting streaming. Writes a LOT of text (one line per item in source plus one line to total)
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="source"></param>
+            <param name="logger"></param>
+            <param name="label"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CalliAPI.Models.MatterFilters.FilterByStatusAsync(System.Collections.Generic.IAsyncEnumerable{CalliAPI.Models.Matter},System.String)">
+            <summary>
+            
+            </summary>
+            <param name="matters"></param>
+            <param name="status"></param>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:CalliAPI.Models.MatterFilters.FilterByCustomFieldAsync(System.Collections.Generic.IAsyncEnumerable{CalliAPI.Models.Matter},CalliAPI.Models.CustomField,System.Func{System.String,System.Boolean})" -->
+        <member name="M:CalliAPI.Models.MatterFilters.ToSmartDataTableAsync(System.Collections.Generic.IAsyncEnumerable{CalliAPI.Models.Matter},CalliAPI.DataAccess.ClioApiClient,System.Collections.Generic.List{CalliAPI.Models.CustomField})">
+            <summary>
+            Converts an IAsyncEnumerable of Matter objects to a DataTable, attempting to include all relevant properties.
+            </summary>
+            <param name="matters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CalliAPI.Program.AllocConsole">
+            <summary>
+            AllocConsole is a Windows API function that allocates a new console for the calling process.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CalliAPI.Program.Main(System.String[])">
+            <summary>
+             The main entry point for the application.
+            </summary>
+        </member>
+        <member name="T:CalliAPI.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:CalliAPI.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:CalliAPI.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:CalliAPI.Properties.Resources.AllowAccess">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:CalliAPI.Properties.Resources.CalliopeMuseEpicPoetryhalf">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="M:CalliAPI.UI.Controls.CalendarQueryControl.WithCalendars(System.Collections.Generic.List{CalliAPI.Models.ClioCalendar})">
+            <summary>
+            Runs at initialization to set up the control with the calendars available in Clio.
+            </summary>
+            <param name="calendars"></param>
+            <returns></returns>
+        </member>
+        <member name="F:CalliAPI.UI.Controls.CalendarQueryControl.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:CalliAPI.UI.Controls.CalendarQueryControl.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:CalliAPI.UI.Controls.CalendarQueryControl.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:CalliAPI.UI.Controls.MatterQueryControl.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:CalliAPI.UI.Controls.MatterQueryControl.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:CalliAPI.UI.Controls.MatterQueryControl.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:CalliAPI.UI.AuthorizationCodeForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:CalliAPI.UI.AuthorizationCodeForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:CalliAPI.UI.AuthorizationCodeForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:CalliAPI.UI.CustomReportBuilderForm.timerLoading_Tick(System.Object,System.EventArgs)">
+            <summary>
+            Loading animation for the report builder.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="F:CalliAPI.UI.CustomReportBuilderForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:CalliAPI.UI.CustomReportBuilderForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:CalliAPI.UI.CustomReportBuilderForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:CalliAPI.UI.Forms.SplashForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:CalliAPI.UI.Forms.SplashForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:CalliAPI.UI.Forms.SplashForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:CalliAPI.UI.MissingClioSecret.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:CalliAPI.UI.MissingClioSecret.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:CalliAPI.UI.MissingClioSecret.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:CalliAPI.UI.ReportForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:CalliAPI.UI.ReportForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:CalliAPI.UI.ReportForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:CalliAPI.UI.Views.FastFetchCreatedSinceView.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:CalliAPI.UI.Views.FastFetchCreatedSinceView.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:CalliAPI.UI.Views.FastFetchCreatedSinceView.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:CalliAPI.UI.Views.ReportsOpenMattersUnworkedMatters.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:CalliAPI.UI.Views.ReportsOpenMattersUnworkedMatters.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:CalliAPI.UI.Views.ReportsOpenMattersUnworkedMatters.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:CalliAPI.UI.Views.ReportsView.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:CalliAPI.UI.Views.ReportsView.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:CalliAPI.UI.Views.ReportsView.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:CalliAPI.MailerForm.dataGridView1_CellClick(System.Object,System.Windows.Forms.DataGridViewCellEventArgs)">
+            <summary>
+            This function checks to see if the user has clicked on the Print or Ignore buttons in the database, and updates the items inside as needed.
+            </summary>
+        </member>
+        <member name="M:CalliAPI.MailerForm.UpdateGrid(System.Object,System.EventArgs)">
+            <summary>
+            Called whenever any checkbox state is changed, UpdateGrid will update the grid with the new state of the checkboxes.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="F:CalliAPI.MailerForm.components">
+            <summary>
+             Required designer variable.
+            </summary>
+        </member>
+        <member name="M:CalliAPI.MailerForm.Dispose(System.Boolean)">
+            <summary>
+             Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:CalliAPI.MailerForm.InitializeComponent">
+            <summary>
+             Required method for Designer support - do not modify
+             the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:CalliAPI.MainForm.AnimateProgressBarAsync(System.Int32)">
+            <summary>
+            This method animates the progress bar to smoothly transition to the target value.
+            </summary>
+            <param name="targetValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CalliAPI.MainForm.btnOpenMailerForm_Click(System.Object,System.EventArgs)">
+            <summary>
+            This method is called when the "Open Mailer Form" button is clicked. Opens a new MailerForm.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:CalliAPI.MainForm.StartOAuthProcess">
+            <summary>
+            This method is called when the "Connect to Clio" button is clicked. It starts the OAuth process to allow for authorized API calls to Clio. The user will be prompted to enter the authorization code after authorizing the app in the browser,
+            and the resulting access token will be stored in the authService.
+            </summary>
+        </member>
+        <member name="F:CalliAPI.MainForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:CalliAPI.MainForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:CalliAPI.MainForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:CalliAPI.Utilities.EmbeddedFontLoader.LoadFont(System.String,System.Single,System.Drawing.FontStyle)">
+            <summary>
+            Loads a font from an embedded resource and returns a Font object.
+            </summary>
+            <param name="resourceName">The full resource name, e.g., "CalliAPI.Resources.CormorantGaramond-Regular.ttf"</param>
+            <param name="size">Font size</param>
+            <param name="style">Font style</param>
+            <returns>A Font object ready to use</returns>
+        </member>
+        <member name="T:CalliAPI.Utilities.KeywordTooltipManager">
+            <summary>
+            Manages keyword highlighting and tooltip display in a RichTextBox.
+            </summary>
+        </member>
+        <member name="M:CalliAPI.Utilities.KeywordTooltipManager.HighlightKeywords">
+            <summary>
+            Call this after setting the RichTextBox text to highlight keywords.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:CalliAPI.Utilities.ReportLauncher.ShowAsync(System.Collections.Generic.IAsyncEnumerable{CalliAPI.Models.Matter},CalliAPI.DataAccess.ClioApiClient)" -->
+        <member name="M:CalliAPI.Utilities.ReportLauncher.ToDataTable``1(System.Collections.Generic.List{``0})">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="items"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CalliAPI.Utilities.TooltipDefinitions">
+            <summary>
+            Centralized definitions for tooltips used across the application.
+            </summary>
+        </member>
+        <member name="T:CalliAPI.Utilities.VersionHelper">
+            <summary>
+            Provides access to the application's version information as defined in the .csproj file.
+            </summary>
+        </member>
+        <member name="M:CalliAPI.Utilities.VersionHelper.GetVersion">
+            <summary>
+            Gets the full version from the executing assembly (e.g., 1.2.3.0).
+            </summary>
+        </member>
+        <member name="M:CalliAPI.Utilities.VersionHelper.GetFormattedVersion(System.Boolean)">
+            <summary>
+            Gets the version as a formatted string (e.g., "v1.2.3").
+            </summary>
+        </member>
+        <member name="M:CalliAPI.Utilities.VersionHelper.GetDisplayVersion">
+            <summary>
+            Gets the version as a string suitable for display in UI.
+            </summary>
+        </member>
+        <member name="M:CalliAPI.Utilities.VersionHelper.SplashPromptForUpdateAsync(System.Windows.Forms.Form)">
+            <summary>
+            Checks for updates and applies them if available.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:CalliAPI.ApplicationConfiguration">
+            <summary>
+             Bootstrap the application configuration.
+            </summary>
+        </member>
+        <member name="M:CalliAPI.ApplicationConfiguration.Initialize">
+            <summary>
+             Bootstrap the application as follows:
+             <code>
+             global::System.Windows.Forms.Application.EnableVisualStyles();
+             global::System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
+             global::System.Windows.Forms.Application.SetHighDpiMode(HighDpiMode.SystemAware);
+            </code>
+            </summary>
+        </member>
+    </members>
+</doc>

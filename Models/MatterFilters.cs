@@ -4,10 +4,11 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
+using Task = System.Threading.Tasks;
 using AmourgisCOREServices;
 using CalliAPI.BusinessLogic;
 using CalliAPI.DataAccess;
+
 
 namespace CalliAPI.Models
 {
@@ -108,7 +109,6 @@ namespace CalliAPI.Models
     //        }
     //    }
 
-
         public static async IAsyncEnumerable<Matter> FilterByPracticeAreaSuffixAsync(this IAsyncEnumerable<Matter> matters, params string[] suffixes)
         {
             await foreach (var matter in matters)
@@ -134,6 +134,8 @@ namespace CalliAPI.Models
                 }
             }
         }
+
+
 
 
         /// <summary>

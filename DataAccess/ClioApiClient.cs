@@ -47,15 +47,23 @@ namespace CalliAPI.DataAccess
             _logger = logger;
             clientSecret = secret;
 
+            // Custom Retry Delays based on the fact that exponential backoff from (2 ^ attempt) seconds was far too short of a delay that Clio never respected
+            var retryDelays = new[]
+{
+    TimeSpan.FromSeconds(10),
+    TimeSpan.FromSeconds(20),
+    TimeSpan.FromSeconds(30),
+    TimeSpan.FromSeconds(60),
+    TimeSpan.FromSeconds(90)
+};
 
-        _retryPolicy = Policy
+            _retryPolicy = Policy
         .Handle<HttpRequestException>()
         .OrResult<HttpResponseMessage>(r => (int)r.StatusCode == 429)
         .WaitAndRetryAsync(
-            retryCount: 5,
-            sleepDurationProvider: attempt => TimeSpan.FromSeconds(Math.Pow(2, attempt)),
+            retryDelays,
             onRetry: (outcome, delay, attempt, context) =>
-            { 
+            {
                 if (outcome.Exception != null)
                 {
                     _logger.Warn($"Exception on attempt {attempt}: {outcome.Exception.Message}. Retrying in {delay.TotalSeconds} seconds...");
@@ -114,7 +122,7 @@ namespace CalliAPI.DataAccess
             try
             {
                 var jsonDocument = JsonDocument.Parse(responseContent);
-                string accessToken = jsonDocument.RootElement.GetProperty("access_token").GetString();
+                string accessToken = jsonDocument.RootElement.GetProperty("access_token").GetString() ?? "";
                 return accessToken;
             }
             catch (KeyNotFoundException)
@@ -161,7 +169,7 @@ namespace CalliAPI.DataAccess
         {
             try
             {
-                Matter matter = JsonSerializer.Deserialize<Matter>(element.GetRawText());
+                Matter matter = JsonSerializer.Deserialize<Matter>(element.GetRawText()) ?? throw new ArgumentNullException();
 
                 return matter;
             }
@@ -175,7 +183,7 @@ namespace CalliAPI.DataAccess
         {
             try
             {
-                ClioCalendar clioCalendar = JsonSerializer.Deserialize<ClioCalendar>(element.GetRawText());
+                ClioCalendar clioCalendar = JsonSerializer.Deserialize<ClioCalendar>(element.GetRawText()) ?? throw new ArgumentNullException();
 
                 return clioCalendar;
             }
@@ -218,7 +226,7 @@ namespace CalliAPI.DataAccess
                     return dataElement.EnumerateArray().Select(t => new ClioTask
                     {
                         id = t.GetProperty("id").GetInt64(),
-                        status = t.GetProperty("status").GetString()
+                        status = t.GetProperty("status").GetString() ?? ""
                     }).ToList();
                 }
             }
@@ -319,14 +327,15 @@ namespace CalliAPI.DataAccess
                         }
                     }
 
+#pragma warning disable CS8600
                     nextPageUrl = json.RootElement
                         .GetProperty("meta")
                         .GetProperty("paging")
                         .TryGetProperty("next", out var nextElement)
                         ? nextElement.GetString()
                         : null;
+#pragma warning restore CS8600
 
-                    
                 }
             }
 
