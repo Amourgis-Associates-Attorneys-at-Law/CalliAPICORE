@@ -247,7 +247,7 @@ namespace CalliAPI.DataAccess
         /// Get a list of all the matters as Matter objects. Use this with MatterFilters.cs to filter the list of matters.
         /// </summary>
         /// <returns></returns>
-        public async IAsyncEnumerable<Matter> GetAllMattersAsync(string fields = "", string status = "", string addedHttp = "")
+        public async IAsyncEnumerable<Matter> GetAllMattersAsync(string fields = "", string status = "", string addedHttp = "", Action<int>? feedbackTotalPagesForThisArea = null, Action<int, int>? onProgress = null)
         {
             _logger.Info("API CALL START -- GET ALL MATTERS ASYNC --");
 
@@ -307,10 +307,11 @@ namespace CalliAPI.DataAccess
                 {
                     totalPages = (int)Math.Ceiling(totalRecords / 200.0);
                     _logger.Info($"Total records: {totalRecords}, estimated pages: {totalPages}");
+                    feedbackTotalPagesForThisArea?.Invoke(totalPages);
                 }
 
                 // Update progress bar here (if you pass a callback or use an event)
-                ProgressUpdated?.Invoke(pageCount, totalPages);
+                onProgress?.Invoke(pageCount, totalPages);
 
 
 
@@ -765,6 +766,7 @@ namespace CalliAPI.DataAccess
         /// <returns></returns>
         public async Task<List<PracticeArea>> GetAllPracticeAreasAsync()
         {
+            _logger.Info($"Getting all Practice Areas...");
             var practiceAreas = new List<PracticeArea>();
             string url = Properties.Settings.Default.ApiUrl + "practice_areas";
 

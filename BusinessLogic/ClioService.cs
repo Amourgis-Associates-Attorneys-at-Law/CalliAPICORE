@@ -79,11 +79,18 @@ namespace CalliAPI.BusinessLogic
         #endregion
 
         #region Delegates
+
         public event Action<int, int> ProgressUpdated
         {
-            add => _clioApiClient.ProgressUpdated += value;
-            remove => _clioApiClient.ProgressUpdated -= value;
+            add => _progressUpdated += value;
+            remove => _progressUpdated -= value;
         }
+
+
+
+        private event Action<int, int> _progressUpdated;
+
+
         public bool IsAuthenticated => !string.IsNullOrWhiteSpace(_authService.AccessToken);
         #endregion
 
@@ -208,14 +215,52 @@ namespace CalliAPI.BusinessLogic
         #endregion
 
         #region reports - all Matters
-        public async Task GetAllMattersAsync(string fields="", string status="", string addedHtml="")
+        public async Task GetAllMattersAsync(string fields = "", string status = "", string addedHtml = "",
+            List<long>? practiceAreasSelected = null)
         {
-            // Initialize the matter stream
-            IAsyncEnumerable<Matter> matters = _clioApiClient.GetAllMattersAsync(fields, status, addedHtml);
-            // Filter the matter stream (since this is ALL matters, we don't need to bother with filtering)
-            // matters = matters.FilterByWhatever();
-            // Convert the matter stream to a DataTable and show it
-            await ReportLauncher.ShowAsync(matters, _clioApiClient);
+
+
+            // If no practice areas are selected, fall back to the original method
+            if (practiceAreasSelected == null || practiceAreasSelected.Count == 0)
+            {
+                IAsyncEnumerable<Matter> allMatters = _clioApiClient.GetAllMattersAsync(fields, status, addedHtml);
+                await ReportLauncher.ShowAsync(allMatters, _clioApiClient);
+                return;
+            }
+
+
+
+            // Local function to combine matters from multiple practice areas
+            async IAsyncEnumerable<Matter> CombinedMatters()
+            {
+
+                int totalPagesAcrossAll = 0;
+                int pagesCompleted = 0;
+
+                foreach (long practiceAreaId in practiceAreasSelected)
+                {
+                    string htmlWithPracticeArea = $"{addedHtml}&practice_area_id={practiceAreaId}";
+
+                    int pagesForThisArea = 0;
+
+                    await foreach (var matter in _clioApiClient.GetAllMattersAsync(
+                        fields,
+                        status,
+                        htmlWithPracticeArea,
+                        feedbackTotalPagesForThisArea: pages => totalPagesAcrossAll += pages,
+                        onProgress: (page, _) =>
+                        {
+                            pagesCompleted++;
+                            _progressUpdated?.Invoke(pagesCompleted, totalPagesAcrossAll);
+                        }))
+                    {
+                        yield return matter;
+                    }
+                }
+            }
+
+            await ReportLauncher.ShowAsync(CombinedMatters(), _clioApiClient);
+
         }
 
 
@@ -270,6 +315,13 @@ namespace CalliAPI.BusinessLogic
             {
                 yield return calendarEvent;
             }
+        }
+        #endregion
+
+        #region Practice Area Methods
+        public async Task<List<PracticeArea>> GetAllPracticeAreasAsync()
+        {
+            return await _clioApiClient.GetAllPracticeAreasAsync();
         }
         #endregion
     }

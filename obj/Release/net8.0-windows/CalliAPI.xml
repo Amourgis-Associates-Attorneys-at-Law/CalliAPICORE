@@ -17,7 +17,7 @@
             <returns></returns>
         </member>
         <!-- Badly formed XML comment ignored for member "M:CalliAPI.DataAccess.ClioApiClient.TryGetObject(System.Text.Json.JsonElement,System.String,System.Text.Json.JsonElement@)" -->
-        <member name="M:CalliAPI.DataAccess.ClioApiClient.GetAllMattersAsync(System.String,System.String,System.String)">
+        <member name="M:CalliAPI.DataAccess.ClioApiClient.GetAllMattersAsync(System.String,System.String,System.String,System.Action{System.Int32},System.Action{System.Int32,System.Int32})">
             <summary>
             Get a list of all the matters as Matter objects. Use this with MatterFilters.cs to filter the list of matters.
             </summary>

@@ -10,10 +10,14 @@
 
 ## Known Issues
 - 3.0.3 - The automatic update functionality is still in its early stages and may not work perfectly on all systems. If you encounter issues, please report them on the GitHub repository.
+- 4.3.2 - STA Threading issues. This may cause the application to hang or crash in some cases. A fix is in progress.
 
 # CalliAPI Patch Log
 
-### 4.3.3 - Bug Fixes and Improvements
+### 4.3.3 - Added ability to filter by Practice Area in Custom Report Builder!
+This will save so much time in execution, especially as our dataset scales up! The ability to filter by Practice Area in the Custom Report Builder is a significant enhancement that will allow users to generate more targeted and relevant reports based on their specific practice areas. This feature will greatly improve the usability of the report builder and make it easier to analyze data related to different practice areas.
+
+### 4.3.2 - Bug Fixes and Improvements
 - Added the ability to search for SQL Views in the Custom Report Builder! This enhancement allows users to filter and generate reports based on specific views, making it easier to analyze data in a more structured way.
 
 ### 4.3.1 - Bug Fixes and Improvements
