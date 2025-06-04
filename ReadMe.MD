@@ -13,6 +13,9 @@
 
 # CalliAPI Patch Log
 
+### 4.3.3 - Bug Fixes and Improvements
+- Added the ability to search for SQL Views in the Custom Report Builder! This enhancement allows users to filter and generate reports based on specific views, making it easier to analyze data in a more structured way.
+
 ### 4.3.1 - Bug Fixes and Improvements
 - Added parallelization to the Unworked 713 Search! Should help greatly increase the speed of the search.
 - Updated the retryAfter Policy to include longer delays to allow for more respect from the Clio API.

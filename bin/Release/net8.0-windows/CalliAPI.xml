@@ -203,6 +203,40 @@
             the contents of this method with the code editor.
             </summary>
         </member>
+        <member name="F:CalliAPI.UI.Forms.AboutForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:CalliAPI.UI.Forms.AboutForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:CalliAPI.UI.Forms.AboutForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:CalliAPI.UI.Forms.SplashForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:CalliAPI.UI.Forms.SplashForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:CalliAPI.UI.Forms.SplashForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
         <member name="F:CalliAPI.UI.AuthorizationCodeForm.components">
             <summary>
             Required designer variable.
@@ -239,23 +273,6 @@
             <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         </member>
         <member name="M:CalliAPI.UI.CustomReportBuilderForm.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="F:CalliAPI.UI.Forms.SplashForm.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:CalliAPI.UI.Forms.SplashForm.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:CalliAPI.UI.Forms.SplashForm.InitializeComponent">
             <summary>
             Required method for Designer support - do not modify
             the contents of this method with the code editor.
@@ -462,7 +479,7 @@
         </member>
         <member name="M:CalliAPI.Utilities.VersionHelper.GetDisplayVersion">
             <summary>
-            Gets the version as a string suitable for display in UI.
+            Gets the version as a string suitable for display in UI (e.g. "CalliAPI v1.2.3").
             </summary>
         </member>
         <member name="M:CalliAPI.Utilities.VersionHelper.SplashPromptForUpdateAsync(System.Windows.Forms.Form)">

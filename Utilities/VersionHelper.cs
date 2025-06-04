@@ -41,7 +41,7 @@ namespace CalliAPI.Utilities
         }
 
         /// <summary>
-        /// Gets the version as a string suitable for display in UI.
+        /// Gets the version as a string suitable for display in UI (e.g. "CalliAPI v1.2.3").
         /// </summary>
         public static string GetDisplayVersion()
         {
