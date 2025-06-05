@@ -14,6 +14,11 @@
 
 # CalliAPI Patch Log
 
+### 4.4.2 - Minor Improvements
+- Added new fonts to the program, making it more visually appealing and easier to read.
+- Added FRC and All Practice Area buttons to the Custom Report Builder, allowing users to quickly generate reports for specific practice areas.
+- Rearranged the Custom Report Builder form to make it more user-friendly and intuitive.
+
 ### 4.4.1 - Added a Second Progress Bar for Spinning Up!
 - Now we can see the progress that CalliAPI makes in the spin-up phase (where she checks how many pages to expect), which gives us more reliable UI indication and prevents surprises.
 

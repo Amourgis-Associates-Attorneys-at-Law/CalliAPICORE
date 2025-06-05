@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
 		<AssemblyName>CalliAPI</AssemblyName>
-		<Version>4.4.1</Version>
+		<Version>4.4.2</Version>
 		<TargetFramework>net8.0-windows</TargetFramework>
 		<RootNamespace>CalliAPI</RootNamespace>
 		<Nullable>enable</Nullable>
@@ -42,6 +42,62 @@
 	  <None Remove="UI\Fonts\FiraSansExtraCondensed-SemiBoldItalic.ttf" />
 	  <None Remove="UI\Fonts\FiraSansExtraCondensed-Thin.ttf" />
 	  <None Remove="UI\Fonts\FiraSansExtraCondensed-ThinItalic.ttf" />
+	  <None Remove="UI\Fonts\Inter-Italic-VariableFont_opsz,wght.ttf" />
+	  <None Remove="UI\Fonts\Inter-VariableFont_opsz,wght.ttf" />
+	  <None Remove="UI\Fonts\Inter_18pt-Black.ttf" />
+	  <None Remove="UI\Fonts\Inter_18pt-BlackItalic.ttf" />
+	  <None Remove="UI\Fonts\Inter_18pt-Bold.ttf" />
+	  <None Remove="UI\Fonts\Inter_18pt-BoldItalic.ttf" />
+	  <None Remove="UI\Fonts\Inter_18pt-ExtraBold.ttf" />
+	  <None Remove="UI\Fonts\Inter_18pt-ExtraBoldItalic.ttf" />
+	  <None Remove="UI\Fonts\Inter_18pt-ExtraLight.ttf" />
+	  <None Remove="UI\Fonts\Inter_18pt-ExtraLightItalic.ttf" />
+	  <None Remove="UI\Fonts\Inter_18pt-Italic.ttf" />
+	  <None Remove="UI\Fonts\Inter_18pt-Light.ttf" />
+	  <None Remove="UI\Fonts\Inter_18pt-LightItalic.ttf" />
+	  <None Remove="UI\Fonts\Inter_18pt-Medium.ttf" />
+	  <None Remove="UI\Fonts\Inter_18pt-MediumItalic.ttf" />
+	  <None Remove="UI\Fonts\Inter_18pt-Regular.ttf" />
+	  <None Remove="UI\Fonts\Inter_18pt-SemiBold.ttf" />
+	  <None Remove="UI\Fonts\Inter_18pt-SemiBoldItalic.ttf" />
+	  <None Remove="UI\Fonts\Inter_18pt-Thin.ttf" />
+	  <None Remove="UI\Fonts\Inter_18pt-ThinItalic.ttf" />
+	  <None Remove="UI\Fonts\Inter_24pt-Black.ttf" />
+	  <None Remove="UI\Fonts\Inter_24pt-BlackItalic.ttf" />
+	  <None Remove="UI\Fonts\Inter_24pt-Bold.ttf" />
+	  <None Remove="UI\Fonts\Inter_24pt-BoldItalic.ttf" />
+	  <None Remove="UI\Fonts\Inter_24pt-ExtraBold.ttf" />
+	  <None Remove="UI\Fonts\Inter_24pt-ExtraBoldItalic.ttf" />
+	  <None Remove="UI\Fonts\Inter_24pt-ExtraLight.ttf" />
+	  <None Remove="UI\Fonts\Inter_24pt-ExtraLightItalic.ttf" />
+	  <None Remove="UI\Fonts\Inter_24pt-Italic.ttf" />
+	  <None Remove="UI\Fonts\Inter_24pt-Light.ttf" />
+	  <None Remove="UI\Fonts\Inter_24pt-LightItalic.ttf" />
+	  <None Remove="UI\Fonts\Inter_24pt-Medium.ttf" />
+	  <None Remove="UI\Fonts\Inter_24pt-MediumItalic.ttf" />
+	  <None Remove="UI\Fonts\Inter_24pt-Regular.ttf" />
+	  <None Remove="UI\Fonts\Inter_24pt-SemiBold.ttf" />
+	  <None Remove="UI\Fonts\Inter_24pt-SemiBoldItalic.ttf" />
+	  <None Remove="UI\Fonts\Inter_24pt-Thin.ttf" />
+	  <None Remove="UI\Fonts\Inter_24pt-ThinItalic.ttf" />
+	  <None Remove="UI\Fonts\Inter_28pt-Black.ttf" />
+	  <None Remove="UI\Fonts\Inter_28pt-BlackItalic.ttf" />
+	  <None Remove="UI\Fonts\Inter_28pt-Bold.ttf" />
+	  <None Remove="UI\Fonts\Inter_28pt-BoldItalic.ttf" />
+	  <None Remove="UI\Fonts\Inter_28pt-ExtraBold.ttf" />
+	  <None Remove="UI\Fonts\Inter_28pt-ExtraBoldItalic.ttf" />
+	  <None Remove="UI\Fonts\Inter_28pt-ExtraLight.ttf" />
+	  <None Remove="UI\Fonts\Inter_28pt-ExtraLightItalic.ttf" />
+	  <None Remove="UI\Fonts\Inter_28pt-Italic.ttf" />
+	  <None Remove="UI\Fonts\Inter_28pt-Light.ttf" />
+	  <None Remove="UI\Fonts\Inter_28pt-LightItalic.ttf" />
+	  <None Remove="UI\Fonts\Inter_28pt-Medium.ttf" />
+	  <None Remove="UI\Fonts\Inter_28pt-MediumItalic.ttf" />
+	  <None Remove="UI\Fonts\Inter_28pt-Regular.ttf" />
+	  <None Remove="UI\Fonts\Inter_28pt-SemiBold.ttf" />
+	  <None Remove="UI\Fonts\Inter_28pt-SemiBoldItalic.ttf" />
+	  <None Remove="UI\Fonts\Inter_28pt-Thin.ttf" />
+	  <None Remove="UI\Fonts\Inter_28pt-ThinItalic.ttf" />
 	  <None Remove="UI\Fonts\Lato-Black.ttf" />
 	  <None Remove="UI\Fonts\Lato-BlackItalic.ttf" />
 	  <None Remove="UI\Fonts\Lato-Bold.ttf" />
@@ -118,44 +174,288 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <EmbeddedResource Include="UI\Fonts\Cinzel-Black.otf" />
-	  <EmbeddedResource Include="UI\Fonts\Cinzel-Bold.otf" />
-	  <EmbeddedResource Include="UI\Fonts\Cinzel-Regular.otf" />
-	  <EmbeddedResource Include="UI\Fonts\CinzelDecorative-Black.otf" />
-	  <EmbeddedResource Include="UI\Fonts\CinzelDecorative-Bold.otf" />
-	  <EmbeddedResource Include="UI\Fonts\CinzelDecorative-Regular.otf" />
-	  <EmbeddedResource Include="UI\Fonts\CormorantGaramond-Italic-VariableFont_wght.ttf" />
-	  <EmbeddedResource Include="UI\Fonts\CormorantGaramond-VariableFont_wght.ttf" />
-	  <EmbeddedResource Include="UI\Fonts\FiraSansExtraCondensed-Black.ttf" />
-	  <EmbeddedResource Include="UI\Fonts\FiraSansExtraCondensed-BlackItalic.ttf" />
-	  <EmbeddedResource Include="UI\Fonts\FiraSansExtraCondensed-Bold.ttf" />
-	  <EmbeddedResource Include="UI\Fonts\FiraSansExtraCondensed-BoldItalic.ttf" />
-	  <EmbeddedResource Include="UI\Fonts\FiraSansExtraCondensed-ExtraBold.ttf" />
-	  <EmbeddedResource Include="UI\Fonts\FiraSansExtraCondensed-ExtraBoldItalic.ttf" />
-	  <EmbeddedResource Include="UI\Fonts\FiraSansExtraCondensed-ExtraLight.ttf" />
-	  <EmbeddedResource Include="UI\Fonts\FiraSansExtraCondensed-ExtraLightItalic.ttf" />
-	  <EmbeddedResource Include="UI\Fonts\FiraSansExtraCondensed-Italic.ttf" />
-	  <EmbeddedResource Include="UI\Fonts\FiraSansExtraCondensed-Light.ttf" />
-	  <EmbeddedResource Include="UI\Fonts\FiraSansExtraCondensed-LightItalic.ttf" />
-	  <EmbeddedResource Include="UI\Fonts\FiraSansExtraCondensed-Medium.ttf" />
-	  <EmbeddedResource Include="UI\Fonts\FiraSansExtraCondensed-MediumItalic.ttf" />
-	  <EmbeddedResource Include="UI\Fonts\FiraSansExtraCondensed-Regular.ttf" />
-	  <EmbeddedResource Include="UI\Fonts\FiraSansExtraCondensed-SemiBold.ttf" />
-	  <EmbeddedResource Include="UI\Fonts\FiraSansExtraCondensed-SemiBoldItalic.ttf" />
-	  <EmbeddedResource Include="UI\Fonts\FiraSansExtraCondensed-Thin.ttf" />
-	  <EmbeddedResource Include="UI\Fonts\FiraSansExtraCondensed-ThinItalic.ttf" />
-	  <EmbeddedResource Include="UI\Fonts\Lato-Black.ttf" />
-	  <EmbeddedResource Include="UI\Fonts\Lato-BlackItalic.ttf" />
-	  <EmbeddedResource Include="UI\Fonts\Lato-Bold.ttf" />
-	  <EmbeddedResource Include="UI\Fonts\Lato-BoldItalic.ttf" />
-	  <EmbeddedResource Include="UI\Fonts\Lato-Italic.ttf" />
-	  <EmbeddedResource Include="UI\Fonts\Lato-Light.ttf" />
-	  <EmbeddedResource Include="UI\Fonts\Lato-LightItalic.ttf" />
-	  <EmbeddedResource Include="UI\Fonts\Lato-Regular.ttf" />
-	  <EmbeddedResource Include="UI\Fonts\Lato-Thin.ttf" />
-	  <EmbeddedResource Include="UI\Fonts\Lato-ThinItalic.ttf" />
-	  <EmbeddedResource Include="UI\Fonts\Montserrat-Italic-VariableFont_wght.ttf" />
-	  <EmbeddedResource Include="UI\Fonts\Montserrat-VariableFont_wght.ttf" />
+	  <EmbeddedResource Include="UI\Fonts\Cinzel-Black.otf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Cinzel-Bold.otf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Cinzel-Regular.otf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\CinzelDecorative-Black.otf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\CinzelDecorative-Bold.otf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\CinzelDecorative-Regular.otf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\CormorantGaramond-Italic-VariableFont_wght.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\CormorantGaramond-VariableFont_wght.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\FiraSansExtraCondensed-Black.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\FiraSansExtraCondensed-BlackItalic.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\FiraSansExtraCondensed-Bold.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\FiraSansExtraCondensed-BoldItalic.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\FiraSansExtraCondensed-ExtraBold.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\FiraSansExtraCondensed-ExtraBoldItalic.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\FiraSansExtraCondensed-ExtraLight.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\FiraSansExtraCondensed-ExtraLightItalic.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\FiraSansExtraCondensed-Italic.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\FiraSansExtraCondensed-Light.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\FiraSansExtraCondensed-LightItalic.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\FiraSansExtraCondensed-Medium.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\FiraSansExtraCondensed-MediumItalic.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\FiraSansExtraCondensed-Regular.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\FiraSansExtraCondensed-SemiBold.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\FiraSansExtraCondensed-SemiBoldItalic.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\FiraSansExtraCondensed-Thin.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\FiraSansExtraCondensed-ThinItalic.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter-Italic-VariableFont_opsz,wght.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter-VariableFont_opsz,wght.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter_18pt-Black.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter_18pt-BlackItalic.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter_18pt-Bold.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter_18pt-BoldItalic.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter_18pt-ExtraBold.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter_18pt-ExtraBoldItalic.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter_18pt-ExtraLight.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter_18pt-ExtraLightItalic.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter_18pt-Italic.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter_18pt-Light.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter_18pt-LightItalic.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter_18pt-Medium.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter_18pt-MediumItalic.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter_18pt-Regular.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter_18pt-SemiBold.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter_18pt-SemiBoldItalic.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter_18pt-Thin.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter_18pt-ThinItalic.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter_24pt-Black.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter_24pt-BlackItalic.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter_24pt-Bold.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter_24pt-BoldItalic.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter_24pt-ExtraBold.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter_24pt-ExtraBoldItalic.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter_24pt-ExtraLight.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter_24pt-ExtraLightItalic.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter_24pt-Italic.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter_24pt-Light.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter_24pt-LightItalic.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter_24pt-Medium.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter_24pt-MediumItalic.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter_24pt-Regular.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter_24pt-SemiBold.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter_24pt-SemiBoldItalic.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter_24pt-Thin.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter_24pt-ThinItalic.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter_28pt-Black.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter_28pt-BlackItalic.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter_28pt-Bold.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter_28pt-BoldItalic.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter_28pt-ExtraBold.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter_28pt-ExtraBoldItalic.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter_28pt-ExtraLight.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter_28pt-ExtraLightItalic.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter_28pt-Italic.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter_28pt-Light.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter_28pt-LightItalic.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter_28pt-Medium.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter_28pt-MediumItalic.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter_28pt-Regular.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter_28pt-SemiBold.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter_28pt-SemiBoldItalic.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter_28pt-Thin.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Inter_28pt-ThinItalic.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Lato-Black.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Lato-BlackItalic.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Lato-Bold.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Lato-BoldItalic.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Lato-Italic.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Lato-Light.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Lato-LightItalic.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Lato-Regular.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Lato-Thin.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Lato-ThinItalic.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Montserrat-Italic-VariableFont_wght.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="UI\Fonts\Montserrat-VariableFont_wght.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
 	  <EmbeddedResource Include="UI\Images\CalliopeMuseEpicPoetry.jpeg">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </EmbeddedResource>
