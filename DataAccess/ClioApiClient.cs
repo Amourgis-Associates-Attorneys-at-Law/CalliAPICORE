@@ -327,14 +327,18 @@ namespace CalliAPI.DataAccess
                             yield return ParseMatter(element);
                         }
                     }
+                    else
+                    {
+                        _logger.Warn("No 'data' property found in the JSON response.");
+                    }
 
 #pragma warning disable CS8600
-                    nextPageUrl = json.RootElement
-                        .GetProperty("meta")
-                        .GetProperty("paging")
-                        .TryGetProperty("next", out var nextElement)
-                        ? nextElement.GetString()
-                        : null;
+                        nextPageUrl = json.RootElement
+                            .GetProperty("meta")
+                            .GetProperty("paging")
+                            .TryGetProperty("next", out var nextElement)
+                            ? nextElement.GetString()
+                            : null;
 #pragma warning restore CS8600
 
                 }

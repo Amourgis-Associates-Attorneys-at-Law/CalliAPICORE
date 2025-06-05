@@ -124,7 +124,7 @@ namespace CalliAPI.BusinessLogic
             // Initialize the matter stream and filter it
             IAsyncEnumerable<Matter> matters = _clioApiClient.GetAllOpenMattersAsync();
             // Convert the matter stream to a DataTable and show it
-            await ReportLauncher.ShowAsync(matters, _clioApiClient);
+            await ReportLauncher.ShowAsync(matters);
         }
 
         public async Task GetAllOpen713Matters()
@@ -132,7 +132,7 @@ namespace CalliAPI.BusinessLogic
             // Initialize the matter stream and filter it
             IAsyncEnumerable<Matter> matters = _clioApiClient.GetAllOpenMattersAsync().FilterByPracticeAreaSuffixAsync(new string[] { "7", "13" });
             // Convert the matter stream to a DataTable and show it
-            await ReportLauncher.ShowAsync(matters, _clioApiClient);
+            await ReportLauncher.ShowAsync(matters);
         }
 
         public async Task GetUnworked713Matters()
@@ -158,7 +158,7 @@ namespace CalliAPI.BusinessLogic
             IAsyncEnumerable<Matter> filteredMatters = FilterMattersWithNoOpenTasksParallelAsync(matters);
 
             // Convert the matter stream to a DataTable and show it
-            await ReportLauncher.ShowAsync(filteredMatters, _clioApiClient);
+            await ReportLauncher.ShowAsync(filteredMatters);
         }
 
 
@@ -215,17 +215,22 @@ namespace CalliAPI.BusinessLogic
         #endregion
 
         #region reports - all Matters
-        public async Task GetAllMattersAsync(string fields = "", string status = "", string addedHtml = "",
+        public async IAsyncEnumerable<Matter> GetAllMattersAsync(string fields = "", string status = "", string addedHtml = "",
             List<long>? practiceAreasSelected = null)
         {
+            string practiceAreasSelectedAsString = string.Join(",", practiceAreasSelected.ToArray());
 
+            _logger.Info($"Beginning GetAllMattersAsync()\nfields: {fields}\nstatus:{status}\naddedHtml:{addedHtml}\n" +
+                $"practiceAreasSelected:{practiceAreasSelectedAsString}");
 
             // If no practice areas are selected, fall back to the original method
             if (practiceAreasSelected == null || practiceAreasSelected.Count == 0)
             {
-                IAsyncEnumerable<Matter> allMatters = _clioApiClient.GetAllMattersAsync(fields, status, addedHtml);
-                await ReportLauncher.ShowAsync(allMatters, _clioApiClient);
-                return;
+                await foreach (var matter in _clioApiClient.GetAllMattersAsync(fields, status, addedHtml))
+                {
+                    yield return matter;
+                }
+                yield break; // Exit early so we don't continue to CombinedMatters()
             }
 
 
@@ -239,9 +244,8 @@ namespace CalliAPI.BusinessLogic
 
                 foreach (long practiceAreaId in practiceAreasSelected)
                 {
+                    _logger.Info($"Processing practice area ID: {practiceAreaId}");
                     string htmlWithPracticeArea = $"{addedHtml}&practice_area_id={practiceAreaId}";
-
-                    int pagesForThisArea = 0;
 
                     await foreach (var matter in _clioApiClient.GetAllMattersAsync(
                         fields,
@@ -259,7 +263,10 @@ namespace CalliAPI.BusinessLogic
                 }
             }
 
-            await ReportLauncher.ShowAsync(CombinedMatters(), _clioApiClient);
+            await foreach (var matter in CombinedMatters())
+            {
+                yield return matter;
+            }
 
         }
 
@@ -299,7 +306,7 @@ namespace CalliAPI.BusinessLogic
         {
             IAsyncEnumerable<Matter> matters = _clioApiClient.FastFetchMattersSinceAsync(dateSince);
 
-            await ReportLauncher.ShowAsync(matters, _clioApiClient);
+            await ReportLauncher.ShowAsync(matters);
         }
         #endregion
 

@@ -25,7 +25,7 @@ namespace CalliAPI.Utilities
         /// </summary>
         /// <param name="matters"></param>
         /// <returns></returns>
-        public static async Task ShowAsync(IAsyncEnumerable<Matter> matters, ClioApiClient clioApiClient)
+        public static async Task ShowAsync(IAsyncEnumerable<Matter> matters)
         {
             if (matters == null)
             {
@@ -36,7 +36,7 @@ namespace CalliAPI.Utilities
             _logger.Info("ReportLauncher.ShowAsync called");
             // This method is called from the ClioService to show a report
             // It takes an IAsyncEnumerable<Matter> and converts it to a DataTable
-            var table = await matters.ToSmartDataTableAsync(clioApiClient); // Defined in MatterFilters.cs, this consumes the stream
+            var table = await matters.ToSmartDataTableAsync(); // Defined in MatterFilters.cs, this consumes the stream
             var form = new ReportForm();
             form.SetData(table);
             form.Show();

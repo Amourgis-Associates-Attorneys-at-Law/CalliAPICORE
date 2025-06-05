@@ -54,7 +54,7 @@ namespace CalliAPI.Utilities
 
             if (results is IAsyncEnumerable<Matter> matters)
             {
-                await ReportLauncher.ShowAsync((IAsyncEnumerable<Matter>)results, clioApiClient);
+                await ReportLauncher.ShowAsync((IAsyncEnumerable<Matter>)results);
             }
             
         }

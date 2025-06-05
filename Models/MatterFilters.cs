@@ -1,19 +1,24 @@
-﻿using System;
+﻿using AmourgisCOREServices;
+using CalliAPI.BusinessLogic;
+using CalliAPI.DataAccess;
+using CalliAPI.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Task = System.Threading.Tasks;
-using AmourgisCOREServices;
-using CalliAPI.BusinessLogic;
-using CalliAPI.DataAccess;
 
 
 namespace CalliAPI.Models
 {
     internal static class MatterFilters
     {
+        static readonly AMO_Logger _logger = new AMO_Logger("CalliAPI");
+
+
+
         /// <summary>
         /// Async logging function so we can log counts without disrupting streaming. Writes a LOT of text (one line per item in source plus one line to total)
         /// </summary>
@@ -95,19 +100,8 @@ namespace CalliAPI.Models
     }
 }
 
-    //    public static async IAsyncEnumerable<Matter> FilterByCustomFieldAsync(
-    //this IAsyncEnumerable<Matter> matters,
-    //CustomField field,
-    //Func<string, bool> predicate)
-    //    {
-    //        await foreach (var matter in matters)
-    //        {
-    //            if (matter.CustomFields.TryGetValue(field, out var value) && predicate(value))
-    //            {
-    //                yield return matter;
-    //            }
-    //        }
-    //    }
+
+
 
         public static async IAsyncEnumerable<Matter> FilterByPracticeAreaSuffixAsync(this IAsyncEnumerable<Matter> matters, params string[] suffixes)
         {
@@ -143,8 +137,7 @@ namespace CalliAPI.Models
         /// </summary>
         /// <param name="matters"></param>
         /// <returns></returns>
-        public static async Task<DataTable> ToSmartDataTableAsync(this IAsyncEnumerable<Matter> matters, 
-            ClioApiClient clioApiClient,
+        public static async Task<DataTable> ToSmartDataTableAsync(this IAsyncEnumerable<Matter> matters,
             List<CustomField>? includedCustomFields = null)
         {
             var table = new DataTable();

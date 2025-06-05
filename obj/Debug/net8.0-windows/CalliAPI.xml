@@ -118,7 +118,7 @@
             <returns></returns>
         </member>
         <!-- Badly formed XML comment ignored for member "M:CalliAPI.Models.MatterFilters.FilterByCustomFieldAsync(System.Collections.Generic.IAsyncEnumerable{CalliAPI.Models.Matter},CalliAPI.Models.CustomField,System.Func{System.String,System.Boolean})" -->
-        <member name="M:CalliAPI.Models.MatterFilters.ToSmartDataTableAsync(System.Collections.Generic.IAsyncEnumerable{CalliAPI.Models.Matter},CalliAPI.DataAccess.ClioApiClient,System.Collections.Generic.List{CalliAPI.Models.CustomField})">
+        <member name="M:CalliAPI.Models.MatterFilters.ToSmartDataTableAsync(System.Collections.Generic.IAsyncEnumerable{CalliAPI.Models.Matter},System.Collections.Generic.List{CalliAPI.Models.CustomField})">
             <summary>
             Converts an IAsyncEnumerable of Matter objects to a DataTable, attempting to include all relevant properties.
             </summary>
@@ -448,7 +448,7 @@
             Call this after setting the RichTextBox text to highlight keywords.
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:CalliAPI.Utilities.ReportLauncher.ShowAsync(System.Collections.Generic.IAsyncEnumerable{CalliAPI.Models.Matter},CalliAPI.DataAccess.ClioApiClient)" -->
+        <!-- Badly formed XML comment ignored for member "M:CalliAPI.Utilities.ReportLauncher.ShowAsync(System.Collections.Generic.IAsyncEnumerable{CalliAPI.Models.Matter})" -->
         <member name="M:CalliAPI.Utilities.ReportLauncher.ToDataTable``1(System.Collections.Generic.List{``0})">
             <summary>
             

@@ -11,8 +11,12 @@
 ## Known Issues
 - 3.0.3 - The automatic update functionality is still in its early stages and may not work perfectly on all systems. If you encounter issues, please report them on the GitHub repository.
 - 4.3.2 - STA Threading issues. This may cause the application to hang or crash in some cases. A fix is in progress.
+- 4.3.3 - The UI, especially the progress bar, may still flicker during report generation. This is a known issue and will be addressed in future updates.
 
 # CalliAPI Patch Log
+
+### 4.3.4 - Bug Fixes and Improvements
+- Added filtering by no active tasks in the Custom Report Builder! This enhancement allows users to filter reports based on whether there are active tasks associated with matters, making it easier to identify matters that may require attention or follow-up.
 
 ### 4.3.3 - Added ability to filter by Practice Area in Custom Report Builder!
 This will save so much time in execution, especially as our dataset scales up! The ability to filter by Practice Area in the Custom Report Builder is a significant enhancement that will allow users to generate more targeted and relevant reports based on their specific practice areas. This feature will greatly improve the usability of the report builder and make it easier to analyze data related to different practice areas.

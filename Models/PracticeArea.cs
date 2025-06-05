@@ -10,5 +10,11 @@ namespace CalliAPI.Models
     {
         public long id { get; set; }
         public string name { get; set; }
+
+        public override string ToString()
+        {
+            return name; // This controls what shows in the UI
+        }
+
     }
 }
