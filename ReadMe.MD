@@ -14,6 +14,9 @@
 
 # CalliAPI Patch Log
 
+### 4.4.1 - Added a Second Progress Bar for Spinning Up!
+- Now we can see the progress that CalliAPI makes in the spin-up phase (where she checks how many pages to expect), which gives us more reliable UI indication and prevents surprises.
+
 ## 4.4 - Cleaned Custom Report Builder Form, Updated UI, and Added New Filters!
 - Finally fixed the progress bar in the Custom Report Builder Form to provide an accurate estimate of page count before it begins to update. Now it won't be a surprise how long the program takes to complete a report or how many pages are needed! All of the 4.3 bug fixes are included as well for a polished 4.4!
 

@@ -81,6 +81,7 @@ namespace CalliAPI.BusinessLogic
         #region Delegates
 
         public event Action<int, int> _progressUpdated;
+        public event Action<int, int>? PracticeAreaProgressUpdated;
 
 
         public bool IsAuthenticated => !string.IsNullOrWhiteSpace(_authService.AccessToken);
@@ -227,12 +228,17 @@ namespace CalliAPI.BusinessLogic
 
 
             List<int> pageTotals = new();
+            int areaIndex = 0;
+
 
             // Calculate the total number of pages for all practice areas selected
             // This is done to provide a progress bar that shows the total number of pages to be processed
 
             foreach (long practiceAreaId in practiceAreasSelected)
             {
+                areaIndex++;
+                PracticeAreaProgressUpdated?.Invoke(areaIndex, practiceAreasSelected.Count);
+
                 int pagesForThisArea = 0;
                 string htmlWithPracticeArea = $"{addedHtml}&practice_area_id={practiceAreaId}";
 
