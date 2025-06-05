@@ -80,15 +80,7 @@ namespace CalliAPI.BusinessLogic
 
         #region Delegates
 
-        public event Action<int, int> ProgressUpdated
-        {
-            add => _progressUpdated += value;
-            remove => _progressUpdated -= value;
-        }
-
-
-
-        private event Action<int, int> _progressUpdated;
+        public event Action<int, int> _progressUpdated;
 
 
         public bool IsAuthenticated => !string.IsNullOrWhiteSpace(_authService.AccessToken);
@@ -234,41 +226,63 @@ namespace CalliAPI.BusinessLogic
             }
 
 
+            List<int> pageTotals = new();
 
-            // Local function to combine matters from multiple practice areas
-            async IAsyncEnumerable<Matter> CombinedMatters()
+            // Calculate the total number of pages for all practice areas selected
+            // This is done to provide a progress bar that shows the total number of pages to be processed
+
+            foreach (long practiceAreaId in practiceAreasSelected)
             {
+                int pagesForThisArea = 0;
+                string htmlWithPracticeArea = $"{addedHtml}&practice_area_id={practiceAreaId}";
 
-                int totalPagesAcrossAll = 0;
-                int pagesCompleted = 0;
-
-                foreach (long practiceAreaId in practiceAreasSelected)
+                // Use a dummy loop to just get the page count
+                await foreach (var _ in _clioApiClient.GetAllMattersAsync(
+             fields,
+             status,
+             htmlWithPracticeArea,
+             feedbackTotalPagesForThisArea: pages => pagesForThisArea = pages,
+             onProgress: null)) // Don't report progress yet
                 {
-                    _logger.Info($"Processing practice area ID: {practiceAreaId}");
-                    string htmlWithPracticeArea = $"{addedHtml}&practice_area_id={practiceAreaId}";
+                    break; // We only need the first page to get the total
+                }
 
-                    await foreach (var matter in _clioApiClient.GetAllMattersAsync(
-                        fields,
-                        status,
-                        htmlWithPracticeArea,
-                        feedbackTotalPagesForThisArea: pages => totalPagesAcrossAll += pages,
-                        onProgress: (page, _) =>
-                        {
-                            pagesCompleted++;
-                            _progressUpdated?.Invoke(pagesCompleted, totalPagesAcrossAll);
-                        }))
+                pageTotals.Add(pagesForThisArea);
+            }
+
+
+
+            int totalPages = pageTotals.Sum();
+            int pagesCompleted = 0;
+
+            foreach (long practiceAreaId in practiceAreasSelected)
+            {
+                string htmlWithPracticeArea = $"{addedHtml}&practice_area_id={practiceAreaId}";
+
+                await foreach (var matter in _clioApiClient.GetAllMattersAsync(
+                    fields,
+                    status,
+                    htmlWithPracticeArea,
+                    feedbackTotalPagesForThisArea: null, // Already known
+                    onProgress: (page, _) =>
                     {
-                        yield return matter;
-                    }
+                        pagesCompleted++;
+                        _progressUpdated?.Invoke(pagesCompleted, totalPages);
+                        _logger.Info($"Progress updated: {pagesCompleted}/{totalPages}");
+                    }))
+                {
+                    yield return matter;
                 }
             }
 
-            await foreach (var matter in CombinedMatters())
-            {
-                yield return matter;
-            }
-
         }
+        //}
+
+        //await foreach (var matter in CombinedMatters())
+        //{
+        //    yield return matter;
+        //}
+
 
 
 

@@ -10,10 +10,12 @@
 
 ## Known Issues
 - 3.0.3 - The automatic update functionality is still in its early stages and may not work perfectly on all systems. If you encounter issues, please report them on the GitHub repository.
-- 4.3.2 - STA Threading issues. This may cause the application to hang or crash in some cases. A fix is in progress.
-- 4.3.3 - The UI, especially the progress bar, may still flicker during report generation. This is a known issue and will be addressed in future updates.
+- 4.3.2 - STA Threading issues, especially around automatic updates. This may cause the application to hang or crash in some cases. A fix is in progress.
 
 # CalliAPI Patch Log
+
+## 4.4 - Cleaned Custom Report Builder Form, Updated UI, and Added New Filters!
+- Finally fixed the progress bar in the Custom Report Builder Form to provide an accurate estimate of page count before it begins to update. Now it won't be a surprise how long the program takes to complete a report or how many pages are needed! All of the 4.3 bug fixes are included as well for a polished 4.4!
 
 ### 4.3.4 - Bug Fixes and Improvements
 - Added filtering by no active tasks in the Custom Report Builder! This enhancement allows users to filter reports based on whether there are active tasks associated with matters, making it easier to identify matters that may require attention or follow-up.
