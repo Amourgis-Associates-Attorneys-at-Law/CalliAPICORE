@@ -1,6 +1,6 @@
 ﻿param (
-	[switch]$publish = $true,
-	[switch]$stable = $true
+    [switch]$publish = $true,
+    [switch]$stable = $true
 )
 
 # Check if a file exists and is unlocked
@@ -20,18 +20,71 @@ function Test-FileUnlocked {
     }
 }
 
+# Get the short major.minor.patch string
+function Get-VersionShort {
+    param ([string]$csprojPath)
+
+    [xml]$csproj = Get-Content $csprojPath
+    $version = $csproj.Project.PropertyGroup.Version
+    $versionParts = $version.Split('.')
+    return "$($versionParts[0]).$($versionParts[1]).$($versionParts[2])"
+}
+
+# Get all the links to the versions in versions.txt
+function Generate-VersionLinks {
+    param ([string]$versionsFile)
+
+    if (-not (Test-Path $versionsFile)) {
+        Write-Host "versions.txt not found."
+        return ""
+    }
+
+    $links = ""
+    Get-Content $versionsFile | ForEach-Object {
+        $links += "<li><a href='https://github.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/releases/download/v$_/CalliAPI-win-Setup.exe'>v$_</a></li>`n"
+    }
+    return "<ul>`n$links</ul>"
+}
+
+# Inject the previous versions and the changelog into the index file
+function Inject-Content {
+    param (
+        [string]$templatePath,
+        [string]$outputPath,
+        [string]$version,
+        [string]$versionLinks,
+        [string]$changelogPath
+    )
+
+    $html = Get-Content $templatePath -Raw
+    $html = $html -replace '{{VERSION}}', $version
+
+    if ($html -match '<!--\s*VERSIONS\s*-->') {
+        $html = $html -replace '<!--\s*VERSIONS\s*-->', $versionLinks
+        Write-Host "Injected version history."
+    }
+
+    if (Test-Path $changelogPath) {
+        $changelog = Get-Content $changelogPath -Raw
+        $html = $html -replace '<!--\s*CHANGELOG\s*-->', "<pre>$changelog</pre>"
+        Write-Host "Injected changelog."
+    }
+
+    Set-Content $outputPath $html -Encoding UTF8
+    Write-Host "Final index.html written."
+}
+
 # Define project settings
 $project = "CalliAPI.csproj"
-[xml]$csproj = Get-Content $project
-$version = $csproj.Project.PropertyGroup.Version
-$versionParts = $version.Split('.')
-$versionShort = "$($versionParts[0]).$($versionParts[1]).$($versionParts[2])"
+$versionShort = Get-VersionShort -csprojPath $project
 
 # Define paths and variables
 $publishDir = "publish"
 $outputDir = "Releases"
 $templateHtml = "docs\index.template.html"
 $outputHtml = "docs\index.html"
+$versionsFile = "versions.txt"
+$changelogFile = "ReadMe.MD"
 $repoUrl = 'https://github.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE'
 $stableStr = if ($stable) { "" } else { "--pre" }
 $publishStr = if ($publish) { "--publish" } else { "" }
@@ -56,46 +109,9 @@ Write-Host "Running Velopack upload for version $versionShort and set to full re
 # Step 1: Build and publish
 dotnet publish $project -c Release -r win-x64 -o $publishDir --self-contained true /p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true
 
-# Step 2: Generate index.html with version injected
-$dir = Split-Path $outputHtml
-if (-not (Test-Path $dir)) {
-    New-Item -ItemType Directory -Path $dir | Out-Null
-}
-
-(Get-Content $templateHtml) -replace '{{VERSION}}', $versionShort | Set-Content $outputHtml
-
-Write-Host "Generated index.html with version $versionShort"
-
-# Step 2.1: Inject version history links
-$versionsFile = "versions.txt"
-$versionLinks = ""
-
-if (Test-Path $versionsFile) {
-    $versions = Get-Content $versionsFile
-    foreach ($v in $versions) {
-        $versionLinks += "<li><a href='https://github.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/releases/download/v$v/CalliAPI-win-Setup.exe'>v$v</a></li>`n"
-    }
-
-    $html = Get-Content $outputHtml -Raw
-    $html = $html -replace '<!--VERSIONS-->', "<ul>`n$versionLinks</ul>"
-    Set-Content $outputHtml $html
-    Write-Host "Injected version history into index.html"
-} else {
-    Write-Host "versions.txt not found. Skipping version history injection."
-}
-
-# Step 2.2: Inject changelog
-$changelogFile = "ReadMe.MD"
-if (Test-Path $changelogFile) {
-    $changelogContent = Get-Content $changelogFile -Raw
-    $html = Get-Content $outputHtml -Raw
-    $html = $html -replace '<!--CHANGELOG-->', "<pre>$changelogContent</pre>"
-    Set-Content $outputHtml $html
-    Write-Host "Injected changelog into index.html"
-} else {
-    Write-Host "ReadMe.MD not found. Skipping changelog injection."
-}
-
+# Step 2: Generate and inject content
+$versionLinks = Generate-VersionLinks -versionsFile $versionsFile
+Inject-Content -templatePath $templateHtml -outputPath $outputHtml -version $versionShort -versionLinks $versionLinks -changelogPath $changelogFile
 
 # Step 3: Publish release to GitHub
 vpk upload github `
@@ -107,38 +123,32 @@ $publishStr `
 --releaseName "CalliAPI $versionShort" `
 --tag "v$versionShort"
 
-Write-Host "Updated to release on GitHub with arguments ${$stable.ToString()} ${$publish.ToString()} $version."
+Write-Host "Updated to release on GitHub with arguments ${$stable.ToString()} ${$publish.ToString()} $versionShort."
 
 # Step 4: Commit and push to GitHub (only unlocked, changed files)
 $changedFiles = git status --porcelain | ForEach-Object {
-    $_.Substring(3)  # Extract file path from status line
+    $_.Substring(3)
 }
 
 $unlockedFiles = @()
 
-foreach ($file in $changedFiles) 
-{
-    if (Test-FileUnlocked $file) { $unlockedFiles += $file }
-    else
-    {
+foreach ($file in $changedFiles) {
+    if (Test-FileUnlocked $file) {
+        $unlockedFiles += $file
+    } else {
         Write-Host "Skipping locked file: $file"
     }
 }
 
 if ($unlockedFiles.Count -eq 0) {
     Write-Host "No unlocked files to commit."
-} 
-else 
-{
+} else {
     git add $unlockedFiles
     git commit -m "Update site for version $versionShort"
-    try 
-    {
-    git push origin main
-    Write-Host "Committed and pushed unlocked changes to GitHub."
-    } 
-    catch
-    {
+    try {
+        git push origin main
+        Write-Host "Committed and pushed unlocked changes to GitHub."
+    } catch {
         Write-Host "Failed to push changes: $_"
     }
 }
