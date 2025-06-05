@@ -17,10 +17,10 @@ namespace CalliAPI.Utilities
 
     public static class ReportLauncher
     {
-        private static readonly AMO_Logger _logger = new AMO_Logger("CalliAPI");
+        private static readonly AMO_Logger _logger = new("CalliAPI");
 
         /// <summary>
-        /// This method is called from the ClioService to show a report. It takes an IAsyncEnumerable<Matter> and converts it to a DataTable, then displays it
+        /// This method is called from the ClioService to show a report. It takes an IAsyncEnumerable of type Matter and converts it to a DataTable, then displays it
         /// in a ReportForm.
         /// </summary>
         /// <param name="matters"></param>

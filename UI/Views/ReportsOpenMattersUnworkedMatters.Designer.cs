@@ -43,7 +43,7 @@
             btnLaunch.TabIndex = 0;
             btnLaunch.Text = "Launch Unworked Matters Report";
             btnLaunch.UseVisualStyleBackColor = true;
-            btnLaunch.Click += btnLaunch_Click;
+            btnLaunch.Click += BtnLaunch_Click;
             // 
             // label1
             // 

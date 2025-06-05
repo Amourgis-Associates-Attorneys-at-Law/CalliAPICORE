@@ -15,7 +15,7 @@ namespace CalliAPI.UI.Views
 {
     public partial class ReportsOpenMattersUnworkedMatters : UserControl
     {
-        private KeywordTooltipManager _tooltipManager;
+        private readonly KeywordTooltipManager _tooltipManager;
         private readonly ClioService _clioService;
 
         public ReportsOpenMattersUnworkedMatters(ClioService clioService)
@@ -28,7 +28,7 @@ namespace CalliAPI.UI.Views
 
         }
 
-        private async void btnLaunch_Click(object sender, EventArgs e)
+        private async void BtnLaunch_Click(object sender, EventArgs e)
         {
             await _clioService.GetUnworked713Matters();
         }

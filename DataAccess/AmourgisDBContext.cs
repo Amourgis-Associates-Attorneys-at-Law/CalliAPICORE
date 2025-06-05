@@ -11,13 +11,21 @@ using CalliAPI.Models.AmourgisDB.dboSchema;
 
 namespace CalliAPI.DataAccess;
 
+/// <summary>
+/// AmourgisDBContext is the database context for the Amourgis database.
+/// </summary>
 public partial class AmourgisDBContext : DbContext
 {
+    /// <summary>
+    /// The constructor for the AmourgisDBContext class.
+    /// </summary>
+    /// <param name="options"></param>
     public AmourgisDBContext(DbContextOptions<AmourgisDBContext> options)
         : base(options)
     {
     }
 
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     public virtual DbSet<CaseInformation> CaseInformation { get; set; }
 
     public virtual DbSet<CrashReports> CrashReports { get; set; }
@@ -109,4 +117,5 @@ public partial class AmourgisDBContext : DbContext
         }
     }
 
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 }

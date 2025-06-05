@@ -24,32 +24,25 @@ using System.Globalization;
 
 namespace CalliAPI.BusinessLogic
 {
-    public class ClioService
+    public class ClioService(ClioApiClient clioApiClient, AuthService authService, AMO_Logger logger)
     {
         
-        private readonly AMO_Logger _logger;
-        private readonly ClioApiClient _clioApiClient;
-        private readonly AuthService _authService;
+        private readonly AMO_Logger _logger = logger;
+        private readonly ClioApiClient _clioApiClient = clioApiClient;
+        private readonly AuthService _authService = authService;
 
 
 
-        public static string[] prefileStages =
-            [
-                "prefile",
-                "pif - prefile",
-                "case prep",
-                "pif - case prep",
-                "signing and filing",
-                "prefiling",
-                "pif - prefiling"
-            ];
-
-        public ClioService(ClioApiClient clioApiClient, AuthService authService, AMO_Logger logger)
-        {
-            _clioApiClient = clioApiClient;
-            _authService = authService;
-            _logger = logger;
-        }
+        public static IReadOnlyList<string> PrefileStages { get; } =
+[
+    "prefile",
+    "pif - prefile",
+    "case prep",
+    "pif - case prep",
+    "signing and filing",
+    "prefiling",
+    "pif - prefiling"
+];
 
         #region Authentication Methods
         public string GetAuthorizationUrl()
@@ -57,22 +50,12 @@ namespace CalliAPI.BusinessLogic
             return _authService.GetAuthorizationUrl();
         }
 
-        public async Task InitializeAfterAuthAsync()
-        {
-            if (!IsAuthenticated)
-            {
-                throw new InvalidOperationException("Cannot initialize ClioService before authentication.");
-            }
-
-            //await _clioApiClient.LoadCustomFieldNamesAsync();
-        }
-
         public async Task GetAccessTokenAsync(string authorizationCode)
         {
             await _authService.GetAccessTokenAsync(authorizationCode);
         }
 
-        public string ValidateAuthorizationCode(string userInput)
+        public string? ValidateAuthorizationCode(string userInput)
         {
             return _authService.ValidateAuthorizationCode(userInput);
         }
@@ -80,10 +63,19 @@ namespace CalliAPI.BusinessLogic
 
         #region Delegates
 
-        public event Action<int, int> _progressUpdated;
+        /// <summary>
+        /// Tracks the progress of a long-running operation, such as fetching matters or tasks.
+        /// </summary>
+        public event Action<int, int> ProgressUpdated;
+
+        /// <summary>
+        /// Tracks the progress of practice area filtering operations.
+        /// </summary>
         public event Action<int, int>? PracticeAreaProgressUpdated;
 
-
+        /// <summary>
+        /// Checks if the user is authenticated with Clio.
+        /// </summary>
         public bool IsAuthenticated => !string.IsNullOrWhiteSpace(_authService.AccessToken);
         #endregion
 
@@ -101,7 +93,7 @@ namespace CalliAPI.BusinessLogic
 
         public static string GetPrefileStageDescription()
         {
-            return $"Prefile stages include: {string.Join(", ", prefileStages)}.";
+            return $"Prefile stages include: {string.Join(", ", PrefileStages)}.";
         }
 
 
@@ -110,23 +102,6 @@ namespace CalliAPI.BusinessLogic
 
         #region Classic Reports
         #region reports - open Matters
-
-
-        public async Task GetAllOpenMatters()
-        {
-            // Initialize the matter stream and filter it
-            IAsyncEnumerable<Matter> matters = _clioApiClient.GetAllOpenMattersAsync();
-            // Convert the matter stream to a DataTable and show it
-            await ReportLauncher.ShowAsync(matters);
-        }
-
-        public async Task GetAllOpen713Matters()
-        {
-            // Initialize the matter stream and filter it
-            IAsyncEnumerable<Matter> matters = _clioApiClient.GetAllOpenMattersAsync().FilterByPracticeAreaSuffixAsync(new string[] { "7", "13" });
-            // Convert the matter stream to a DataTable and show it
-            await ReportLauncher.ShowAsync(matters);
-        }
 
         public async Task GetUnworked713Matters()
         {
@@ -138,11 +113,11 @@ namespace CalliAPI.BusinessLogic
 #if DEBUG
 .LogEachAsync(_logger, "All Matters")
 #endif
-                    .FilterByPracticeAreaSuffixAsync(new[] { "7", "13" })
+                    .FilterByPracticeAreaSuffixAsync(["7", "13"])
 #if DEBUG
 .LogEachAsync(_logger, "After Suffix Filter")
 #endif
-                    .FilterByStageNameAsync(prefileStages)
+                    .FilterByStageNameAsync([.. PrefileStages])
 #if DEBUG
 .LogEachAsync(_logger, "After Stage Filter")
 #endif
@@ -211,13 +186,21 @@ namespace CalliAPI.BusinessLogic
         public async IAsyncEnumerable<Matter> GetAllMattersAsync(string fields = "", string status = "", string addedHtml = "",
             List<long>? practiceAreasSelected = null)
         {
-            string practiceAreasSelectedAsString = string.Join(",", practiceAreasSelected.ToArray());
+            // Safely convert the list to a comma-separated string, or "null" if it's null
+            string practiceAreasSelectedAsString = practiceAreasSelected is null
+            ? "null"
+            : string.Join(",", practiceAreasSelected);
 
-            _logger.Info($"Beginning GetAllMattersAsync()\nfields: {fields}\nstatus:{status}\naddedHtml:{addedHtml}\n" +
-                $"practiceAreasSelected:{practiceAreasSelectedAsString}");
+            _logger.Info($"""
+            Beginning GetAllMattersAsync()
+            fields: {fields}
+            status: {status}
+            addedHtml: {addedHtml}
+            practiceAreasSelected: {practiceAreasSelectedAsString}
+            """);
 
             // If no practice areas are selected, fall back to the original method
-            if (practiceAreasSelected == null || practiceAreasSelected.Count == 0)
+            if (practiceAreasSelected is null || practiceAreasSelected.Count == 0)
             {
                 await foreach (var matter in _clioApiClient.GetAllMattersAsync(fields, status, addedHtml))
                 {
@@ -227,7 +210,7 @@ namespace CalliAPI.BusinessLogic
             }
 
 
-            List<int> pageTotals = new();
+            List<int> pageTotals = [];
             int areaIndex = 0;
 
 
@@ -273,7 +256,7 @@ namespace CalliAPI.BusinessLogic
                     onProgress: (page, _) =>
                     {
                         pagesCompleted++;
-                        _progressUpdated?.Invoke(pagesCompleted, totalPages);
+                        ProgressUpdated?.Invoke(pagesCompleted, totalPages);
                         _logger.Info($"Progress updated: {pagesCompleted}/{totalPages}");
                     }))
                 {
@@ -282,12 +265,8 @@ namespace CalliAPI.BusinessLogic
             }
 
         }
-        //}
 
-        //await foreach (var matter in CombinedMatters())
-        //{
-        //    yield return matter;
-        //}
+
 
 
 
@@ -312,7 +291,7 @@ namespace CalliAPI.BusinessLogic
             {
                 if (await MatterHasNoOpenTasksAsync(matter))
                 {
-                    _logger.Info($"No tasks found for matter {matter.id.ToString()}.");
+                    _logger.Info($"No tasks found for matter {matter.id}.");
                     yield return matter;
                 }
             }
@@ -333,12 +312,12 @@ namespace CalliAPI.BusinessLogic
         #region Calendar Methods
         public async Task<List<ClioCalendar>> GetCalendarsAsync()
         {
-            return await _clioApiClient.GetCalendarsAsync(_authService.AccessToken);
+            return await _clioApiClient.GetCalendarsAsync();
         }
 
         internal async IAsyncEnumerable<ClioCalendarEvent> GetCalendarEntriesAsync(List<long> selectedCalendars)
         {
-            await foreach (var calendarEvent in _clioApiClient.GetCalendarEntriesAsync(selectedCalendars, _authService.AccessToken))
+            await foreach (var calendarEvent in _clioApiClient.GetCalendarEntriesAsync(selectedCalendars))
             {
                 yield return calendarEvent;
             }

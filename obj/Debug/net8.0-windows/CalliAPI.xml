@@ -4,9 +4,34 @@
         <name>CalliAPI</name>
     </assembly>
     <members>
-        <member name="M:CalliAPI.BusinessLogic.AuthService.GeneratePkceValues">
+        <member name="T:CalliAPI.BusinessLogic.AuthService">
+            <summary>
+            AuthService is responsible for handling authentication with the Clio API.
+            </summary>
+        </member>
+        <member name="M:CalliAPI.BusinessLogic.AuthService.#ctor(CalliAPI.DataAccess.ClioApiClient,AmourgisCOREServices.AMO_Logger)">
+            <summary>
+            AuthService is responsible for handling authentication with the Clio API.
+            </summary>
+        </member>
+        <member name="M:CalliAPI.BusinessLogic.AuthService.GetAuthorizationUrl">
             <summary>
             Generates PKCE (Proof Key for Code Exchange) values. Useful if we can use PKCE for OAuth 2.0 authorization.
+            </summary>
+        </member>
+        <member name="E:CalliAPI.BusinessLogic.ClioService.ProgressUpdated">
+            <summary>
+            Tracks the progress of a long-running operation, such as fetching matters or tasks.
+            </summary>
+        </member>
+        <member name="E:CalliAPI.BusinessLogic.ClioService.PracticeAreaProgressUpdated">
+            <summary>
+            Tracks the progress of practice area filtering operations.
+            </summary>
+        </member>
+        <member name="P:CalliAPI.BusinessLogic.ClioService.IsAuthenticated">
+            <summary>
+            Checks if the user is authenticated with Clio.
             </summary>
         </member>
         <member name="M:CalliAPI.BusinessLogic.ClioService.FilterMattersWithNoOpenTasksParallelAsync(System.Collections.Generic.IAsyncEnumerable{CalliAPI.Models.Matter})">
@@ -16,18 +41,34 @@
             <param name="matters"></param>
             <returns></returns>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:CalliAPI.DataAccess.ClioApiClient.TryGetObject(System.Text.Json.JsonElement,System.String,System.Text.Json.JsonElement@)" -->
+        <member name="T:CalliAPI.DataAccess.AmourgisDBContext">
+            <summary>
+            AmourgisDBContext is the database context for the Amourgis database.
+            </summary>
+        </member>
+        <member name="M:CalliAPI.DataAccess.AmourgisDBContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{CalliAPI.DataAccess.AmourgisDBContext})">
+            <summary>
+            The constructor for the AmourgisDBContext class.
+            </summary>
+            <param name="options"></param>
+        </member>
+        <member name="M:CalliAPI.DataAccess.ClioApiClient.ParseMatter(System.Text.Json.JsonElement)">
+            <summary>
+            Attempts to parse a JsonElement into a Matter object.
+            </summary>
+            <param name="element">The JSON containing the Matter object to parse.</param>
+            <returns>The Matter object that was returned from the JSON.</returns>
+        </member>
         <member name="M:CalliAPI.DataAccess.ClioApiClient.GetAllMattersAsync(System.String,System.String,System.String,System.Action{System.Int32},System.Action{System.Int32,System.Int32})">
             <summary>
             Get a list of all the matters as Matter objects. Use this with MatterFilters.cs to filter the list of matters.
             </summary>
             <returns></returns>
         </member>
-        <member name="M:CalliAPI.DataAccess.ClioApiClient.GetCalendarsAsync(System.String)">
+        <member name="M:CalliAPI.DataAccess.ClioApiClient.GetCalendarsAsync">
             <summary>
             Get all visible calendars and store them as ClioCalendar objects.
             </summary>
-            <param name="accessToken"></param>
             <returns>A List of ClioCalendar objects that the user is allowed to view.</returns>
         </member>
         <member name="M:CalliAPI.DataAccess.ClioApiClient.GetAllOpenMattersAsync">
@@ -74,6 +115,31 @@
             Optional description of the query for logging or display.
             </summary>
         </member>
+        <member name="T:CalliAPI.Models.ClioCalendar">
+            <summary>
+            A representation of a Clio calendar (not the events on it, which are ClioCalendarEvent items).
+            </summary>
+        </member>
+        <member name="P:CalliAPI.Models.ClioCalendar.id">
+            <summary>
+            The unique identifier for the calendar.
+            </summary>
+        </member>
+        <member name="P:CalliAPI.Models.ClioCalendar.name">
+            <summary>
+            The name of the calendar.
+            </summary>
+        </member>
+        <member name="P:CalliAPI.Models.ClioCalendar.permission">
+            <summary>
+            The permission level for the calendar ("owner", "editor", "viewer", etc.).
+            </summary>
+        </member>
+        <member name="P:CalliAPI.Models.ClioCalendar.visible">
+            <summary>
+            A boolean that reflects if the current user can see the items on the calendar.
+            </summary>
+        </member>
         <member name="T:CalliAPI.Models.CustomFieldValue">
             <summary>
             Holds the value of a custom field for a matter in Clio.
@@ -99,6 +165,96 @@
             
             </summary>
         </member>
+        <member name="T:CalliAPI.Models.Matter">
+            <summary>
+            A representation of a matter in Clio, which includes details such as the matter's number, description, status, and associated client and practice area.
+            </summary>
+        </member>
+        <member name="P:CalliAPI.Models.Matter.id">
+            <summary>
+            The unique identifier for the matter in Clio.
+            </summary>
+        </member>
+        <member name="P:CalliAPI.Models.Matter.number">
+            <summary>
+            The number assigned to the matter.
+            </summary>
+        </member>
+        <member name="P:CalliAPI.Models.Matter.display_number">
+            <summary>
+            The display number for the matter, which may include a prefix or suffix.
+            </summary>
+        </member>
+        <member name="P:CalliAPI.Models.Matter.custom_number">
+            <summary>
+            The custom number for the matter, if applicable.
+            </summary>
+        </member>
+        <member name="P:CalliAPI.Models.Matter.description">
+            <summary>
+            The description of the matter.
+            </summary>
+        </member>
+        <member name="P:CalliAPI.Models.Matter.status">
+            <summary>
+            The status of the matter, such as "Open", "Closed", or "Pending".
+            </summary>
+        </member>
+        <member name="P:CalliAPI.Models.Matter.created_at">
+            <summary>
+            The date when the matter was opened.
+            </summary>
+        </member>
+        <member name="P:CalliAPI.Models.Matter.updated_at">
+            <summary>
+            The date when the matter was last updated.
+            </summary>
+        </member>
+        <member name="P:CalliAPI.Models.Matter.has_tasks">
+            <summary>
+            A boolean indicating whether the matter has any tasks (regardless of completion).
+            </summary>
+        </member>
+        <member name="P:CalliAPI.Models.Matter.client">
+            <summary>
+            The client associated with the matter.
+            </summary>
+        </member>
+        <member name="P:CalliAPI.Models.Matter.practice_area">
+            <summary>
+            The Practice Area associated with the matter, which may include areas like "AK7", "CL13", etc.
+            </summary>
+        </member>
+        <member name="P:CalliAPI.Models.Matter.matter_stage">
+            <summary>
+            The stage of the matter, which may include stages like "Intake", "Discovery", etc.
+            </summary>
+        </member>
+        <member name="P:CalliAPI.Models.Matter.CustomFields">
+            <summary>
+            The list of custom field values associated with the matter.
+            </summary>
+        </member>
+        <member name="T:CalliAPI.Models.MatterStage">
+            <summary>
+            The stage of a matter in Clio, such as "Intake", "Discovery", etc.
+            </summary>
+        </member>
+        <member name="P:CalliAPI.Models.MatterStage.id">
+            <summary>
+            The unique identifier for the matter stage.
+            </summary>
+        </member>
+        <member name="P:CalliAPI.Models.MatterStage.name">
+            <summary>
+            The name of the matter stage.
+            </summary>
+        </member>
+        <member name="P:CalliAPI.Models.MatterStage.practice_area_id">
+            <summary>
+            The unique identifier for the practice area associated with this matter stage.
+            </summary>
+        </member>
         <member name="M:CalliAPI.Models.MatterFilters.LogEachAsync``1(System.Collections.Generic.IAsyncEnumerable{``0},AmourgisCOREServices.AMO_Logger,System.String)">
             <summary>
             Async logging function so we can log counts without disrupting streaming. Writes a LOT of text (one line per item in source plus one line to total)
@@ -117,7 +273,16 @@
             <param name="status"></param>
             <returns></returns>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:CalliAPI.Models.MatterFilters.FilterByCustomFieldAsync(System.Collections.Generic.IAsyncEnumerable{CalliAPI.Models.Matter},CalliAPI.Models.CustomField,System.Func{System.String,System.Boolean})" -->
+        <member name="M:CalliAPI.Models.MatterFilters.FilterByCustomFieldAsync(System.Collections.Generic.IAsyncEnumerable{CalliAPI.Models.Matter},CalliAPI.Models.CustomField,System.Func{System.String,System.Boolean})">
+            <summary>
+            Filters matters by a custom field. For example:
+            For a date comparison: var filtered = matters.FilterByCustomFieldAsync(CustomField.DateOf341Meeting,value => DateTime.TryParse(value, out var date) and date >= new DateTime(2025, 6, 1));
+            </summary>
+            <param name="matters"></param>
+            <param name="field"></param>
+            <param name="predicate"></param>
+            <returns></returns>
+        </member>
         <member name="M:CalliAPI.Models.MatterFilters.ToSmartDataTableAsync(System.Collections.Generic.IAsyncEnumerable{CalliAPI.Models.Matter},System.Collections.Generic.List{CalliAPI.Models.CustomField})">
             <summary>
             Converts an IAsyncEnumerable of Matter objects to a DataTable, attempting to include all relevant properties.
@@ -125,13 +290,18 @@
             <param name="matters"></param>
             <returns></returns>
         </member>
+        <member name="T:CalliAPI.Program">
+            <summary>
+            The main entry point for the application.
+            </summary>
+        </member>
         <member name="M:CalliAPI.Program.AllocConsole">
             <summary>
             AllocConsole is a Windows API function that allocates a new console for the calling process.
-            </summary>
-            <returns></returns>
+             </summary>
+             <returns>True if the console was successfully allocated; otherwise, false.</returns>
         </member>
-        <member name="M:CalliAPI.Program.Main(System.String[])">
+        <member name="M:CalliAPI.Program.Main">
             <summary>
              The main entry point for the application.
             </summary>
@@ -186,6 +356,18 @@
             the contents of this method with the code editor.
             </summary>
         </member>
+        <member name="T:CalliAPI.UI.Controls.MatterQueryControl">
+            <summary>
+            A control that allows users to query Clio Matters with various filters and fields.
+            </summary>
+        </member>
+        <member name="M:CalliAPI.UI.Controls.MatterQueryControl.#ctor(CalliAPI.BusinessLogic.ClioService)">
+            <summary>
+            A control for building and executing queries against Clio Matters.
+            </summary>
+            <param name="clioService"></param>
+            <exception cref="T:System.ArgumentNullException">Thrown if the ClioService passed is null or missing</exception>
+        </member>
         <member name="F:CalliAPI.UI.Controls.MatterQueryControl.components">
             <summary> 
             Required designer variable.
@@ -201,6 +383,36 @@
             <summary> 
             Required method for Designer support - do not modify 
             the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:CalliAPI.UI.Controls.ProgressBarWithText">
+            <summary>
+            Custom implementation of a ProgressBar that displays a percentage value as text within the bar.
+            </summary>
+        </member>
+        <member name="P:CalliAPI.UI.Controls.ProgressBarWithText.GradientStartColor">
+            <summary>
+            The start and end colors for the gradient fill of the progress bar.
+            </summary>
+        </member>
+        <member name="P:CalliAPI.UI.Controls.ProgressBarWithText.GradientEndColor">
+            <summary>
+            The start and end colors for the gradient fill of the progress bar.
+            </summary>
+        </member>
+        <member name="P:CalliAPI.UI.Controls.ProgressBarWithText.BarBackgroundColor">
+            <summary>
+            The background color of the progress bar.
+            </summary>
+        </member>
+        <member name="T:CalliAPI.UI.Forms.AboutForm">
+            <summary>
+            A form that displays information about the application, including its version.
+            </summary>
+        </member>
+        <member name="M:CalliAPI.UI.Forms.AboutForm.#ctor">
+            <summary>
+            A form that displays information about the application, including its version.
             </summary>
         </member>
         <member name="F:CalliAPI.UI.Forms.AboutForm.components">
@@ -220,6 +432,11 @@
             the contents of this method with the code editor.
             </summary>
         </member>
+        <member name="M:CalliAPI.UI.Forms.SplashForm.LoadClientSecretFromRegistry">
+            <summary>
+            Loads the Clio client secret from the registry, or returns null if not found.
+            </summary>
+        </member>
         <member name="F:CalliAPI.UI.Forms.SplashForm.components">
             <summary>
             Required designer variable.
@@ -235,6 +452,21 @@
             <summary>
             Required method for Designer support - do not modify
             the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:CalliAPI.UI.AuthorizationCodeForm">
+            <summary>
+            A form for entering an authorization code.
+            </summary>
+        </member>
+        <member name="P:CalliAPI.UI.AuthorizationCodeForm.AuthorizationCode">
+            <summary>
+            The authorization code entered by the user.
+            </summary>
+        </member>
+        <member name="M:CalliAPI.UI.AuthorizationCodeForm.#ctor">
+            <summary>
+            A form for entering an authorization code.
             </summary>
         </member>
         <member name="F:CalliAPI.UI.AuthorizationCodeForm.components">
@@ -254,7 +486,7 @@
             the contents of this method with the code editor.
             </summary>
         </member>
-        <member name="M:CalliAPI.UI.CustomReportBuilderForm.timerLoading_Tick(System.Object,System.EventArgs)">
+        <member name="M:CalliAPI.UI.CustomReportBuilderForm.TimerLoading_Tick(System.Object,System.EventArgs)">
             <summary>
             Loading animation for the report builder.
             </summary>
@@ -363,7 +595,7 @@
             the contents of this method with the code editor.
             </summary>
         </member>
-        <member name="M:CalliAPI.MailerForm.dataGridView1_CellClick(System.Object,System.Windows.Forms.DataGridViewCellEventArgs)">
+        <member name="M:CalliAPI.MailerForm.DataGridView1_CellClick(System.Object,System.Windows.Forms.DataGridViewCellEventArgs)">
             <summary>
             This function checks to see if the user has clicked on the Print or Ignore buttons in the database, and updates the items inside as needed.
             </summary>
@@ -392,19 +624,36 @@
              the contents of this method with the code editor.
             </summary>
         </member>
+        <member name="M:CalliAPI.MainForm.MainForm_FormClosed(System.Object,System.Windows.Forms.FormClosedEventArgs)">
+            <summary>
+            Ends the program when the main form is closed.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:CalliAPI.MainForm.SetProgressBarTheme(System.Drawing.Color,System.Drawing.Color,System.Drawing.Color,System.Drawing.Color)">
+            <summary>
+            Sets the theme for the progress bar based on the current phase of the operation.
+            </summary>
+            <param name="gradientStartColor"></param>
+            <param name="gradientEndColor"></param>
+            <param name="barBackgroundColor"></param>
+            <param name="text"></param>
+        </member>
+        <member name="M:CalliAPI.MainForm.SetProgress(System.Int32,System.Int32)">
+            <summary>
+            Sets the progress bar value and updates the label accordingly.
+            </summary>
+            <param name="current"></param>
+            <param name="total"></param>
+            <returns></returns>
+        </member>
         <member name="M:CalliAPI.MainForm.AnimateProgressBarAsync(System.Int32)">
             <summary>
             This method animates the progress bar to smoothly transition to the target value.
             </summary>
             <param name="targetValue"></param>
             <returns></returns>
-        </member>
-        <member name="M:CalliAPI.MainForm.btnOpenMailerForm_Click(System.Object,System.EventArgs)">
-            <summary>
-            This method is called when the "Open Mailer Form" button is clicked. Opens a new MailerForm.
-            </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
         </member>
         <member name="M:CalliAPI.MainForm.StartOAuthProcess">
             <summary>
@@ -448,7 +697,14 @@
             Call this after setting the RichTextBox text to highlight keywords.
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:CalliAPI.Utilities.ReportLauncher.ShowAsync(System.Collections.Generic.IAsyncEnumerable{CalliAPI.Models.Matter})" -->
+        <member name="M:CalliAPI.Utilities.ReportLauncher.ShowAsync(System.Collections.Generic.IAsyncEnumerable{CalliAPI.Models.Matter})">
+            <summary>
+            This method is called from the ClioService to show a report. It takes an IAsyncEnumerable of type Matter and converts it to a DataTable, then displays it
+            in a ReportForm.
+            </summary>
+            <param name="matters"></param>
+            <returns></returns>
+        </member>
         <member name="M:CalliAPI.Utilities.ReportLauncher.ToDataTable``1(System.Collections.Generic.List{``0})">
             <summary>
             

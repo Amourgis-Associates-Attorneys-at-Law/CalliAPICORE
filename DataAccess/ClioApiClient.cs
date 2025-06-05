@@ -1,26 +1,10 @@
 ﻿using CalliAPI.Interfaces;
 using CalliAPI.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
-using CalliAPI.Properties;
-using System.Text.RegularExpressions;
-using CalliAPI.Properties;
-using CalliAPI.Models;
-using Task = System.Threading.Tasks.Task;
-using System.Diagnostics.Metrics;
 using AmourgisCOREServices;
 using Polly;
-using System.Net.Sockets;
-using System.Net;
-using System.Drawing.Printing;
-using System.Threading;
 using System.Runtime.CompilerServices;
 using ClioTask = CalliAPI.Models.Task;
-using DocumentFormat.OpenXml.Drawing.Charts;
 
 namespace CalliAPI.DataAccess
 {
@@ -32,9 +16,9 @@ namespace CalliAPI.DataAccess
 
         private readonly HttpClient _httpClient;
         private readonly AMO_Logger _logger;
-        private string clientSecret = string.Empty;
-        private AsyncPolicy<HttpResponseMessage> _retryPolicy;
-        private Dictionary<long, string> _fieldNameCache = new Dictionary<long, string>();
+        private readonly string clientSecret = string.Empty;
+        private readonly AsyncPolicy<HttpResponseMessage> _retryPolicy;
+        private readonly Dictionary<long, string> _fieldNameCache = [];
         //private List<string> practiceAreas = new List<string>
         //{
         //    "AK", "CA", "CB", "CL", "CN", "DY", "TD", "WA", "YO"
@@ -137,70 +121,96 @@ namespace CalliAPI.DataAccess
             }
         }
 
-        /// <summary>
-        /// This method attempts to get a property from a JsonElement. It checks if the property exists and if its value is an object.
-        /// </summary>
-        /// <param name="element">The JsonElement</param>
-        /// <param name="propertyName">The property to attempt to recover from the JsonElement</param>
-        /// <param name="result">The output of the attempt to access the JsonValueKind.Object from the JsonElement</param>
-        /// <returns>True if TryGetProperty() && ValueKind == JsonValueKind.Object, else false</returns>
-        private bool TryGetObject(JsonElement element, string propertyName, out JsonElement result)
-        {
-            result = default;
-            if (element.TryGetProperty(propertyName, out var temp) && temp.ValueKind == JsonValueKind.Object)
-            {
-                result = temp;
-                return true;
-            }
-            return false;
-        }
+        ///// <summary>
+        ///// This method attempts to get a property from a JsonElement. It checks if the property exists and if its value is an object.
+        ///// </summary>
+        ///// <param name="element">The JsonElement</param>
+        ///// <param name="propertyName">The property to attempt to recover from the JsonElement</param>
+        ///// <param name="result">The output of the attempt to access the JsonValueKind.Object from the JsonElement</param>
+        ///// <returns>True if TryGetProperty() and ValueKind == JsonValueKind.Object, else false</returns>
+        //private static bool TryGetObject(JsonElement element, string propertyName, out JsonElement result)
+        //{
+        //    result = default;
+        //    if (element.TryGetProperty(propertyName, out var temp) && temp.ValueKind == JsonValueKind.Object)
+        //    {
+        //        result = temp;
+        //        return true;
+        //    }
+        //    return false;
+        //}
 
 
-        private static string TryGetString(JsonElement element, string propertyName)
-        {
-            return element.TryGetProperty(propertyName, out var prop) && prop.ValueKind == JsonValueKind.String
-            ? prop.GetString()
-            : null;
-        }
+        //private static string TryGetString(JsonElement element, string propertyName)
+        //{
+        //    return element.TryGetProperty(propertyName, out var prop) && prop.ValueKind == JsonValueKind.String
+        //    ? prop.GetString()
+        //    : null;
+        //}
 
 
         #region Parse Methods
+        /// <summary>
+        /// Attempts to parse a JsonElement into a Matter object.
+        /// </summary>
+        /// <param name="element">The JSON containing the Matter object to parse.</param>
+        /// <returns>The Matter object that was returned from the JSON.</returns>
         public Matter ParseMatter(JsonElement element)
         {
             try
             {
-                Matter matter = JsonSerializer.Deserialize<Matter>(element.GetRawText()) ?? throw new ArgumentNullException();
+                // Attempt to deserialize the JSON into a Matter object
+                Matter? matter = JsonSerializer.Deserialize<Matter>(element.GetRawText());
 
-                return matter;
+                // If deserialization fails and returns null, throw a meaningful exception
+                return matter is null ? throw new InvalidOperationException("Deserialization returned null for Matter.") : matter;
+            }
+            catch (JsonException jsonEx)
+            {
+                _logger.Error($"JSON error parsing Matter: {jsonEx.Message}");
+                throw;
             }
             catch (Exception ex)
             {
-                _logger.Error($"Error parsing matter: {ex.Message}");
+                _logger.Error($"Unexpected error parsing Matter: {ex.Message}");
                 throw;
             }
         }
+
         private ClioCalendar ParseClioCalendar(JsonElement element)
         {
             try
             {
-                ClioCalendar clioCalendar = JsonSerializer.Deserialize<ClioCalendar>(element.GetRawText()) ?? throw new ArgumentNullException();
+                ClioCalendar? calendar = JsonSerializer.Deserialize<ClioCalendar>(element.GetRawText());
 
-                return clioCalendar;
+                return calendar is null ? throw new InvalidOperationException("Deserialization returned null for ClioCalendar.") : calendar;
+            }
+            catch (JsonException jsonEx)
+            {
+                _logger.Error($"JSON error parsing ClioCalendar: {jsonEx.Message}");
+                throw;
             }
             catch (Exception ex)
             {
-                _logger.Error($"Error parsing clio calendar: {ex.Message}");
+                _logger.Error($"Unexpected error parsing ClioCalendar: {ex.Message}");
                 throw;
             }
         }
+
 
         private ClioCalendarEvent ParseClioCalendarEvent(JsonElement element)
         {
             try
             {
-                ClioCalendarEvent clioCalendarEvent = JsonSerializer.Deserialize<ClioCalendarEvent>(element.GetRawText());
+                ClioCalendarEvent? clioCalendarEvent = JsonSerializer.Deserialize<ClioCalendarEvent>(element.GetRawText());
+
+                if (clioCalendarEvent is null)
+                {
+                    _logger.Error("Deserialization returned null for ClioCalendarEvent.");
+                    throw new InvalidOperationException("Failed to deserialize ClioCalendarEvent.");
+                }
 
                 return clioCalendarEvent;
+
             }
             catch (Exception ex)
             {
@@ -223,11 +233,11 @@ namespace CalliAPI.DataAccess
             {
                 if (jsonDocument.RootElement.TryGetProperty("data", out JsonElement dataElement))
                 {
-                    return dataElement.EnumerateArray().Select(t => new ClioTask
+                    return [.. dataElement.EnumerateArray().Select(t => new ClioTask
                     {
                         id = t.GetProperty("id").GetInt64(),
                         status = t.GetProperty("status").GetString() ?? ""
-                    }).ToList();
+                    })];
                 }
             }
             catch (Exception ex)
@@ -235,7 +245,7 @@ namespace CalliAPI.DataAccess
                 _logger.Error($"Error parsing tasks: {ex.Message}");
                 throw;
             }
-            return new List<ClioTask>();
+            return [];
         }
 
         #endregion
@@ -258,7 +268,7 @@ namespace CalliAPI.DataAccess
                     fields = "id," + fields; // Ensure 'id' is always included in the fields
 
             if (string.IsNullOrEmpty(status)) status = "open,pending,closed"; // Default to all matters if no status is provided
-            if (!addedHttp.StartsWith("&")) addedHttp = "&" + addedHttp; // Ensure the additional parameters start with '&'
+            if (!addedHttp.StartsWith('&')) addedHttp = "&" + addedHttp; // Ensure the additional parameters start with '&'
 
             string nextPageUrl = $"{Properties.Settings.Default.ApiUrl}matters?" +
                                 $"fields={fields}" + // Use the provided fields or default to MatterFields
@@ -268,7 +278,6 @@ namespace CalliAPI.DataAccess
 
             int pageCount = 0;
             int maxPages = 9999;
-            int totalRecords;
             int totalPages = 0;
 
             while (!string.IsNullOrEmpty(nextPageUrl) && pageCount < maxPages) // While there exists another page of results...
@@ -303,9 +312,9 @@ namespace CalliAPI.DataAccess
                 if (pageCount == 1 &&
                     json.RootElement.TryGetProperty("meta", out var metaElement) &&
                     metaElement.TryGetProperty("records", out var recordsElement) &&
-                    recordsElement.TryGetInt32(out totalRecords))
+                    recordsElement.TryGetInt32(out int totalRecords))
                 {
-                    totalPages = (int)Math.Ceiling(totalRecords / 200.0);
+                    totalPages = Math.Max(1, (int)Math.Ceiling(totalRecords / 200.0));
                     _logger.Info($"Total records: {totalRecords}, estimated pages: {totalPages}");
                     feedbackTotalPagesForThisArea?.Invoke(totalPages);
                 }
@@ -352,9 +361,8 @@ namespace CalliAPI.DataAccess
         /// <summary>
         /// Get all visible calendars and store them as ClioCalendar objects.
         /// </summary>
-        /// <param name="accessToken"></param>
         /// <returns>A List of ClioCalendar objects that the user is allowed to view.</returns>
-        internal async Task<List<ClioCalendar>> GetCalendarsAsync(string accessToken)
+        internal async Task<List<ClioCalendar>> GetCalendarsAsync()
         {
             var calendars = new List<ClioCalendar>();
 
@@ -388,7 +396,7 @@ namespace CalliAPI.DataAccess
             return calendars;
         }
 
-        internal async IAsyncEnumerable<ClioCalendarEvent> GetCalendarEntriesAsync(List<long> selectedCalendars, string accessToken)
+        internal async IAsyncEnumerable<ClioCalendarEvent> GetCalendarEntriesAsync(List<long> selectedCalendars)
         {
 
             foreach (long calendarId in selectedCalendars)
@@ -402,7 +410,6 @@ namespace CalliAPI.DataAccess
 
                 int pageCount = 0;
                 int maxPages = 9999;
-                int totalRecords;
                 int totalPages = 0;
 
                 while (!string.IsNullOrEmpty(nextPageUrl) && pageCount < maxPages) // While there exists another page of results...
@@ -437,7 +444,7 @@ namespace CalliAPI.DataAccess
                     if (pageCount == 1 &&
                         json.RootElement.TryGetProperty("meta", out var metaElement) &&
                         metaElement.TryGetProperty("records", out var recordsElement) &&
-                        recordsElement.TryGetInt32(out totalRecords))
+                        recordsElement.TryGetInt32(out int totalRecords))
                     {
                         totalPages = (int)Math.Ceiling(totalRecords / 200.0);
                         _logger.Info($"Total records: {totalRecords}, estimated pages: {totalPages}");
@@ -460,14 +467,14 @@ namespace CalliAPI.DataAccess
                                 yield return ParseClioCalendarEvent(element);
                             }
                         }
-
+#pragma warning disable CS8600
                         nextPageUrl = json.RootElement
                             .GetProperty("meta")
                             .GetProperty("paging")
                             .TryGetProperty("next", out var nextElement)
                             ? nextElement.GetString()
                             : null;
-
+#pragma warning restore CS8600
 
                     }
                 }
@@ -497,7 +504,6 @@ namespace CalliAPI.DataAccess
 
             int pageCount = 0;
             int maxPages = 9999;
-            int totalRecords;
             int totalPages = 0;
 
             while (!string.IsNullOrEmpty(nextPageUrl) && pageCount < maxPages) // While there exists another page of results...
@@ -532,7 +538,7 @@ namespace CalliAPI.DataAccess
                 if (pageCount == 1 &&
                     json.RootElement.TryGetProperty("meta", out var metaElement) &&
                     metaElement.TryGetProperty("records", out var recordsElement) &&
-                    recordsElement.TryGetInt32(out totalRecords))
+                    recordsElement.TryGetInt32(out int totalRecords))
                 {
                     totalPages = (int)Math.Ceiling(totalRecords / 200.0);
                     _logger.Info($"Total records: {totalRecords}, estimated pages: {totalPages}");
@@ -555,14 +561,14 @@ namespace CalliAPI.DataAccess
                             yield return ParseMatter(element);
                         }
                     }
-
+#pragma warning disable CS8600
                     nextPageUrl = json.RootElement
                         .GetProperty("meta")
                         .GetProperty("paging")
                         .TryGetProperty("next", out var nextElement)
                         ? nextElement.GetString()
                         : null;
-
+#pragma warning restore CS8600
 
                 }
             }
@@ -612,7 +618,7 @@ namespace CalliAPI.DataAccess
                     if (!response.IsSuccessStatusCode)
                     {
                         _logger.Warn($"[ParallelFetch] Failed at offset {offset}: {response.StatusCode}");
-                        return Enumerable.Empty<Matter>();
+                        return [];
                     }
 
                     var content = await response.Content.ReadAsStringAsync(cancellationToken);
@@ -726,7 +732,7 @@ namespace CalliAPI.DataAccess
                 catch (Exception ex)
                 {
                     _logger.Error($"[ParallelFetch] Exception at offset {offset}: {ex.Message}");
-                    return Enumerable.Empty<Matter>();
+                    return [];
                 }
                 finally
                 {
@@ -780,23 +786,22 @@ namespace CalliAPI.DataAccess
 
             if (jsonDocument.RootElement.TryGetProperty("data", out JsonElement dataElement))
             {
-                practiceAreas = dataElement.EnumerateArray().Select(pa => new PracticeArea
+                practiceAreas = [.. dataElement.EnumerateArray().Select(pa => new PracticeArea
                 {
                     id = pa.GetProperty("id").GetInt64(),
                     name = pa.GetProperty("name").GetString()
-                }).ToList();
+                })];
             }
 
             return practiceAreas;
         }
 
 
-        public List<long> GetRelevantPracticeAreaIds(List<PracticeArea> practiceAreas)
+        public static List<long> GetRelevantPracticeAreaIds(List<PracticeArea> practiceAreas)
         {
-            return practiceAreas
-            .Where(pa => pa.name.EndsWith("7") || pa.name.EndsWith("13"))
-            .Select(pa => pa.id)
-            .ToList();
+            return [.. practiceAreas
+            .Where(pa => pa.name.EndsWith('7') || pa.name.EndsWith("13"))
+            .Select(pa => pa.id)];
         }
 
 
@@ -807,7 +812,7 @@ namespace CalliAPI.DataAccess
             var allMatters = new List<Matter>();
 
             // This line constructs the URL for the API endpoint to fetch matters. The URL is based on the base API URL and the specific endpoint for matters.
-            string nextPageUrl = Properties.Settings.Default.ApiUrl + "matters?" +
+            string? nextPageUrl = Properties.Settings.Default.ApiUrl + "matters?" +
                 "fields=id,practice_area{name},status,has_tasks,client{id,name},matter_stage{name}" +
                 "&practice_area_id=" + practiceAreaId.ToString() +
                 "&status=open,pending";
@@ -880,20 +885,20 @@ namespace CalliAPI.DataAccess
             // 2. have a stage in "Prefile" or "PIF - Prefile" or "Case prep" or "PIF - Case prep" or "Signing and Filing"
             // 3. have no tasks outstanding
 
-            List<string> validStages = new List<string>
-            {
+            List<string> validStages =
+            [
                 "prefile",
                 "pif - prefile",
                 "case prep",
                 "pif - case prep",
                 "signing and filing"
-            };
+            ];
 
             var matters = await GetAllActive713MattersAsync(accessToken); // 1. get all matters with a practice area ending in 7 or 13
 
             var filteredMatters = matters
-                .Where(m => (m.matter_stage != null && m.matter_stage.name != null)) // has a stage
-                .Where(m => (validStages.Contains(m.matter_stage.name.ToLower()))); // 2. has a stage in "Prefile" or "PIF - Prefile" or "Case prep" or "PIF - Case prep" or "Signing and Filing"
+                .Where(m => m.matter_stage?.name != null &&
+                            validStages.Contains(m.matter_stage.name.ToLower())); // 2. has a stage in "Prefile" or "PIF - Prefile" or "Case prep" or "PIF - Case prep" or "Signing and Filing"
 
 
             // Create a list to store matters with no outstanding tasks

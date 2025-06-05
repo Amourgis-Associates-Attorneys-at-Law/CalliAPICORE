@@ -19,7 +19,7 @@ namespace CalliAPI.Utilities
     /// </summary>
     public static class VersionHelper
     {
-        public static AMO_Logger _logger = new AMO_Logger("CalliAPI");
+        public static readonly AMO_Logger _logger = new("CalliAPI");
 
         /// <summary>
                 /// Gets the full version from the executing assembly (e.g., 1.2.3.0).
@@ -48,6 +48,7 @@ namespace CalliAPI.Utilities
             return $"CalliAPI {GetFormattedVersion(includeBuild: true)}";
         }
 
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         /// <summary>
         /// Checks for updates and applies them if available.
         /// </summary>
@@ -92,5 +93,6 @@ namespace CalliAPI.Utilities
 
 #endif
         }
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
     }
 }

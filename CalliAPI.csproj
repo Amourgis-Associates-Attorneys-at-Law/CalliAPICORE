@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
 		<AssemblyName>CalliAPI</AssemblyName>
-		<Version>4.4.2</Version>
+		<Version>4.5.1</Version>
 		<TargetFramework>net8.0-windows</TargetFramework>
 		<RootNamespace>CalliAPI</RootNamespace>
 		<Nullable>enable</Nullable>
@@ -11,8 +11,9 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<ApplicationIcon>UI\Icons\ico_Calliope.ico</ApplicationIcon>
 		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-		<NoWarn>CS1030</NoWarn>
+		<NoWarn>CS1030;IDE1006;SYSLIB1045</NoWarn>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
 	</PropertyGroup>
 
 	<ItemGroup>

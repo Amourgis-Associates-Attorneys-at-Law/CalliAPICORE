@@ -15,7 +15,7 @@ namespace CalliAPI.Models
 {
     internal static class MatterFilters
     {
-        static readonly AMO_Logger _logger = new AMO_Logger("CalliAPI");
+        static readonly AMO_Logger _logger = new("CalliAPI");
 
 
 
@@ -60,7 +60,7 @@ namespace CalliAPI.Models
 
         /// <summary>
         /// Filters matters by a custom field. For example:
-        /// For a date comparison: var filtered = matters.FilterByCustomFieldAsync(CustomField.DateOf341Meeting,value => DateTime.TryParse(value, out var date) && date >= new DateTime(2025, 6, 1));
+        /// For a date comparison: var filtered = matters.FilterByCustomFieldAsync(CustomField.DateOf341Meeting,value => DateTime.TryParse(value, out var date) and date >= new DateTime(2025, 6, 1));
         /// </summary>
         /// <param name="matters"></param>
         /// <param name="field"></param>
@@ -71,10 +71,6 @@ namespace CalliAPI.Models
     CustomField field,
     Func<string, bool> predicate)
 {
-            if (field == null)
-            {
-                throw new ArgumentNullException(nameof(field), "Custom field cannot be null.");
-            }
             if (predicate == null)
             {
                 throw new ArgumentNullException(nameof(predicate), "Predicate function cannot be null.");
@@ -91,7 +87,7 @@ namespace CalliAPI.Models
 
         if (match != null && match.value.ValueKind != JsonValueKind.Null)
         {
-            string value = match.value.ToString();
+            string value = match.value.ToString() ?? "null";
             if (predicate(value))
             {
                 yield return matter;
@@ -236,7 +232,7 @@ namespace CalliAPI.Models
                         }
                         else
                         {
-                            row[columnName] = null;
+                            row[columnName] = "null";
                         }
                     }
 
@@ -277,7 +273,7 @@ namespace CalliAPI.Models
 
             await foreach (var matter in matters)
             {
-                table.Rows.Add(matter.id, matter.practice_area.name, matter.matter_stage.name);
+                table.Rows.Add(matter.id, matter.practice_area?.name ?? "", matter.matter_stage?.name ?? "");
             }
 
             return table;

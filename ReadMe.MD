@@ -14,6 +14,20 @@
 
 # CalliAPI Patch Log
 
+## 4.5 - Major Refactoring, Bug Fixes, and Improvements
+- Simplified "using" statements throughout the codebase to improve readability and maintainability. This change will help streamline the code and make it easier to understand and modify in the future.
+- Updated DLL Import in Main to use LibraryImport instead, which is a more modern and efficient way to handle DLL imports in .NET. This change will improve performance and reduce potential issues related to DLL loading.
+- Simplified collection initialization in the codebase to enhance performance and reduce memory overhead. This change will help optimize the application's performance, especially when dealing with large datasets or collections.
+- Removed the Reports MenuStrip item to ensure that the Custom Report Builder is the primary way to generate reports. This change will help streamline the user experience and focus on the Custom Report Builder as the main reporting tool.
+- Added a new "About" menu item to the Help MenuStrip, providing users with information about the application, its version, and how to get support. This will enhance the user experience by making it easier to find help and information about CalliAPI.
+- Added plenty of new comments throughout the codebase to improve documentation and make it easier for developers to understand the code. This change will help future developers quickly grasp the purpose and functionality of different parts of the code, making maintenance and updates easier.
+- Added XML documentation to the codebase to provide detailed explanations of classes, methods, and properties. This will enhance the overall documentation quality and make it easier for developers to understand how to use and extend the application.
+- Simplified the initialization of variables throughout the codebase to improve readability and maintainability. This change will help make the code cleaner and easier to understand, reducing potential confusion for developers working on the project, and aligns with best practices.
+- Removed multiple unneeded functions and variables from the codebase to streamline the application and improve performance. This change will help reduce complexity and make the codebase cleaner and more efficient.
+- Consolidated the ClioService in order to simplify the codebase and improve maintainability. This change will help reduce redundancy and make it easier to manage the ClioService functionality, ensuring that all related code is in one place.
+- Renamed multiple controls to use PascalCase, which is a common naming convention in C#. This change will improve code consistency and readability, making it easier for developers to understand the purpose of different controls and components.
+- Added XML documentation to the Models in the codebase to provide detailed explanations of the data structures used in the application. This will enhance the overall documentation quality and make it easier for developers to understand how to use and extend the Models.
+
 ### 4.4.2 - Minor Improvements
 - Added new fonts to the program, making it more visually appealing and easier to read.
 - Added FRC and All Practice Area buttons to the Custom Report Builder, allowing users to quickly generate reports for specific practice areas.
