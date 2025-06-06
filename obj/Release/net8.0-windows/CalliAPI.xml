@@ -717,6 +717,11 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:CalliAPI.Utilities.VersionHelper.IsInstalled">
+            <summary>
+            Determines whether the application is running from a Velopack-installed location.
+            </summary>
+        </member>
         <member name="T:CalliAPI.ApplicationConfiguration">
             <summary>
              Bootstrap the application configuration.

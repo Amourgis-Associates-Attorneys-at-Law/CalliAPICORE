@@ -13,11 +13,11 @@ using System.Reflection;
 
 [assembly: System.Reflection.AssemblyCompanyAttribute("CalliAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
-[assembly: System.Reflection.AssemblyFileVersionAttribute("4.6.1.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("4.6.1+acc54c9ffce9d3fff6d2f9015dd59999599772e6")]
+[assembly: System.Reflection.AssemblyFileVersionAttribute("4.7.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("4.7.0+390d7cc157c8c727977b82836aba4b7d6cf1dacc")]
 [assembly: System.Reflection.AssemblyProductAttribute("CalliAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CalliAPI")]
-[assembly: System.Reflection.AssemblyVersionAttribute("4.6.1.0")]
+[assembly: System.Reflection.AssemblyVersionAttribute("4.7.0.0")]
 [assembly: System.Runtime.Versioning.TargetPlatformAttribute("Windows7.0")]
 [assembly: System.Runtime.Versioning.SupportedOSPlatformAttribute("Windows7.0")]
 

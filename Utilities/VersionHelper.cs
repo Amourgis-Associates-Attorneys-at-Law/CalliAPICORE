@@ -55,6 +55,7 @@ namespace CalliAPI.Utilities
         /// <returns></returns>
         public static async Task SplashPromptForUpdateAsync(Form splash, string? githubToken)
         {
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
 #if !DEBUG
             try
             {
@@ -93,8 +94,31 @@ namespace CalliAPI.Utilities
                 MessageBox.Show($"Update check failed: {ex.Message}", "Update Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 #endif
+
         }
 
-#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+
+
+        /// <summary>
+                /// Determines whether the application is running from a Velopack-installed location.
+                /// </summary>
+        public static bool IsInstalled()
+            {
+                try
+                {
+                    // Velopack installs typically live under LocalAppData or Program Files
+                    string exePath = AppContext.BaseDirectory;
+                    string localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+                    string programFiles = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
+
+                    return exePath.StartsWith(localAppData, StringComparison.OrdinalIgnoreCase) ||
+                    exePath.StartsWith(programFiles, StringComparison.OrdinalIgnoreCase);
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+
     }
 }

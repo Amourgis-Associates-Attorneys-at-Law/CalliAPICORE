@@ -16,10 +16,15 @@ repository.
 <h1> CalliAPI Patch Log </h1>
 
 <details open><summary><strong>CalliAPI 4</strong> (June 2025)</summary>
+<h3>4.7.0 - Velopack Now Allows for Zip file runs!</h3>
+-
+<hr style="border: none; height: 3px; background: linear-gradient(to right, #feb47b, #ff7e5f); margin: 20px 0;">
+
 <h3>4.6.0 - GitHub Authentication Added</h3>
 - Added matter_stage to the selectable items in the Custom Report Builder!
 - Added authentication via GitHub token
 - Created a RegistrySecretManager class to handle secrets on the user side and prevent access issues or security issues
+<hr style="border: none; height: 3px; background: linear-gradient(to right, #feb47b, #ff7e5f); margin: 20px 0;">
 
 
 <h4>4.5.3 - Bug Fixes & Improvements</h4>
