@@ -13,7 +13,6 @@ namespace CalliAPI.Interfaces
     {
 
         Task<HttpResponseMessage> VerifyAPI(string accessToken);
-        Task<string> GetAccessTokenAsync(string authorizationCode);
         Task<List<Matter>> GetAllActive713MattersAsync(string accessToken);
         Task<List<Matter>> GetMattersNotCurrentlyBeingWorked(string accessToken);
 

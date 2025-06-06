@@ -2,20 +2,16 @@
 <h3>Wishlist</h3>
 
 <h4>Functionality</h4>
-- Add filters to TaskFilters
-- 4.5.3 - Save HKEY
-
+- 3.0.3 - Add filters to TaskFilters
 <h4>UI</h4>
 
 <h4>Documentation & External Resources</h4>
-- 4.5.3 - Add custom labels to the ReadMe.MD file
 
 
-<h2> Known Issues </h2>
+<h2>Known Issues</h2>
 - 3.0.3 - The automatic update functionality is still in its early stages and may not work perfectly on all systems. If you encounter issues, please report them on the GitHub 
 repository.
 - 4.3.2 - STA Threading issues, especially around automatic updates. This may cause the application to hang or crash in some cases. A fix is in progress.
-- 4.5.3 - Clio API Documentation hyperlink crashes the program??
 
 <h1> CalliAPI Patch Log </h1>
 

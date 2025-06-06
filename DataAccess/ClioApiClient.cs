@@ -1,9 +1,10 @@
-﻿using CalliAPI.Interfaces;
+﻿using AmourgisCOREServices;
+using CalliAPI.Interfaces;
 using CalliAPI.Models;
-using System.Text.Json;
-using AmourgisCOREServices;
+using CalliAPI.Utilities;
 using Polly;
 using System.Runtime.CompilerServices;
+using System.Text.Json;
 using ClioTask = CalliAPI.Models.Task;
 
 namespace CalliAPI.DataAccess
@@ -72,54 +73,70 @@ namespace CalliAPI.DataAccess
 
 
 
-        public async Task<HttpResponseMessage> VerifyAPI(string accessToken)
+        public async Task<HttpResponseMessage> VerifyAPI(string? accessToken)
         {
+            if (accessToken is null) accessToken = RegistrySecretManager.GetClioAccessToken();
             _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
             string apiUrl = "https://app.clio.com/api/v4/users/who_am_i";
             HttpResponseMessage response = await _httpClient.GetAsync(apiUrl);
             return response;
         }
 
-        public async Task<string> GetAccessTokenAsync(string authorizationCode)
+        public async Task<(string accessToken, string refreshToken, DateTime expiresAt)> GetAccessTokenAsync(string authorizationCode)
         {
-            string tokenEndpoint = "https://app.clio.com/oauth/token";
-            // Package up the request data and send it to the token endpoint so we can grab the access_token string
             var requestData = new Dictionary<string, string>
-            {
-            { "grant_type", "authorization_code" },
-            { "code", authorizationCode },
-            { "redirect_uri", "https://www.amourgis.com/" },
-            { "client_id", Properties.Settings.Default.ClientId },
-            { "client_secret", clientSecret}
-            };
+    {
+        { "grant_type", "authorization_code" },
+        { "code", authorizationCode },
+        { "redirect_uri", Properties.Settings.Default.RedirectUri },
+        { "client_id", Properties.Settings.Default.ClientId },
+        { "client_secret", clientSecret }
+    };
 
+            var response = await _httpClient.PostAsync("https://app.clio.com/oauth/token", new FormUrlEncodedContent(requestData));
+            var content = await response.Content.ReadAsStringAsync();
+            var json = JsonDocument.Parse(content);
 
-            _logger.Info("Requesting access token with data: " +
-                            string.Join(", ", requestData.Select(kvp => $"{kvp.Key}={kvp.Value}")));
+            var accessToken = json.RootElement.GetProperty("access_token").GetString();
+            var refreshToken = json.RootElement.GetProperty("refresh_token").GetString();
+            var expiresIn = json.RootElement.GetProperty("expires_in").GetInt32(); // seconds
+            var expiresAt = DateTime.UtcNow.AddSeconds(expiresIn);
 
-            var response = await _httpClient.PostAsync(tokenEndpoint, new FormUrlEncodedContent(requestData));
+            // Save to registry
+            RegistrySecretManager.SetClioAccessToken(accessToken);
+            RegistrySecretManager.SetClioRefreshToken(refreshToken);
+            RegistrySecretManager.SetClioTokenExpiry(expiresAt);
 
-            var responseContent = await response.Content.ReadAsStringAsync();
-
-            _logger.Info("Token response: " + responseContent);
-
-            try
-            {
-                var jsonDocument = JsonDocument.Parse(responseContent);
-                string accessToken = jsonDocument.RootElement.GetProperty("access_token").GetString() ?? "";
-                return accessToken;
-            }
-            catch (KeyNotFoundException)
-            {
-                _logger.Error("Access token not found in response.");
-                throw;
-            }
-            catch (Exception ex)
-            {
-                _logger.Error($"Unexpected error parsing token response: {ex.Message}");
-                throw;
-            }
+            return (accessToken, refreshToken, expiresAt);
         }
+
+        public async Task<string> RefreshAccessTokenAsync(string refreshToken)
+        {
+            var requestData = new Dictionary<string, string>
+    {
+        { "grant_type", "refresh_token" },
+        { "refresh_token", refreshToken },
+        { "client_id", Properties.Settings.Default.ClientId },
+        { "client_secret", clientSecret }
+    };
+
+            var response = await _httpClient.PostAsync("https://app.clio.com/oauth/token", new FormUrlEncodedContent(requestData));
+            var content = await response.Content.ReadAsStringAsync();
+            var json = JsonDocument.Parse(content);
+
+            var accessToken = json.RootElement.GetProperty("access_token").GetString();
+            var newRefreshToken = json.RootElement.GetProperty("refresh_token").GetString();
+            var expiresIn = json.RootElement.GetProperty("expires_in").GetInt32();
+
+            var expiresAt = DateTime.UtcNow.AddSeconds(expiresIn);
+
+            RegistrySecretManager.SetClioAccessToken(accessToken);
+            RegistrySecretManager.SetClioRefreshToken(newRefreshToken);
+            RegistrySecretManager.SetClioTokenExpiry(expiresAt);
+
+            return accessToken;
+        }
+
 
         ///// <summary>
         ///// This method attempts to get a property from a JsonElement. It checks if the property exists and if its value is an object.

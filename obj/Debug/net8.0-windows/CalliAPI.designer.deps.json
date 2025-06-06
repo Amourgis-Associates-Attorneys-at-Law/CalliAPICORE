@@ -765,6 +765,7 @@
           }
         }
       },
+      "Microsoft.NET.ILLink.Tasks/8.0.16": {},
       "Microsoft.NETCore.Platforms/1.1.1": {},
       "Microsoft.NETCore.Targets/1.1.0": {},
       "Microsoft.SqlServer.Server/1.0.0": {
@@ -2400,6 +2401,13 @@
       "sha512": "sha512-qK6kW5qZvDj7E5RLWQ9gzJxQe5GUz7+7bXrLQQydSDF9hTf5Ip2qHuAQW3Fg9GND6jkjTr7IXAZFmBHadNQi4Q==",
       "path": "microsoft.identitymodel.tokens/8.9.0",
       "hashPath": "microsoft.identitymodel.tokens.8.9.0.nupkg.sha512"
+    },
+    "Microsoft.NET.ILLink.Tasks/8.0.16": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-0H1QaKpVibe++Zx6EYJQGhrpfz2bBPGiQ7Rpsmx8I3+oKv+ZRRIfVfmcj50KuZlhhRE6V02y5bUjP+V2oPM2ng==",
+      "path": "microsoft.net.illink.tasks/8.0.16",
+      "hashPath": "microsoft.net.illink.tasks.8.0.16.nupkg.sha512"
     },
     "Microsoft.NETCore.Platforms/1.1.1": {
       "type": "package",

@@ -1,58 +1,25 @@
 ﻿using AmourgisCOREServices;
-using CalliAPI;
 using CalliAPI.DataAccess;
 using CalliAPI.Interfaces;
-using CalliAPI.Properties;
+using CalliAPI.Utilities;
 using Microsoft.AspNetCore.WebUtilities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace CalliAPI.BusinessLogic
 {
-    /// <summary>
-    /// AuthService is responsible for handling authentication with the Clio API.
-    /// </summary>
     public class AuthService(ClioApiClient clioApiAccess, AMO_Logger logger) : IAuthService
     {
         private readonly AMO_Logger _logger = logger;
-
         private readonly ClioApiClient _clioApiClient = clioApiAccess;
+
         public string? AccessToken { get; private set; }
-
-        //private string _codeVerifier;
-        //private string _codeChallenge;
-
-
-        /// <summary>
-        /// Generates PKCE (Proof Key for Code Exchange) values. Useful if we can use PKCE for OAuth 2.0 authorization.
-        /// </summary>
-        //private void GeneratePkceValues()
-        //{
-        //    using var rng = RandomNumberGenerator.Create();
-        //    var bytes = new byte[32];
-        //    rng.GetBytes(bytes);
-        //    _codeVerifier = Convert.ToBase64String(bytes)
-        //        .TrimEnd('=').Replace('+', '-').Replace('/', '_');
-
-        //    using var sha256 = SHA256.Create();
-        //    var challengeBytes = sha256.ComputeHash(Encoding.ASCII.GetBytes(_codeVerifier));
-        //    _codeChallenge = Convert.ToBase64String(challengeBytes)
-        //        .TrimEnd('=').Replace('+', '-').Replace('/', '_');
-        //}
-
-
-
 
         public string GetAuthorizationUrl()
         {
-            // Return the authorization URL
             return $"https://app.clio.com/oauth/authorize?response_type=code&" +
-                $"client_id={Properties.Settings.Default.ClientId}&" +
-                $"redirect_uri={Properties.Settings.Default.RedirectUri}";
+                   $"client_id={Properties.Settings.Default.ClientId}&" +
+                   $"redirect_uri={Properties.Settings.Default.RedirectUri}";
         }
 
         public string? ValidateAuthorizationCode(string userInput)
@@ -67,18 +34,50 @@ namespace CalliAPI.BusinessLogic
                 return query.TryGetValue("code", out var code) ? code.ToString() : null;
             }
 
-            // Regex fallback: check if it's a raw code
             if (System.Text.RegularExpressions.Regex.IsMatch(userInput, @"^[a-zA-Z0-9]{20,}$"))
                 return userInput;
+
             return null;
         }
 
-
         public async Task GetAccessTokenAsync(string authorizationCode)
         {
-            AccessToken = await _clioApiClient.GetAccessTokenAsync(authorizationCode);
+            var (accessToken, refreshToken, expiresAt) = await _clioApiClient.GetAccessTokenAsync(authorizationCode);
+            AccessToken = accessToken;
+
+            RegistrySecretManager.SetClioAccessToken(accessToken);
+            RegistrySecretManager.SetClioRefreshToken(refreshToken);
+            RegistrySecretManager.SetClioTokenExpiry(expiresAt);
         }
 
+        public async Task<bool> TryLoadOrRefreshTokenAsync()
+        {
+            var accessToken = RegistrySecretManager.GetClioAccessToken();
+            var refreshToken = RegistrySecretManager.GetClioRefreshToken();
+            var expiry = RegistrySecretManager.GetClioTokenExpiry();
 
+            if (!string.IsNullOrWhiteSpace(accessToken) && expiry.HasValue && expiry.Value > DateTime.UtcNow)
+            {
+                _logger.Info("Using cached access token.");
+                AccessToken = accessToken;
+                return true;
+            }
+
+            if (!string.IsNullOrWhiteSpace(refreshToken))
+            {
+                _logger.Info("Access token expired. Attempting refresh...");
+                try
+                {
+                    AccessToken = await _clioApiClient.RefreshAccessTokenAsync(refreshToken);
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    _logger.Warn($"Token refresh failed: {ex.Message}");
+                }
+            }
+
+            return false;
+        }
     }
 }
