@@ -1,13 +1,13 @@
 
-# Wishlist
+<h3>Wishlist</h3>
 
-## Functionality
+<h4>Functionality</h4>
 - Add filters to TaskFilters
 - 4.5.3 - Save HKEY
 
-## UI
+<h4>UI</h4>
 
-## Documentation & External Resources
+<h4>Documentation & External Resources</h4>
 - 4.5.3 - Add custom labels to the ReadMe.MD file
 
 
@@ -20,7 +20,13 @@ repository.
 <h1> CalliAPI Patch Log </h1>
 
 <details open><summary><strong>CalliAPI 4</strong> (June 2025)</summary>
-<h4>4.5.3 - </h4>
+<h3>4.6.0 - GitHub Authentication Added</h3>
+- Added matter_stage to the selectable items in the Custom Report Builder!
+- Added authentication via GitHub token
+- Created a RegistrySecretManager class to handle secrets on the user side and prevent access issues or security issues
+
+
+<h4>4.5.3 - Bug Fixes & Improvements</h4>
 - Made the ReadMe more readable and added a control to allow users to collapse the install instructions, rather than having to scroll past them to read the changes.
 - Updated AmourgisCOREServices to 2.3.0, updated Velopack.
 - Added badges to index.html to display the integrations available.

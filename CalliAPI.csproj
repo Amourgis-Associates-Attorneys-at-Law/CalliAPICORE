@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
 		<AssemblyName>CalliAPI</AssemblyName>
-		<Version>4.5.3</Version>
+		<Version>4.6.0</Version>
 		<TargetFramework>net8.0-windows</TargetFramework>
 		<RootNamespace>CalliAPI</RootNamespace>
 		<Nullable>enable</Nullable>
@@ -150,6 +150,9 @@
 			<DesignTimeSharedInput>True</DesignTimeSharedInput>
 			<AutoGen>True</AutoGen>
 			<DependentUpon>Settings.settings</DependentUpon>
+		</Compile>
+		<Compile Update="UI\Forms\MissingGithubSecret.cs">
+		  <SubType>Form</SubType>
 		</Compile>
 	</ItemGroup>
 

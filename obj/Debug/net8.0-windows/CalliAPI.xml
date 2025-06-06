@@ -432,11 +432,6 @@
             the contents of this method with the code editor.
             </summary>
         </member>
-        <member name="M:CalliAPI.UI.Forms.SplashForm.LoadClientSecretFromRegistry">
-            <summary>
-            Loads the Clio client secret from the registry, or returns null if not found.
-            </summary>
-        </member>
         <member name="F:CalliAPI.UI.Forms.SplashForm.components">
             <summary>
             Required designer variable.
@@ -527,6 +522,23 @@
             the contents of this method with the code editor.
             </summary>
         </member>
+        <member name="F:CalliAPI.UI.MissingGithubSecret.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:CalliAPI.UI.MissingGithubSecret.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:CalliAPI.UI.MissingGithubSecret.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
         <member name="F:CalliAPI.UI.ReportForm.components">
             <summary>
             Required designer variable.
@@ -593,35 +605,6 @@
             <summary> 
             Required method for Designer support - do not modify 
             the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="M:CalliAPI.MailerForm.DataGridView1_CellClick(System.Object,System.Windows.Forms.DataGridViewCellEventArgs)">
-            <summary>
-            This function checks to see if the user has clicked on the Print or Ignore buttons in the database, and updates the items inside as needed.
-            </summary>
-        </member>
-        <member name="M:CalliAPI.MailerForm.UpdateGrid(System.Object,System.EventArgs)">
-            <summary>
-            Called whenever any checkbox state is changed, UpdateGrid will update the grid with the new state of the checkboxes.
-            </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
-        </member>
-        <member name="F:CalliAPI.MailerForm.components">
-            <summary>
-             Required designer variable.
-            </summary>
-        </member>
-        <member name="M:CalliAPI.MailerForm.Dispose(System.Boolean)">
-            <summary>
-             Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:CalliAPI.MailerForm.InitializeComponent">
-            <summary>
-             Required method for Designer support - do not modify
-             the contents of this method with the code editor.
             </summary>
         </member>
         <member name="M:CalliAPI.MainForm.MainForm_FormClosed(System.Object,System.Windows.Forms.FormClosedEventArgs)">
@@ -697,6 +680,11 @@
             Call this after setting the RichTextBox text to highlight keywords.
             </summary>
         </member>
+        <member name="T:CalliAPI.Utilities.RegistrySecretManager">
+            <summary>
+            Centralized helper for storing and retrieving secrets from the Windows Registry.
+            </summary>
+        </member>
         <member name="M:CalliAPI.Utilities.ReportLauncher.ShowAsync(System.Collections.Generic.IAsyncEnumerable{CalliAPI.Models.Matter})">
             <summary>
             This method is called from the ClioService to show a report. It takes an IAsyncEnumerable of type Matter and converts it to a DataTable, then displays it
@@ -738,7 +726,7 @@
             Gets the version as a string suitable for display in UI (e.g. "CalliAPI v1.2.3").
             </summary>
         </member>
-        <member name="M:CalliAPI.Utilities.VersionHelper.SplashPromptForUpdateAsync(System.Windows.Forms.Form)">
+        <member name="M:CalliAPI.Utilities.VersionHelper.SplashPromptForUpdateAsync(System.Windows.Forms.Form,System.String)">
             <summary>
             Checks for updates and applies them if available.
             </summary>

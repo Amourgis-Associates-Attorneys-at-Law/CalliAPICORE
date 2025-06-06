@@ -53,36 +53,31 @@ namespace CalliAPI.Utilities
         /// Checks for updates and applies them if available.
         /// </summary>
         /// <returns></returns>
-        public static async Task SplashPromptForUpdateAsync(Form splash)
+        public static async Task SplashPromptForUpdateAsync(Form splash, string? githubToken)
         {
 #if !DEBUG
-            var mgr = new UpdateManager(new GithubSource("https://github.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE", accessToken: null, prerelease: false));
-            var updateInfo = await mgr.CheckForUpdatesAsync();
-            _logger.Info($"Update check completed. Update available: {updateInfo != null}");
-            if (updateInfo != null)
+            try
             {
-                //using (Form topmostForm = new Form
-                //{
-                //    Size = new Size(0, 0),
-                //    StartPosition = FormStartPosition.Manual,
-                //    Location = new Point(-2000, -2000), // Off-screen
-                //    ShowInTaskbar = false,
-                //    TopMost = true
-                //})
-                //{
+                var mgr = new UpdateManager(
+                    new GithubSource(
+                        "https://github.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE",
+                        accessToken: githubToken,
+                        prerelease: false
+                    )
+                );
 
-                //    topmostForm.Show();
-                //    await Task.Delay(100); // Ensure the form is shown before focusing
-                //    topmostForm.Focus();
+                var updateInfo = await mgr.CheckForUpdatesAsync();
+                _logger.Info($"Update check completed. Update available: {updateInfo != null}");
 
+                if (updateInfo != null)
+                {
                     var result = MessageBox.Show(
                         splash,
-                        $"A new version ({updateInfo.TargetFullRelease.ToString()}) is available. Would you like to update now?",
+                        $"A new version ({updateInfo.TargetFullRelease}) is available. Would you like to update now?",
                         "Update Available",
                         MessageBoxButtons.YesNo,
-                        MessageBoxIcon.Information);
-
-
+                        MessageBoxIcon.Information
+                    );
 
                     if (result == DialogResult.Yes)
                     {
@@ -90,9 +85,16 @@ namespace CalliAPI.Utilities
                         mgr.ApplyUpdatesAndRestart(updateInfo);
                     }
                 }
-
+            }
+            catch (HttpRequestException ex)
+            {
+                _logger.Warn($"Update check failed: {ex.Message}");
+                // Optional: show a non-blocking message to the user
+                MessageBox.Show($"Update check failed: {ex.Message}", "Update Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 #endif
         }
+
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
     }
 }
