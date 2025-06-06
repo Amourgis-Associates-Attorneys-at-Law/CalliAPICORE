@@ -57,6 +57,8 @@ namespace CalliAPI.Models
         /// </summary>
         public bool has_tasks { get; set; }
 
+        public string? matter_stage_updated_at { get; set; }
+
         /// <summary>
         /// The client associated with the matter.
         /// </summary>

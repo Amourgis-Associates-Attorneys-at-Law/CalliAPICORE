@@ -2,9 +2,13 @@
 <h3>Wishlist</h3>
 
 <h4>Functionality</h4>
-- 3.0.3 - Add filters to TaskFilters
-<h4>UI</h4>
+- 3.0.3 - Add filters to TaskFilters.
+- 4.7.0 - Allow users to access their calendars on the Custom Report Builder.
+- 4.7.0 - Add the ability to create a Report using all of the data in a Matter lookup with the equivalent SQL information (as a checkbox in the Matters endpoint inside the
+CRB?).
 
+<h4>UI</h4>
+- Include the parent field name when flattening to a ReportForm.
 <h4>Documentation & External Resources</h4>
 
 
@@ -16,8 +20,14 @@ repository.
 <h1> CalliAPI Patch Log </h1>
 
 <details open><summary><strong>CalliAPI 4</strong> (June 2025)</summary>
+<h4>4.7.1 - </h4>
+- Add "matter_stage_updated_at" to the Matter model.
+<hr style="border: none; height: 3px; background: linear-gradient(to right, #feb47b, #ff7e5f); margin: 20px 0;">
+
 <h3>4.7.0 - Velopack Now Allows for Zip file runs!</h3>
--
+- By checking to make sure we're not running from AppData or ProgramFiles, CalliAPI 4.7.0+ is smart enough to recognize the app isn't installed, and if it's not installed it'll 
+just skip calling Velopack at all! That means, if you have CalliAPI installed, she'll check for updates, but if you don't, she won't even try - making the portable version 
+truly portable!
 <hr style="border: none; height: 3px; background: linear-gradient(to right, #feb47b, #ff7e5f); margin: 20px 0;">
 
 <h3>4.6.0 - GitHub Authentication Added</h3>
