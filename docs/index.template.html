@@ -168,49 +168,67 @@ html {
 
     <a class="install-button" href="https://github.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/releases/download/v{{VERSION}}/CalliAPI-win-Setup.exe">Install CalliAPI</a>
     <br />
-    <div class="version"><span class="version-badge">v{{VERSION}}</span></div>
+    <!-- Version badge -->
+    <img src="https://img.shields.io/badge/version-{{VERSION}}-blue" alt="Version">
 
-    <div class="gallery">
-        <p>To install CalliAPI, follow the instructions below:</p>
-        <div class="gallery-step">
-            <p>Step 1. Once CalliAPI has downloaded, click the Downloads icon (usually an arrow at the top right of this page).</p>
-            <img src="https://raw.githubusercontent.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/main/UI/Images/InstallStep0DownloadLocation.png" alt="Downloads icon">
-        </div>
-        <div class="gallery-step">
-            <p>If you have an error icon, such as shown here, click the three dots and then <strong>Keep</strong>.</p>
-            <img src="https://raw.githubusercontent.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/main/UI/Images/InstallStep1.png" alt="Download with error warning">
-        </div>
-        <div class="gallery-step">
-            <p>Step 2. You'll likely receive this notification, with the options to Cancel or Delete. Instead, click <strong>Show more</strong>.</p>
-            <img src="https://raw.githubusercontent.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/main/UI/Images/InstallStep2.png" alt="Make sure you trust dialog box">
-        </div>
-        <div class="gallery-step">
-            <p>Step 3. Click <strong>Keep anyway</strong> to tell Microsoft you want to keep CalliAPI.</p>
-            <img src="https://raw.githubusercontent.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/main/UI/Images/InstallStep3.png" alt="Make sure you trust dialog box">
-        </div>
-        <div class="gallery-step">
-            <p>Step 4. Click <strong>Open file</strong> to open the Setup executable. If you don't see it, click the Downloads icon again and click the file.</p>
-            <img src="https://raw.githubusercontent.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/main/UI/Images/InstallStep4.png" alt="Open the file" />
-        </div>
-        <div class="gallery-step">
-            <p>Step 5. If you have CalliAPI installed, you will see a Repair option. Click <strong>Repair</strong> to repair your installation.</p>
-            <img src="https://raw.githubusercontent.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/main/UI/Images/InstallStep5Repair.png" alt="Repair tooltip">
-            <p><em>If you do not see this pop-up, continue with the installation as normal.</em></p>
-        </div>
-        <div class="gallery-step">
-            <p>Check the top left corner of the screen to verify you are on the proper version of CalliAPI. If so, you are complete and good to go.</p>
-            <img src="https://raw.githubusercontent.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/main/UI/Images/InstallStep6Done.png" alt="Installation complete">
-            <p><em>If you run into any issues in this setup, reach out to us at support@amourgis.com. Please clearly detail the issues you're experiencing.</em></p>
-        </div>
-    </div>
+    <!-- Status badge -->
+    <img src="https://img.shields.io/badge/status-stable-brightgreen" alt="Status">
+
+    <!-- Clio Integration badge -->
+    <img src="https://img.shields.io/badge/Clio_Integration-Enabled-9cf" alt="Clio Integration">
+
+    <!-- SQL Integration badge -->
+    <img src="https://img.shields.io/badge/SQL_Integration-Enabled-purple" alt="SQL Integration">
 
 
-    <div class="fallback">
-        <p>If the install button doesn't work, you can <a href="https://github.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/releases/download/v{{VERSION}}/CalliAPI-win-Portable.zip">download the full installer package (ZIP)</a> and run <strong>setup.exe</strong> manually.</p>
-    </div>
 
-    <details><summary class="summary-heading">Changelog</summary>
-    <!--CHANGELOG-->
+    <br />
+
+    <details open>
+        <summary class="summary-heading">Install Instructions</summary>
+        <div class="gallery">
+            <p>To install CalliAPI, follow the instructions below:</p>
+
+            <div class="gallery-step">
+                <p>Step 1. Once CalliAPI has downloaded, click the Downloads icon (usually an arrow at the top right of this page).</p>
+                <img src="https://raw.githubusercontent.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/main/UI/Images/InstallStep0DownloadLocation.png" alt="Downloads icon">
+            </div>
+            <div class="gallery-step">
+                <p>If you have an error icon, such as shown here, click the three dots and then <strong>Keep</strong>.</p>
+                <img src="https://raw.githubusercontent.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/main/UI/Images/InstallStep1.png" alt="Download with error warning">
+            </div>
+            <div class="gallery-step">
+                <p>Step 2. You'll likely receive this notification, with the options to Cancel or Delete. Instead, click <strong>Show more</strong>.</p>
+                <img src="https://raw.githubusercontent.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/main/UI/Images/InstallStep2.png" alt="Make sure you trust dialog box">
+            </div>
+            <div class="gallery-step">
+                <p>Step 3. Click <strong>Keep anyway</strong> to tell Microsoft you want to keep CalliAPI.</p>
+                <img src="https://raw.githubusercontent.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/main/UI/Images/InstallStep3.png" alt="Make sure you trust dialog box">
+            </div>
+            <div class="gallery-step">
+                <p>Step 4. Click <strong>Open file</strong> to open the Setup executable. If you don't see it, click the Downloads icon again and click the file.</p>
+                <img src="https://raw.githubusercontent.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/main/UI/Images/InstallStep4.png" alt="Open the file" />
+            </div>
+            <div class="gallery-step">
+                <p>Step 5. If you have CalliAPI installed, you will see a Repair option. Click <strong>Repair</strong> to repair your installation.</p>
+                <img src="https://raw.githubusercontent.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/main/UI/Images/InstallStep5Repair.png" alt="Repair tooltip">
+                <p><em>If you do not see this pop-up, continue with the installation as normal.</em></p>
+            </div>
+            <div class="gallery-step">
+                <p>Check the top left corner of the screen to verify you are on the proper version of CalliAPI. If so, you are complete and good to go.</p>
+                <img src="https://raw.githubusercontent.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/main/UI/Images/InstallStep6Done.png" alt="Installation complete">
+                <p><em>If you run into any issues in this setup, reach out to us at support@amourgis.com. Please clearly detail the issues you're experiencing.</em></p>
+            </div>
+        </div>
+
+
+        <div class="fallback">
+            <p>If the install button doesn't work, you can <a href="https://github.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/releases/download/v{{VERSION}}/CalliAPI-win-Portable.zip">download the full installer package (ZIP)</a> and run <strong>setup.exe</strong> manually.</p>
+        </div>
+    </details>
+    <details>
+        <summary class="summary-heading">Changelog</summary>
+        <!--CHANGELOG-->
     </details>
 
     <h2>Previous Versions</h2>

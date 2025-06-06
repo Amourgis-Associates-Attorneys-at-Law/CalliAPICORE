@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
 		<AssemblyName>CalliAPI</AssemblyName>
-		<Version>4.5.2</Version>
+		<Version>4.5.3</Version>
 		<TargetFramework>net8.0-windows</TargetFramework>
 		<RootNamespace>CalliAPI</RootNamespace>
 		<Nullable>enable</Nullable>
@@ -119,10 +119,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="AmourgisCOREServices" Version="2.1.0" />
+		<PackageReference Include="AmourgisCOREServices" Version="2.3.0" />
 		<PackageReference Include="ClosedXML" Version="0.105.0" />
 		<PackageReference Include="FluentAssertions" Version="8.3.0" />
-		<PackageReference Include="MaterialSkin" Version="0.2.1" />
 		<PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.0-preview1.25120.4" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.16" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.16" />
@@ -133,8 +132,8 @@
 		<PackageReference Include="Polly" Version="8.5.2" />
 		<PackageReference Include="System.Linq.Async" Version="6.0.1" />
 		<PackageReference Include="System.Net.Http" Version="4.3.4" />
-		<PackageReference Include="Velopack" Version="0.0.1251" />
-		<PackageReference Include="Velopack.Build" Version="0.0.1251">
+		<PackageReference Include="Velopack" Version="0.0.1297" />
+		<PackageReference Include="Velopack.Build" Version="0.0.1297">
 		  <PrivateAssets>all</PrivateAssets>
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>

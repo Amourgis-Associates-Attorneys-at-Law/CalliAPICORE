@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     "net8.0-windows7.0": {
-      "AmourgisCOREServices/2.1.0": {
+      "AmourgisCOREServices/2.3.0": {
         "type": "package",
         "dependencies": {
           "Microsoft.Data.SqlClient": "6.0.2",
@@ -189,15 +189,6 @@
           "lib/net6.0/Humanizer.dll": {
             "related": ".xml"
           }
-        }
-      },
-      "MaterialSkin/0.2.1": {
-        "type": "package",
-        "compile": {
-          "lib/MaterialSkin.dll": {}
-        },
-        "runtime": {
-          "lib/MaterialSkin.dll": {}
         }
       },
       "Microsoft.Bcl.AsyncInterfaces/6.0.0": {
@@ -1106,7 +1097,7 @@
           }
         }
       },
-      "NuGet.Versioning/6.13.2": {
+      "NuGet.Versioning/6.14.0": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/NuGet.Versioning.dll": {
@@ -2770,10 +2761,10 @@
           "lib/netcoreapp2.1/_._": {}
         }
       },
-      "Velopack/0.0.1251": {
+      "Velopack/0.0.1297": {
         "type": "package",
         "dependencies": {
-          "NuGet.Versioning": "6.13.2"
+          "NuGet.Versioning": "6.14.0"
         },
         "compile": {
           "lib/net8.0/Velopack.dll": {
@@ -2786,7 +2777,7 @@
           }
         }
       },
-      "Velopack.Build/0.0.1251": {
+      "Velopack.Build/0.0.1297": {
         "type": "package",
         "build": {
           "build/Velopack.Build.targets": {}
@@ -2878,7 +2869,7 @@
       }
     },
     "net8.0-windows7.0/win-x64": {
-      "AmourgisCOREServices/2.1.0": {
+      "AmourgisCOREServices/2.3.0": {
         "type": "package",
         "dependencies": {
           "Microsoft.Data.SqlClient": "6.0.2",
@@ -3065,15 +3056,6 @@
           "lib/net6.0/Humanizer.dll": {
             "related": ".xml"
           }
-        }
-      },
-      "MaterialSkin/0.2.1": {
-        "type": "package",
-        "compile": {
-          "lib/MaterialSkin.dll": {}
-        },
-        "runtime": {
-          "lib/MaterialSkin.dll": {}
         }
       },
       "Microsoft.Bcl.AsyncInterfaces/6.0.0": {
@@ -3973,7 +3955,7 @@
           }
         }
       },
-      "NuGet.Versioning/6.13.2": {
+      "NuGet.Versioning/6.14.0": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/NuGet.Versioning.dll": {
@@ -5748,10 +5730,10 @@
           "lib/netcoreapp2.1/_._": {}
         }
       },
-      "Velopack/0.0.1251": {
+      "Velopack/0.0.1297": {
         "type": "package",
         "dependencies": {
-          "NuGet.Versioning": "6.13.2"
+          "NuGet.Versioning": "6.14.0"
         },
         "compile": {
           "lib/net8.0/Velopack.dll": {
@@ -5764,7 +5746,7 @@
           }
         }
       },
-      "Velopack.Build/0.0.1251": {
+      "Velopack.Build/0.0.1297": {
         "type": "package",
         "build": {
           "build/Velopack.Build.targets": {}
@@ -5857,13 +5839,13 @@
     }
   },
   "libraries": {
-    "AmourgisCOREServices/2.1.0": {
-      "sha512": "DApvtTJrseRc/eiKKsUplGhlTZW6zvqc3FVhVKwCcNJ35oplfXFZtVddXL1XvHpQA1x34bbWgER24QyNINGRsQ==",
+    "AmourgisCOREServices/2.3.0": {
+      "sha512": "Z020EwkUUyH8+9ejzuUZB2anP/hSwJpXuKhBp9Jc54JUcsnDZFwFavrlEJ//IBcHO+cpGXOUV9GbCOBl9Vvb0A==",
       "type": "package",
-      "path": "amourgiscoreservices/2.1.0",
+      "path": "amourgiscoreservices/2.3.0",
       "files": [
         ".nupkg.metadata",
-        "amourgiscoreservices.2.1.0.nupkg.sha512",
+        "amourgiscoreservices.2.3.0.nupkg.sha512",
         "amourgiscoreservices.nuspec",
         "lib/net8.0/AmourgisCOREServices.dll",
         "readme.md"
@@ -6066,18 +6048,6 @@
         "lib/netstandard2.0/Humanizer.dll",
         "lib/netstandard2.0/Humanizer.xml",
         "logo.png"
-      ]
-    },
-    "MaterialSkin/0.2.1": {
-      "sha512": "/6AEh6qIeNKbxsha7IHBb5s50tyvB0iZuGQPB9mjyR+mRdfQ7vnKTklwI26Y/DbrymTcg+aBHSgCgAT7/qLIrQ==",
-      "type": "package",
-      "path": "materialskin/0.2.1",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/MaterialSkin.dll",
-        "materialskin.0.2.1.nupkg.sha512",
-        "materialskin.nuspec"
       ]
     },
     "Microsoft.Bcl.AsyncInterfaces/6.0.0": {
@@ -7613,10 +7583,10 @@
         "packageIcon.png"
       ]
     },
-    "NuGet.Versioning/6.13.2": {
-      "sha512": "pGYNyvCVM+Z9jITTiJiuxFC8oJXFdh2k25ZDV4tSAOSuKyAWvh1VcfJy0WZGWdI6J7Avkbl0qra7XENYFSy4Ng==",
+    "NuGet.Versioning/6.14.0": {
+      "sha512": "4v4blkhCv8mpKtfx+z0G/X0daVCzdIaHSC51GkUspugi5JIMn2Bo8xm5PdZYF0U68gOBfz/+aPWMnpRd85Jbow==",
       "type": "package",
-      "path": "nuget.versioning/6.13.2",
+      "path": "nuget.versioning/6.14.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -7626,7 +7596,7 @@
         "lib/net472/NuGet.Versioning.xml",
         "lib/netstandard2.0/NuGet.Versioning.dll",
         "lib/netstandard2.0/NuGet.Versioning.xml",
-        "nuget.versioning.6.13.2.nupkg.sha512",
+        "nuget.versioning.6.14.0.nupkg.sha512",
         "nuget.versioning.nuspec"
       ]
     },
@@ -11668,10 +11638,10 @@
         "version.txt"
       ]
     },
-    "Velopack/0.0.1251": {
-      "sha512": "rDojkZXbakJgTKn8wmw4/kPGP+j63AO87dKRhzwYIVYL1rj7KZKXw+uhA6R6nCXMnHZ0isW9QXNW0O2h7bTVAQ==",
+    "Velopack/0.0.1297": {
+      "sha512": "FfZ3B+U97TSZ4Ibcvve6TqJvSYp7jOAPKFUTG69FYb2MjgTeHzfd9j1/jgHRhDDlldpPnXM6iExuihrSKQRiNA==",
       "type": "package",
-      "path": "velopack/0.0.1251",
+      "path": "velopack/0.0.1297",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -11687,14 +11657,14 @@
         "lib/net9.0/Velopack.xml",
         "lib/netstandard2.0/Velopack.dll",
         "lib/netstandard2.0/Velopack.xml",
-        "velopack.0.0.1251.nupkg.sha512",
+        "velopack.0.0.1297.nupkg.sha512",
         "velopack.nuspec"
       ]
     },
-    "Velopack.Build/0.0.1251": {
-      "sha512": "DzowoYYrzROUEBUm8wUTj7slEmj84eU2hu0x9gmrBcpLnkQbb0H3fdYYnlmm+IlpOXhpHfoGgTmj9VKw+Sx5Nw==",
+    "Velopack.Build/0.0.1297": {
+      "sha512": "/sttQ8kvzxeq/RGWbFAugC4H1XG+V2zM/zMiAL8CIayAPbQV3u7ZVA9UI3pJxXlUpnzp4KrDuTORqdw7wnDcEg==",
       "type": "package",
-      "path": "velopack.build/0.0.1251",
+      "path": "velopack.build/0.0.1297",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -11816,6 +11786,7 @@
         "build/net6.0/System.IO.Pipelines.dll",
         "build/net6.0/System.Linq.Async.dll",
         "build/net6.0/System.Net.Http.Formatting.dll",
+        "build/net6.0/System.Runtime.CompilerServices.Unsafe.dll",
         "build/net6.0/System.Security.Cryptography.Pkcs.dll",
         "build/net6.0/System.Security.Cryptography.ProtectedData.dll",
         "build/net6.0/System.Text.Encoding.CodePages.dll",
@@ -11850,8 +11821,7 @@
         "build/net6.0/runtimes/win-x86/native/getfilesiginforedist.dll",
         "build/net6.0/runtimes/win-x86/native/msalruntime_x86.dll",
         "build/net6.0/runtimes/win/lib/net6.0/System.Security.Cryptography.Pkcs.dll",
-        "build/net6.0/runtimes/win/lib/net6.0/System.Text.Encoding.CodePages.dll",
-        "velopack.build.0.0.1251.nupkg.sha512",
+        "velopack.build.0.0.1297.nupkg.sha512",
         "velopack.build.nuspec",
         "vendor/DefaultApp.icns",
         "vendor/DefaultApp.png",
@@ -12067,10 +12037,9 @@
   },
   "projectFileDependencyGroups": {
     "net8.0-windows7.0": [
-      "AmourgisCOREServices >= 2.1.0",
+      "AmourgisCOREServices >= 2.3.0",
       "ClosedXML >= 0.105.0",
       "FluentAssertions >= 8.3.0",
-      "MaterialSkin >= 0.2.1",
       "Microsoft.Data.SqlClient >= 6.1.0-preview1.25120.4",
       "Microsoft.EntityFrameworkCore >= 8.0.16",
       "Microsoft.EntityFrameworkCore.SqlServer >= 8.0.16",
@@ -12079,8 +12048,8 @@
       "Polly >= 8.5.2",
       "System.Linq.Async >= 6.0.1",
       "System.Net.Http >= 4.3.4",
-      "Velopack >= 0.0.1251",
-      "Velopack.Build >= 0.0.1251",
+      "Velopack >= 0.0.1297",
+      "Velopack.Build >= 0.0.1297",
       "xunit >= 2.9.3"
     ]
   },
@@ -12089,7 +12058,7 @@
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
-    "version": "4.5.2",
+    "version": "4.5.3",
     "restore": {
       "projectUniqueName": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\CalliAPI.csproj",
       "projectName": "CalliAPI",
@@ -12137,7 +12106,7 @@
         "dependencies": {
           "AmourgisCOREServices": {
             "target": "Package",
-            "version": "[2.1.0, )"
+            "version": "[2.3.0, )"
           },
           "ClosedXML": {
             "target": "Package",
@@ -12146,10 +12115,6 @@
           "FluentAssertions": {
             "target": "Package",
             "version": "[8.3.0, )"
-          },
-          "MaterialSkin": {
-            "target": "Package",
-            "version": "[0.2.1, )"
           },
           "Microsoft.Data.SqlClient": {
             "target": "Package",
@@ -12189,13 +12154,13 @@
           },
           "Velopack": {
             "target": "Package",
-            "version": "[0.0.1251, )"
+            "version": "[0.0.1297, )"
           },
           "Velopack.Build": {
             "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
             "suppressParent": "All",
             "target": "Package",
-            "version": "[0.0.1251, )"
+            "version": "[0.0.1297, )"
           },
           "xunit": {
             "target": "Package",
@@ -12243,17 +12208,5 @@
         "#import": []
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'MaterialSkin 0.2.1' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0-windows7.0'. This package may not be fully compatible with your project.",
-      "libraryId": "MaterialSkin",
-      "targetGraphs": [
-        "net8.0-windows7.0"
-      ]
-    }
-  ]
+  }
 }

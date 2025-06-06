@@ -595,35 +595,6 @@
             the contents of this method with the code editor.
             </summary>
         </member>
-        <member name="M:CalliAPI.MailerForm.DataGridView1_CellClick(System.Object,System.Windows.Forms.DataGridViewCellEventArgs)">
-            <summary>
-            This function checks to see if the user has clicked on the Print or Ignore buttons in the database, and updates the items inside as needed.
-            </summary>
-        </member>
-        <member name="M:CalliAPI.MailerForm.UpdateGrid(System.Object,System.EventArgs)">
-            <summary>
-            Called whenever any checkbox state is changed, UpdateGrid will update the grid with the new state of the checkboxes.
-            </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
-        </member>
-        <member name="F:CalliAPI.MailerForm.components">
-            <summary>
-             Required designer variable.
-            </summary>
-        </member>
-        <member name="M:CalliAPI.MailerForm.Dispose(System.Boolean)">
-            <summary>
-             Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:CalliAPI.MailerForm.InitializeComponent">
-            <summary>
-             Required method for Designer support - do not modify
-             the contents of this method with the code editor.
-            </summary>
-        </member>
         <member name="M:CalliAPI.MainForm.MainForm_FormClosed(System.Object,System.Windows.Forms.FormClosedEventArgs)">
             <summary>
             Ends the program when the main form is closed.
