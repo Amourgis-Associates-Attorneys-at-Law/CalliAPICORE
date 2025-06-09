@@ -166,11 +166,11 @@ html {
     <h1>Install CalliAPI</h1>
     <p>Click the <span class="accent">Install</span> button below to install the latest version of CalliAPI.</p>
 
-    <a class="install-button" href="https://github.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/releases/download/v4.7.1/CalliAPI-win-Setup.exe">Install CalliAPI</a>
+    <a class="install-button" href="https://github.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/releases/download/v4.7.2/CalliAPI-win-Setup.exe">Install CalliAPI</a>
     <br />
     <br />
     <!-- Version badge -->
-    <img src="https://img.shields.io/badge/version-4.7.1-blue" alt="Version">
+    <img src="https://img.shields.io/badge/version-4.7.2-blue" alt="Version">
 
     <!-- Status badge -->
     <img src="https://img.shields.io/badge/status-stable-brightgreen" alt="Status">
@@ -184,6 +184,31 @@ html {
 
 
     <br />
+
+
+    <details open>
+        <summary class="summary-heading">Known Issues and Roadmap</summary>
+        <pre><h3>Wishlist</h3>
+
+<h4>Functionality</h4>
+- 3.0.3 - Add filters to TaskFilters.
+- 4.7.0 - Allow users to access their calendars on the Custom Report Builder.
+- 4.7.0 - Add the ability to create a Report using all of the data in a Matter lookup with the equivalent SQL information (as a checkbox in the Matters endpoint inside the
+CRB?).
+
+<h4>UI</h4>
+- Include the parent field name when flattening to a ReportForm.
+<h4>Documentation & External Resources</h4>
+
+
+<h2>Known Issues</h2>
+- 4.7.1 - Adding the access and refresh tokens to the user's registry is still in its early stages and may not work perfectly on all systems. If you encounter issues, please
+report them to support@amourgis.com.
+- 4.3.2 - STA Threading issues, especially around automatic updates. Downloading the portable version from the zip file below the install instructions is a likely workaround
+for the time being.
+- 3.0.3 - The automatic update functionality is still in its early stages and may not work perfectly on all systems. If you encounter issues, please report them to
+support@amourgis.com.</pre>
+    </details>
 
     <details open>
         <summary class="summary-heading">Install Instructions</summary>
@@ -224,34 +249,20 @@ html {
 
 
         <div class="fallback">
-            <p>If the install button doesn't work, you can <a href="https://github.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/releases/download/v4.7.1/CalliAPI-win-Portable.zip">download the full installer package (ZIP)</a> and run <strong>CalliAPI.exe</strong> manually.</p>
+            <p>If the install button doesn't work, you can <a href="https://github.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/releases/download/v4.7.2/CalliAPI-win-Portable.zip">download the full installer package (ZIP)</a> and run <strong>CalliAPI.exe</strong> manually.</p>
         </div>
     </details>
     <details>
         <summary class="summary-heading">Changelog</summary>
-        <pre>
-<h3>Wishlist</h3>
-
-<h4>Functionality</h4>
-- 3.0.3 - Add filters to TaskFilters.
-- 4.7.0 - Allow users to access their calendars on the Custom Report Builder.
-- 4.7.0 - Add the ability to create a Report using all of the data in a Matter lookup with the equivalent SQL information (as a checkbox in the Matters endpoint inside the
-CRB?).
-
-<h4>UI</h4>
-- Include the parent field name when flattening to a ReportForm.
-<h4>Documentation & External Resources</h4>
-
-
-<h2>Known Issues</h2>
-- 3.0.3 - The automatic update functionality is still in its early stages and may not work perfectly on all systems. If you encounter issues, please report them on the GitHub 
-repository.
-- 4.3.2 - STA Threading issues, especially around automatic updates. This may cause the application to hang or crash in some cases. A fix is in progress.
-
-<h1> CalliAPI Patch Log </h1>
+        <pre><h1> CalliAPI Patch Log </h1>
 
 <details open><summary><strong>CalliAPI 4</strong> (June 2025)</summary>
-<h4>4.7.1 - </h4>
+<h4>4.7.2 - Quick Bug Fix</h4>
+- Fixed the issue that disabled the Custom Report Builder in 4.7.1! Should be good to go now!
+<hr style="border: none; height: 3px; background: linear-gradient(to right, #feb47b, #ff7e5f); margin: 20px 0;">
+<h4>4.7.1 - Store Clio Access and Refresh Tokens!</h4>
+- We now have the ability to actually store the refresh and access tokens to the user's registry, meaning that CalliAPI should no longer prompt for the OAuth flow
+every single time we run her.
 - Add "matter_stage_updated_at" to the Matter model.
 <hr style="border: none; height: 3px; background: linear-gradient(to right, #feb47b, #ff7e5f); margin: 20px 0;">
 
@@ -507,6 +518,7 @@ FastFetch parallelizes the queries we send to Clio in order to grab up to 10,000
 
     <h2>Previous Versions</h2>
     <ul>
+<li><a href='https://github.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/releases/download/v4.7.2/CalliAPI-win-Setup.exe'>v4.7.2</a></li>
 <li><a href='https://github.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/releases/download/v4.7.0/CalliAPI-win-Setup.exe'>v4.7.0</a></li>
 <li><a href='https://github.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/releases/download/v4.6.1/CalliAPI-win-Setup.exe'>v4.6.1</a></li>
 <li><a href='https://github.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/releases/download/v4.5.0/CalliAPI-win-Setup.exe'>v4.5.0</a></li>

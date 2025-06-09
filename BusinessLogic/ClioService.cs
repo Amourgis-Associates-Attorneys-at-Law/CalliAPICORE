@@ -59,6 +59,12 @@ namespace CalliAPI.BusinessLogic
         {
             return _authService.ValidateAuthorizationCode(userInput);
         }
+
+
+        /// <summary>
+        /// Checks if the user is authenticated with Clio.
+        /// </summary>
+        public async Task<bool> IsAuthenticated() => await _authService.TryLoadOrRefreshTokenAsync();
         #endregion
 
         #region Delegates
@@ -73,10 +79,6 @@ namespace CalliAPI.BusinessLogic
         /// </summary>
         public event Action<int, int>? PracticeAreaProgressUpdated;
 
-        /// <summary>
-        /// Checks if the user is authenticated with Clio.
-        /// </summary>
-        public bool IsAuthenticated => !string.IsNullOrWhiteSpace(_authService.AccessToken);
         #endregion
 
         public async Task<HttpResponseMessage> VerifyAPI()

@@ -4,6 +4,11 @@
         <name>CalliAPI</name>
     </assembly>
     <members>
+        <member name="M:CalliAPI.BusinessLogic.ClioService.IsAuthenticated">
+            <summary>
+            Checks if the user is authenticated with Clio.
+            </summary>
+        </member>
         <member name="E:CalliAPI.BusinessLogic.ClioService.ProgressUpdated">
             <summary>
             Tracks the progress of a long-running operation, such as fetching matters or tasks.
@@ -12,11 +17,6 @@
         <member name="E:CalliAPI.BusinessLogic.ClioService.PracticeAreaProgressUpdated">
             <summary>
             Tracks the progress of practice area filtering operations.
-            </summary>
-        </member>
-        <member name="P:CalliAPI.BusinessLogic.ClioService.IsAuthenticated">
-            <summary>
-            Checks if the user is authenticated with Clio.
             </summary>
         </member>
         <member name="M:CalliAPI.BusinessLogic.ClioService.FilterMattersWithNoOpenTasksParallelAsync(System.Collections.Generic.IAsyncEnumerable{CalliAPI.Models.Matter})">

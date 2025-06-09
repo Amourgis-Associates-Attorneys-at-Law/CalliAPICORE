@@ -1,26 +1,12 @@
-
-<h3>Wishlist</h3>
-
-<h4>Functionality</h4>
-- 3.0.3 - Add filters to TaskFilters.
-- 4.7.0 - Allow users to access their calendars on the Custom Report Builder.
-- 4.7.0 - Add the ability to create a Report using all of the data in a Matter lookup with the equivalent SQL information (as a checkbox in the Matters endpoint inside the
-CRB?).
-
-<h4>UI</h4>
-- Include the parent field name when flattening to a ReportForm.
-<h4>Documentation & External Resources</h4>
-
-
-<h2>Known Issues</h2>
-- 3.0.3 - The automatic update functionality is still in its early stages and may not work perfectly on all systems. If you encounter issues, please report them on the GitHub 
-repository.
-- 4.3.2 - STA Threading issues, especially around automatic updates. This may cause the application to hang or crash in some cases. A fix is in progress.
-
 <h1> CalliAPI Patch Log </h1>
 
 <details open><summary><strong>CalliAPI 4</strong> (June 2025)</summary>
-<h4>4.7.1 - </h4>
+<h4>4.7.2 - Quick Bug Fix</h4>
+- Fixed the issue that disabled the Custom Report Builder in 4.7.1! Should be good to go now!
+<hr style="border: none; height: 3px; background: linear-gradient(to right, #feb47b, #ff7e5f); margin: 20px 0;">
+<h4>4.7.1 - Store Clio Access and Refresh Tokens!</h4>
+- We now have the ability to actually store the refresh and access tokens to the user's registry, meaning that CalliAPI should no longer prompt for the OAuth flow
+every single time we run her.
 - Add "matter_stage_updated_at" to the Matter model.
 <hr style="border: none; height: 3px; background: linear-gradient(to right, #feb47b, #ff7e5f); margin: 20px 0;">
 

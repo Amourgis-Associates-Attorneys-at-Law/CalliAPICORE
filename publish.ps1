@@ -46,27 +46,38 @@ function Generate-VersionLinks {
     return "<ul>`n$links</ul>"
 }
 
-# Inject the previous versions and the changelog into the index file
+# Inject the previous versions and the changelog into the index file.
 function Inject-Content {
     param (
         [string]$templatePath,
         [string]$outputPath,
         [string]$version,
         [string]$versionLinks,
-        [string]$changelogPath
+        [string]$changelogPath,
+        [string]$buglistPath
     )
 
+    # 1. Get the index.template.html placeholder text and inject the new version number.
     $html = Get-Content $templatePath -Raw
     $html = $html -replace '{{VERSION}}', $version
 
+    # 2. Inject the version history with paths to each older release.
     if ($html -match '<!--\s*VERSIONS\s*-->') {
         $html = $html -replace '<!--\s*VERSIONS\s*-->', $versionLinks
         Write-Host "Injected version history."
     }
 
+    # 3. Inject the changelog with the information about all the changes the program has undergone.
     if (Test-Path $changelogPath) {
         $changelog = Get-Content $changelogPath -Raw
         $html = $html -replace '<!--\s*CHANGELOG\s*-->', "<pre>$changelog</pre>"
+        Write-Host "Injected changelog."
+    }
+
+    # 4. Inject the known issues list and wishlist containing issues to warn users about as well as information on the roadmap for CalliAPI.
+        if (Test-Path $changelogPath) {
+        $buglist = Get-Content $buglistPath -Raw
+        $html = $html -replace '<!--\s*BUGLIST\s*-->', "<pre>$buglist</pre>"
         Write-Host "Injected changelog."
     }
 
@@ -85,6 +96,7 @@ $templateHtml = "docs\index.template.html"
 $outputHtml = "docs\index.html"
 $versionsFile = "versions.txt"
 $changelogFile = "ReadMe.MD"
+$buglistFile = "buglist.md"
 $repoUrl = 'https://github.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE'
 $stableStr = if ($stable) { "" } else { "--pre" }
 $publishStr = if ($publish) { "--publish" } else { "" }
@@ -111,7 +123,7 @@ dotnet publish $project -c Release -r win-x64 -o $publishDir --self-contained tr
 
 # Step 2: Generate and inject content
 $versionLinks = Generate-VersionLinks -versionsFile $versionsFile
-Inject-Content -templatePath $templateHtml -outputPath $outputHtml -version $versionShort -versionLinks $versionLinks -changelogPath $changelogFile
+Inject-Content -templatePath $templateHtml -outputPath $outputHtml -version $versionShort -versionLinks $versionLinks -changelogPath $changelogFile -buglistPath $buglistFile
 
 # Step 3: Publish release to GitHub
 vpk upload github `
