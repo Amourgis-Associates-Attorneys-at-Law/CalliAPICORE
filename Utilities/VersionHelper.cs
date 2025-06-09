@@ -62,7 +62,7 @@ namespace CalliAPI.Utilities
                 var mgr = new UpdateManager(
                     new GithubSource(
                         "https://github.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE",
-                        accessToken: githubToken,
+                        accessToken: githubToken ?? RegistrySecretManager.GetGithubToken(),
                         prerelease: false
                     )
                 );
@@ -119,6 +119,20 @@ namespace CalliAPI.Utilities
                     return false;
                 }
             }
+
+        public static bool ShouldCheckForUpdates()
+        {
+            var token = RegistrySecretManager.GetGithubToken();
+
+            // Only check for updates if:
+            // - A GitHub token is present and not a dummy
+            // - The app is installed (not portable)
+            return !string.IsNullOrWhiteSpace(token) &&
+                token != "dummy" &&
+                IsInstalled();
+
+        }
+
 
     }
 }

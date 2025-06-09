@@ -21,13 +21,10 @@ namespace CalliAPI.Utilities
             key?.SetValue(keyName, value);
         }
 
+        #region Clio
         public static string? GetClioClientSecret() => GetSecret("CLIO_CLIENT_SECRET");
 
         public static void SetClioClientSecret(string secret) => SetSecret("CLIO_CLIENT_SECRET", secret);
-
-        public static string? GetGithubToken() => GetSecret("GITHUB_TOKEN");
-
-        public static void SetGithubToken(string token) => SetSecret("GITHUB_TOKEN", token);
 
         public static string? GetClioAccessToken() => GetSecret("CLIO_ACCESS_TOKEN");
         public static void SetClioAccessToken(string token) => SetSecret("CLIO_ACCESS_TOKEN", token);
@@ -45,7 +42,25 @@ namespace CalliAPI.Utilities
         {
             SetSecret("CLIO_TOKEN_EXPIRY", expiry.ToString("o")); // ISO 8601
         }
+        #endregion
 
+        #region Github
+
+        public static string? GetGithubToken() => GetSecret("GITHUB_TOKEN");
+
+        public static void SetGithubToken(string token) => SetSecret("GITHUB_TOKEN", token);
+
+        public static bool GetSkipGithubTokenWarning()
+        {
+            var value = GetSecret("SKIP_GITHUB_TOKEN_WARNING");
+            return value == "true";
+        }
+
+        public static void SetSkipGithubTokenWarning(bool skip)
+        {
+            SetSecret("SKIP_GITHUB_TOKEN_WARNING", skip ? "true" : "false");
+        }
+        #endregion
 
     }
 }

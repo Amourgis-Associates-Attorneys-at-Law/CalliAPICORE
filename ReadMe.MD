@@ -1,6 +1,11 @@
 <h1> CalliAPI Patch Log </h1>
 
 <details open><summary><strong>CalliAPI 4</strong> (June 2025)</summary>
+<h4>4.7.4 - Quality of Life Changes</h4>
+- Allow users to "skip Github token check in the future"
+- Rewrote the splash logic to only run the update checker if on an installed instance with a Github token, so as to prevent Unauthorized errors for users without a 
+Github token
+<hr style="border: none; height: 3px; background: linear-gradient(to right, #feb47b, #ff7e5f); margin: 20px 0;">
 <h4>4.7.3 - Small Improvements</h4>
 - Added more detail and an About section to the install page. 
 - Updated the AboutForm to include more useful information.
