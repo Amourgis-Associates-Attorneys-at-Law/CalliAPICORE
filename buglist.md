@@ -1,15 +1,13 @@
-﻿<h3>Wishlist</h3>
-
-<h4>Functionality</h4>
+﻿<h2>Wishlist</h2>
+<h3>Functionality</h3>
 - 3.0.3 - Add filters to TaskFilters.
 - 4.7.0 - Allow users to access their calendars on the Custom Report Builder.
 - 4.7.0 - Add the ability to create a Report using all of the data in a Matter lookup with the equivalent SQL information (as a checkbox in the Matters endpoint inside the
 CRB?).
-
-<h4>UI</h4>
+<h3>UI</h3>
 - Include the parent field name when flattening to a ReportForm.
-<h4>Documentation & External Resources</h4>
-
+<h3>Documentation & External Resources</h3>
+(none)
 
 <h2>Known Issues</h2>
 - 4.7.1 - Adding the access and refresh tokens to the user's registry is still in its early stages and may not work perfectly on all systems. If you encounter issues, please
