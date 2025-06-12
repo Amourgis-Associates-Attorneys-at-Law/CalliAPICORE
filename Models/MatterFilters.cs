@@ -104,8 +104,8 @@ namespace CalliAPI.Models
             await foreach (var matter in matters)
             {
                 if (matter.practice_area != null 
-                    && matter.practice_area.name != null 
-                    && suffixes.Any(suffix => matter.practice_area.name.EndsWith(suffix)))
+                    && matter.practice_area.practice_area_name != null 
+                    && suffixes.Any(suffix => matter.practice_area.practice_area_name.EndsWith(suffix)))
                 {
                     yield return matter;
                 }
@@ -117,8 +117,8 @@ namespace CalliAPI.Models
             await foreach (var matter in matters)
             {
                 if (matter.matter_stage != null 
-                    && matter.matter_stage.name != null 
-                    && stageNames.Any(stageName => matter.matter_stage.name.Trim().ToLower().Equals(stageName.Trim().ToLower())))
+                    && matter.matter_stage.matter_stage_name != null 
+                    && stageNames.Any(stageName => matter.matter_stage.matter_stage_name.Trim().ToLower().Equals(stageName.Trim().ToLower())))
                 {
                     yield return matter;
                 }
@@ -273,7 +273,7 @@ namespace CalliAPI.Models
 
             await foreach (var matter in matters)
             {
-                table.Rows.Add(matter.id, matter.practice_area?.name ?? "", matter.matter_stage?.name ?? "");
+                table.Rows.Add(matter.id, matter.practice_area?.practice_area_name ?? "", matter.matter_stage?.matter_stage_name ?? "");
             }
 
             return table;

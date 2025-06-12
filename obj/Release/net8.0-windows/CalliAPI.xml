@@ -230,7 +230,7 @@
             The unique identifier for the matter stage.
             </summary>
         </member>
-        <member name="P:CalliAPI.Models.MatterStage.name">
+        <member name="P:CalliAPI.Models.MatterStage.matter_stage_name">
             <summary>
             The name of the matter stage.
             </summary>

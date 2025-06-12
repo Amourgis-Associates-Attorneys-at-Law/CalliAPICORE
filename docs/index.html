@@ -167,11 +167,11 @@ html {
     <p class="version-badge"><em>"kuh-LIE-uh-pee"</em></p>
     <p>Click the <span class="accent">Install</span> button below to install the latest version of CalliAPI.</p>
 
-    <a class="install-button" href="https://github.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/releases/download/v4.7.4/CalliAPI-win-Setup.exe">Install CalliAPI</a>
+    <a class="install-button" href="https://github.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/releases/download/v4.7.5/CalliAPI-win-Setup.exe">Install CalliAPI</a>
     <br />
     <br />
     <!-- Version badge -->
-    <img src="https://img.shields.io/badge/version-4.7.4-blue" alt="Version">
+    <img src="https://img.shields.io/badge/version-4.7.5-blue" alt="Version">
 
     <!-- Status badge -->
     <img src="https://img.shields.io/badge/status-stable-brightgreen" alt="Status">
@@ -214,10 +214,12 @@ issues, please report them to support@amourgis.com.
 in the Matters endpoint inside the CRB?).
 - 4.7.3 - Add Responsible Attorney and Responsible Staff to the Matters fields.
 - 4.7.3 - Add a check to the ReportForm to make sure the target .xlsx file isn't locked before saving.
+- 4.7.4 - 
+
 <strong>UI</strong>
 📄4.7.0 - Include the parent field name when flattening to a ReportForm.
-- 4.7.3 - Hide GitHub token gatekeeper pop-up or have option to hide Github token gatekeeper on startup.
-- 4.7.3 - Hide "Update process failed" on CalliAPI startup but show on File > Check for Updates.
+- 4.7.4 - Add a tutorial.
+
 <h3>Documentation & External Resources</h3>
 (none)</pre>
     </details>
@@ -261,7 +263,7 @@ in the Matters endpoint inside the CRB?).
 
 
         <div class="fallback">
-            <p>If the install button doesn't work, you can <a href="https://github.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/releases/download/v4.7.4/CalliAPI-win-Portable.zip">download the full installer package (ZIP)</a> and run <strong>CalliAPI.exe</strong> manually.</p>
+            <p>If the install button doesn't work, you can <a href="https://github.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/releases/download/v4.7.5/CalliAPI-win-Portable.zip">download the full installer package (ZIP)</a> and run <strong>CalliAPI.exe</strong> manually.</p>
         </div>
     </details>
     <details>
@@ -269,6 +271,9 @@ in the Matters endpoint inside the CRB?).
         <pre><h1> CalliAPI Patch Log </h1>
 
 <details open><summary><strong>CalliAPI 4</strong> (June 2025)</summary>
+<h4>4.7.5 - Fix Collision Bug in Report Form </h4>
+- Fix the way that some fields with the same display name were being mixed in the ReportForm (such as client{name} and matter_stage{name} and practice_area{name}).
+<hr style="border: none; height: 3px; background: linear-gradient(to right, #feb47b, #ff7e5f); margin: 20px 0;">
 <h4>4.7.4 - Quality of Life Changes</h4>
 - Allow users to "skip Github token check in the future"
 - Rewrote the splash logic to only run the update checker if on an installed instance with a Github token, so as to prevent Unauthorized errors for users without a 
@@ -539,6 +544,7 @@ FastFetch parallelizes the queries we send to Clio in order to grab up to 10,000
 
     <h2>Previous Versions</h2>
     <ul>
+<li><a href='https://github.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/releases/download/v4.7.5/CalliAPI-win-Setup.exe'>v4.7.5</a></li>
 <li><a href='https://github.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/releases/download/v4.7.3/CalliAPI-win-Setup.exe'>v4.7.3</a></li>
 <li><a href='https://github.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/releases/download/v4.7.0/CalliAPI-win-Setup.exe'>v4.7.0</a></li>
 <li><a href='https://github.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/releases/download/v4.6.1/CalliAPI-win-Setup.exe'>v4.6.1</a></li>

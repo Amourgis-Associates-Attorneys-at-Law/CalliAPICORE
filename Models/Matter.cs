@@ -98,7 +98,8 @@ namespace CalliAPI.Models
         /// <summary>
         /// The name of the matter stage.
         /// </summary>
-        public string? name { get; set; }
+        [JsonPropertyName("name")]
+        public string? matter_stage_name { get; set; }
 
         /// <summary>
         /// The unique identifier for the practice area associated with this matter stage.

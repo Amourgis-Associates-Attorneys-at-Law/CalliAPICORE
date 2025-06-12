@@ -15,9 +15,11 @@ issues, please report them to support@amourgis.com.
 in the Matters endpoint inside the CRB?).
 - 4.7.3 - Add Responsible Attorney and Responsible Staff to the Matters fields.
 - 4.7.3 - Add a check to the ReportForm to make sure the target .xlsx file isn't locked before saving.
+- 4.7.4 - 
+
 <strong>UI</strong>
 📄4.7.0 - Include the parent field name when flattening to a ReportForm.
-- 4.7.3 - Hide GitHub token gatekeeper pop-up or have option to hide Github token gatekeeper on startup.
-- 4.7.3 - Hide "Update process failed" on CalliAPI startup but show on File > Check for Updates.
+- 4.7.4 - Add a tutorial.
+
 <h3>Documentation & External Resources</h3>
 (none)

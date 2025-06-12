@@ -806,7 +806,7 @@ namespace CalliAPI.DataAccess
                 practiceAreas = [.. dataElement.EnumerateArray().Select(pa => new PracticeArea
                 {
                     id = pa.GetProperty("id").GetInt64(),
-                    name = pa.GetProperty("name").GetString()
+                    practice_area_name = pa.GetProperty("name").GetString()
                 })];
             }
 
@@ -817,7 +817,7 @@ namespace CalliAPI.DataAccess
         public static List<long> GetRelevantPracticeAreaIds(List<PracticeArea> practiceAreas)
         {
             return [.. practiceAreas
-            .Where(pa => pa.name.EndsWith('7') || pa.name.EndsWith("13"))
+            .Where(pa => pa.practice_area_name.EndsWith('7') || pa.practice_area_name.EndsWith("13"))
             .Select(pa => pa.id)];
         }
 
@@ -914,8 +914,8 @@ namespace CalliAPI.DataAccess
             var matters = await GetAllActive713MattersAsync(accessToken); // 1. get all matters with a practice area ending in 7 or 13
 
             var filteredMatters = matters
-                .Where(m => m.matter_stage?.name != null &&
-                            validStages.Contains(m.matter_stage.name.ToLower())); // 2. has a stage in "Prefile" or "PIF - Prefile" or "Case prep" or "PIF - Case prep" or "Signing and Filing"
+                .Where(m => m.matter_stage?.matter_stage_name != null &&
+                            validStages.Contains(m.matter_stage.matter_stage_name.ToLower())); // 2. has a stage in "Prefile" or "PIF - Prefile" or "Case prep" or "PIF - Case prep" or "Signing and Filing"
 
 
             // Create a list to store matters with no outstanding tasks
