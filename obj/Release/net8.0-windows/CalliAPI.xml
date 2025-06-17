@@ -270,10 +270,10 @@
         </member>
         <member name="M:CalliAPI.Models.MatterFilters.ToSmartDataTableAsync(System.Collections.Generic.IAsyncEnumerable{CalliAPI.Models.Matter},System.Collections.Generic.List{CalliAPI.Models.CustomField})">
             <summary>
-            Converts an IAsyncEnumerable of Matter objects to a DataTable, attempting to include all relevant properties.
+            Converts an IAsyncEnumerable of Matter objects to a DataTable,
+            flattening nested objects and including custom fields.
+            Core fields retain their original order; custom fields are sorted alphabetically.
             </summary>
-            <param name="matters"></param>
-            <returns></returns>
         </member>
         <member name="T:CalliAPI.Program">
             <summary>

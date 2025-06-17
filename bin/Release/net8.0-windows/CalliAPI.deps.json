@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v8.0": {
-      "CalliAPI/4.7.5": {
+      "CalliAPI/4.7.6": {
         "dependencies": {
           "AmourgisCOREServices": "2.3.0",
           "ClosedXML": "0.105.0",
@@ -1737,7 +1737,7 @@
     }
   },
   "libraries": {
-    "CalliAPI/4.7.5": {
+    "CalliAPI/4.7.6": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

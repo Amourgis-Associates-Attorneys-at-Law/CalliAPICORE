@@ -167,11 +167,11 @@ html {
     <p class="version-badge"><em>"kuh-LIE-uh-pee"</em></p>
     <p>Click the <span class="accent">Install</span> button below to install the latest version of CalliAPI.</p>
 
-    <a class="install-button" href="https://github.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/releases/download/v4.7.5/CalliAPI-win-Setup.exe">Install CalliAPI</a>
+    <a class="install-button" href="https://github.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/releases/download/v4.7.6/CalliAPI-win-Setup.exe">Install CalliAPI</a>
     <br />
     <br />
     <!-- Version badge -->
-    <img src="https://img.shields.io/badge/version-4.7.5-blue" alt="Version">
+    <img src="https://img.shields.io/badge/version-4.7.6-blue" alt="Version">
 
     <!-- Status badge -->
     <img src="https://img.shields.io/badge/status-stable-brightgreen" alt="Status">
@@ -263,7 +263,7 @@ in the Matters endpoint inside the CRB?).
 
 
         <div class="fallback">
-            <p>If the install button doesn't work, you can <a href="https://github.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/releases/download/v4.7.5/CalliAPI-win-Portable.zip">download the full installer package (ZIP)</a> and run <strong>CalliAPI.exe</strong> manually.</p>
+            <p>If the install button doesn't work, you can <a href="https://github.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/releases/download/v4.7.6/CalliAPI-win-Portable.zip">download the full installer package (ZIP)</a> and run <strong>CalliAPI.exe</strong> manually.</p>
         </div>
     </details>
     <details>
@@ -271,21 +271,34 @@ in the Matters endpoint inside the CRB?).
         <pre><h1> CalliAPI Patch Log </h1>
 
 <details open><summary><strong>CalliAPI 4</strong> (June 2025)</summary>
+<h4>4.7.6 - Updates to Reporting Functionality! </h4>
+- Add a call to VerifyAPI() when the Custom Report Builder is opened, to ensure that the API is available before attempting to generate reports. This will help prevent errors and ensure a smoother user experience!
+- Added "All" and "Clear" buttons to the Matter fields and Client fields checkboxes
+- Defaulted the Matter and Client checkboxes so that useful information is included in the report by default, such as Client Name, Matter Name, and Matter Stage Name.
+- Changed the order of the columns in the ReportForm so that the most useful information is displayed first, making it easier for users to read and understand the reports.
+- Added code to allow for duplicate field names by incrementing the field name if a duplicate is found. This will help prevent errors and ensure that all fields are included in the report, even if they have the same name.
+- Fixed an emergent breaking issue where the ReportForm would exceed FillWeightLimit and not display anything.
+<hr style="border: none; height: 3px; background: linear-gradient(to right, #feb47b, #ff7e5f); margin: 20px 0;">
+
 <h4>4.7.5 - Fix Collision Bug in Report Form </h4>
 - Fix the way that some fields with the same display name were being mixed in the ReportForm (such as client{name} and matter_stage{name} and practice_area{name}).
 <hr style="border: none; height: 3px; background: linear-gradient(to right, #feb47b, #ff7e5f); margin: 20px 0;">
+
 <h4>4.7.4 - Quality of Life Changes</h4>
 - Allow users to "skip Github token check in the future"
 - Rewrote the splash logic to only run the update checker if on an installed instance with a Github token, so as to prevent Unauthorized errors for users without a 
 Github token
 <hr style="border: none; height: 3px; background: linear-gradient(to right, #feb47b, #ff7e5f); margin: 20px 0;">
+
 <h4>4.7.3 - Small Improvements</h4>
 - Added more detail and an About section to the install page. 
 - Updated the AboutForm to include more useful information.
 <hr style="border: none; height: 3px; background: linear-gradient(to right, #feb47b, #ff7e5f); margin: 20px 0;">
+
 <h4>4.7.2 - Quick Bug Fix</h4>
 - Fixed the issue that disabled the Custom Report Builder in 4.7.1! Should be good to go now!
 <hr style="border: none; height: 3px; background: linear-gradient(to right, #feb47b, #ff7e5f); margin: 20px 0;">
+
 <h4>4.7.1 - Store Clio Access and Refresh Tokens!</h4>
 - We now have the ability to actually store the refresh and access tokens to the user's registry, meaning that CalliAPI should no longer prompt for the OAuth flow
 every single time we run her.
