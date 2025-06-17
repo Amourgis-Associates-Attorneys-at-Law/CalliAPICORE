@@ -1,7 +1,12 @@
 <h1> CalliAPI Patch Log </h1>
 
 <details open><summary><strong>CalliAPI 4</strong> (June 2025)</summary>
+<h4>4.7.7 - Report Form Functionality Improvements! </h4>
+- Added a checkedListBox to allow users to select which fields they want to include in the report, making it easier to customize the report output.
+<hr style="border: none; height: 3px; background: linear-gradient(to right, #feb47b, #ff7e5f); margin: 20px 0;">
+
 <h4>4.7.6 - Updates to Reporting Functionality! </h4>
+- Added a button to make it clearer how to use the Custom Report Builder, which will help users understand how to generate reports more easily.
 - Add a call to VerifyAPI() when the Custom Report Builder is opened, to ensure that the API is available before attempting to generate reports. This will help prevent errors and ensure a smoother user experience!
 - Added "All" and "Clear" buttons to the Matter fields and Client fields checkboxes
 - Defaulted the Matter and Client checkboxes so that useful information is included in the report by default, such as Client Name, Matter Name, and Matter Stage Name.

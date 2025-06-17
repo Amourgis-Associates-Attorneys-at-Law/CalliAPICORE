@@ -139,6 +139,8 @@ namespace CalliAPI.Models
             this IAsyncEnumerable<Matter> matters,
             List<CustomField>? includedCustomFields = null)
         {
+            _logger.Info($"Starting ToSmartDataTableAsync()...");
+
             var table = new DataTable();
             var rows = new List<Dictionary<string, object>>();
 
@@ -147,8 +149,12 @@ namespace CalliAPI.Models
             var seenCoreColumns = new HashSet<string>(); // prevents duplicates
             var customColumns = new SortedSet<string>(StringComparer.OrdinalIgnoreCase); // sorted automatically
 
+            int matterCount = 0;
+
             await foreach (var matter in matters)
             {
+                matterCount++;
+                _logger.Info($"Processing matter #" + matterCount);
                 var row = new Dictionary<string, object>();
 
                 // Flatten Matter properties
@@ -170,6 +176,7 @@ namespace CalliAPI.Models
                 // Flatten Client properties
                 if (matter.client != null)
                 {
+                    _logger.Info($"Processing CLIENT for matter #" + matterCount);
                     foreach (var prop in typeof(Client).GetProperties())
                     {
                         var value = prop.GetValue(matter.client);
@@ -187,6 +194,7 @@ namespace CalliAPI.Models
                 // Flatten PracticeArea properties
                 if (matter.practice_area != null)
                 {
+                    _logger.Info($"Processing PRACTICE AREA for matter #" + matterCount);
                     foreach (var prop in typeof(PracticeArea).GetProperties())
                     {
                         var value = prop.GetValue(matter.practice_area);
@@ -204,6 +212,7 @@ namespace CalliAPI.Models
                 // Flatten MatterStage properties
                 if (matter.matter_stage != null)
                 {
+                    _logger.Info($"Processing MATTER STAGE for matter #" + matterCount);
                     foreach (var prop in typeof(MatterStage).GetProperties())
                     {
                         var value = prop.GetValue(matter.matter_stage);
@@ -221,11 +230,12 @@ namespace CalliAPI.Models
                 // Include custom fields (sorted)
                 if (matter.CustomFields != null)
                 {
-                    int customFieldCount = 0; // to differentiate custom fields with the same name
+                    _logger.Info($"Processing CUSTOM FIELDS for matter #" + matterCount);
+                    //int customFieldCount = 0; // to differentiate custom fields with the same name
 
                     foreach (var field in matter.CustomFields)
                     {
-                        customFieldCount++; // Increment for each custom field processed
+                        //customFieldCount++; // Increment for each custom field processed
 
                         if (includedCustomFields != null &&
                             (!CustomFieldMap.TryGetField(field.custom_field.id, out var enumField) ||
@@ -234,22 +244,36 @@ namespace CalliAPI.Models
                             continue; // Skip excluded fields
                         }
 
-                        string columnName = (field.field_name ?? $"Field_{field.custom_field.id}") + "_" + customFieldCount;
+                        string columnName = (field.field_name ?? $"Field_{field.custom_field.id}")
+                            //+ "_" + customFieldCount
+                            ;
+
+
                         customColumns.Add(columnName);
+
+
+                        string fieldValue = "";
 
                         // Prefer picklist label if available
                         if (field.picklist_option?.option != null)
                         {
-                            row[columnName] = field.picklist_option.option;
+                            fieldValue = field.picklist_option.option;
                         }
                         else if (field.value.ValueKind != JsonValueKind.Null)
                         {
-                            row[columnName] = field.value.ToString();
+                            fieldValue = field.value.ToString();
                         }
                         else
                         {
-                            row[columnName] = "null";
+                            fieldValue = "null";
                         }
+
+                        // Add if there's no value yet
+                        if (!row.ContainsKey(columnName) || string.IsNullOrWhiteSpace(row[columnName]?.ToString()))
+                        {
+                            row[columnName] = fieldValue;
+                        }
+
                     }
                 }
 
@@ -260,6 +284,7 @@ namespace CalliAPI.Models
             //var columnNameMap = new Dictionary<string, string>();
             //int columnIndex = 0;
 
+            _logger.Info($"Processing columns for " + matterCount + " matters.");
             foreach (var column in coreColumns)
             {
                 //string indexedName = $"{column}_{columnIndex++}";
