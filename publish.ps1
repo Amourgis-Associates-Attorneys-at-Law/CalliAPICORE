@@ -75,10 +75,10 @@ function Inject-Content {
     }
 
     # 4. Inject the known issues list and wishlist containing issues to warn users about as well as information on the roadmap for CalliAPI.
-        if (Test-Path $changelogPath) {
+        if (Test-Path $buglistPath) {
         $buglist = Get-Content $buglistPath -Raw
         $html = $html -replace '<!--\s*BUGLIST\s*-->', "<pre>$buglist</pre>"
-        Write-Host "Injected changelog."
+        Write-Host "Injected buglist."
     }
 
     Set-Content $outputPath $html -Encoding UTF8
