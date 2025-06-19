@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v8.0": {
-      "CalliAPI/5.0.3": {
+      "CalliAPI/5.0.4": {
         "dependencies": {
           "AmourgisCOREServices": "2.5.0",
           "ClosedXML": "0.105.0",
@@ -17,6 +17,7 @@
           "Microsoft.EntityFrameworkCore.Tools": "8.0.16",
           "Microsoft.Extensions.DependencyInjection": "8.0.1",
           "Polly": "8.6.1",
+          "Polly.Core": "8.6.1",
           "System.Linq.Async": "6.0.3",
           "System.Net.Http": "4.3.4",
           "Velopack": "0.0.1335-g2ad2c37",
@@ -1738,7 +1739,7 @@
     }
   },
   "libraries": {
-    "CalliAPI/5.0.3": {
+    "CalliAPI/5.0.4": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

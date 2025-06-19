@@ -40,15 +40,6 @@
     <Compile Update="UI\Forms\SplashForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="UI\Views\FastFetchCreatedSinceView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="UI\Views\ReportsOpenMattersUnworkedMatters.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="UI\Views\ReportsView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Update="CalliAPI.nuspec">

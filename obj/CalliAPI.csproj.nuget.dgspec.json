@@ -5,7 +5,7 @@
   },
   "projects": {
     "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\CalliAPI.csproj": {
-      "version": "5.0.3",
+      "version": "5.0.4",
       "restore": {
         "projectUniqueName": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\CalliAPI.csproj",
         "projectName": "CalliAPI",
@@ -92,6 +92,10 @@
               "autoReferenced": true
             },
             "Polly": {
+              "target": "Package",
+              "version": "[8.6.1, )"
+            },
+            "Polly.Core": {
               "target": "Package",
               "version": "[8.6.1, )"
             },

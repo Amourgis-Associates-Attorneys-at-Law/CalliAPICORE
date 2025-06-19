@@ -56,18 +56,6 @@
             </summary>
             <returns>A List of ClioCalendar objects that the user is allowed to view.</returns>
         </member>
-        <member name="M:CalliAPI.DataAccess.ClioApiClient.GetAllOpenMattersAsync">
-            <summary>
-            Get a list of all the open matters as Matter objects. Use this with MatterFilters.cs to filter the list of matters.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:CalliAPI.DataAccess.ClioApiClient.FastFetchMattersSinceAsync(System.DateTime,System.Threading.CancellationToken)">
-            <summary>
-            Fetches up to 10,000 Matter records created since the given date using offset-based pagination,
-            parallelized for performance. Results are streamed back as an IAsyncEnumerable.
-            </summary>
-        </member>
         <member name="M:CalliAPI.DataAccess.ClioApiClient.GetAllPracticeAreasAsync">
             <summary>
             Get a list of all the Practice Areas as PracticeArea objects
@@ -538,57 +526,6 @@
         <member name="M:CalliAPI.UI.ReportForm.InitializeComponent">
             <summary>
             Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="F:CalliAPI.UI.Views.FastFetchCreatedSinceView.components">
-            <summary> 
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:CalliAPI.UI.Views.FastFetchCreatedSinceView.Dispose(System.Boolean)">
-            <summary> 
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:CalliAPI.UI.Views.FastFetchCreatedSinceView.InitializeComponent">
-            <summary> 
-            Required method for Designer support - do not modify 
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="F:CalliAPI.UI.Views.ReportsOpenMattersUnworkedMatters.components">
-            <summary> 
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:CalliAPI.UI.Views.ReportsOpenMattersUnworkedMatters.Dispose(System.Boolean)">
-            <summary> 
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:CalliAPI.UI.Views.ReportsOpenMattersUnworkedMatters.InitializeComponent">
-            <summary> 
-            Required method for Designer support - do not modify 
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="F:CalliAPI.UI.Views.ReportsView.components">
-            <summary> 
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:CalliAPI.UI.Views.ReportsView.Dispose(System.Boolean)">
-            <summary> 
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:CalliAPI.UI.Views.ReportsView.InitializeComponent">
-            <summary> 
-            Required method for Designer support - do not modify 
             the contents of this method with the code editor.
             </summary>
         </member>

@@ -302,14 +302,7 @@ namespace CalliAPI.BusinessLogic
 
         #endregion
 #endregion
-        #region FastFetch reports
-        public async Task FastFetchAllMatters(DateTime dateSince)
-        {
-            IAsyncEnumerable<Matter> matters = _clioApiClient.FastFetchMattersSinceAsync(dateSince);
 
-            await ReportLauncher.ShowAsync(matters);
-        }
-        #endregion
 
         #region Calendar Methods
         public async Task<List<ClioCalendar>> GetCalendarsAsync()

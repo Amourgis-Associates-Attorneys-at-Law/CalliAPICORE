@@ -2,20 +2,31 @@
 
 
 <details open>
-  <summary><strong>CalliAPI 5</strong> (June 2025)</summary>
+<summary><strong>CalliAPI 5</strong> (June 2025)</summary>
+
+
+<h4>5.0.4 - Usability Improvements! </h4>
+- Change some confusing wording, especially around updates.
+- Clean up ReadMe formatting to make it more readable.
+- Increase Clio API timeout timers to allow for more consistent reporting.
+- Add Polly.Core to create smarter retry policies for the Clio API, which will help prevent errors and improve the overall reliability -
+and hopefully speed - of the application.
+- Migrate to Polly 8 to create Pipelines instead of Policies.
+- Remove some old code referencing FastFetch or Report Views, which are no longer used in the application.
+- Add color coding to the log box to make it a bit less painful to look at.
+- Remove a lot of extraneous logging that is no longer required. This will make it much more pleasant to use!
+<hr style="border: none; height: 3px; background: linear-gradient(to right, #feb47b, #ff7e5f); margin: 20px 0;">
+
 <h4>5.0.3 - Usability Improvements! </h4>
 - Add instructions to the Custom Report Builder Form to make it more clear how to use it.
 <hr style="border: none; height: 3px; background: linear-gradient(to right, #feb47b, #ff7e5f); margin: 20px 0;">
 
-  <h4>🚀 CalliAPI 5.0.1 Released — Smarter, Cleaner, and More Resilient</h4>
+<h4>CalliAPI 5.0.1 Released — Smarter, Cleaner, and More Resilient</h4>
+- <strong>Modernized Architecture:</strong> Dependency injection enables modular, testable code.</li>
+- <strong>Streamlined UX:</strong> Console replaced with embedded logging for a cleaner interface.</li>
+- <strong>Smarter Updates:</strong> Now checks for updates even without a GitHub token.</li>
 
-  <ul>
-    <li><strong>Modernized Architecture:</strong> Dependency injection enables modular, testable code.</li>
-    <li><strong>Streamlined UX:</strong> Console replaced with embedded logging for a cleaner interface.</li>
-    <li><strong>Smarter Updates:</strong> Now checks for updates even without a GitHub token.</li>
-  </ul>
-
-  <p>⚠️ <strong>Note:</strong> Users on versions prior to 5.0.1 must manually update once to benefit from the new auto-update system.</p>
+<p><strong>Note:</strong> Users on versions prior to 5.0.1 must manually update once to benefit from the new auto-update system.</p>
 
   <hr style="border: none; height: 3px; background: linear-gradient(to right, #feb47b, #ff7e5f); margin: 20px 0;">
 </details>

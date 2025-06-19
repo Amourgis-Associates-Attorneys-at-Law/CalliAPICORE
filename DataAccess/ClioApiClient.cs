@@ -3,7 +3,11 @@ using CalliAPI.Interfaces;
 using CalliAPI.Models;
 using CalliAPI.Utilities;
 using Polly;
+using Polly.Retry;
+using Polly.Wrap;
+using System;
 using System.Runtime.CompilerServices;
+using System.Security.Policy;
 using System.Text.Json;
 using ClioTask = CalliAPI.Models.Task;
 
@@ -18,7 +22,7 @@ namespace CalliAPI.DataAccess
         private readonly HttpClient _httpClient;
         private readonly AMO_Logger _logger;
         private readonly string clientSecret = string.Empty;
-        private readonly AsyncPolicy<HttpResponseMessage> _retryPolicy;
+        private readonly ResiliencePipeline<HttpResponseMessage> _pipeline;
         private readonly Dictionary<long, string> _fieldNameCache = [];
         //private List<string> practiceAreas = new List<string>
         //{
@@ -32,32 +36,36 @@ namespace CalliAPI.DataAccess
             _logger = AMO_Logger.Instance;
             clientSecret = secret;
 
-            // Custom Retry Delays based on the fact that exponential backoff from (2 ^ attempt) seconds was far too short of a delay that Clio never respected
-            var retryDelays = new[]
-{
-    TimeSpan.FromSeconds(10),
-    TimeSpan.FromSeconds(20),
-    TimeSpan.FromSeconds(30),
-    TimeSpan.FromSeconds(60),
-    TimeSpan.FromSeconds(90)
-};
+            #region deprecated code
+            //            // Custom Retry Delays based on the fact that exponential backoff from (2 ^ attempt) seconds was far too short of a delay that Clio never respected
+            //            var retryDelays = new[]
+            //{
+            //    TimeSpan.FromSeconds(30),
+            //    TimeSpan.FromSeconds(60),
+            //    TimeSpan.FromSeconds(90),
+            //    TimeSpan.FromSeconds(120),
+            //    TimeSpan.FromSeconds(150)
+            //};
 
-            _retryPolicy = Policy
-        .Handle<HttpRequestException>()
-        .OrResult<HttpResponseMessage>(r => (int)r.StatusCode == 429)
-        .WaitAndRetryAsync(
-            retryDelays,
-            onRetry: (outcome, delay, attempt, context) =>
-            {
-                if (outcome.Exception != null)
-                {
-                    _logger.Warn($"Exception on attempt {attempt}: {outcome.Exception.Message}. Retrying in {delay.TotalSeconds} seconds...");
-                }
-                else
-                {
-                    _logger.Warn($"Retrying due to HTTP {outcome.Result.StatusCode}. Delay: {delay.TotalSeconds} seconds...");
-                }
-            });
+            //            _retryPolicy = Policy
+            //        .Handle<HttpRequestException>()
+            //        .OrResult<HttpResponseMessage>(r => (int)r.StatusCode == 429)
+            //        .WaitAndRetryAsync(
+            //            retryDelays,
+            //            onRetry: (outcome, delay, attempt, context) =>
+            //            {
+            //                if (outcome.Exception != null)
+            //                {
+            //                    _logger.Warn($"Exception on attempt {attempt}: {outcome.Exception.Message}. Retrying in {delay.TotalSeconds} seconds...");
+            //                }
+            //                else
+            //                {
+            //                    _logger.Warn($"Retrying due to HTTP {outcome.Result.StatusCode}. Delay: {delay.TotalSeconds} seconds...");
+            //                }
+            //            });
+            #endregion
+
+            _pipeline = CreateClioRetryPipeline(_logger);
 
         }
 
@@ -69,7 +77,51 @@ namespace CalliAPI.DataAccess
         #endregion
 
 
+        #region Polly Retry Policy
+        // As of Polly 8, ResiliencePipeline is the new way to create resilience policies
+        private static ResiliencePipeline<HttpResponseMessage> CreateClioRetryPipeline(AMO_Logger logger)
+        {
+            var retryOptions = new RetryStrategyOptions<HttpResponseMessage>
+            {
+                MaxRetryAttempts = 5,
+                ShouldHandle = new PredicateBuilder<HttpResponseMessage>()
+                    .HandleResult(r => (int)r.StatusCode == 429),
+                DelayGenerator = args =>
+                {
+                    var response = args.Outcome.Result;
+                    if (response != null && response.Headers.TryGetValues("Retry-After", out var values))
+                    {
+                        var retryAfter = values.FirstOrDefault();
+                        if (int.TryParse(retryAfter, out int seconds))
+                        {
+                            logger.Warn($"Rate limit hit. Retrying after {seconds} seconds.");
+                            return new ValueTask<TimeSpan?>(TimeSpan.FromSeconds(seconds));
+                        }
+                        else if (DateTimeOffset.TryParse(retryAfter, out var retryDate))
+                        {
+                            var delay = retryDate - DateTimeOffset.UtcNow;
+                            logger.Warn($"Rate limit hit. Retrying at {retryDate} (in {delay.TotalSeconds:F0} seconds).");
+                            return new ValueTask<TimeSpan?>(delay > TimeSpan.Zero ? delay : TimeSpan.FromSeconds(10));
+                        }
+                    }
 
+                    logger.Warn("Rate limit hit. Retry-After header missing or invalid. Using default 30s delay.");
+                    return new ValueTask<TimeSpan?>(TimeSpan.FromSeconds(30));
+                },
+                OnRetry = args =>
+                {
+                    logger.Warn($"Retry {args.AttemptNumber + 1} due to 429 Too Many Requests.");
+                    return default;
+                }
+            };
+
+            return new ResiliencePipelineBuilder<HttpResponseMessage>()
+                .AddRetry(retryOptions)
+                .Build();
+        }
+
+
+        #endregion
 
 
 
@@ -242,7 +294,10 @@ namespace CalliAPI.DataAccess
         public async Task<List<ClioTask>> GetTasksForMatterAsync(long matterId)
         {
             string url = $"{Properties.Settings.Default.ApiUrl}tasks?matter_id={matterId}&fields=id,subject,status";
-            var response = await _retryPolicy.ExecuteAsync(() => _httpClient.GetAsync(url));
+            var response = await _pipeline.ExecuteAsync(async token =>
+            {
+                return await _httpClient.GetAsync(url, token);
+            });
             var responseContent = await response.Content.ReadAsStringAsync();
             using var jsonDocument = JsonDocument.Parse(responseContent);
 
@@ -304,7 +359,10 @@ namespace CalliAPI.DataAccess
 
 
                 // Get the next page (retrying with Polly)
-                var response = await _retryPolicy.ExecuteAsync(() => _httpClient.GetAsync(nextPageUrl));
+                var response = await _pipeline.ExecuteAsync(async token =>
+                {
+                    return await _httpClient.GetAsync(nextPageUrl, token);
+                });
                 if (!response.IsSuccessStatusCode)
                 {
                     _logger.Error($"Failed to fetch matters: {response.StatusCode} - {await response.Content.ReadAsStringAsync()}");
@@ -385,7 +443,10 @@ namespace CalliAPI.DataAccess
 
             string taskUrl = Properties.Settings.Default.ApiUrl + "calendars?fields=visible,id,name,permission&visible=true";
 
-            var response = await _retryPolicy.ExecuteAsync(() => _httpClient.GetAsync(taskUrl));
+            var response = await _pipeline.ExecuteAsync(async token =>
+            {
+                return await _httpClient.GetAsync(taskUrl, token);
+            });
             if (!response.IsSuccessStatusCode)
             {
                 _logger.Error($"Failed to fetch calendars: {response.StatusCode} - {await response.Content.ReadAsStringAsync()}");
@@ -436,7 +497,10 @@ namespace CalliAPI.DataAccess
 
 
                     // Get the next page (retrying with Polly)
-                    var response = await _retryPolicy.ExecuteAsync(() => _httpClient.GetAsync(nextPageUrl));
+                    var response = await _pipeline.ExecuteAsync(async token =>
+                    {
+                        return await _httpClient.GetAsync(nextPageUrl, token);
+                    });
                     if (!response.IsSuccessStatusCode)
                     {
                         _logger.Error($"Failed to fetch matters: {response.StatusCode} - {await response.Content.ReadAsStringAsync()}");
@@ -507,285 +571,6 @@ namespace CalliAPI.DataAccess
 
 
         #region archived methods
-        /// <summary>
-        /// Get a list of all the open matters as Matter objects. Use this with MatterFilters.cs to filter the list of matters.
-        /// </summary>
-        /// <returns></returns>
-        public async IAsyncEnumerable<Matter> GetAllOpenMattersAsync()
-        {
-            _logger.Info("API CALL START -- GET ALL OPEN MATTERS ASYNC --");
-
-            string nextPageUrl = $"{Properties.Settings.Default.ApiUrl}matters?" +
-                                 $"fields={MatterFields}" +
-                                 "&status=open&order=id(asc)";
-
-            int pageCount = 0;
-            int maxPages = 9999;
-            int totalPages = 0;
-
-            while (!string.IsNullOrEmpty(nextPageUrl) && pageCount < maxPages) // While there exists another page of results...
-            {
-                pageCount++;
-                _logger.Info($"Fetching page {pageCount}: {nextPageUrl}");
-
-
-                // Get the next page (retrying with Polly)
-                var response = await _retryPolicy.ExecuteAsync(() => _httpClient.GetAsync(nextPageUrl));
-                if (!response.IsSuccessStatusCode)
-                {
-                    _logger.Error($"Failed to fetch matters: {response.StatusCode} - {await response.Content.ReadAsStringAsync()}");
-                    yield break;
-                }
-
-                var content = await response.Content.ReadAsStringAsync();
-
-                JsonDocument json;
-
-                try // Parse the JSON response
-                {
-                    json = JsonDocument.Parse(content);
-                }
-                catch (JsonException ex)
-                {
-                    _logger.Error($"Failed to parse JSON: {ex.Message}");
-                    yield break;
-                }
-
-                // Only extract totalRecords on the first page
-                if (pageCount == 1 &&
-                    json.RootElement.TryGetProperty("meta", out var metaElement) &&
-                    metaElement.TryGetProperty("records", out var recordsElement) &&
-                    recordsElement.TryGetInt32(out int totalRecords))
-                {
-                    totalPages = (int)Math.Ceiling(totalRecords / 200.0);
-                    _logger.Info($"Total records: {totalRecords}, estimated pages: {totalPages}");
-                }
-
-                // Update progress bar here (if you pass a callback or use an event)
-                ProgressUpdated?.Invoke(pageCount, totalPages);
-
-
-
-                // If there's a data element, parse it
-
-                // Using the using block to ensure it's disposed of later...
-                using (json)
-                {
-                    if (json.RootElement.TryGetProperty("data", out var dataElement))
-                    {
-                        foreach (var element in dataElement.EnumerateArray())
-                        {
-                            yield return ParseMatter(element);
-                        }
-                    }
-#pragma warning disable CS8600
-                    nextPageUrl = json.RootElement
-                        .GetProperty("meta")
-                        .GetProperty("paging")
-                        .TryGetProperty("next", out var nextElement)
-                        ? nextElement.GetString()
-                        : null;
-#pragma warning restore CS8600
-
-                }
-            }
-
-            _logger.Info("API CALL END -- GET ALL OPEN MATTERS ASYNC --");
-        }
-
-
-
-        /// <summary>
-        /// Fetches up to 10,000 Matter records created since the given date using offset-based pagination,
-        /// parallelized for performance. Results are streamed back as an IAsyncEnumerable.
-        /// </summary>
-        public async IAsyncEnumerable<Matter> FastFetchMattersSinceAsync(
-         DateTime sinceDate,
-         [EnumeratorCancellation] CancellationToken cancellationToken = default)
-        {
-            // Constants for pagination and throttling
-            const int PageSize = 200;                   // Clio API max page size
-            const int MaxRecords = 10000;               // Safety cap to avoid over-fetching
-            const int MaxParallelRequests = 10;         // Limit concurrent requests to avoid rate limiting
-
-            int totalPages = MaxRecords / PageSize;     // Total pages to fetch (e.g., 50 for 10,000 records)
-            int completedPages = 0;                     // Tracks how many pages have completed
-            int totalRecordsFetched = 0;                // Tracks total records fetched across all pages
-
-            // Build base URL and query parameters
-            string baseUrl = $"{Properties.Settings.Default.ApiUrl}matters";
-            string fields = MatterFields;
-            string isoDate = sinceDate.ToUniversalTime().ToString("o"); // ISO 8601 format
-
-            var throttler = new SemaphoreSlim(MaxParallelRequests); // Controls how many requests run at once
-
-            // Create a list of tasks, one for each page (offset)
-            var tasks = Enumerable.Range(0, totalPages).Select(async i =>
-            {
-                int offset = i * PageSize;
-                string url = $"{baseUrl}?fields={Uri.EscapeDataString(fields)}&created_since={Uri.EscapeDataString(isoDate)}&limit={PageSize}&offset={offset}";
-                _logger.Info($"Requesting {url}");
-                await throttler.WaitAsync(cancellationToken); // Wait for a slot to run
-                try
-                {
-                    // Use Polly to retry transient failures
-                    var response = await _retryPolicy.ExecuteAsync(() =>
-         _httpClient.GetAsync(url, cancellationToken));
-
-                    if (!response.IsSuccessStatusCode)
-                    {
-                        _logger.Warn($"[ParallelFetch] Failed at offset {offset}: {response.StatusCode}");
-                        return [];
-                    }
-
-                    var content = await response.Content.ReadAsStringAsync(cancellationToken);
-                    var json = JsonDocument.Parse(content);
-
-                    var matters = new List<Matter>();
-                    if (json.RootElement.TryGetProperty("data", out var dataElement))
-                    {
-                        foreach (var element in dataElement.EnumerateArray())
-                        {
-                            matters.Add(ParseMatter(element)); // Convert JSON to Matter object
-                        }
-                    }
-
-                    // Safely increment the total record count
-                    Interlocked.Add(ref totalRecordsFetched, matters.Count);
-                    return matters;
-                }
-                catch (Exception ex)
-                {
-                    _logger.Error($"[ParallelFetch] Exception at offset {offset}: {ex.Message}");
-                    return Enumerable.Empty<Matter>();
-                }
-                finally
-                {
-                    // Update progress and release the throttler slot
-                    int newPageCount = Interlocked.Increment(ref completedPages);
-                    ProgressUpdated?.Invoke(newPageCount, totalPages);
-                    throttler.Release();
-                }
-            }).ToList();
-
-            // As each task completes, yield its results
-            foreach (var task in tasks)
-            {
-                var matters = await task;
-                foreach (var matter in matters)
-                {
-                    yield return matter;
-                }
-            }
-
-            // Warn if we hit the record cap
-            if (totalRecordsFetched >= MaxRecords)
-            {
-                _logger.Warn($"[ParallelFetch] Record cap of {MaxRecords} reached. Results may be incomplete.");
-                MessageBox.Show(
-                $"Only the first {MaxRecords} records were fetched. The results may be incomplete.\n\n" +
-                $"Try narrowing your date range or applying filters.",
-                "Record Limit Reached",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Warning);
-            }
-        }
-
-        public async IAsyncEnumerable<Matter> FastFetchOpenMattersSinceAsync(
- DateTime sinceDate,
- [EnumeratorCancellation] CancellationToken cancellationToken = default)
-        {
-            // Constants for pagination and throttling
-            const int PageSize = 200;                   // Clio API max page size
-            const int MaxRecords = 10000;               // Safety cap to avoid over-fetching
-            const int MaxParallelRequests = 10;         // Limit concurrent requests to avoid rate limiting
-
-            int totalPages = MaxRecords / PageSize;     // Total pages to fetch (e.g., 50 for 10,000 records)
-            int completedPages = 0;                     // Tracks how many pages have completed
-            int totalRecordsFetched = 0;                // Tracks total records fetched across all pages
-
-            // Build base URL and query parameters
-            string baseUrl = $"{Properties.Settings.Default.ApiUrl}matters";
-            string fields = $"{MatterFields}&status=open";
-            string isoDate = sinceDate.ToUniversalTime().ToString("o"); // ISO 8601 format
-
-            var throttler = new SemaphoreSlim(MaxParallelRequests); // Controls how many requests run at once
-
-            // Create a list of tasks, one for each page (offset)
-            var tasks = Enumerable.Range(0, totalPages).Select(async i =>
-            {
-                int offset = i * PageSize;
-                string url = $"{baseUrl}?fields={Uri.EscapeDataString(fields)}&created_since={Uri.EscapeDataString(isoDate)}&limit={PageSize}&offset={offset}";
-
-                await throttler.WaitAsync(cancellationToken); // Wait for a slot to run
-                try
-                {
-                    // Use Polly to retry transient failures
-                    var response = await _retryPolicy.ExecuteAsync(() =>
-         _httpClient.GetAsync(url, cancellationToken));
-
-                    if (!response.IsSuccessStatusCode)
-                    {
-                        _logger.Warn($"[ParallelFetch] Failed at offset {offset}: {response.StatusCode}");
-                        return Enumerable.Empty<Matter>();
-                    }
-
-                    var content = await response.Content.ReadAsStringAsync(cancellationToken);
-                    var json = JsonDocument.Parse(content);
-
-                    var matters = new List<Matter>();
-                    if (json.RootElement.TryGetProperty("data", out var dataElement))
-                    {
-                        foreach (var element in dataElement.EnumerateArray())
-                        {
-                            matters.Add(ParseMatter(element)); // Convert JSON to Matter object
-                        }
-                    }
-
-                    // Safely increment the total record count
-                    Interlocked.Add(ref totalRecordsFetched, matters.Count);
-                    return matters;
-                }
-                catch (Exception ex)
-                {
-                    _logger.Error($"[ParallelFetch] Exception at offset {offset}: {ex.Message}");
-                    return [];
-                }
-                finally
-                {
-                    // Update progress and release the throttler slot
-                    int newPageCount = Interlocked.Increment(ref completedPages);
-                    ProgressUpdated?.Invoke(newPageCount, totalPages);
-                    throttler.Release();
-                }
-            }).ToList();
-
-            // As each task completes, yield its results
-            foreach (var task in tasks)
-            {
-                var matters = await task;
-                foreach (var matter in matters)
-                {
-                    yield return matter;
-                }
-            }
-
-            // Warn if we hit the record cap
-            if (totalRecordsFetched >= MaxRecords)
-            {
-                _logger.Warn($"[ParallelFetch] Record cap of {MaxRecords} reached. Results may be incomplete.");
-                MessageBox.Show(
-                $"Only the first {MaxRecords} records were fetched. The results may be incomplete.\n\n" +
-                $"Try narrowing your date range or applying filters.",
-                "Record Limit Reached",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Warning);
-            }
-        }
-
-
-
-
 
         /// <summary>
         /// Get a list of all the Practice Areas as PracticeArea objects

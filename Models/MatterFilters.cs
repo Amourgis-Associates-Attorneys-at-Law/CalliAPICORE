@@ -154,7 +154,6 @@ namespace CalliAPI.Models
             await foreach (var matter in matters)
             {
                 matterCount++;
-                _logger.Info($"Processing matter #" + matterCount);
                 var row = new Dictionary<string, object>();
 
                 // Flatten Matter properties
@@ -176,7 +175,6 @@ namespace CalliAPI.Models
                 // Flatten Client properties
                 if (matter.client != null)
                 {
-                    _logger.Info($"Processing CLIENT for matter #" + matterCount);
                     foreach (var prop in typeof(Client).GetProperties())
                     {
                         var value = prop.GetValue(matter.client);
@@ -194,7 +192,6 @@ namespace CalliAPI.Models
                 // Flatten PracticeArea properties
                 if (matter.practice_area != null)
                 {
-                    _logger.Info($"Processing PRACTICE AREA for matter #" + matterCount);
                     foreach (var prop in typeof(PracticeArea).GetProperties())
                     {
                         var value = prop.GetValue(matter.practice_area);
@@ -212,7 +209,6 @@ namespace CalliAPI.Models
                 // Flatten MatterStage properties
                 if (matter.matter_stage != null)
                 {
-                    _logger.Info($"Processing MATTER STAGE for matter #" + matterCount);
                     foreach (var prop in typeof(MatterStage).GetProperties())
                     {
                         var value = prop.GetValue(matter.matter_stage);
@@ -230,7 +226,6 @@ namespace CalliAPI.Models
                 // Include custom fields (sorted)
                 if (matter.CustomFields != null)
                 {
-                    _logger.Info($"Processing CUSTOM FIELDS for matter #" + matterCount);
                     //int customFieldCount = 0; // to differentiate custom fields with the same name
 
                     foreach (var field in matter.CustomFields)
