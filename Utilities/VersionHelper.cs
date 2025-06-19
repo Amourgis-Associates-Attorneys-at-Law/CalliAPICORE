@@ -19,7 +19,7 @@ namespace CalliAPI.Utilities
     /// </summary>
     public static class VersionHelper
     {
-        public static readonly AMO_Logger _logger = new("CalliAPI");
+        public static readonly AMO_Logger _logger = AMO_Logger.Instance;
 
         /// <summary>
                 /// Gets the full version from the executing assembly (e.g., 1.2.3.0).

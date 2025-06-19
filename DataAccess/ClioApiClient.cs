@@ -26,10 +26,10 @@ namespace CalliAPI.DataAccess
         //};
 
 
-        public ClioApiClient(HttpClient httpClient, AMO_Logger logger, string secret)
+        public ClioApiClient(HttpClient httpClient, string secret)
         {
             _httpClient = httpClient;
-            _logger = logger;
+            _logger = AMO_Logger.Instance;
             clientSecret = secret;
 
             // Custom Retry Delays based on the fact that exponential backoff from (2 ^ attempt) seconds was far too short of a delay that Clio never respected

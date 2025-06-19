@@ -4,6 +4,11 @@
         <name>CalliAPI</name>
     </assembly>
     <members>
+        <member name="M:CalliAPI.BusinessLogic.ClioService.IsAuthenticated">
+            <summary>
+            Checks if the user is authenticated with Clio.
+            </summary>
+        </member>
         <member name="E:CalliAPI.BusinessLogic.ClioService.ProgressUpdated">
             <summary>
             Tracks the progress of a long-running operation, such as fetching matters or tasks.
@@ -12,11 +17,6 @@
         <member name="E:CalliAPI.BusinessLogic.ClioService.PracticeAreaProgressUpdated">
             <summary>
             Tracks the progress of practice area filtering operations.
-            </summary>
-        </member>
-        <member name="P:CalliAPI.BusinessLogic.ClioService.IsAuthenticated">
-            <summary>
-            Checks if the user is authenticated with Clio.
             </summary>
         </member>
         <member name="M:CalliAPI.BusinessLogic.ClioService.FilterMattersWithNoOpenTasksParallelAsync(System.Collections.Generic.IAsyncEnumerable{CalliAPI.Models.Matter})">
@@ -230,7 +230,7 @@
             The unique identifier for the matter stage.
             </summary>
         </member>
-        <member name="P:CalliAPI.Models.MatterStage.name">
+        <member name="P:CalliAPI.Models.MatterStage.matter_stage_name">
             <summary>
             The name of the matter stage.
             </summary>
@@ -270,10 +270,10 @@
         </member>
         <member name="M:CalliAPI.Models.MatterFilters.ToSmartDataTableAsync(System.Collections.Generic.IAsyncEnumerable{CalliAPI.Models.Matter},System.Collections.Generic.List{CalliAPI.Models.CustomField})">
             <summary>
-            Converts an IAsyncEnumerable of Matter objects to a DataTable, attempting to include all relevant properties.
+            Converts an IAsyncEnumerable of Matter objects to a DataTable,
+            flattening nested objects and including custom fields.
+            Core fields retain their original order; custom fields are sorted alphabetically.
             </summary>
-            <param name="matters"></param>
-            <returns></returns>
         </member>
         <member name="T:CalliAPI.Program">
             <summary>
@@ -599,6 +599,12 @@
             <param name="sender"></param>
             <param name="e"></param>
         </member>
+        <member name="M:CalliAPI.MainForm.OnLogMessageReceived(System.String)">
+            <summary>
+            Adds to the log text box in the UI thread.
+            </summary>
+            <param name="message"></param>
+        </member>
         <member name="M:CalliAPI.MainForm.SetProgressBarTheme(System.Drawing.Color,System.Drawing.Color,System.Drawing.Color,System.Drawing.Color)">
             <summary>
             Sets the theme for the progress bar based on the current phase of the operation.
@@ -716,6 +722,11 @@
             Checks for updates and applies them if available.
             </summary>
             <returns></returns>
+        </member>
+        <member name="M:CalliAPI.Utilities.VersionHelper.IsInstalled">
+            <summary>
+            Determines whether the application is running from a Velopack-installed location.
+            </summary>
         </member>
         <member name="T:CalliAPI.ApplicationConfiguration">
             <summary>

@@ -8,9 +8,9 @@ using System.Text;
 
 namespace CalliAPI.BusinessLogic
 {
-    public class AuthService(ClioApiClient clioApiAccess, AMO_Logger logger) : IAuthService
+    public class AuthService(ClioApiClient clioApiAccess) : IAuthService
     {
-        private readonly AMO_Logger _logger = logger;
+        private readonly AMO_Logger _logger = AMO_Logger.Instance;
         private readonly ClioApiClient _clioApiClient = clioApiAccess;
 
         public string? AccessToken { get; private set; }

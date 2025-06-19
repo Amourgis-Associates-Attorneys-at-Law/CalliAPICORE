@@ -2,12 +2,12 @@
   "version": 3,
   "targets": {
     "net8.0-windows7.0": {
-      "AmourgisCOREServices/2.3.0": {
+      "AmourgisCOREServices/2.5.0": {
         "type": "package",
         "dependencies": {
           "Microsoft.Data.SqlClient": "6.0.2",
-          "Microsoft.Extensions.Configuration": "9.0.4",
-          "Serilog": "4.2.0",
+          "Microsoft.Extensions.Configuration": "9.0.6",
+          "Serilog": "4.3.0",
           "Serilog.Enrichers.AssemblyName": "2.0.0",
           "Serilog.Enrichers.ClientInfo": "2.1.2",
           "Serilog.Enrichers.Context": "4.6.5",
@@ -20,10 +20,11 @@
           "Serilog.Exceptions.SqlServer": "8.4.0",
           "Serilog.Sinks.Async": "2.1.0",
           "Serilog.Sinks.Console": "6.0.0",
+          "Serilog.Sinks.Debug": "3.0.0",
           "Serilog.Sinks.File": "7.0.0",
           "Serilog.Sinks.SyslogMessages": "4.0.0",
           "System.Data.SqlClient": "4.9.0",
-          "System.IdentityModel.Tokens.Jwt": "8.9.0"
+          "System.IdentityModel.Tokens.Jwt": "8.12.1"
         },
         "compile": {
           "lib/net8.0/AmourgisCOREServices.dll": {}
@@ -218,22 +219,6 @@
         },
         "build": {
           "buildTransitive/net6.0/_._": {}
-        }
-      },
-      "Microsoft.Bcl.Memory/9.0.0": {
-        "type": "package",
-        "compile": {
-          "lib/net8.0/Microsoft.Bcl.Memory.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net8.0/Microsoft.Bcl.Memory.dll": {
-            "related": ".xml"
-          }
-        },
-        "build": {
-          "buildTransitive/net8.0/_._": {}
         }
       },
       "Microsoft.CodeAnalysis.Analyzers/3.3.3": {
@@ -739,11 +724,11 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-      "Microsoft.Extensions.Configuration/9.0.4": {
+      "Microsoft.Extensions.Configuration/9.0.6": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Extensions.Configuration.Abstractions": "9.0.4",
-          "Microsoft.Extensions.Primitives": "9.0.4"
+          "Microsoft.Extensions.Configuration.Abstractions": "9.0.6",
+          "Microsoft.Extensions.Primitives": "9.0.6"
         },
         "compile": {
           "lib/net8.0/Microsoft.Extensions.Configuration.dll": {
@@ -759,10 +744,10 @@
           "buildTransitive/net8.0/_._": {}
         }
       },
-      "Microsoft.Extensions.Configuration.Abstractions/9.0.4": {
+      "Microsoft.Extensions.Configuration.Abstractions/9.0.6": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Extensions.Primitives": "9.0.4"
+          "Microsoft.Extensions.Primitives": "9.0.6"
         },
         "compile": {
           "lib/net8.0/Microsoft.Extensions.Configuration.Abstractions.dll": {
@@ -889,7 +874,7 @@
           "buildTransitive/net6.0/Microsoft.Extensions.Options.targets": {}
         }
       },
-      "Microsoft.Extensions.Primitives/9.0.4": {
+      "Microsoft.Extensions.Primitives/9.0.6": {
         "type": "package",
         "compile": {
           "lib/net8.0/Microsoft.Extensions.Primitives.dll": {
@@ -939,7 +924,7 @@
           }
         }
       },
-      "Microsoft.IdentityModel.Abstractions/8.9.0": {
+      "Microsoft.IdentityModel.Abstractions/8.12.1": {
         "type": "package",
         "compile": {
           "lib/net8.0/Microsoft.IdentityModel.Abstractions.dll": {
@@ -952,10 +937,10 @@
           }
         }
       },
-      "Microsoft.IdentityModel.JsonWebTokens/8.9.0": {
+      "Microsoft.IdentityModel.JsonWebTokens/8.12.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.IdentityModel.Tokens": "8.9.0"
+          "Microsoft.IdentityModel.Tokens": "8.12.1"
         },
         "compile": {
           "lib/net8.0/Microsoft.IdentityModel.JsonWebTokens.dll": {
@@ -968,10 +953,10 @@
           }
         }
       },
-      "Microsoft.IdentityModel.Logging/8.9.0": {
+      "Microsoft.IdentityModel.Logging/8.12.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.IdentityModel.Abstractions": "8.9.0"
+          "Microsoft.IdentityModel.Abstractions": "8.12.1"
         },
         "compile": {
           "lib/net8.0/Microsoft.IdentityModel.Logging.dll": {
@@ -1017,12 +1002,11 @@
           }
         }
       },
-      "Microsoft.IdentityModel.Tokens/8.9.0": {
+      "Microsoft.IdentityModel.Tokens/8.12.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Bcl.Memory": "9.0.0",
           "Microsoft.Extensions.Logging.Abstractions": "8.0.0",
-          "Microsoft.IdentityModel.Logging": "8.9.0"
+          "Microsoft.IdentityModel.Logging": "8.12.1"
         },
         "compile": {
           "lib/net8.0/Microsoft.IdentityModel.Tokens.dll": {
@@ -1110,10 +1094,10 @@
           }
         }
       },
-      "Polly/8.5.2": {
+      "Polly/8.6.1": {
         "type": "package",
         "dependencies": {
-          "Polly.Core": "8.5.2"
+          "Polly.Core": "8.6.1"
         },
         "compile": {
           "lib/net6.0/Polly.dll": {
@@ -1126,7 +1110,7 @@
           }
         }
       },
-      "Polly.Core/8.5.2": {
+      "Polly.Core/8.6.1": {
         "type": "package",
         "compile": {
           "lib/net8.0/Polly.Core.dll": {
@@ -1345,7 +1329,7 @@
           }
         }
       },
-      "Serilog/4.2.0": {
+      "Serilog/4.3.0": {
         "type": "package",
         "compile": {
           "lib/net8.0/Serilog.dll": {
@@ -1356,6 +1340,9 @@
           "lib/net8.0/Serilog.dll": {
             "related": ".xml"
           }
+        },
+        "build": {
+          "build/_._": {}
         }
       },
       "Serilog.Enrichers.AssemblyName/2.0.0": {
@@ -1543,6 +1530,22 @@
         },
         "runtime": {
           "lib/net8.0/Serilog.Sinks.Console.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Serilog.Sinks.Debug/3.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Serilog": "4.0.0"
+        },
+        "compile": {
+          "lib/net8.0/Serilog.Sinks.Debug.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Serilog.Sinks.Debug.dll": {
             "related": ".xml"
           }
         }
@@ -1985,11 +1988,11 @@
           }
         }
       },
-      "System.IdentityModel.Tokens.Jwt/8.9.0": {
+      "System.IdentityModel.Tokens.Jwt/8.12.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.IdentityModel.JsonWebTokens": "8.9.0",
-          "Microsoft.IdentityModel.Tokens": "8.9.0"
+          "Microsoft.IdentityModel.JsonWebTokens": "8.12.1",
+          "Microsoft.IdentityModel.Tokens": "8.12.1"
         },
         "compile": {
           "lib/net8.0/System.IdentityModel.Tokens.Jwt.dll": {
@@ -2099,14 +2102,11 @@
           "lib/netstandard1.6/System.Linq.dll": {}
         }
       },
-      "System.Linq.Async/6.0.1": {
+      "System.Linq.Async/6.0.3": {
         "type": "package",
-        "dependencies": {
-          "Microsoft.Bcl.AsyncInterfaces": "6.0.0"
-        },
         "compile": {
           "ref/net6.0/System.Linq.Async.dll": {
-            "related": ".xml"
+            "related": ".deps.json;.xml"
           }
         },
         "runtime": {
@@ -2761,7 +2761,7 @@
           "lib/netcoreapp2.1/_._": {}
         }
       },
-      "Velopack/0.0.1297": {
+      "Velopack/0.0.1335-g2ad2c37": {
         "type": "package",
         "dependencies": {
           "NuGet.Versioning": "6.14.0"
@@ -2777,7 +2777,7 @@
           }
         }
       },
-      "Velopack.Build/0.0.1297": {
+      "Velopack.Build/0.0.1335-g2ad2c37": {
         "type": "package",
         "build": {
           "build/Velopack.Build.targets": {}
@@ -2869,12 +2869,12 @@
       }
     },
     "net8.0-windows7.0/win-x64": {
-      "AmourgisCOREServices/2.3.0": {
+      "AmourgisCOREServices/2.5.0": {
         "type": "package",
         "dependencies": {
           "Microsoft.Data.SqlClient": "6.0.2",
-          "Microsoft.Extensions.Configuration": "9.0.4",
-          "Serilog": "4.2.0",
+          "Microsoft.Extensions.Configuration": "9.0.6",
+          "Serilog": "4.3.0",
           "Serilog.Enrichers.AssemblyName": "2.0.0",
           "Serilog.Enrichers.ClientInfo": "2.1.2",
           "Serilog.Enrichers.Context": "4.6.5",
@@ -2887,10 +2887,11 @@
           "Serilog.Exceptions.SqlServer": "8.4.0",
           "Serilog.Sinks.Async": "2.1.0",
           "Serilog.Sinks.Console": "6.0.0",
+          "Serilog.Sinks.Debug": "3.0.0",
           "Serilog.Sinks.File": "7.0.0",
           "Serilog.Sinks.SyslogMessages": "4.0.0",
           "System.Data.SqlClient": "4.9.0",
-          "System.IdentityModel.Tokens.Jwt": "8.9.0"
+          "System.IdentityModel.Tokens.Jwt": "8.12.1"
         },
         "compile": {
           "lib/net8.0/AmourgisCOREServices.dll": {}
@@ -3085,22 +3086,6 @@
         },
         "build": {
           "buildTransitive/net6.0/_._": {}
-        }
-      },
-      "Microsoft.Bcl.Memory/9.0.0": {
-        "type": "package",
-        "compile": {
-          "lib/net8.0/Microsoft.Bcl.Memory.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net8.0/Microsoft.Bcl.Memory.dll": {
-            "related": ".xml"
-          }
-        },
-        "build": {
-          "buildTransitive/net8.0/_._": {}
         }
       },
       "Microsoft.CodeAnalysis.Analyzers/3.3.3": {
@@ -3583,11 +3568,11 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-      "Microsoft.Extensions.Configuration/9.0.4": {
+      "Microsoft.Extensions.Configuration/9.0.6": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Extensions.Configuration.Abstractions": "9.0.4",
-          "Microsoft.Extensions.Primitives": "9.0.4"
+          "Microsoft.Extensions.Configuration.Abstractions": "9.0.6",
+          "Microsoft.Extensions.Primitives": "9.0.6"
         },
         "compile": {
           "lib/net8.0/Microsoft.Extensions.Configuration.dll": {
@@ -3603,10 +3588,10 @@
           "buildTransitive/net8.0/_._": {}
         }
       },
-      "Microsoft.Extensions.Configuration.Abstractions/9.0.4": {
+      "Microsoft.Extensions.Configuration.Abstractions/9.0.6": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Extensions.Primitives": "9.0.4"
+          "Microsoft.Extensions.Primitives": "9.0.6"
         },
         "compile": {
           "lib/net8.0/Microsoft.Extensions.Configuration.Abstractions.dll": {
@@ -3733,7 +3718,7 @@
           "buildTransitive/net6.0/Microsoft.Extensions.Options.targets": {}
         }
       },
-      "Microsoft.Extensions.Primitives/9.0.4": {
+      "Microsoft.Extensions.Primitives/9.0.6": {
         "type": "package",
         "compile": {
           "lib/net8.0/Microsoft.Extensions.Primitives.dll": {
@@ -3783,7 +3768,7 @@
           }
         }
       },
-      "Microsoft.IdentityModel.Abstractions/8.9.0": {
+      "Microsoft.IdentityModel.Abstractions/8.12.1": {
         "type": "package",
         "compile": {
           "lib/net8.0/Microsoft.IdentityModel.Abstractions.dll": {
@@ -3796,10 +3781,10 @@
           }
         }
       },
-      "Microsoft.IdentityModel.JsonWebTokens/8.9.0": {
+      "Microsoft.IdentityModel.JsonWebTokens/8.12.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.IdentityModel.Tokens": "8.9.0"
+          "Microsoft.IdentityModel.Tokens": "8.12.1"
         },
         "compile": {
           "lib/net8.0/Microsoft.IdentityModel.JsonWebTokens.dll": {
@@ -3812,10 +3797,10 @@
           }
         }
       },
-      "Microsoft.IdentityModel.Logging/8.9.0": {
+      "Microsoft.IdentityModel.Logging/8.12.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.IdentityModel.Abstractions": "8.9.0"
+          "Microsoft.IdentityModel.Abstractions": "8.12.1"
         },
         "compile": {
           "lib/net8.0/Microsoft.IdentityModel.Logging.dll": {
@@ -3861,12 +3846,11 @@
           }
         }
       },
-      "Microsoft.IdentityModel.Tokens/8.9.0": {
+      "Microsoft.IdentityModel.Tokens/8.12.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Bcl.Memory": "9.0.0",
           "Microsoft.Extensions.Logging.Abstractions": "8.0.0",
-          "Microsoft.IdentityModel.Logging": "8.9.0"
+          "Microsoft.IdentityModel.Logging": "8.12.1"
         },
         "compile": {
           "lib/net8.0/Microsoft.IdentityModel.Tokens.dll": {
@@ -3968,10 +3952,10 @@
           }
         }
       },
-      "Polly/8.5.2": {
+      "Polly/8.6.1": {
         "type": "package",
         "dependencies": {
-          "Polly.Core": "8.5.2"
+          "Polly.Core": "8.6.1"
         },
         "compile": {
           "lib/net6.0/Polly.dll": {
@@ -3984,7 +3968,7 @@
           }
         }
       },
-      "Polly.Core/8.5.2": {
+      "Polly.Core/8.6.1": {
         "type": "package",
         "compile": {
           "lib/net8.0/Polly.Core.dll": {
@@ -4335,7 +4319,7 @@
           "runtimes/win/lib/netstandard1.5/System.Runtime.Extensions.dll": {}
         }
       },
-      "Serilog/4.2.0": {
+      "Serilog/4.3.0": {
         "type": "package",
         "compile": {
           "lib/net8.0/Serilog.dll": {
@@ -4346,6 +4330,9 @@
           "lib/net8.0/Serilog.dll": {
             "related": ".xml"
           }
+        },
+        "build": {
+          "build/_._": {}
         }
       },
       "Serilog.Enrichers.AssemblyName/2.0.0": {
@@ -4533,6 +4520,22 @@
         },
         "runtime": {
           "lib/net8.0/Serilog.Sinks.Console.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Serilog.Sinks.Debug/3.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Serilog": "4.0.0"
+        },
+        "compile": {
+          "lib/net8.0/Serilog.Sinks.Debug.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Serilog.Sinks.Debug.dll": {
             "related": ".xml"
           }
         }
@@ -4970,11 +4973,11 @@
           "runtimes/win/lib/netstandard1.3/System.Globalization.Extensions.dll": {}
         }
       },
-      "System.IdentityModel.Tokens.Jwt/8.9.0": {
+      "System.IdentityModel.Tokens.Jwt/8.12.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.IdentityModel.JsonWebTokens": "8.9.0",
-          "Microsoft.IdentityModel.Tokens": "8.9.0"
+          "Microsoft.IdentityModel.JsonWebTokens": "8.12.1",
+          "Microsoft.IdentityModel.Tokens": "8.12.1"
         },
         "compile": {
           "lib/net8.0/System.IdentityModel.Tokens.Jwt.dll": {
@@ -5086,14 +5089,11 @@
           "lib/netstandard1.6/System.Linq.dll": {}
         }
       },
-      "System.Linq.Async/6.0.1": {
+      "System.Linq.Async/6.0.3": {
         "type": "package",
-        "dependencies": {
-          "Microsoft.Bcl.AsyncInterfaces": "6.0.0"
-        },
         "compile": {
           "ref/net6.0/System.Linq.Async.dll": {
-            "related": ".xml"
+            "related": ".deps.json;.xml"
           }
         },
         "runtime": {
@@ -5730,7 +5730,7 @@
           "lib/netcoreapp2.1/_._": {}
         }
       },
-      "Velopack/0.0.1297": {
+      "Velopack/0.0.1335-g2ad2c37": {
         "type": "package",
         "dependencies": {
           "NuGet.Versioning": "6.14.0"
@@ -5746,7 +5746,7 @@
           }
         }
       },
-      "Velopack.Build/0.0.1297": {
+      "Velopack.Build/0.0.1335-g2ad2c37": {
         "type": "package",
         "build": {
           "build/Velopack.Build.targets": {}
@@ -5839,13 +5839,13 @@
     }
   },
   "libraries": {
-    "AmourgisCOREServices/2.3.0": {
-      "sha512": "Z020EwkUUyH8+9ejzuUZB2anP/hSwJpXuKhBp9Jc54JUcsnDZFwFavrlEJ//IBcHO+cpGXOUV9GbCOBl9Vvb0A==",
+    "AmourgisCOREServices/2.5.0": {
+      "sha512": "TT03w3/Ge80HM88Qoaaa6YCX4gAzyIcxBk89Vkv3eXLMeFiA6qgu/IGqh6UWXSztqkdH02cF2CIsxmV/1z+hXQ==",
       "type": "package",
-      "path": "amourgiscoreservices/2.3.0",
+      "path": "amourgiscoreservices/2.5.0",
       "files": [
         ".nupkg.metadata",
-        "amourgiscoreservices.2.3.0.nupkg.sha512",
+        "amourgiscoreservices.2.5.0.nupkg.sha512",
         "amourgiscoreservices.nuspec",
         "lib/net8.0/AmourgisCOREServices.dll",
         "readme.md"
@@ -6094,36 +6094,6 @@
         "lib/netstandard2.0/Microsoft.Bcl.Cryptography.xml",
         "microsoft.bcl.cryptography.8.0.0.nupkg.sha512",
         "microsoft.bcl.cryptography.nuspec",
-        "useSharedDesignerContext.txt"
-      ]
-    },
-    "Microsoft.Bcl.Memory/9.0.0": {
-      "sha512": "bTUtGfpGyJnohQzjdXbtc7MqNzkv7CWUSRz54+ucNm0i32rZiIU0VdVPHDBShOl1qhVKRjW8mnEBz3d2vH93tQ==",
-      "type": "package",
-      "path": "microsoft.bcl.memory/9.0.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "Icon.png",
-        "LICENSE.TXT",
-        "PACKAGE.md",
-        "THIRD-PARTY-NOTICES.TXT",
-        "buildTransitive/net461/Microsoft.Bcl.Memory.targets",
-        "buildTransitive/net462/_._",
-        "buildTransitive/net8.0/_._",
-        "buildTransitive/netcoreapp2.0/Microsoft.Bcl.Memory.targets",
-        "lib/net462/Microsoft.Bcl.Memory.dll",
-        "lib/net462/Microsoft.Bcl.Memory.xml",
-        "lib/net8.0/Microsoft.Bcl.Memory.dll",
-        "lib/net8.0/Microsoft.Bcl.Memory.xml",
-        "lib/net9.0/Microsoft.Bcl.Memory.dll",
-        "lib/net9.0/Microsoft.Bcl.Memory.xml",
-        "lib/netstandard2.0/Microsoft.Bcl.Memory.dll",
-        "lib/netstandard2.0/Microsoft.Bcl.Memory.xml",
-        "lib/netstandard2.1/Microsoft.Bcl.Memory.dll",
-        "lib/netstandard2.1/Microsoft.Bcl.Memory.xml",
-        "microsoft.bcl.memory.9.0.0.nupkg.sha512",
-        "microsoft.bcl.memory.nuspec",
         "useSharedDesignerContext.txt"
       ]
     },
@@ -6890,10 +6860,10 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "Microsoft.Extensions.Configuration/9.0.4": {
-      "sha512": "KIVBrMbItnCJDd1RF4KEaE8jZwDJcDUJW5zXpbwQ05HNYTK1GveHxHK0B3SjgDJuR48GRACXAO+BLhL8h34S7g==",
+    "Microsoft.Extensions.Configuration/9.0.6": {
+      "sha512": "VWB5jdkxHsRiuoniTqwOL32R4OWyp5If/bAucLjRJczRVNcwb8iCXKLjn3Inv8fv+jHMVMnvQLg7xhSys+y5PA==",
       "type": "package",
-      "path": "microsoft.extensions.configuration/9.0.4",
+      "path": "microsoft.extensions.configuration/9.0.6",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -6913,15 +6883,15 @@
         "lib/net9.0/Microsoft.Extensions.Configuration.xml",
         "lib/netstandard2.0/Microsoft.Extensions.Configuration.dll",
         "lib/netstandard2.0/Microsoft.Extensions.Configuration.xml",
-        "microsoft.extensions.configuration.9.0.4.nupkg.sha512",
+        "microsoft.extensions.configuration.9.0.6.nupkg.sha512",
         "microsoft.extensions.configuration.nuspec",
         "useSharedDesignerContext.txt"
       ]
     },
-    "Microsoft.Extensions.Configuration.Abstractions/9.0.4": {
-      "sha512": "0LN/DiIKvBrkqp7gkF3qhGIeZk6/B63PthAHjQsxymJfIBcz0kbf4/p/t4lMgggVxZ+flRi5xvTwlpPOoZk8fg==",
+    "Microsoft.Extensions.Configuration.Abstractions/9.0.6": {
+      "sha512": "3GgMIi2jP8g1fBW93Z9b9Unamc0SIsgyhiCmC91gq4loTixK9vQMuxxUsfJ1kRGwn+/FqLKwOHqmn0oYWn3Fvw==",
       "type": "package",
-      "path": "microsoft.extensions.configuration.abstractions/9.0.4",
+      "path": "microsoft.extensions.configuration.abstractions/9.0.6",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -6941,7 +6911,7 @@
         "lib/net9.0/Microsoft.Extensions.Configuration.Abstractions.xml",
         "lib/netstandard2.0/Microsoft.Extensions.Configuration.Abstractions.dll",
         "lib/netstandard2.0/Microsoft.Extensions.Configuration.Abstractions.xml",
-        "microsoft.extensions.configuration.abstractions.9.0.4.nupkg.sha512",
+        "microsoft.extensions.configuration.abstractions.9.0.6.nupkg.sha512",
         "microsoft.extensions.configuration.abstractions.nuspec",
         "useSharedDesignerContext.txt"
       ]
@@ -7192,10 +7162,10 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "Microsoft.Extensions.Primitives/9.0.4": {
-      "sha512": "SPFyMjyku1nqTFFJ928JAMd0QnRe4xjE7KeKnZMWXf3xk+6e0WiOZAluYtLdbJUXtsl2cCRSi8cBquJ408k8RA==",
+    "Microsoft.Extensions.Primitives/9.0.6": {
+      "sha512": "BHniU24QV67qp1pJknqYSofAPYGmijGI8D+ci9yfw33iuFdyOeB9lWTg78ThyYLyQwZw3s0vZ36VMb0MqbUuLw==",
       "type": "package",
-      "path": "microsoft.extensions.primitives/9.0.4",
+      "path": "microsoft.extensions.primitives/9.0.6",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -7215,7 +7185,7 @@
         "lib/net9.0/Microsoft.Extensions.Primitives.xml",
         "lib/netstandard2.0/Microsoft.Extensions.Primitives.dll",
         "lib/netstandard2.0/Microsoft.Extensions.Primitives.xml",
-        "microsoft.extensions.primitives.9.0.4.nupkg.sha512",
+        "microsoft.extensions.primitives.9.0.6.nupkg.sha512",
         "microsoft.extensions.primitives.nuspec",
         "useSharedDesignerContext.txt"
       ]
@@ -7261,10 +7231,10 @@
         "microsoft.identity.client.extensions.msal.nuspec"
       ]
     },
-    "Microsoft.IdentityModel.Abstractions/8.9.0": {
-      "sha512": "b/87S+lb86U7Ns7xgTKnqql6XGNr8hBE+k0rj5sRWwXeJe6uA+3mSjvpZ9GoQo3cB9zlwzcbGBU8KM44qX0t1g==",
+    "Microsoft.IdentityModel.Abstractions/8.12.1": {
+      "sha512": "JzWhET0VOCORyJbqDc1Wtdl8Q/l+I1MjFB0I/Jko+Ma691JZll8X6o9XwZtUce8FkqGuV4uY4/V1808XZOpDVg==",
       "type": "package",
-      "path": "microsoft.identitymodel.abstractions/8.9.0",
+      "path": "microsoft.identitymodel.abstractions/8.12.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -7281,14 +7251,14 @@
         "lib/net9.0/Microsoft.IdentityModel.Abstractions.xml",
         "lib/netstandard2.0/Microsoft.IdentityModel.Abstractions.dll",
         "lib/netstandard2.0/Microsoft.IdentityModel.Abstractions.xml",
-        "microsoft.identitymodel.abstractions.8.9.0.nupkg.sha512",
+        "microsoft.identitymodel.abstractions.8.12.1.nupkg.sha512",
         "microsoft.identitymodel.abstractions.nuspec"
       ]
     },
-    "Microsoft.IdentityModel.JsonWebTokens/8.9.0": {
-      "sha512": "QcNC57hJLc6LIcy2PTYlD8iRBQBm6bqPKbCjsRYWlp7QTyJisF0ImUWaa3mx6wWaS1upwYneYVPiIiNSlAy16g==",
+    "Microsoft.IdentityModel.JsonWebTokens/8.12.1": {
+      "sha512": "imi3xiRLzzKxN4m1aR9Z2X8GUmNsVH7GLA6AkwYStNnh3UzupFtHEEVk3GK1fCvnYdRbpnCGNYY6WQb9AfDAKg==",
       "type": "package",
-      "path": "microsoft.identitymodel.jsonwebtokens/8.9.0",
+      "path": "microsoft.identitymodel.jsonwebtokens/8.12.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -7305,14 +7275,14 @@
         "lib/net9.0/Microsoft.IdentityModel.JsonWebTokens.xml",
         "lib/netstandard2.0/Microsoft.IdentityModel.JsonWebTokens.dll",
         "lib/netstandard2.0/Microsoft.IdentityModel.JsonWebTokens.xml",
-        "microsoft.identitymodel.jsonwebtokens.8.9.0.nupkg.sha512",
+        "microsoft.identitymodel.jsonwebtokens.8.12.1.nupkg.sha512",
         "microsoft.identitymodel.jsonwebtokens.nuspec"
       ]
     },
-    "Microsoft.IdentityModel.Logging/8.9.0": {
-      "sha512": "rswvH4ZANbFsJYEn+PGEOj7nkkBRjnsb7LcYGAS16VUJpSeKULLeYSy/7SK6jLO1WTT12xqdeL4mj3dYT7GdoQ==",
+    "Microsoft.IdentityModel.Logging/8.12.1": {
+      "sha512": "39HjVkU7Voe2jRLmORRB5PoTmta1ZPKzUZCc6ldlNlLzdx+um0+fAnvfk05LUQPrNxpvb5ZoqF00SrNvyO2Fzg==",
       "type": "package",
-      "path": "microsoft.identitymodel.logging/8.9.0",
+      "path": "microsoft.identitymodel.logging/8.12.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -7329,7 +7299,7 @@
         "lib/net9.0/Microsoft.IdentityModel.Logging.xml",
         "lib/netstandard2.0/Microsoft.IdentityModel.Logging.dll",
         "lib/netstandard2.0/Microsoft.IdentityModel.Logging.xml",
-        "microsoft.identitymodel.logging.8.9.0.nupkg.sha512",
+        "microsoft.identitymodel.logging.8.12.1.nupkg.sha512",
         "microsoft.identitymodel.logging.nuspec"
       ]
     },
@@ -7379,10 +7349,10 @@
         "microsoft.identitymodel.protocols.openidconnect.nuspec"
       ]
     },
-    "Microsoft.IdentityModel.Tokens/8.9.0": {
-      "sha512": "qK6kW5qZvDj7E5RLWQ9gzJxQe5GUz7+7bXrLQQydSDF9hTf5Ip2qHuAQW3Fg9GND6jkjTr7IXAZFmBHadNQi4Q==",
+    "Microsoft.IdentityModel.Tokens/8.12.1": {
+      "sha512": "DzgPEABn3eZmIk4lhov0QPcoHkIbnAfgkyDPM7uGuWDHeockR9DdqNCD9Zy30hPfExu5VhbOXn9oPRi+tFUhEQ==",
       "type": "package",
-      "path": "microsoft.identitymodel.tokens/8.9.0",
+      "path": "microsoft.identitymodel.tokens/8.12.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -7399,7 +7369,7 @@
         "lib/net9.0/Microsoft.IdentityModel.Tokens.xml",
         "lib/netstandard2.0/Microsoft.IdentityModel.Tokens.dll",
         "lib/netstandard2.0/Microsoft.IdentityModel.Tokens.xml",
-        "microsoft.identitymodel.tokens.8.9.0.nupkg.sha512",
+        "microsoft.identitymodel.tokens.8.12.1.nupkg.sha512",
         "microsoft.identitymodel.tokens.nuspec"
       ]
     },
@@ -7600,13 +7570,14 @@
         "nuget.versioning.nuspec"
       ]
     },
-    "Polly/8.5.2": {
-      "sha512": "vbXsGgkG86nG+TOwY+SmtrGrRHmHH0DQaxtILx//d3Dz/ocJ8izSNYzdvU2gEtWa/LDD8zJLvD3HdjEkdlvkhg==",
+    "Polly/8.6.1": {
+      "sha512": "UMYpEiKPQhbiQY1NXKL0hssUMETjuv7RGZx2VlcrlaIL7bIs2vs7iBfH2gblcR5Q7ockW3Kc78uTY6kK/ZeYgg==",
       "type": "package",
-      "path": "polly/8.5.2",
+      "path": "polly/8.6.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
+        "LICENSE",
         "lib/net462/Polly.dll",
         "lib/net462/Polly.pdb",
         "lib/net462/Polly.xml",
@@ -7621,17 +7592,18 @@
         "lib/netstandard2.0/Polly.xml",
         "package-icon.png",
         "package-readme.md",
-        "polly.8.5.2.nupkg.sha512",
+        "polly.8.6.1.nupkg.sha512",
         "polly.nuspec"
       ]
     },
-    "Polly.Core/8.5.2": {
-      "sha512": "1MJKdxv4zwDmiWvYvVN24DsrWUfgQ4F83voH8bhbtLMdPuGy8CfTUzsgQhvyrl1a7hrM6f/ydwLVdVUI0xooUw==",
+    "Polly.Core/8.6.1": {
+      "sha512": "HvkxFqEGk0NiLHYBescE/AnVu6W+ZqE0S7JkdXhvnJ2P2zRh8OPMDrFIjXPiIWugWIoxVeBHt45a6Cr61+asXw==",
       "type": "package",
-      "path": "polly.core/8.5.2",
+      "path": "polly.core/8.6.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
+        "LICENSE",
         "lib/net462/Polly.Core.dll",
         "lib/net462/Polly.Core.pdb",
         "lib/net462/Polly.Core.xml",
@@ -7649,7 +7621,7 @@
         "lib/netstandard2.0/Polly.Core.xml",
         "package-icon.png",
         "package-readme.md",
-        "polly.core.8.5.2.nupkg.sha512",
+        "polly.core.8.6.1.nupkg.sha512",
         "polly.core.nuspec"
       ]
     },
@@ -8405,14 +8377,15 @@
         "runtimes/win/lib/netstandard1.5/System.Runtime.Extensions.dll"
       ]
     },
-    "Serilog/4.2.0": {
-      "sha512": "gmoWVOvKgbME8TYR+gwMf7osROiWAURterc6Rt2dQyX7wtjZYpqFiA/pY6ztjGQKKV62GGCyOcmtP1UKMHgSmA==",
+    "Serilog/4.3.0": {
+      "sha512": "+cDryFR0GRhsGOnZSKwaDzRRl4MupvJ42FhCE4zhQRVanX0Jpg6WuCBk59OVhVDPmab1bB+nRykAnykYELA9qQ==",
       "type": "package",
-      "path": "serilog/4.2.0",
+      "path": "serilog/4.3.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "README.md",
+        "build/Serilog.targets",
         "icon.png",
         "lib/net462/Serilog.dll",
         "lib/net462/Serilog.xml",
@@ -8426,7 +8399,7 @@
         "lib/net9.0/Serilog.xml",
         "lib/netstandard2.0/Serilog.dll",
         "lib/netstandard2.0/Serilog.xml",
-        "serilog.4.2.0.nupkg.sha512",
+        "serilog.4.3.0.nupkg.sha512",
         "serilog.nuspec"
       ]
     },
@@ -8695,6 +8668,29 @@
         "lib/netstandard2.0/Serilog.Sinks.Console.xml",
         "serilog.sinks.console.6.0.0.nupkg.sha512",
         "serilog.sinks.console.nuspec"
+      ]
+    },
+    "Serilog.Sinks.Debug/3.0.0": {
+      "sha512": "4BzXcdrgRX7wde9PmHuYd9U6YqycCC28hhpKonK7hx0wb19eiuRj16fPcPSVp0o/Y1ipJuNLYQ00R3q2Zs8FDA==",
+      "type": "package",
+      "path": "serilog.sinks.debug/3.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "icon.png",
+        "lib/net462/Serilog.Sinks.Debug.dll",
+        "lib/net462/Serilog.Sinks.Debug.xml",
+        "lib/net471/Serilog.Sinks.Debug.dll",
+        "lib/net471/Serilog.Sinks.Debug.xml",
+        "lib/net6.0/Serilog.Sinks.Debug.dll",
+        "lib/net6.0/Serilog.Sinks.Debug.xml",
+        "lib/net8.0/Serilog.Sinks.Debug.dll",
+        "lib/net8.0/Serilog.Sinks.Debug.xml",
+        "lib/netstandard2.0/Serilog.Sinks.Debug.dll",
+        "lib/netstandard2.0/Serilog.Sinks.Debug.xml",
+        "serilog.sinks.debug.3.0.0.nupkg.sha512",
+        "serilog.sinks.debug.nuspec"
       ]
     },
     "Serilog.Sinks.File/7.0.0": {
@@ -9592,10 +9588,10 @@
         "system.globalization.extensions.nuspec"
       ]
     },
-    "System.IdentityModel.Tokens.Jwt/8.9.0": {
-      "sha512": "7Pu9UjF1+so0s8zgzcIxSxbRQoiM2DMdwazVGmNptX3O6gDfMyeWZBd/Zn6VueDteN0ZTHw2acsf6+mAe8UpMw==",
+    "System.IdentityModel.Tokens.Jwt/8.12.1": {
+      "sha512": "jlYdVOJrdeyD80ppEqKJ8BhJdrV3MjeA+seURdhC0DnD41GyUA9Ik+P7Sb571ufVVCYIx93GjeqVvY3QyQxZAA==",
       "type": "package",
-      "path": "system.identitymodel.tokens.jwt/8.9.0",
+      "path": "system.identitymodel.tokens.jwt/8.12.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -9612,7 +9608,7 @@
         "lib/net9.0/System.IdentityModel.Tokens.Jwt.xml",
         "lib/netstandard2.0/System.IdentityModel.Tokens.Jwt.dll",
         "lib/netstandard2.0/System.IdentityModel.Tokens.Jwt.xml",
-        "system.identitymodel.tokens.jwt.8.9.0.nupkg.sha512",
+        "system.identitymodel.tokens.jwt.8.12.1.nupkg.sha512",
         "system.identitymodel.tokens.jwt.nuspec"
       ]
     },
@@ -9900,10 +9896,10 @@
         "system.linq.nuspec"
       ]
     },
-    "System.Linq.Async/6.0.1": {
-      "sha512": "0YhHcaroWpQ9UCot3Pizah7ryAzQhNvobLMSxeDIGmnXfkQn8u5owvpOH0K6EVB+z9L7u6Cc4W17Br/+jyttEQ==",
+    "System.Linq.Async/6.0.3": {
+      "sha512": "hSHiq2m1ky7zUQgTp+/2h1K3lABIQ+GltRixoclHPg/Sc1vnfeS6g/Uy5moOVZKrZJdQiFPFZd6OobBp3tZcFg==",
       "type": "package",
-      "path": "system.linq.async/6.0.1",
+      "path": "system.linq.async/6.0.3",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -9916,15 +9912,21 @@
         "lib/netstandard2.0/System.Linq.Async.xml",
         "lib/netstandard2.1/System.Linq.Async.dll",
         "lib/netstandard2.1/System.Linq.Async.xml",
+        "ref/net48/Microsoft.Bcl.AsyncInterfaces.dll",
         "ref/net48/System.Linq.Async.dll",
         "ref/net48/System.Linq.Async.xml",
+        "ref/net48/System.Runtime.CompilerServices.Unsafe.dll",
+        "ref/net48/System.Threading.Tasks.Extensions.dll",
+        "ref/net6.0/System.Linq.Async.deps.json",
         "ref/net6.0/System.Linq.Async.dll",
         "ref/net6.0/System.Linq.Async.xml",
+        "ref/netstandard2.0/System.Linq.Async.deps.json",
         "ref/netstandard2.0/System.Linq.Async.dll",
         "ref/netstandard2.0/System.Linq.Async.xml",
+        "ref/netstandard2.1/System.Linq.Async.deps.json",
         "ref/netstandard2.1/System.Linq.Async.dll",
         "ref/netstandard2.1/System.Linq.Async.xml",
-        "system.linq.async.6.0.1.nupkg.sha512",
+        "system.linq.async.6.0.3.nupkg.sha512",
         "system.linq.async.nuspec"
       ]
     },
@@ -11638,10 +11640,10 @@
         "version.txt"
       ]
     },
-    "Velopack/0.0.1297": {
-      "sha512": "FfZ3B+U97TSZ4Ibcvve6TqJvSYp7jOAPKFUTG69FYb2MjgTeHzfd9j1/jgHRhDDlldpPnXM6iExuihrSKQRiNA==",
+    "Velopack/0.0.1335-g2ad2c37": {
+      "sha512": "ah+cyj2bp0RO3X6wpzsqt7HcJXxXXTCueBUQUctmlLkCLtWt9BrePWcbEOP1ZLI8YcCtlhrx18HitWef6TMbKA==",
       "type": "package",
-      "path": "velopack/0.0.1297",
+      "path": "velopack/0.0.1335-g2ad2c37",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -11657,14 +11659,14 @@
         "lib/net9.0/Velopack.xml",
         "lib/netstandard2.0/Velopack.dll",
         "lib/netstandard2.0/Velopack.xml",
-        "velopack.0.0.1297.nupkg.sha512",
+        "velopack.0.0.1335-g2ad2c37.nupkg.sha512",
         "velopack.nuspec"
       ]
     },
-    "Velopack.Build/0.0.1297": {
-      "sha512": "/sttQ8kvzxeq/RGWbFAugC4H1XG+V2zM/zMiAL8CIayAPbQV3u7ZVA9UI3pJxXlUpnzp4KrDuTORqdw7wnDcEg==",
+    "Velopack.Build/0.0.1335-g2ad2c37": {
+      "sha512": "j6rr2eeLFZwRgfLxENCFW7PAeQ0X7u5ifIgoy9BL/nhFZlvOmKTXBo4Bfin8PJESSf2vmULw7xxR+pcMcDRNVg==",
       "type": "package",
-      "path": "velopack.build/0.0.1297",
+      "path": "velopack.build/0.0.1335-g2ad2c37",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -11821,7 +11823,7 @@
         "build/net6.0/runtimes/win-x86/native/getfilesiginforedist.dll",
         "build/net6.0/runtimes/win-x86/native/msalruntime_x86.dll",
         "build/net6.0/runtimes/win/lib/net6.0/System.Security.Cryptography.Pkcs.dll",
-        "velopack.build.0.0.1297.nupkg.sha512",
+        "velopack.build.0.0.1335-g2ad2c37.nupkg.sha512",
         "velopack.build.nuspec",
         "vendor/DefaultApp.icns",
         "vendor/DefaultApp.png",
@@ -12037,19 +12039,20 @@
   },
   "projectFileDependencyGroups": {
     "net8.0-windows7.0": [
-      "AmourgisCOREServices >= 2.3.0",
+      "AmourgisCOREServices >= 2.5.0",
       "ClosedXML >= 0.105.0",
       "FluentAssertions >= 8.3.0",
       "Microsoft.Data.SqlClient >= 6.1.0-preview1.25120.4",
       "Microsoft.EntityFrameworkCore >= 8.0.16",
       "Microsoft.EntityFrameworkCore.SqlServer >= 8.0.16",
       "Microsoft.EntityFrameworkCore.Tools >= 8.0.16",
+      "Microsoft.Extensions.DependencyInjection >= 8.0.1",
       "Microsoft.NET.ILLink.Tasks >= 8.0.17",
-      "Polly >= 8.5.2",
-      "System.Linq.Async >= 6.0.1",
+      "Polly >= 8.6.1",
+      "System.Linq.Async >= 6.0.3",
       "System.Net.Http >= 4.3.4",
-      "Velopack >= 0.0.1297",
-      "Velopack.Build >= 0.0.1297",
+      "Velopack >= 0.0.1335-g2ad2c37",
+      "Velopack.Build >= 0.0.1335-g2ad2c37",
       "xunit >= 2.9.3"
     ]
   },
@@ -12058,7 +12061,7 @@
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
-    "version": "4.8.0",
+    "version": "5.0.0",
     "restore": {
       "projectUniqueName": "C:\\Users\\JakeH.AMOURGISREILLY\\Documents\\GitHub\\CalliAPICORE\\CalliAPI.csproj",
       "projectName": "CalliAPI",
@@ -12106,7 +12109,7 @@
         "dependencies": {
           "AmourgisCOREServices": {
             "target": "Package",
-            "version": "[2.3.0, )"
+            "version": "[2.5.0, )"
           },
           "ClosedXML": {
             "target": "Package",
@@ -12134,6 +12137,10 @@
             "target": "Package",
             "version": "[8.0.16, )"
           },
+          "Microsoft.Extensions.DependencyInjection": {
+            "target": "Package",
+            "version": "[8.0.1, )"
+          },
           "Microsoft.NET.ILLink.Tasks": {
             "suppressParent": "All",
             "target": "Package",
@@ -12142,11 +12149,11 @@
           },
           "Polly": {
             "target": "Package",
-            "version": "[8.5.2, )"
+            "version": "[8.6.1, )"
           },
           "System.Linq.Async": {
             "target": "Package",
-            "version": "[6.0.1, )"
+            "version": "[6.0.3, )"
           },
           "System.Net.Http": {
             "target": "Package",
@@ -12154,13 +12161,13 @@
           },
           "Velopack": {
             "target": "Package",
-            "version": "[0.0.1297, )"
+            "version": "[0.0.1335-g2ad2c37, )"
           },
           "Velopack.Build": {
             "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
             "suppressParent": "All",
             "target": "Package",
-            "version": "[0.0.1297, )"
+            "version": "[0.0.1335-g2ad2c37, )"
           },
           "xunit": {
             "target": "Package",

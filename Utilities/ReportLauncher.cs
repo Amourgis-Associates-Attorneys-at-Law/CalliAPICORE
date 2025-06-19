@@ -17,7 +17,7 @@ namespace CalliAPI.Utilities
 
     public static class ReportLauncher
     {
-        private static readonly AMO_Logger _logger = new("CalliAPI");
+        private static readonly AMO_Logger _logger = AMO_Logger.Instance;
 
         /// <summary>
         /// This method is called from the ClioService to show a report. It takes an IAsyncEnumerable of type Matter and converts it to a DataTable, then displays it
@@ -29,7 +29,7 @@ namespace CalliAPI.Utilities
         {
             if (matters == null)
             {
-                _logger.LogError("matters is null");
+                _logger.Error("matters is null");
                 return;
             }
 

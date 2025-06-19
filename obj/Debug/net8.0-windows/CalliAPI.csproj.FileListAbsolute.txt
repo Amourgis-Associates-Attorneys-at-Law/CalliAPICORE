@@ -37,7 +37,6 @@ C:\Users\JakeH.AMOURGISREILLY\Documents\GitHub\CalliAPICORE\bin\Debug\net8.0-win
 C:\Users\JakeH.AMOURGISREILLY\Documents\GitHub\CalliAPICORE\bin\Debug\net8.0-windows\FluentAssertions.dll
 C:\Users\JakeH.AMOURGISREILLY\Documents\GitHub\CalliAPICORE\bin\Debug\net8.0-windows\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\JakeH.AMOURGISREILLY\Documents\GitHub\CalliAPICORE\bin\Debug\net8.0-windows\Microsoft.Bcl.Cryptography.dll
-C:\Users\JakeH.AMOURGISREILLY\Documents\GitHub\CalliAPICORE\bin\Debug\net8.0-windows\Microsoft.Bcl.Memory.dll
 C:\Users\JakeH.AMOURGISREILLY\Documents\GitHub\CalliAPICORE\bin\Debug\net8.0-windows\Microsoft.Data.SqlClient.dll
 C:\Users\JakeH.AMOURGISREILLY\Documents\GitHub\CalliAPICORE\bin\Debug\net8.0-windows\Microsoft.Extensions.Caching.Memory.dll
 C:\Users\JakeH.AMOURGISREILLY\Documents\GitHub\CalliAPICORE\bin\Debug\net8.0-windows\Microsoft.Extensions.Configuration.dll
@@ -199,3 +198,4 @@ C:\Users\JakeH.AMOURGISREILLY\Documents\GitHub\CalliAPICORE\obj\Debug\net8.0-win
 C:\Users\JakeH.AMOURGISREILLY\Documents\GitHub\CalliAPICORE\obj\Debug\net8.0-windows\CalliAPI.UI.Forms.AboutForm.resources
 C:\Users\JakeH.AMOURGISREILLY\Documents\GitHub\CalliAPICORE\obj\Debug\net8.0-windows\CalliAPI.UI.Forms.MailerForm.resources
 C:\Users\JakeH.AMOURGISREILLY\Documents\GitHub\CalliAPICORE\obj\Debug\net8.0-windows\CalliAPI.UI.MissingGithubSecret.resources
+C:\Users\JakeH.AMOURGISREILLY\Documents\GitHub\CalliAPICORE\bin\Debug\net8.0-windows\Serilog.Sinks.Debug.dll

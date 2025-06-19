@@ -599,6 +599,12 @@
             <param name="sender"></param>
             <param name="e"></param>
         </member>
+        <member name="M:CalliAPI.MainForm.OnLogMessageReceived(System.String)">
+            <summary>
+            Adds to the log text box in the UI thread.
+            </summary>
+            <param name="message"></param>
+        </member>
         <member name="M:CalliAPI.MainForm.SetProgressBarTheme(System.Drawing.Color,System.Drawing.Color,System.Drawing.Color,System.Drawing.Color)">
             <summary>
             Sets the theme for the progress bar based on the current phase of the operation.

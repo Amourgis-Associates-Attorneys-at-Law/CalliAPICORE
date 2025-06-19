@@ -14,6 +14,7 @@ using CalliAPI.UI.Forms;
 using CalliAPI.Utilities;
 using DocumentFormat.OpenXml.Drawing.Charts;
 using Microsoft.AspNetCore.DataProtection;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Win32;
 using Serilog.Core;
 using System.Net.Http;
@@ -29,8 +30,6 @@ namespace CalliAPI
     /// </summary>
     public static partial class Program
     {
-
-
             ///<summary>
             ///AllocConsole is a Windows API function that allocates a new console for the calling process.
             /// </summary>
@@ -51,11 +50,14 @@ namespace CalliAPI
             VelopackApp.Build().Run(); // <--- must be first line of code in Main!
             // ^ Checks for Updates with Velopack (formerly Squirrel.Clowd, formerly Squirrel.Windows)
 
-            AMO_Logger _logger = new("CalliAPI");
-            _logger.Info("CalliAPI started");
+
+            // Register the singleton logger
+            AMO_Logger.Initialize("CalliAPI");
 
 
 
+
+#if DEBUG
             // Open a console window for debugging purposes
             AllocConsole();
 
@@ -68,14 +70,14 @@ namespace CalliAPI
             };
             Console.SetOut(standardOutput);
             Console.SetError(standardOutput);
-
+#endif
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
 
+            // Resolve and run the splash form
+            Application.Run(new SplashForm());
 
-            // Show splash on the main thread
-            Application.Run(new SplashForm(_logger));
         }
 
 

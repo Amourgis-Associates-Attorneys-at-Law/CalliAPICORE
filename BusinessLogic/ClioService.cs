@@ -24,10 +24,10 @@ using System.Globalization;
 
 namespace CalliAPI.BusinessLogic
 {
-    public class ClioService(ClioApiClient clioApiClient, AuthService authService, AMO_Logger logger)
+    public class ClioService(ClioApiClient clioApiClient, AuthService authService)
     {
         
-        private readonly AMO_Logger _logger = logger;
+        private readonly AMO_Logger _logger = AMO_Logger.Instance;
         private readonly ClioApiClient _clioApiClient = clioApiClient;
         private readonly AuthService _authService = authService;
 

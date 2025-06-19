@@ -167,11 +167,11 @@ html {
     <p class="version-badge"><em>"kuh-LIE-uh-pee"</em></p>
     <p>Click the <span class="accent">Install</span> button below to install the latest version of CalliAPI.</p>
 
-    <a class="install-button" href="https://github.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/releases/download/v4.8.0/CalliAPI-win-Setup.exe">Install CalliAPI</a>
+    <a class="install-button" href="https://github.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/releases/download/v5.0.0/CalliAPI-win-Setup.exe">Install CalliAPI</a>
     <br />
     <br />
     <!-- Version badge -->
-    <img src="https://img.shields.io/badge/version-4.8.0-blue" alt="Version">
+    <img src="https://img.shields.io/badge/version-5.0.0-blue" alt="Version">
 
     <!-- Status badge -->
     <img src="https://img.shields.io/badge/status-stable-brightgreen" alt="Status">
@@ -195,7 +195,7 @@ html {
         It is in that spirit that <strong>CalliAPI</strong> was named: a tool designed to <strong>gather information from</strong>, <strong>guide</strong>, and <strong>enhance</strong> the work done in Clio. As an API (Application Programming Interface), CalliAPI acts as a bridge — connecting systems, streamlining workflows, and helping your data speak more clearly.
     </p>
 
-    <details open>
+    <details>
         <summary class="summary-heading">Known Issues and Roadmap</summary>
         <pre><h2>Known Issues</h2>
 ⚠️ 4.7.1 - Adding the access and refresh tokens to the user's registry is still in its early stages and may not work perfectly on all systems.
@@ -263,25 +263,44 @@ in the Matters endpoint inside the CRB?).
 
 
         <div class="fallback">
-            <p>If the install button doesn't work, you can <a href="https://github.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/releases/download/v4.8.0/CalliAPI-win-Portable.zip">download the full installer package (ZIP)</a> and run <strong>CalliAPI.exe</strong> manually.</p>
+            <p>If the install button doesn't work, you can <a href="https://github.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE/releases/download/v5.0.0/CalliAPI-win-Portable.zip">download the full installer package (ZIP)</a> and run <strong>CalliAPI.exe</strong> manually.</p>
         </div>
     </details>
     <details>
         <summary class="summary-heading">Changelog</summary>
         <pre><h1> CalliAPI Patch Log </h1>
 
-<details open><summary><strong>CalliAPI 4</strong> (June 2025)</summary>
+
+<details open><summary><strong>CalliAPI 5</strong> (June 2025)</summary>
+<h2>5.0 - Prep for Azure Launch! </h2>
+- Add a MainForm indicator for whether the app is running in Portable or Installed mode, which will help us determine how to handle updates and functionality 
+in the future.
+- Adde a logTextBox so that the console isn't needed.
+- Update AmourgisCOREServices from 2.3.0 to 2.5.0, which includes more sinks and the ability to subscribe to a LogMessage event so we can display user-facing logs.
+- Add singleton dependency injection for the LogService, which will allow us to easily log messages throughout the application without needing to create new instances
+of the LogService every time.
+- Removed the TreeListView report selector, as the custom reports are an ideal replacement. This simplifies the UI and makes it less overwhelming for new users.
+- Add DependencyInjection so we can optimize the codebase and make it easier to manage dependencies. This will help us maintain a cleaner and more modular code structure, 
+making it easier to add new features in the future, as well as preventing unexpected behavior.
+- Add registry secrets to the Dependency Injection container, which will allow us to securely store and access sensitive information like API keys and tokens. 
+This is a crucial step in ensuring the security and reliability of the application, as well as making it much more user friendly.
+- Fixed the issue where the entire program self-minimized when a report was running.
+<hr style="border: none; height: 3px; background: linear-gradient(to right, #feb47b, #ff7e5f); margin: 20px 0;">
+
+<details><summary><strong>CalliAPI 4</strong> (June 2025)</summary>
 <h3>4.8 - Report Form Functionality Improvements! </h3>
 - Added a checkedListBox to allow users to select which fields they want to include in the report, making it easier to customize the report output.
 <hr style="border: none; height: 3px; background: linear-gradient(to right, #feb47b, #ff7e5f); margin: 20px 0;">
 
 <h4>4.7.6 - Updates to Reporting Functionality! </h4>
 - Added a button to make it clearer how to use the Custom Report Builder, which will help users understand how to generate reports more easily.
-- Add a call to VerifyAPI() when the Custom Report Builder is opened, to ensure that the API is available before attempting to generate reports. This will help prevent errors and ensure a smoother user experience!
+- Add a call to VerifyAPI() when the Custom Report Builder is opened, to ensure that the API is available before attempting to generate reports. This will help prevent 
+errors and ensure a smoother user experience!
 - Added "All" and "Clear" buttons to the Matter fields and Client fields checkboxes
 - Defaulted the Matter and Client checkboxes so that useful information is included in the report by default, such as Client Name, Matter Name, and Matter Stage Name.
 - Changed the order of the columns in the ReportForm so that the most useful information is displayed first, making it easier for users to read and understand the reports.
-- Added code to allow for duplicate field names by incrementing the field name if a duplicate is found. This will help prevent errors and ensure that all fields are included in the report, even if they have the same name.
+- Added code to allow for duplicate field names by incrementing the field name if a duplicate is found. This will help prevent errors and ensure that all fields are included 
+in the report, even if they have the same name.
 - Fixed an emergent breaking issue where the ReportForm would exceed FillWeightLimit and not display anything.
 <hr style="border: none; height: 3px; background: linear-gradient(to right, #feb47b, #ff7e5f); margin: 20px 0;">
 
@@ -311,9 +330,9 @@ every single time we run her.
 <hr style="border: none; height: 3px; background: linear-gradient(to right, #feb47b, #ff7e5f); margin: 20px 0;">
 
 <h3>4.7.0 - Velopack Now Allows for Zip file runs!</h3>
-- By checking to make sure we're not running from AppData or ProgramFiles, CalliAPI 4.7.0+ is smart enough to recognize the app isn't installed, and if it's not installed it'll 
-just skip calling Velopack at all! That means, if you have CalliAPI installed, she'll check for updates, but if you don't, she won't even try - making the portable version 
-truly portable!
+- By checking to make sure we're not running from AppData or ProgramFiles, CalliAPI 4.7.0+ is smart enough to recognize the app isn't installed, and if it's not installed 
+it'll just skip calling Velopack at all! That means, if you have CalliAPI installed, she'll check for updates, but if you don't, she won't even try - making the portable 
+version truly portable!
 <hr style="border: none; height: 3px; background: linear-gradient(to right, #feb47b, #ff7e5f); margin: 20px 0;">
 
 <h3>4.6.0 - GitHub Authentication Added</h3>
@@ -383,8 +402,8 @@ surprises.
 <hr style="border: none; height: 3px; background: linear-gradient(to right, #feb47b, #ff7e5f); margin: 20px 0;">
 
 <h3>4.4 - Cleaned Custom Report Builder Form, Updated UI, and Added New Filters!</h3>
-- Finally fixed the progress bar in the Custom Report Builder Form to provide an accurate estimate of page count before it begins to update. Now it won't be a surprise how long 
-the program takes to complete a report or how many pages are needed! All of the 4.3 bug fixes are included as well for a polished 4.4!
+- Finally fixed the progress bar in the Custom Report Builder Form to provide an accurate estimate of page count before it begins to update. Now it won't be a surprise how 
+long the program takes to complete a report or how many pages are needed! All of the 4.3 bug fixes are included as well for a polished 4.4!
 <hr style="border: none; height: 3px; background: linear-gradient(to right, #feb47b, #ff7e5f); margin: 20px 0;">
 
 <h4>4.3.4 - Bug Fixes and Improvements</h4>
@@ -393,14 +412,14 @@ matters, making it easier to identify matters that may require attention or foll
 <hr style="border: none; height: 3px; background: linear-gradient(to right, #feb47b, #ff7e5f); margin: 20px 0;">
 
 <h4>4.3.3 - Added ability to filter by Practice Area in Custom Report Builder!</h4>
-This will save so much time in execution, especially as our dataset scales up! The ability to filter by Practice Area in the Custom Report Builder is a significant enhancement 
-that will allow users to generate more targeted and relevant reports based on their specific practice areas. This feature will greatly improve the usability of the report 
+This will save so much time in execution, especially as our dataset scales up! The ability to filter by Practice Area in the Custom Report Builder is a significant 
+enhancement that will allow users to generate more targeted and relevant reports based on their specific practice areas. This feature will greatly improve the usability of the report 
 builder and make it easier to analyze data related to different practice areas.
 <hr style="border: none; height: 3px; background: linear-gradient(to right, #feb47b, #ff7e5f); margin: 20px 0;">
 
 <h4>4.3.2 - Bug Fixes and Improvements</h4>
-- Added the ability to search for SQL Views in the Custom Report Builder! This enhancement allows users to filter and generate reports based on specific views, making it easier 
-to analyze data in a more structured way.
+- Added the ability to search for SQL Views in the Custom Report Builder! This enhancement allows users to filter and generate reports based on specific views, making it 
+easier to analyze data in a more structured way.
 <hr style="border: none; height: 3px; background: linear-gradient(to right, #feb47b, #ff7e5f); margin: 20px 0;">
 
 <h4>4.3.1 - Bug Fixes and Improvements</h4>

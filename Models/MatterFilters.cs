@@ -16,7 +16,7 @@ namespace CalliAPI.Models
 {
     internal static class MatterFilters
     {
-        static readonly AMO_Logger _logger = new("CalliAPI");
+        static readonly AMO_Logger _logger = AMO_Logger.Instance;
 
 
 
