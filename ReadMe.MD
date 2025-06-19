@@ -3,6 +3,9 @@
 
 <details open>
   <summary><strong>CalliAPI 5</strong> (June 2025)</summary>
+<h4>5.0.3 - Usability Improvements! </h4>
+- Add instructions to the Custom Report Builder Form to make it more clear how to use it.
+<hr style="border: none; height: 3px; background: linear-gradient(to right, #feb47b, #ff7e5f); margin: 20px 0;">
 
   <h4>🚀 CalliAPI 5.0.1 Released — Smarter, Cleaner, and More Resilient</h4>
 
