@@ -59,10 +59,20 @@ namespace CalliAPI.Utilities
 #if !DEBUG
             try
             {
+
+                // Check if we have a valid GitHub token
+                string? token = RegistrySecretManager.GetGithubToken();
+                if (string.IsNullOrWhiteSpace(token) || token == "dummy")
+                {
+                    token = null; // Treat dummy as no token
+                }
+                _logger.Info($"Checking for updates with token: {(token ?? "none")}");
+
+                // Initialize the UpdateManager with the GitHub source
                 var mgr = new UpdateManager(
                     new GithubSource(
                         "https://github.com/Amourgis-Associates-Attorneys-at-Law/CalliAPICORE",
-                        accessToken: githubToken ?? RegistrySecretManager.GetGithubToken(),
+                        accessToken: token,
                         prerelease: false
                     )
                 );
@@ -120,18 +130,18 @@ namespace CalliAPI.Utilities
                 }
             }
 
-        public static bool ShouldCheckForUpdates()
-        {
-            var token = RegistrySecretManager.GetGithubToken();
+        //public static bool ShouldCheckForUpdates()
+        //{
+        //    var token = RegistrySecretManager.GetGithubToken();
 
-            // Only check for updates if:
-            // - A GitHub token is present and not a dummy
-            // - The app is installed (not portable)
-            return !string.IsNullOrWhiteSpace(token) &&
-                token != "dummy" &&
-                IsInstalled();
+        //    // Only check for updates if:
+        //    // - A GitHub token is present and not a dummy
+        //    // - The app is installed (not portable)
+        //    return !string.IsNullOrWhiteSpace(token) &&
+        //        token != "dummy" &&
+        //        IsInstalled();
 
-        }
+        //}
 
 
     }

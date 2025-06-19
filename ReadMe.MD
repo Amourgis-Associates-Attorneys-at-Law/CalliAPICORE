@@ -2,6 +2,10 @@
 
 
 <details open><summary><strong>CalliAPI 5</strong> (June 2025)</summary>
+<h4>5.0.1 - Updates to Reporting Functionality! </h4>
+- Fixed the issue where not having a Github token entered prevented the application from updating. Now a Github token is no longer required to update it!
+<hr style="border: none; height: 3px; background: linear-gradient(to right, #feb47b, #ff7e5f); margin: 20px 0;">
+
 <h2>5.0 - Prep for Azure Launch! </h2>
 - Add a MainForm indicator for whether the app is running in Portable or Installed mode, which will help us determine how to handle updates and functionality 
 in the future.
