@@ -12,7 +12,7 @@ namespace CalliAPI.Interfaces
         string GetAuthorizationUrl();
         string ValidateAuthorizationCode(string userInput);
         Task GetAccessTokenAsync(string authorizationCode);
-        string AccessToken { get; }
+        string? AccessToken { get; }
 
     }
 }

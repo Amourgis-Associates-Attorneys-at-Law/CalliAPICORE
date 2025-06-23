@@ -1,10 +1,6 @@
 ﻿<h2>Known Issues</h2>
-⚠️ 4.7.1 - Adding the access and refresh tokens to the user's registry is still in its early stages and may not work perfectly on all systems.
-If you encounter issues, please report them to support@amourgis.com.
-⚠️ 4.3.2 - STA Threading issues, especially around automatic updates. Downloading the portable version from the zip file below the install 
-instructions is a likely workaround for the time being.
-⚠️ 3.0.3 - The automatic update functionality is still in its early stages and may not work perfectly on all systems. If you encounter 
-issues, please report them to support@amourgis.com.
+There are no currently tracked issues. 
+If you encounter unexpected behavior or issues, please report them to support@amourgis.com.
 
 
 
@@ -15,7 +11,10 @@ issues, please report them to support@amourgis.com.
 in the Matters endpoint inside the CRB?).
 - 4.7.3 - Add Responsible Attorney and Responsible Staff to the Matters fields.
 - 4.7.3 - Add a check to the ReportForm to make sure the target .xlsx file isn't locked before saving.
-- 4.7.4 - 
+- 5.0.5 - Change responsible staff and attorney by ID? It seems like it is possible to PATCH a matter.responsible_staff.id (long) value; 
+if Clio doesn't have a way to do that natively, CalliAPI could theoretically do that. It's a long way off because CalliAPI is currently 
+blind to users, but adding them by reference and then setting up some kind of routine to go through and return all matters where 
+matter.responsible_staff.id == oldUserId and then for each matter patch matter.responsible_staff.id = newUserId could be a way to do it.
 
 <strong>UI</strong>
 📄4.7.0 - Include the parent field name when flattening to a ReportForm.

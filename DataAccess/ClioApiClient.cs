@@ -149,8 +149,8 @@ namespace CalliAPI.DataAccess
             var content = await response.Content.ReadAsStringAsync();
             var json = JsonDocument.Parse(content);
 
-            var accessToken = json.RootElement.GetProperty("access_token").GetString();
-            var refreshToken = json.RootElement.GetProperty("refresh_token").GetString();
+            string? accessToken = json.RootElement.GetProperty("access_token").GetString();
+            string? refreshToken = json.RootElement.GetProperty("refresh_token").GetString();
             var expiresIn = json.RootElement.GetProperty("expires_in").GetInt32(); // seconds
             var expiresAt = DateTime.UtcNow.AddSeconds(expiresIn);
 
@@ -591,7 +591,7 @@ namespace CalliAPI.DataAccess
                 practiceAreas = [.. dataElement.EnumerateArray().Select(pa => new PracticeArea
                 {
                     id = pa.GetProperty("id").GetInt64(),
-                    practice_area_name = pa.GetProperty("name").GetString()
+                    practice_area_name = pa.GetProperty("name").GetString() ?? ""
                 })];
             }
 

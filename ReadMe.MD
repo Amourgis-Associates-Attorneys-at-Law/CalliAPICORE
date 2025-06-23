@@ -3,9 +3,16 @@
 
 <details open>
 <summary><strong>CalliAPI 5</strong> (June 2025)</summary>
+<h4>5.0.5 - Usability Improvements!</h4>
+- Remove some existing logging that is no longer needed in order to reduce clutter in the log box.
+- Clean up some code, fixing some warnings to make the codebase cleaner and more maintainable.
+- Rearrange the File MenuStrip to make it more intuitive, with Exit at the bottom and About at the top.
+- Rearrange the Program MenuStrip to make it more intuitive, removing the (currently unusable) Mailing Tool item and moving
+the Custom Report Builder to the top.
+- Hopefully fixed the issue where the search button was cut off; added a scroll wheel to the Custom Report Builder Form to allow for scrolling through the fields.
+<hr style="border: none; height: 3px; background: linear-gradient(to right, #feb47b, #ff7e5f); margin: 20px 0;">
 
-
-<h4>5.0.4 - Usability Improvements! </h4>
+<h4>5.0.4 - Usability Improvements!</h4>
 - Change some confusing wording, especially around updates.
 - Clean up ReadMe formatting to make it more readable.
 - Increase Clio API timeout timers to allow for more consistent reporting.
@@ -17,7 +24,7 @@ and hopefully speed - of the application.
 - Remove a lot of extraneous logging that is no longer required. This will make it much more pleasant to use!
 <hr style="border: none; height: 3px; background: linear-gradient(to right, #feb47b, #ff7e5f); margin: 20px 0;">
 
-<h4>5.0.3 - Usability Improvements! </h4>
+<h4>5.0.3 - Usability Improvements!</h4>
 - Add instructions to the Custom Report Builder Form to make it more clear how to use it.
 <hr style="border: none; height: 3px; background: linear-gradient(to right, #feb47b, #ff7e5f); margin: 20px 0;">
 
@@ -25,17 +32,13 @@ and hopefully speed - of the application.
 - <strong>Modernized Architecture:</strong> Dependency injection enables modular, testable code.</li>
 - <strong>Streamlined UX:</strong> Console replaced with embedded logging for a cleaner interface.</li>
 - <strong>Smarter Updates:</strong> Now checks for updates even without a GitHub token.</li>
-
 <p><strong>Note:</strong> Users on versions prior to 5.0.1 must manually update once to benefit from the new auto-update system.</p>
+<hr style="border: none; height: 3px; background: linear-gradient(to right, #feb47b, #ff7e5f); margin: 20px 0;">
 
-  <hr style="border: none; height: 3px; background: linear-gradient(to right, #feb47b, #ff7e5f); margin: 20px 0;">
-</details>
-
-
-<h2>5.0 - Prep for Azure Launch! </h2>
+<h2>5.0 - Prep for Azure Launch!</h2>
 - Add a MainForm indicator for whether the app is running in Portable or Installed mode, which will help us determine how to handle updates and functionality 
 in the future.
-- Adde a logTextBox so that the console isn't needed.
+- Add a logTextBox so that the console isn't needed.
 - Update AmourgisCOREServices from 2.3.0 to 2.5.0, which includes more sinks and the ability to subscribe to a LogMessage event so we can display user-facing logs.
 - Add singleton dependency injection for the LogService, which will allow us to easily log messages throughout the application without needing to create new instances
 of the LogService every time.
@@ -46,7 +49,7 @@ making it easier to add new features in the future, as well as preventing unexpe
 This is a crucial step in ensuring the security and reliability of the application, as well as making it much more user friendly.
 - Fixed the issue where the entire program self-minimized when a report was running.
 <hr style="border: none; height: 3px; background: linear-gradient(to right, #feb47b, #ff7e5f); margin: 20px 0;">
-
+</details>
 <details><summary><strong>CalliAPI 4</strong> (June 2025)</summary>
 <h3>4.8 - Report Form Functionality Improvements! </h3>
 - Added a checkedListBox to allow users to select which fields they want to include in the report, making it easier to customize the report output.

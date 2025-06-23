@@ -8,6 +8,10 @@ using System.Text;
 
 namespace CalliAPI.BusinessLogic
 {
+    /// <summary>
+    /// AuthService is responsible for handling authentication with the Clio API.
+    /// </summary>
+    /// <param name="clioApiAccess">A ClioApiClient to communicate with the Clio API.</param>
     public class AuthService(ClioApiClient clioApiAccess) : IAuthService
     {
         private readonly AMO_Logger _logger = AMO_Logger.Instance;

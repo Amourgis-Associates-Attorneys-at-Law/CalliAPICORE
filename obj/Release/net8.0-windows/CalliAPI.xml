@@ -4,6 +4,18 @@
         <name>CalliAPI</name>
     </assembly>
     <members>
+        <member name="T:CalliAPI.BusinessLogic.AuthService">
+            <summary>
+            AuthService is responsible for handling authentication with the Clio API.
+            </summary>
+            <param name="clioApiAccess">A ClioApiClient to communicate with the Clio API.</param>
+        </member>
+        <member name="M:CalliAPI.BusinessLogic.AuthService.#ctor(CalliAPI.DataAccess.ClioApiClient)">
+            <summary>
+            AuthService is responsible for handling authentication with the Clio API.
+            </summary>
+            <param name="clioApiAccess">A ClioApiClient to communicate with the Clio API.</param>
+        </member>
         <member name="M:CalliAPI.BusinessLogic.ClioService.IsAuthenticated">
             <summary>
             Checks if the user is authenticated with Clio.

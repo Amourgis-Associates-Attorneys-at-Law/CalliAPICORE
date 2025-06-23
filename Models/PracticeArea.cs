@@ -12,11 +12,11 @@ namespace CalliAPI.Models
         public long id { get; set; }
 
         [JsonPropertyName("name")]
-        public string practice_area_name { get; set; }
+        public string? practice_area_name { get; set; }
 
         public override string ToString()
         {
-            return practice_area_name; // This controls what shows in the UI
+            return practice_area_name ?? ""; // This controls what shows in the UI
         }
 
     }

@@ -26,7 +26,7 @@ namespace CalliAPI.Utilities
                 /// </summary>
         public static Version GetVersion()
         {
-            return Assembly.GetExecutingAssembly().GetName().Version;
+            return Assembly.GetExecutingAssembly().GetName().Version!;
         }
 
         /// <summary>
